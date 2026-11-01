@@ -148,28 +148,28 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
         <img src="https://github.com/Santiago1023.png?size=100" width="68" height="68" style="border-radius: 50%;" alt="Santiago1023"/><br/>
         <sub><b>Santiago Bedoya</b></sub>
       </a><br/>
-      <sub>🤝 Colaborador(a)</sub>
+      <sub>🤝 Colaborador</sub>
     </td>
     <td align="center" width="150">
       <a href="https://www.linkedin.com/in/valentina-p-86b3b913a/" title="Valentina Pinzón Montoya (@vdevalen)">
         <img src="https://github.com/vdevalen.png?size=100" width="68" height="68" style="border-radius: 50%;" alt="vdevalen"/><br/>
         <sub><b>Valentina Pinzón</b></sub>
       </a><br/>
-      <sub>🤝 Colaborador(a)</sub>
+      <sub>🤝 Colaboradora</sub>
     </td>
     <td align="center" width="150">
       <a href="https://www.linkedin.com/in/andresqb198/" title="Andrés Quintero Bedoya (@andresqb198)">
         <img src="https://github.com/andresqb198.png?size=100" width="68" height="68" style="border-radius: 50%;" alt="andresqb198"/><br/>
         <sub><b>Andrés Quintero</b></sub>
       </a><br/>
-      <sub>🤝 Colaborador(a)</sub>
+      <sub>🤝 Colaborador</sub>
     </td>
     <td align="center" width="150">
       <a href="https://www.linkedin.com/in/karengonzalezanalista/" title="Karen González (@Ka1999)">
         <img src="https://github.com/Ka1999.png?size=100" width="68" height="68" style="border-radius: 50%;" alt="Ka1999"/><br/>
         <sub><b>Karen González</b></sub>
       </a><br/>
-      <sub>🤝 Colaborador(a)</sub>
+      <sub>🤝 Colaboradora</sub>
     </td>
   </tr>
 </table>

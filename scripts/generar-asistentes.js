@@ -521,7 +521,14 @@ function buildReadmeMosaicSection(students, instructorsList = []) {
       const parts = fullName.split(/\s+/);
       const shortName = parts.length > 2 ? `${parts[0]} ${parts[1]}` : fullName;
       const isCaptain = user.toLowerCase() === 'edwinbermudez91';
-      const roleTag = isCaptain ? '⚓ Capitán • Instructor' : '🤝 Colaborador(a)';
+      const isFemale =
+        /colaboradora|instructora/i.test(inst.rol || '') ||
+        /^(valentina|karen|ana|mar[ií]a|laura|paola|gloria|natalia|nathali|jeraldin|camila|karol|airy|sara|diana|luisa|carolina|andrea|daniela)\b/i.test(fullName);
+      const roleTag = isCaptain
+        ? '⚓ Capitán • Instructor'
+        : isFemale
+          ? '🤝 Colaboradora'
+          : '🤝 Colaborador';
       const profileLink = cleanLinkedin(inst.linkedin) || `https://github.com/${user}`;
       return `    <td align="center" width="150">\n      <a href="${profileLink}" title="${fullName} (@${user})">\n        <img src="https://github.com/${user}.png?size=100" width="68" height="68" style="border-radius: 50%;" alt="${user}"/><br/>\n        <sub><b>${shortName}</b></sub>\n      </a><br/>\n      <sub>${roleTag}</sub>\n    </td>`;
     });
