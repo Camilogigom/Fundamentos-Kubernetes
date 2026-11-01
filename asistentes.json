@@ -425,5 +425,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Lo que me motivo a unirme es la pasion  que tengo por aprender cosas nuevas en la carrera que estoy estudiando  en este caso la tematica de contenedores docker y kubernetes  me parece fenomenal  y que bueno hacer parte de este grupo y aprender demaciado de ustedes  muchas gracias"
+  },
+  {
+    "github": "ManuelaOJ",
+    "nombre": "Manuela Orozco Jimenez",
+    "rol": "AI Engineer",
+    "linkedin": "https://www.linkedin.com/in/manuela-orozco-jimenez/",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Kubernetes es fundamental porque se ha convertido en el estándar de la industria para orquestar contenedores y gestionar aplicaciones distribuidas a gran escala en la nube"
   }
 ]
