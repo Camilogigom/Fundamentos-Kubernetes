@@ -84,7 +84,7 @@ Si prefieres hacerlo con comandos de `git`, edita tu bloque en [`asistentes.json
 
 ---
 
-## 👥 Tabla de Posiciones de la Tripulación (37 Tripulantes)
+## 👥 Tabla de Posiciones de la Tripulación (38 Tripulantes)
 
 <!-- INICIO_TABLA_ASISTENTES -->
 | # | 👤 Tripulante | 💼 Rol / Especialidad | 🌐 Redes Profesionales | 🎖️ Rango y Progreso (XP) | 🎯 ¿Qué te motivó a unirte? |
@@ -126,6 +126,7 @@ Si prefieres hacerlo con comandos de `git`, edita tu bloque en [`asistentes.json
 | #35 | <img src="https://github.com/juanjosegonzalezrosales.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Juan José González Rosales** | Desarrollador Jr | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/juanjosegonzalezrosales)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-josé-gonzález-rosales-40a4a8203?utm_source=share_via&utm_content=profile&utm_medium=member_android) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Aprender sobre contenedores y kubernetes con el ánimo de crecer profesionalmente. |
 | #36 | <img src="https://github.com/SirJulianM3003.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Julián Esteban Madrid** | Desarrollador de Software | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/SirJulianM3003) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Mejorar para poder acceder a mejores empleos |
 | #37 | <img src="https://github.com/edwin8855.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Edwin Restrepo** | Consultor | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/edwin8855)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/edwinalexanderrg) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Aprender a desplegar aplicaciones y aprovechar la oportunidad de la comunidad |
+| #38 | <img src="https://github.com/MiguelCeballos944.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Miguel ceballos** | Estudiante de Ingenieria de Sistemas | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/MiguelCeballos944) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Lo que me motivo a unirme es la pasion  que tengo por aprender cosas nuevas en la carrera que estoy estudiando  en este caso la tematica de contenedores docker y kubernetes  me parece fenomenal  y que bueno hacer parte de este grupo y aprender demaciado de ustedes  muchas gracias |
 <!-- FIN_TABLA_ASISTENTES -->
 
 > [!TIP]
