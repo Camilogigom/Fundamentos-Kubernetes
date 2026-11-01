@@ -13,7 +13,8 @@
 
 ## 📑 Índice Rápido
 
-1. [☸️ Paso 1: Instalar `kubectl` y Documentación Oficial de Kubernetes](#-paso-1-instalar-kubectl-y-documentación-oficial-de-kubernetes)
+0. [🧱 Paso 0 (Prerrequisito): Instalar Docker y Verificar Recursos](#-paso-0-prerrequisito-instalar-docker-y-verificar-recursos)
+1. [☸️ Paso 1: Instalar `kubectl`, Alias `k` y Autocompletado](#-paso-1-instalar-kubectl-alias-k-y-autocompletado)
 2. [🐳 Paso 2: ¿Qué es Kind y cómo crear tu Clúster Local?](#-paso-2-qué-es-kind-y-cómo-crear-tu-clúster-local)
 3. [🛠️ Paso 3: Personalizando tu Clúster de Kind con YAML (Multi-Nodo, Cilium e Ingress)](#️-paso-3-personalizando-tu-clúster-de-kind-con-yaml)
 4. [🧰 Paso 4: Kit de Supervivencia CLI (`kubectx`, `kubens`, `k9s` y `stern`)](#-paso-4-kit-de-supervivencia-cli-kubectx-kubens-k9s-y-stern)
@@ -24,14 +25,85 @@
 
 ---
 
-## ☸️ Paso 1: Instalar `kubectl` y Documentación Oficial de Kubernetes
+## 🧱 Paso 0 (Prerrequisito): Instalar Docker y Verificar Recursos
+
+Como usaremos **Kind** (*Kubernetes in Docker*), cada nodo de nuestro clúster correrá como un contenedor. Por lo tanto, **es indispensable tener Docker instalado y en ejecución** antes de continuar.
+
+### 🖥️ Requisitos recomendados de tu equipo para el laboratorio
+* **CPU:** Mínimo 2 vCPUs asignadas a Docker (recomendado **4 vCPUs**).
+* **Memoria RAM:** Mínimo **4 GB de RAM** libres para Docker (recomendado **6 GB a 8 GB** para clústeres multi-nodo con Cilium o Ingress).
+* **Disco:** Al menos **15 GB** de espacio libre para descargar las imágenes de los nodos e imágenes de contenedores.
+
+---
+
+### 📦 Cómo instalar Docker según tu Sistema Operativo
+
+<details open>
+<summary><b>🍏 macOS (Docker Desktop, OrbStack o Colima)</b></summary>
+<br>
+
+* **Opción A — Docker Desktop (Oficial):**
+  ```bash
+  brew install --cask docker
+  ```
+  *(O descárgalo desde [docs.docker.com/desktop/setup/install/mac-install/](https://docs.docker.com/desktop/setup/install/mac-install/)).* Luego abre la aplicación **Docker** desde tus Aplicaciones y espera a que el ícono de la ballena indique *Engine running*.
+
+* **Opción B — OrbStack (Alternativa ultra ligera y rápida para Mac):**
+  ```bash
+  brew install --cask orbstack
+  ```
+</details>
+
+<details>
+<summary><b>🪟 Windows (Docker Desktop + WSL 2)</b></summary>
+<br>
+
+1. Asegúrate de tener activado **WSL 2** abriendo PowerShell como Administrador:
+   ```powershell
+   wsl --install
+   ```
+2. Instala **Docker Desktop**:
+   ```powershell
+   winget install -e --id Docker.DockerDesktop
+   ```
+   *(O descárgalo desde [docs.docker.com/desktop/setup/install/windows-install/](https://docs.docker.com/desktop/setup/install/windows-install/)).*
+3. Abre **Docker Desktop**, ve a **Settings → Resources → WSL Integration** y activa la integración con tu distribución de Ubuntu/WSL.
+</details>
+
+<details>
+<summary><b>🐧 Linux (Docker Engine Oficial — Ubuntu / Debian / Fedora)</b></summary>
+<br>
+
+1. Instala **Docker Engine** usando el script oficial de conveniencia o desde los repositorios oficiales ([docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)):
+   ```bash
+   curl -fsSL https://get.docker.com -o get-docker.sh
+   sudo sh get-docker.sh
+   rm get-docker.sh
+   ```
+2. **¡Muy importante en Linux!** Agrega tu usuario al grupo `docker` para no tener que usar `sudo` en cada comando (Kind lo requiere):
+   ```bash
+   sudo usermod -aG docker $USER
+   newgrp docker
+   ```
+</details>
+
+### ✅ Verifica que Docker esté listo y corriendo
+Ejecuta ambos comandos en tu terminal; si ambos responden sin errores, ya cumpliste el prerrequisito:
+```bash
+docker --version
+docker ps
+```
+
+---
+
+## ☸️ Paso 1: Instalar `kubectl`, Alias `k` y Autocompletado
 
 **`kubectl`** (*Kube Control*) es la herramienta oficial de línea de comandos de Kubernetes. Es el "control remoto" con el que te comunicas con el **API Server** del clúster para desplegar Pods, inspeccionar logs y diagnosticar problemas.
 
 ### 📚 Documentación Oficial de Kubernetes (Guárdala en tus favoritos)
 * 🌐 **Documentación Principal de Kubernetes (Español):** [https://kubernetes.io/es/docs/home/](https://kubernetes.io/es/docs/home/)
 * 🛠️ **Guía Oficial de Instalación de Herramientas (`kubectl`):** [https://kubernetes.io/es/docs/tasks/tools/](https://kubernetes.io/es/docs/tasks/tools/)
-* ⚡ **Cheat Sheet Oficial de `kubectl` (Referencia Rápida):** [https://kubernetes.io/es/docs/reference/kubectl/cheatsheet/](https://kubernetes.io/es/docs/reference/kubectl/cheatsheet/)
+* ⚡ **Cheat Sheet Oficial de `kubectl` (Referencia Rápida y Autocompletado):** [https://kubernetes.io/es/docs/reference/kubectl/cheatsheet/](https://kubernetes.io/es/docs/reference/kubectl/cheatsheet/)
 * 📖 **Referencia de Comandos `kubectl`:** [https://kubernetes.io/docs/reference/kubectl/](https://kubernetes.io/docs/reference/kubectl/)
 
 ---
@@ -96,21 +168,82 @@ choco install kubernetes-cli
 
 ---
 
-### ✅ Verificar la instalación y activar el alias `k`
+### ⌨️ Verificar la instalación, configurar el alias `k` y activar el Autocompletado (`Tab`)
 
-1. Comprueba que `kubectl` responda correctamente:
-   ```bash
-   kubectl version --client
-   ```
-2. **Truco de velocidad profesional:** Configura el alias `k` para no escribir `kubectl` completo cientos de veces:
-   ```bash
-   # En Zsh (macOS / Linux):
-   echo 'alias k=kubectl' >> ~/.zshrc && source ~/.zshrc
+Comprueba primero que el cliente de `kubectl` esté instalado:
+```bash
+kubectl version --client
+```
 
-   # En Bash (Linux / Git Bash):
-   echo 'alias k=kubectl' >> ~/.bashrc && source ~/.bashrc
-   ```
-   Ahora puedes escribir simplemente `k get pods` o `k get nodes`.
+> [!TIP]
+> **¿Por qué configurar el autocompletado y el alias `k`?**  
+> En lugar de escribir `kubectl describe deployment mi-aplicacion-super-larga -n kube-system`, podrás escribir `k desc<TAB> deploy<TAB> mi-<TAB> -n kube-<TAB>` y la tecla **`Tab`** completará automáticamente los subcomandos, los tipos de recursos y hasta los nombres reales de tus Pods vivos en el clúster. ¡Es el primer paso que todo ingeniero configura en certificaciones como **CKA / CKAD / CKS**!
+
+Selecciona tu terminal y ejecuta el bloque correspondiente para dejar **el autocompletado de `kubectl` + el alias `k` con autocompletado** configurados de forma permanente:
+
+<details open>
+<summary><b>🐚 Zsh (Por defecto en macOS y muy común en Linux)</b></summary>
+<br>
+
+```zsh
+cat << 'EOF' >> ~/.zshrc
+
+# --- Autocompletado de kubectl y alias k ---
+autoload -Uz compinit
+compinit
+source <(kubectl completion zsh)
+alias k=kubectl
+compdef __start_kubectl k
+EOF
+
+source ~/.zshrc
+```
+</details>
+
+<details>
+<summary><b>🐚 Bash (Por defecto en Linux Ubuntu / Debian / WSL / Git Bash)</b></summary>
+<br>
+
+1. Asegúrate de tener instalado el paquete `bash-completion` (en Linux):
+```bash
+sudo apt-get update && sudo apt-get install -y bash-completion
+```
+
+2. Agrega el autocompletado y el alias `k` a tu `~/.bashrc`:
+```bash
+cat << 'EOF' >> ~/.bashrc
+
+# --- Autocompletado de kubectl y alias k ---
+source <(kubectl completion bash)
+alias k=kubectl
+complete -o default -F __start_kubectl k
+EOF
+
+source ~/.bashrc
+```
+</details>
+
+<details>
+<summary><b>🪟 PowerShell (Windows)</b></summary>
+<br>
+
+Ejecuta en PowerShell para agregar el alias `k` y el autocompletado a tu perfil (`$PROFILE`):
+```powershell
+if (!(Test-Path -Path $PROFILE)) { New-Item -ItemType File -Path $PROFILE -Force }
+
+Add-Content -Path $PROFILE -Value @'
+
+# --- Autocompletado de kubectl y alias k ---
+Set-Alias -Name k -Value kubectl
+kubectl completion powershell | Out-String | Invoke-Expression
+Register-ArgumentCompleter -CommandName 'k' -ScriptBlock $__kubectlCompleterBlock
+'@
+
+. $PROFILE
+```
+</details>
+
+**¡Pruébalo!** Escribe en tu terminal `k get no` y presiona la tecla **`Tab`**: verás cómo se autocompleta a `k get nodes`.
 
 ---
 
