@@ -512,7 +512,7 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/carlos-andres-montoya-alzate" title="Carlos Andres Montoya Alzate (@calichem26) — 10 XP">
+      <a href="https://www.linkedin.com/in/carlos-andres-montoya-alzate-044ba433" title="Carlos Andres Montoya Alzate (@calichem26) — 10 XP">
         <img src="https://github.com/calichem26.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="calichem26"/><br/>
         <sub><b>Carlos Andres</b></sub>
       </a><br/>
