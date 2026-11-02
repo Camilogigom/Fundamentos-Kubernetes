@@ -55,6 +55,16 @@
     "motivacion": "El conocimiento es la clave para mi avance tanto profesional como laboral."
   },
   {
+    "github": "calichem26",
+    "nombre": "Carlos Andres Montoya Alzate",
+    "rol": "Devops",
+    "linkedin": "https://www.linkedin.com/in/carlos-andres-montoya-alzate-044ba433",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 60,
+    "motivacion": "Reforzar mis conocimientos y aportar en lo que mas se pueda"
+  },
+  {
     "github": "glgaviria64",
     "nombre": "Gloria Gaviria",
     "rol": "👩‍💻 Estudiante<br>Desarrolladora Jr",
@@ -455,15 +465,5 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Mi objetivo es fortalecer mis competencias técnicas en Docker, Kubernetes, OpenShift y servicios de nube como AWS EKS, para poder participar en proyectos de modernización tecnológica, automatización, alta disponibilidad y administración de plataformas empresariales."
-  },
-  {
-    "github": "calichem26",
-    "nombre": "Carlos Andres Montoya Alzate",
-    "rol": "Devops",
-    "linkedin": "https://www.linkedin.com/in/carlos-andres-montoya-alzate-044ba433",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 10,
-    "motivacion": "Reforzar mis conocimientos y aportar en lo que mas se pueda"
   }
 ]
