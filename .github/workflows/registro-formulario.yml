@@ -110,21 +110,29 @@ jobs:
 
       - name: 🎉 Confirmar registro y cerrar el Issue
         uses: actions/github-script@v9
+        env:
+          GH_USER: ${{ steps.registro.outputs.user }}
+          NOMBRE: ${{ steps.registro.outputs.nombre }}
+          ACTION_TYPE: ${{ steps.registro.outputs.action_type }}
+          XP: ${{ steps.registro.outputs.xp }}
+          RANGO: ${{ steps.registro.outputs.rango }}
         with:
           script: |
-            const user = '${{ steps.registro.outputs.user }}';
-            const nombre = '${{ steps.registro.outputs.nombre }}';
-            const actionType = '${{ steps.registro.outputs.action_type }}';
-            const xp = '${{ steps.registro.outputs.xp }}';
-            const rango = '${{ steps.registro.outputs.rango }}';
+            const user = process.env.GH_USER || '';
+            const nombre = process.env.NOMBRE || user;
+            const actionType = process.env.ACTION_TYPE || 'registrado';
+            const xp = process.env.XP || '10';
+            const rango = process.env.RANGO || '⛵ Marinero';
 
-            const comment = `### ⛵ ¡Bienvenido/a a bordo, **${nombre}** (@${user})! 🏔️☕
-
-            Tu perfil ha sido **${actionType} automáticamente** en el **[Muro Oficial de Asistentes (\`ASISTENTES.md\`)](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/ASISTENTES.md)** y en el **Mosaico de la Portada** con tu foto oficial de GitHub y tus redes profesionales.
-
-            🎖️ **Rango actual:** **${rango}** (**${xp} XP**)
-
-            > 💡 *Cerramos este formulario automáticamente porque tus datos ya quedaron publicados. Si en algún momento deseas actualizar tu información o agregar más redes sociales, puedes volver a llenar el formulario cuando quieras.*`;
+            const comment = [
+              `### ⛵ ¡Bienvenido/a a bordo, **${nombre}** (@${user})! 🏔️☕`,
+              '',
+              `Tu perfil ha sido **${actionType} automáticamente** en el **[Muro Oficial de Asistentes (\`ASISTENTES.md\`)](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/ASISTENTES.md)** y en el **Mosaico de la Portada** con tu foto oficial de GitHub y tus redes profesionales.`,
+              '',
+              `🎖️ **Rango actual:** **${rango}** (**${xp} XP**)`,
+              '',
+              '> 💡 *Cerramos este formulario automáticamente porque tus datos ya quedaron publicados. Si en algún momento deseas actualizar tu información o agregar más redes sociales, puedes volver a llenar el formulario cuando quieras.*'
+            ].join('\n');
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,

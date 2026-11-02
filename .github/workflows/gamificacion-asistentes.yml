@@ -124,39 +124,50 @@ jobs:
 
       - name: 💾 Guardar cambios en el repositorio
         if: steps.calcular.outputs.has_updates == 'true'
+        env:
+          GH_USER: ${{ github.event.pull_request.user.login }}
+          POINTS: ${{ steps.calcular.outputs.points }}
+          NEW_RANK: ${{ steps.calcular.outputs.new_rank }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add asistentes.json ASISTENTES.md README.md
           if ! git diff --staged --quiet; then
-            git commit -m "chore(gamificacion): actualizar puntaje de @${{ github.event.pull_request.user.login }} (${{ steps.calcular.outputs.points }} XP - ${{ steps.calcular.outputs.new_rank }}) [skip ci]"
-            git pull --rebase origin ${{ github.event.repository.default_branch }}
-            git push origin HEAD:${{ github.event.repository.default_branch }}
+            git commit -m "chore(gamificacion): actualizar puntaje de @${GH_USER} (${POINTS} XP - ${NEW_RANK}) [skip ci]"
+            git pull --rebase origin "${DEFAULT_BRANCH}"
+            git push origin HEAD:"${DEFAULT_BRANCH}"
           fi
 
       - name: 📣 Publicar reporte de evaluación y puntaje en el Pull Request
         uses: actions/github-script@v9
+        env:
+          NEW_RANK: ${{ steps.calcular.outputs.new_rank }}
+          POINTS: ${{ steps.calcular.outputs.points }}
+          REPORT: ${{ steps.calcular.outputs.report }}
         with:
           script: |
             const user = context.payload.pull_request.user.login;
-            const rank = '${{ steps.calcular.outputs.new_rank }}';
-            const points = '${{ steps.calcular.outputs.points }}';
-            const report = `${{ steps.calcular.outputs.report }}`;
+            const rank = process.env.NEW_RANK || '';
+            const points = process.env.POINTS || '';
+            const report = process.env.REPORT || '';
 
             if (!points) return;
 
-            const comment = `### 🏆 ¡Felicidades @${user}! Tu Pull Request ha sido fusionado con éxito.
-
-            📊 **Reporte de Evaluación de tus Ejercicios y Puntaje:**
-            - 🎖️ **Rango actual:** **${rank}**
-            - ⚡ **Puntaje Total:** **${points} XP**
-
-            #### 📋 Detalle por semana:
-            ${report}
-
-            > 💡 *Recuerda: Para que una semana cuente como **100% Completada** y otorgue el bono de **+20 XP** (necesario para ascender a **🧭 Timonel** y **⚓ Capitán K8s**), debes incluir la solución de **todos los ejercicios** de esa semana dentro de tu carpeta \`aportes-comunidad/soluciones-retos/${user}/semana-XX/\`.*
-
-            👉 **[Ver la Tabla de Posiciones en ASISTENTES.md](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/ASISTENTES.md)**`;
+            const comment = [
+              `### 🏆 ¡Felicidades @${user}! Tu Pull Request ha sido fusionado con éxito.`,
+              '',
+              '📊 **Reporte de Evaluación de tus Ejercicios y Puntaje:**',
+              `- 🎖️ **Rango actual:** **${rank}**`,
+              `- ⚡ **Puntaje Total:** **${points} XP**`,
+              '',
+              '#### 📋 Detalle por semana:',
+              report,
+              '',
+              `> 💡 *Recuerda: Cada reto roto resuelto y validado suma **+10 XP**. Para que una semana cuente como **100% Completada** (necesario para ascender a **🧭 Timonel** y **⚓ Capitán K8s**), debes incluir la solución de **todos los ejercicios** de esa semana dentro de tu carpeta \`aportes-comunidad/soluciones-retos/${user}/semana-XX/\`.*`,
+              '',
+              `👉 **[Ver la Tabla de Posiciones en ASISTENTES.md](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/ASISTENTES.md)**`
+            ].join('\n');
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
