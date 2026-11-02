@@ -455,5 +455,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Mi objetivo es fortalecer mis competencias técnicas en Docker, Kubernetes, OpenShift y servicios de nube como AWS EKS, para poder participar en proyectos de modernización tecnológica, automatización, alta disponibilidad y administración de plataformas empresariales."
+  },
+  {
+    "github": "calichem26",
+    "nombre": "Carlos Andres Montoya Alzate",
+    "rol": "Devops",
+    "linkedin": "https://www.linkedin.com/in/carlos-andres-montoya-alzate",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Aprender de Docker y Kubernetes"
   }
 ]
