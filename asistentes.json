@@ -465,5 +465,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Mi objetivo es fortalecer mis competencias técnicas en Docker, Kubernetes, OpenShift y servicios de nube como AWS EKS, para poder participar en proyectos de modernización tecnológica, automatización, alta disponibilidad y administración de plataformas empresariales."
+  },
+  {
+    "github": "yepesd86",
+    "nombre": "Juan D Yepes",
+    "rol": "Lider Plataformas Cloud",
+    "linkedin": "https://www.linkedin.com/in/yepesd/",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Mejor los conocimientos y conceptos optenidos en docker y kubernetes aplicarlos y replicarlos en mi entorno de trabajo"
   }
 ]
