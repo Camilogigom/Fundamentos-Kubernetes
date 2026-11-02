@@ -445,5 +445,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Desarrollar nuevas habilidades y ampliar conocimientos"
+  },
+  {
+    "github": "sergiogarciaj01",
+    "nombre": "Sergio Andres Garcia Jaramillo",
+    "rol": "Middleware Architect",
+    "linkedin": "https://www.linkedin.com/in/sergio-andres-garcia-jaramillo",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Mi objetivo es fortalecer mis competencias técnicas en Docker, Kubernetes, OpenShift y servicios de nube como AWS EKS, para poder participar en proyectos de modernización tecnológica, automatización, alta disponibilidad y administración de plataformas empresariales."
   }
 ]
