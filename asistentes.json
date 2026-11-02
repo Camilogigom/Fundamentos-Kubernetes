@@ -435,5 +435,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Kubernetes es fundamental porque se ha convertido en el estándar de la industria para orquestar contenedores y gestionar aplicaciones distribuidas a gran escala en la nube"
+  },
+  {
+    "github": "camilorendon08",
+    "nombre": "Camilo Rendon",
+    "rol": "Ingeniero de Software",
+    "linkedin": "https://www.linkedin.com/in/camilo-rendon-3671a0208/",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Desarrollar nuevas habilidades y ampliar conocimientos"
   }
 ]

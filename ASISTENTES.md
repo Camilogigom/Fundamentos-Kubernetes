@@ -84,7 +84,7 @@ Si prefieres hacerlo con comandos de `git`, edita tu bloque en [`asistentes.json
 
 ---
 
-## 👥 Tabla de Posiciones de la Tripulación (39 Tripulantes)
+## 👥 Tabla de Posiciones de la Tripulación (40 Tripulantes)
 
 <!-- INICIO_TABLA_ASISTENTES -->
 | # | 👤 Tripulante | 💼 Rol / Especialidad | 🌐 Redes Profesionales | 🎖️ Rango y Progreso (XP) | 🎯 ¿Qué te motivó a unirte? |
@@ -128,6 +128,7 @@ Si prefieres hacerlo con comandos de `git`, edita tu bloque en [`asistentes.json
 | #37 | <img src="https://github.com/edwin8855.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Edwin Restrepo** | Consultor | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/edwin8855)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/edwinalexanderrg) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Aprender a desplegar aplicaciones y aprovechar la oportunidad de la comunidad |
 | #38 | <img src="https://github.com/MiguelCeballos944.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Miguel ceballos** | Estudiante de Ingenieria de Sistemas | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/MiguelCeballos944) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Lo que me motivo a unirme es la pasion  que tengo por aprender cosas nuevas en la carrera que estoy estudiando  en este caso la tematica de contenedores docker y kubernetes  me parece fenomenal  y que bueno hacer parte de este grupo y aprender demaciado de ustedes  muchas gracias |
 | #39 | <img src="https://github.com/ManuelaOJ.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Manuela Orozco Jimenez** | AI Engineer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/ManuelaOJ)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/manuela-orozco-jimenez/) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Kubernetes es fundamental porque se ha convertido en el estándar de la industria para orquestar contenedores y gestionar aplicaciones distribuidas a gran escala en la nube |
+| #40 | <img src="https://github.com/camilorendon08.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Camilo Rendon** | Ingeniero de Software | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/camilorendon08)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/camilo-rendon-3671a0208/) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Desarrollar nuevas habilidades y ampliar conocimientos |
 <!-- FIN_TABLA_ASISTENTES -->
 
 > [!TIP]
