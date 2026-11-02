@@ -40,30 +40,39 @@ graph TB
 
 ---
 
-### La analogía del tinto colombiano ☕ (El hilo conductor del workshop)
+### ☕ La Analogía de KubeCafé (El hilo conductor de la Semana 00 a la 06)
 
-Para entender esto sin complicaciones, piensa en cómo funciona un buen tinto en Medellín:
+Para entender Docker y cómo se conecta con Kubernetes, imagina que estamos montando una cafetería de especialidad de alta escala (**KubeCafé**):
 
-* **Los Granos de café:** Es tu código fuente (`app.py`, `index.html`, etc.). La materia prima sin procesar.
-* **El `Dockerfile` (La Receta):** Indica cómo tostar, moler y preparar el café. Es la receta escrita paso a paso.
-* **La Imagen de Docker (La Bolsa de café sellada):** Es la bolsa de café molido sellada al vacío que compras en la tienda. Es inmutable: la construyes una vez y la puedes llevar a Medellín, Bogotá o Tokio; sabe exactamente igual en todas partes.
-* **El Contenedor (La Greca preparando el tinto):** Es la greca encendida pasando agua caliente por el café molido. La aplicación cobrando vida, lista para servir peticiones.
-* **El Pod (El Carrito de tintos):** Es la unidad donde montas la greca junto con los vasitos desechables y el azúcar (recursos compartidos).
-* **Kubernetes (La Administración del Metro en hora pico):** Coordina una red de carritos en las estaciones. Si a un carrito se le apaga la greca, envía otro inmediatamente; si dan las 7:00 a. m., activa 10 carritos más para que nadie se quede sin tinto.
+| Concepto en Semana 00 | En KubeCafé | ¿Qué significa en la práctica? |
+| :--- | :--- | :--- |
+| **Código Fuente (`app.py`)** | 🌱 **Grano verde / crudo** | Tu receta original y lógica de negocio sin procesar. |
+| **`Dockerfile`** | 📜 **Receta del tostador** | Pasos exactos escritos en texto para tostar, moler y empacar. |
+| **Imagen Docker (`Image`)** | 📦 **Bolsa de café sellada** | Paquete inmutable sellado al vacío: sabe exactamente igual en Medellín, Bogotá o Tokio. |
+| **Registry (`Harbor / Hub`)** | 🏪 **Bodega Mayorista** | Almacén central donde guardas y distribuyes tus bolsas selladas (`docker push` / `pull`). |
+| **Contenedor (`Container`)** | ☕ **Taza de café servida** | La bebida caliente ya preparada y ejecutándose en memoria RAM y CPU. |
+| **Kubernetes (Semanas 01–06)** | 🏢 **Operación completa de KubeCafé** | Pone las tazas en **🍽️ Bandejas (`Pods`)** sobre **🪵 Mesas de barismo (`Nodes`)** atendidas por **👨‍🍳 Baristas (`kubelet`)**, **🤵 Meseros (`Services`)** y una **🏢 Oficina de Gerencia (`Control Plane`)**. |
 
-👉 *¿Quieres leer la historia completa con todos los componentes de Kubernetes? Lee la guía comunitaria: [**De un Tinto Colombiano a Kubernetes**](../recursos/de-un-tinto-a-kubernetes.md).*
+> 💡 **¿Qué significan estos términos de cafetería?**
+> * **📜 Tostador:** Es quien toma el grano de café crudo, lo cocina con calor (*tostar*) y lo tritura (*moler*) para que quede listo (`docker build`).
+> * **📦 Inmutable (Sellado al vacío):** Significa que una vez cerrada la bolsa en fábrica, **no se modifica por dentro**; si cambias la receta, empacas una bolsa nueva con otra etiqueta (`v2`).
+> * **👨‍🍳 Barista y 🪵 Mesa de barismo:** El *barista* es la persona experta que prepara el café detrás de la barra (`kubelet`), y la *mesa de barismo* es su estación o mesón de trabajo equipado con molinos (**CPU**) y agua (**RAM**), es decir, el servidor (`Worker Node`).
+
+👉 *¿Quieres ver cómo se conecta toda la cafetería hasta la Semana 06? Explora la guía interactiva: [**☕ Kubernetes explicado con la Analogía del Café (KubeCafé)**](../recursos/de-un-tinto-a-kubernetes.md).*
 
 ---
 
-## 🧩 Anatomía del Ecosistema Docker
+## 🧩 Anatomía del Ecosistema Docker (Del Grano a la Taza)
 
 ```mermaid
 flowchart LR
-    DF["📄 Dockerfile\n(Receta)"] -->|"docker build"| IMG["📦 Imagen OCI\n(Inmutable / Plantilla)"]
-    IMG -->|"docker push"| REG["🌐 Registry\n(Docker Hub / GHCR)"]
-    IMG -->|"docker run"| CONT["🚀 Contenedor\n(Proceso en ejecución)"]
-    IMG -->|"kind load"| K8S["☸️ Clúster Kind / K8s\n(Listo para orquestar)"]
+    G["🌱 Código Fuente\n(Grano verde)"] --> DF["📜 Dockerfile\n(Receta del tostador)"]
+    DF -->|"docker build"| IMG["📦 Imagen OCI\n(Bolsa de café sellada)"]
+    IMG -->|"docker push"| REG["🏪 Registry\n(Bodega Mayorista)"]
+    IMG -->|"docker run"| CONT["☕ Contenedor\n(Taza de café servida)"]
+    IMG -->|"kind load"| K8S["☸️ Clúster Kind / KubeCafé\n(Mesas de barismo)"]
 
+    style G fill:#f1f8e9,stroke:#558b2f,stroke-width:2px,color:#000
     style DF fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#000
     style IMG fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
     style CONT fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#000

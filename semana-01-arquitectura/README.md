@@ -4,26 +4,60 @@
 
 ---
 
-## 🧠 Resumen en 2 minutos (Sin enredos)
+## 🧠 Resumen en 2 minutos: Bienvenido a ☕ KubeCafé
 
-Imagina una red de carritos de tinto atendiendo en las estaciones del Metro de Medellín:
-* **El Contenedor (Docker):** Es la **greca encendida** preparando el tinto (el proceso de tu aplicación corriendo en primer plano).
-* **El Pod:** Es el **carrito de tintos**, donde va la greca montada junto con los vasitos desechables y el azúcar. En Kubernetes nunca pones grecas sueltas en el piso; siempre van agrupadas dentro de un **Pod** que les da red (IP) y almacenamiento compartido.
-* **El Worker Node (Nodo trabajador):** Es la **estación física** (ej. Estación San Antonio o Parque Berrío) que cuenta con espacio y electricidad para alojar varios carritos.
-* **El Control Plane (Cerebro):** Es la **administración central del Metro** que supervisa la operación completa, decide en qué estación poner cada carrito y envía reemplazos si alguno se daña.
+En la **Semana 00** aprendimos a tostar el **🌱 Grano verde** (`Código`), seguir la **📜 Receta** (`Dockerfile`), empacar la **📦 Bolsa sellada** (`Imagen Docker`) y servir una **☕ Taza de café** (`Contenedor`).
 
-👉 *¿Quieres ver la analogía completa con hora pico, Deployments, Services y HPA? Lee: [**De un Tinto Colombiano a Kubernetes**](../recursos/de-un-tinto-a-kubernetes.md).*
+Ahora en la **Semana 01** abrimos nuestra cafetería de especialidad (**KubeCafé**), donde todo está organizado entre la **🏢 Oficina de Gerencia (`Control Plane`)** y las **🪵 Mesas de Barismo (`Worker Nodes`)**:
+
+> 💡 **Palabras clave de la cafetería en lenguaje cotidiano:**
+> * **👨‍🍳 Barista:** Es la persona experta que prepara las bebidas de café detrás de la barra y maneja la máquina cafetera (en Kubernetes es el **`kubelet`**).
+> * **🪵 Barismo / Mesa de barismo:** El *barismo* es el oficio de preparar buen café. Una *mesa de barismo* es el mesón o estación de trabajo donde están conectados los molinos (**CPU**) y el agua (**RAM**) para preparar las tazas (representa un **`Worker Node`** o servidor).
+> * **🧾 Comanda:** En un restaurante o cafetería, es el papelito u orden escrita donde se anota qué pidió el cliente para pasarlo a preparación (representa tu archivo manifiesto **`.yaml`**).
+> * **🥛 Sidecar (Acompañante):** Como el vasito de agua que te sirven en la misma bandeja junto al café; es un contenedor auxiliar que acompaña al contenedor principal dentro del mismo **`Pod`**.
+
+| Componente Técnico | En ☕ KubeCafé | ¿Cuál es su función en la cafetería y en el clúster? |
+| :--- | :--- | :--- |
+| **Contenedor** | ☕ **Taza de café servida** | La bebida lista y ejecutándose en memoria/CPU. |
+| **Pod** | 🍽️ **Bandeja de servicio** | Unidad mínima de K8s: lleva la **☕ taza de café principal** + el **🥛 vaso de agua** (*Sidecar*). Nunca se sirven tazas sueltas sin bandeja. |
+| **Worker Node** | 🪵 **Mesa de barismo** | Estación de trabajo física o virtual con agua (**RAM**) y molinos (**CPU**). |
+| **Kubelet** | 👨‍🍳 **Barista de la mesa** | Agente en cada nodo: recibe órdenes de gerencia y vigila que las tazas no se enfríen. |
+| **Control Plane** | 🏢 **Oficina de Gerencia** | Coordina toda la cafetería sin preparar café directamente. |
+| **kube-apiserver** | 🛎️ **Caja / Mostrador** | Ventanilla única: todos tus comandos (`kubectl`) y reportes entran por aquí. |
+| **etcd** | 📖 **Libro contable** | Base de datos llave-valor inmutable donde se anotan todas las comandas y mesas. |
+| **kube-scheduler** | 📋 **Despachador de mesas** | Mira qué mesa de barismo tiene molino y agua libre para asignar la bandeja (`Pod`). |
+| **Controller Manager** | 🧐 **Supervisor de salón** | Si una taza se derrama, detecta la falta y ordena preparar otra inmediatamente. |
+
+👉 *¿Quieres ver cómo se conecta KubeCafé hasta la Semana 06 (Services, Ingress, ConfigMaps, Secrets, PV y Helm)? Lee: [**☕ Kubernetes explicado con la Analogía del Café (KubeCafé)**](../recursos/de-un-tinto-a-kubernetes.md).*
 
 ```mermaid
-graph TD
-    U["👨‍💻 Tú (kubectl)"] -->|"1. Quiero un Pod con Nginx"| API["🧠 Control Plane (API Server)"]
-    API -->|"2. Asigna un servidor libre"| N1["💪 Worker Node (Estación San Antonio)"]
-    subgraph N1 ["💪 Worker Node (Tu Computador)"]
-        K["👷 Kubelet (Capataz)"] -->|"3. Prepara el carrito"| P["🛒 Pod (IP: 10.244.0.5)"]
-        subgraph P ["🛒 Pod: Carrito de tintos"]
-            C["🔥 Contenedor Nginx: Greca activa (Puerto 80)"]
+flowchart TD
+    U["👨‍💻 Tú (kubectl)"] -->|"1. Entregas comanda\n(k apply -f pod.yaml)"| APIServer
+
+    subgraph Gerencia["🏢 Control Plane (Oficina de Gerencia)"]
+        APIServer["🛎️ kube-apiserver (Caja / Mostrador)"]
+        ETCD["📖 etcd (Libro Contable)"]
+        Scheduler["📋 kube-scheduler (Despachador)"]
+        Controller["🧐 Controller Manager (Supervisor)"]
+
+        APIServer <--> ETCD
+        APIServer <--> Scheduler
+        APIServer <--> Controller
+    end
+
+    subgraph Mesa1["🪵 Worker Node 1 (Mesa de Barismo Norte)"]
+        Kubelet1["👨‍🍳 kubelet (Barista 1)"]
+        subgraph PodA["🍽️ Pod (Bandeja: IP 10.244.0.5)"]
+            TazaA["☕ Taza Principal (Nginx :80)"]
+            AguaA["🥛 Vaso Agua (Sidecar)"]
         end
     end
+
+    APIServer -.->|"2. Ordena preparar bandeja"| Kubelet1
+    Kubelet1 -->|"3. Sirve y vigila"| PodA
+
+    style Gerencia fill:#fff8e1,stroke:#f57f17,stroke-width:2px,color:#000
+    style Mesa1 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000
 ```
 
 ---
@@ -78,25 +112,34 @@ Puedes utilizarla de tres formas según lo que prefieras:
 
 ---
 
-## 💥 El Reto Roto de la Semana 1
+## 💥 Los Retos Rotos de la Semana 1 (`2.reto-roto/`)
 
-Entra a la carpeta [`reto-roto/pod-con-errores.yaml`](./reto-roto/pod-con-errores.yaml). Un compañero intentó desplegar un Pod pero cometió **2 errores muy comunes** y el Pod nunca pasa a estado `Running`.
+En la carpeta [`2.reto-roto/`](./2.reto-roto) encontrarás **4 incidentes reales en KubeCafé** (+10 XP por cada reto solucionado):
 
-### ¿Cómo superarlo?
-1. Intenta aplicarlo en tu clúster: `kubectl apply -f semana-01-arquitectura/reto-roto/pod-con-errores.yaml`
-2. Investiga qué le duele usando:
-   * `kubectl get pods`
-   * `kubectl describe pod pod-rebelde`
-3. Copia el archivo a `aportes-comunidad/soluciones-retos/tu-usuario/semana-01/pod-solucionado.yaml`, corrígelo, agrega un comentario `#` explicando qué estaba mal y envía tu **Pull Request**.
+| # | Archivo del Reto | ¿Qué pasó en ☕ KubeCafé? | Estado / Síntoma |
+| :-: | :--- | :--- | :--- |
+| **01** | [`01-pod-con-errores.yaml`](./2.reto-roto/01-pod-con-errores.yaml) | El barista buscó una 📦 **bolsa de café** con etiqueta mal escrita y puerto inválido. | `ImagePullBackOff` / Error de puerto |
+| **02** | [`02-pod-crashloop.yaml`](./2.reto-roto/02-pod-crashloop.yaml) | La ☕ **taza se sirve pero se derrama** al instante porque el comando falla. | `CrashLoopBackOff` |
+| **03** | [`03-pod-pendiente-infinito.yaml`](./2.reto-roto/03-pod-pendiente-infinito.yaml) | La comanda exige **64 molinos de café (CPU)** y ninguna 🪵 mesa tiene tantos. | `Pending` (`Insufficient cpu`) |
+| **04** | [`04-pod-yaml-molesto.yaml`](./2.reto-roto/04-pod-yaml-molesto.yaml) | La comanda entregada en 🛎️ **Caja (`apiserver`)** tiene errores de escritura YAML. | Error de validación al hacer `apply` |
 
+### ¿Cómo superarlos y ganar hasta +40 XP?
+1. Intenta aplicar cada archivo en tu clúster:
+   ```bash
+   kubectl apply -f semana-01-arquitectura/2.reto-roto/01-pod-con-errores.yaml
+   ```
+2. Investiga qué le duele usando `kubectl get pods`, `kubectl describe pod <nombre>` y `kubectl logs <nombre>`.
+3. Copia los 4 archivos a `aportes-comunidad/soluciones-retos/<tu-usuario>/semana-01/`, corrígelos conservando sus nombres (`01-pod-con-errores.yaml`, `02-pod-crashloop.yaml`, `03-pod-pendiente-infinito.yaml`, `04-pod-yaml-molesto.yaml`) y envía tu **Pull Request**.
 
-## 🕵️‍♂️ Diccionario Rápido: ¿Qué le duele a mi Pod?
+---
+
+## 🕵️‍♂️ Diccionario Rápido: ¿Qué le duele a mi Bandeja (`Pod`) en KubeCafé?
 
 Cuando ejecutes `kubectl get pods`, el estado (`STATUS`) te dará la primera pista de dónde buscar:
 
-| Estado del Pod | ¿Qué significa en español? | Comando para descubrir el culpable |
-| :--- | :--- | :--- |
-| **`Pending`** | El Pod está en la sala de espera. Ningún servidor tiene suficiente RAM/CPU libre para recibirlo. | `kubectl describe pod <nombre>` *(Mira la tabla de Events al final)*. |
-| **`ImagePullBackOff`** o **`ErrImagePull`** | Kubernetes intentó descargar la imagen de Docker pero no existe, está mal escrita o es privada. | `kubectl describe pod <nombre>` *(Revisa qué imagen intentó bajar)*. |
-| **`CrashLoopBackOff`** | El contenedor logró arrancar, pero la aplicación de adentro falló y se apagó sola. | `kubectl logs <nombre>` *(Lee el error que arrojó la aplicación)*. |
-| **`Error de validación al hacer apply`** | El archivo YAML tiene un error de sintaxis, indentación o un nombre de campo inventado. | Lee el número de línea que te muestra la terminal al hacer `kubectl apply`. |
+| Estado del Pod | En ☕ KubeCafé | ¿Qué significa técnicamente? | Comando para descubrir el culpable |
+| :--- | :--- | :--- | :--- |
+| **`Pending`** | 📋 El **Despachador (`scheduler`)** dejó la comanda en sala de espera porque ninguna mesa tiene tanta agua/molinos. | Ningún Worker Node tiene suficiente RAM/CPU libre o hay una restricción (`taint`/`nodeSelector`). | `kubectl describe pod <nombre>` *(Mira la tabla de `Events` al final)*. |
+| **`ImagePullBackOff`** / **`ErrImagePull`** | 👨‍🍳 El **Barista (`kubelet`)** fue a la bodega pero esa 📦 **bolsa de café** no existe o está bajo llave. | La imagen de Docker está mal escrita, el tag no existe o el repositorio es privado. | `kubectl describe pod <nombre>` *(Revisa qué imagen intentó descargar)*. |
+| **`CrashLoopBackOff`** | ☕ La **taza se sirve pero se cae al piso** una y otra vez apenas el barista la suelta. | El contenedor arrancó, pero el proceso principal adentro terminó con error o se apagó. | `kubectl logs <nombre>` *(Lee el error que arrojó la aplicación)*. |
+| **`Error de validación al hacer apply`** | 🛎️ La **Caja Registradora (`apiserver`)** rechazó tu comanda porque el formulario está mal llenado. | El archivo YAML tiene un error de sintaxis, indentación o un campo mal escrito. | Usa `kubectl explain pod --recursive` o revisa la línea del error en terminal. |

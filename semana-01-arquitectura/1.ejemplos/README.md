@@ -21,21 +21,22 @@ En esta carpeta aprenderás las dos formas de trabajar con Kubernetes (**Modo Im
 
 ## ⚖️ 1. Modo Imperativo (Interactivo) vs. Modo Declarativo
 
-En Kubernetes existen dos filosofías para crear y administrar recursos:
+En Kubernetes existen dos filosofías para crear y administrar recursos. En [**☕ KubeCafé**](../../recursos/de-un-tinto-a-kubernetes.md), imagínalo como la diferencia entre **gritarle un pedido rápido al cajero** vs. **entregar la comanda oficial impresa y archivada en el Libro Contable (`etcd`)**:
 
 ```mermaid
 flowchart LR
-    subgraph Imperativo ["⚡ Modo Imperativo / Interactivo"]
-        I1["👤 Ingeniero"] -->|"k run / k create / k edit\n(Cómo hacerlo paso a paso)"| API1["☸️ API Server"]
+    subgraph Imperativo ["⚡ Modo Imperativo / Interactivo (Pedido a viva voz)"]
+        I1["👤 Ingeniero"] -->|"k run / k create / k edit\n(Cómo hacerlo paso a paso)"| API1["🛎️ kube-apiserver (Caja)"]
     end
-    subgraph Declarativo ["📜 Modo Declarativo (Producción / GitOps)"]
-        D1["👤 Ingeniero"] -->|"Escribe estado deseado"| Y["📄 archivo.yaml (Git)"]
-        Y -->|"k apply -f archivo.yaml\n(Qué estado final quiero)"| API2["☸️ API Server"]
+    subgraph Declarativo ["📜 Modo Declarativo (Comanda Oficial en Git)"]
+        D1["👤 Ingeniero"] -->|"Escribe estado deseado"| Y["📄 archivo.yaml (Comanda)"]
+        Y -->|"k apply -f archivo.yaml\n(Qué bandeja final quiero)"| API2["🛎️ kube-apiserver (Caja)"]
     end
 ```
 
 | Característica | ⚡ Modo Imperativo / Interactivo | 📜 Modo Declarativo |
 | :--- | :--- | :--- |
+| **En ☕ KubeCafé** | Pides en el mostrador a viva voz: *"¡Sírvanme un espresso rápido!"*. | Entregas una comanda escrita y firmada con la receta exacta que queda archivada. |
 | **¿Qué le dices a K8s?** | **Cómo** hacer algo mediante órdenes directas en la terminal. | **Qué** estado final deseas alcanzar descrito en un archivo `.yaml`. |
 | **Comandos típicos** | `k run`, `k create`, `k expose`, `k scale`, `k edit`, `k delete pod X` | `k apply -f archivo.yaml`, `k diff -f archivo.yaml`, `k delete -f archivo.yaml` |
 | **Trazabilidad / Auditoría** | ❌ Baja (si no guardas el comando, nadie sabe qué cambiaste). | ✅ Alta (el archivo YAML vive en Git con historial de commits y PRs). |
@@ -208,35 +209,35 @@ k delete -f .
 
 ---
 
-## 📑 6. Catálogo de Manifiestos YAML de Ejemplo
+## 📑 6. Catálogo de Manifiestos YAML de Ejemplo (Las Bandejas de KubeCafé)
 
-| Archivo | Tipo de Pod | Concepto Clave |
-| :--- | :--- | :--- |
-| [`01-mi-primer-pod.yaml`](./01-mi-primer-pod.yaml) | Pod Básico (1 Contenedor) | Estructura básica mínima de un Pod en Kubernetes. |
-| [`02-pod-multi-contenedor.yaml`](./02-pod-multi-contenedor.yaml) | **Multi-Contenedor (2 Contenedores)** | Patrón Sidecar con volumen temporal compartido (`emptyDir`). |
-| [`03-pod-con-recursos-y-env.yaml`](./03-pod-con-recursos-y-env.yaml) | Pod con Variables y Recursos | `requests`, `limits` de CPU/RAM y Downward API (`fieldRef`). |
-| [`04-pod-con-init-container.yaml`](./04-pod-con-init-container.yaml) | Pod con `initContainers` | Tareas previas bloqueantes antes de iniciar la app principal. |
-| [`05-pod-con-health-checks.yaml`](./05-pod-con-health-checks.yaml) | Pod con Sondas de Salud | `readinessProbe` y `livenessProbe` para auto-recuperación. |
+| Archivo | Tipo de Pod | En ☕ KubeCafé | Concepto Técnico Clave |
+| :--- | :--- | :--- | :--- |
+| [`01-mi-primer-pod.yaml`](./01-mi-primer-pod.yaml) | Pod Básico (1 Contenedor) | 🍽️ Bandeja con 1 ☕ taza de café | Estructura básica mínima de un Pod en Kubernetes. |
+| [`02-pod-multi-contenedor.yaml`](./02-pod-multi-contenedor.yaml) | **Multi-Contenedor (2 Contenedores)** | 🍽️ Bandeja con ☕ taza principal + 🥛 vaso de agua | Patrón *Sidecar* con volumen temporal compartido (`emptyDir`). |
+| [`03-pod-con-recursos-y-env.yaml`](./03-pod-con-recursos-y-env.yaml) | Pod con Variables y Recursos | ⚖️ Medidor de agua/molino y 🧂 azúcar del día | `requests`, `limits` de CPU/RAM y Downward API (`fieldRef`). |
+| [`04-pod-con-init-container.yaml`](./04-pod-con-init-container.yaml) | Pod con `initContainers` | 🧼 Calentar y limpiar la máquina antes de servir | Tareas previas bloqueantes antes de iniciar la app principal. |
+| [`05-pod-con-health-checks.yaml`](./05-pod-con-health-checks.yaml) | Pod con Sondas de Salud | 🌡️ Termómetro para saber si el café sigue caliente | `readinessProbe` y `livenessProbe` para auto-recuperación. |
 
 ---
 
-## 🔍 7. Detalle del Pod con 2 Contenedores (Patrón Sidecar)
+## 🔍 7. Detalle del Pod con 2 Contenedores: La Bandeja de Servicio (Patrón Sidecar)
 
-El archivo [`02-pod-multi-contenedor.yaml`](./02-pod-multi-contenedor.yaml) implementa un Pod con **dos contenedores** que colaboran estrechamente:
+En **☕ KubeCafé**, un **Pod** es una **🍽️ Bandeja de servicio**: lleva la **☕ taza de café principal** acompañada de un **🥛 vaso de agua o galleta (*Sidecar*)**. El archivo [`02-pod-multi-contenedor.yaml`](./02-pod-multi-contenedor.yaml) implementa exactamente esto con dos contenedores que colaboran en la misma bandeja:
 
-1. **`servidor-web` (Nginx):** Sirve tráfico HTTP en el puerto 80 desde la ruta `/usr/share/nginx/html`.
-2. **`generador-contenido` (Busybox - Sidecar):** Ejecuta un bucle cada 5 segundos que actualiza un archivo `index.html` en la ruta `/datos`.
+1. **`servidor-web` (Nginx — ☕ Taza Principal):** Sirve tráfico HTTP en el puerto 80 desde la ruta `/usr/share/nginx/html`.
+2. **`generador-contenido` (Busybox — 🥛 Vaso de Agua / Sidecar):** Ejecuta un bucle cada 5 segundos que actualiza un archivo `index.html` en la ruta `/datos`.
 
 ```mermaid
 graph LR
-    subgraph Pod ["📦 Pod: pod-dos-contenedores (Misma IP / Localhost)"]
-        subgraph V ["💾 Volumen Compartido (emptyDir)"]
+    subgraph Pod ["🍽️ Pod: pod-dos-contenedores (Bandeja con Misma IP / Localhost)"]
+        subgraph V ["💾 Volumen Compartido (emptyDir / Servilleta)"]
             F["📄 index.html"]
         end
-        C2["⚙️ Sidecar: generador-contenido"] -->|"Escribe datos periódicos"| V
-        V -->|"Lee y sirve"| C1["🌐 Principal: servidor-web (Nginx :80)"]
+        C2["🥛 Sidecar: generador-contenido"] -->|"Escribe datos periódicos"| V
+        V -->|"Lee y sirve"| C1["☕ Principal: servidor-web (Nginx :80)"]
     end
-    U["👤 Usuario / Navegador"] -->|"Puerto 8080"| C1
+    U["👤 Cliente / Navegador"] -->|"Puerto 8080"| C1
 ```
 
 ### ¿Qué comparten dos contenedores en el mismo Pod?

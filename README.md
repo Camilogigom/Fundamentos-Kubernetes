@@ -14,7 +14,7 @@
   Aprende haciendo, rompe cosas sin miedo en tu entorno local y haz tu primer aporte al Open Source.
 </p>
 
-[☕ Guía del Tinto](./recursos/de-un-tinto-a-kubernetes.md) •
+[☕ Analogía KubeCafé](./recursos/de-un-tinto-a-kubernetes.md) •
 [⚓ Guía de Harbor](./recursos/guia-harbor-registry.md) •
 [🛡️ Guía de Trivy](./recursos/guia-trivy-seguridad.md) •
 [🤖 Guía de Ollama](./recursos/guia-ollama-ia-local.md) •
@@ -32,8 +32,8 @@
 > **¿Es tu primera vez usando GitHub o Kubernetes?** ¡Estás en el lugar correcto! Tu primera misión toma solo 30 segundos: regístrate en el [**Muro de Asistentes (`ASISTENTES.md`)**](./ASISTENTES.md) usando nuestro [**⛵ Formulario Visual de Registro**](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml).
 
 > [!NOTE]
-> ☕ **¿Quieres entender Kubernetes con una historia 100% colombiana?**  
-> Lee el guion oficial para estudiantes y speakers: [**De un Tinto Colombiano a Kubernetes (Contenedores, Pods y el Metro de Medellín)**](./recursos/de-un-tinto-a-kubernetes.md).
+> ☕ **Hilo Conductor del Workshop — KubeCafé (La Analogía del Café):**  
+> Todo lo que aprenderás desde la **Semana 00** hasta la **Semana 06** está conectado mediante la operación de una cafetería de especialidad de alta escala (**KubeCafé**). Explora la guía interactiva con diagramas y retos: [**☕ Kubernetes explicado con la Analogía del Café (KubeCafé)**](./recursos/de-un-tinto-a-kubernetes.md).
 
 > [!IMPORTANT]
 > 📢 **¿Hiciste Fork de este repositorio antes?**  
@@ -41,18 +41,18 @@
 
 ---
 
-## 🗺️ Mapa de Ruta
+## 🗺️ Mapa de Ruta (Conectado con ☕ KubeCafé)
 
-Así evolucionaremos paso a paso desde el código empaquetado con Docker hasta desplegar una arquitectura completa en Kubernetes:
+Así evolucionaremos paso a paso desde el grano de café empaquetado con Docker hasta inaugurar una franquicia completa en Kubernetes:
 
 ```mermaid
 flowchart LR
-    S0["🐳 Semana 0\nFundamentos de Docker"] --> S1["🌱 Semana 1\nArquitectura y Pods"]
-    S1 --> S2["🔄 Semana 2\nDeployments y Réplicas"]
-    S2 --> S3["🌐 Semana 3\nServices e Ingress"]
-    S3 --> S4["💾 Semana 4\nConfigMaps, Secrets y PV"]
-    S4 --> S5["🛡️ Semana 5\nProbes, Recursos y RBAC"]
-    S5 --> S6["🚀 Semana 6\nHelm y Proyecto Final"]
+    S0["🐳 Semana 0\nFundamentos de Docker\n(🌱 Grano → 📦 Bolsa → ☕ Taza)"] --> S1["🌱 Semana 1\nArquitectura y Pods\n(🍽️ Bandeja, 🪵 Mesas y 🏢 Gerencia)"]
+    S1 --> S2["🔄 Semana 2\nDeployments y Réplicas\n(🧐 Supervisor y Auto-Curación)"]
+    S2 --> S3["🌐 Semana 3\nServices e Ingress\n(🤵 Mesero y 🚪 Anfitriona)"]
+    S3 --> S4["💾 Semana 4\nConfigMaps, Secrets y PV\n(🧂 Especias, 🔐 Caja Fuerte y 🏬 Bodega)"]
+    S4 --> S5["🛡️ Semana 5\nProbes, Recursos y RBAC\n(🌡️ Termómetro, ⚖️ Agua y 🪪 Carnets)"]
+    S5 --> S6["🚀 Semana 6\nHelm y Proyecto Final\n(🍱 Kit de Franquicia)"]
 
     style S0 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000
     style S1 fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#000
@@ -63,15 +63,49 @@ flowchart LR
     style S6 fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#000
 ```
 
-| Semana | Módulo | Lo que vas a dominar | Estado |
-| :---: | :--- | :--- | :---: |
-| **00** | [**De Código a Contenedor con Docker**](./semana-00-fundamentos-docker) | `Dockerfile`, imágenes OCI, ciclo de vida de contenedores y puente a Kind/K8s. | 🟢 Disponible |
-| **01** | [**El motor por dentro y tu primer Pod**](./semana-01-arquitectura) | Control Plane vs. Nodos, `kubectl` y creación de Pods en YAML. | 🟢 Disponible |
-| **02** | [**Despliegues sin caídas y autorreparación**](./semana-02-deployments) | ReplicaSets, Deployments, *Self-healing*, *Rolling Updates* y *Rollbacks*. | 🔜 Próximamente |
-| **03** | [**Conectando todo: Redes en K8s**](./semana-03-redes) | Comunicación interna y externa: `ClusterIP`, `NodePort` e `Ingress`. | 🔜 Próximamente |
-| **04** | [**Configuración y Datos Persistentes**](./semana-04-almacenamiento) | Desacoplar configuración con `ConfigMaps`, `Secrets` y volúmenes (`PVC`). | 🔜 Próximamente |
-| **05** | [**Salud, Límites y Seguridad Básica**](./semana-05-operacion-seguridad) | `Liveness/Readiness Probes`, límites de CPU/RAM y permisos con `RBAC`. | 🔜 Próximamente |
-| **06** | [**Empaquetado con Helm y Proyecto Final**](./semana-06-proyecto-final) | Creación de Charts básicos y despliegue de una app completa de 3 capas. | 🔜 Próximamente |
+| Semana | Módulo | Equivalente en ☕ KubeCafé | Lo que vas a dominar | Estado |
+| :---: | :--- | :--- | :--- | :---: |
+| **00** | [**De Código a Contenedor con Docker**](./semana-00-fundamentos-docker) | 🌱 Grano → 📜 Receta → 📦 Bolsa sellada → ☕ Taza servida | `Dockerfile`, imágenes OCI, ciclo de vida de contenedores y puente a Kind/K8s. | 🟢 Disponible |
+| **01** | [**El motor por dentro y tu primer Pod**](./semana-01-arquitectura) | 🍽️ Bandeja (`Pod`), 🪵 Mesas (`Nodes`), 👨‍🍳 Barista (`kubelet`) y 🏢 Gerencia | Control Plane vs. Nodos, `kubectl` (imperativo/declarativo) y Pods en YAML. | 🟢 Disponible |
+| **02** | [**Despliegues sin caídas y autorreparación**](./semana-02-deployments) | 🧐 Supervisor (`Controller Manager`) y 📝 Orden de Producción | ReplicaSets, Deployments, *Self-healing*, *Rolling Updates* y *Rollbacks*. | 🔜 Próximamente |
+| **03** | [**Conectando todo: Redes en K8s**](./semana-03-redes) | 🤵 Mesero de barra fija (`Service`) y 🚪 Anfitriona (`Ingress`) | Comunicación interna y externa: `ClusterIP`, `NodePort` e `Ingress`. | 🔜 Próximamente |
+| **04** | [**Configuración y Datos Persistentes**](./semana-04-almacenamiento) | 🧂 Especias (`ConfigMap`), 🔐 Caja fuerte (`Secret`) y 🏬 Bodega (`PV`) | Desacoplar configuración con `ConfigMaps`, `Secrets` y volúmenes (`PVC`). | 🔜 Próximamente |
+| **05** | [**Salud, Límites y Seguridad Básica**](./semana-05-operacion-seguridad) | 🌡️ Termómetro (`Probes`), ⚖️ Dosificador (`Limits`) y 🪪 Carnets (`RBAC`) | `Liveness/Readiness Probes`, límites de CPU/RAM y permisos con `RBAC`. | 🔜 Próximamente |
+| **06** | [**Empaquetado con Helm y Proyecto Final**](./semana-06-proyecto-final) | 🍱 Kit de Franquicia (`Helm Chart`) para abrir sucursales | Creación de Charts básicos y despliegue de una app completa de 3 capas. | 🔜 Próximamente |
+
+<details>
+<summary><b>☕ Desplegar Vista Rápida de KubeCafé (Tabla de Correspondencia y Glosario Cafetero)</b></summary>
+<br>
+
+> 💡 **Glosario rápido de términos cafeteros usados en la analogía:**
+> * **👨‍🍳 Barista:** La persona experta que prepara el café detrás de la barra y opera la cafetera (representa al **`kubelet`**).
+> * **🪵 Barismo / Mesa de barismo:** El *barismo* es el oficio de preparar café de calidad; la *mesa de barismo* es el mesón o estación de trabajo con agua (**RAM**) y molinos (**CPU**) donde trabaja el barista (representa un **`Worker Node`**).
+> * **📜 Tostador:** Quien cocina con calor (*tuesta*) y tritura (*muele*) el grano crudo para que quede listo para preparar (el proceso de **`docker build`** con tu **`Dockerfile`**).
+> * **🧾 Comanda:** El papelito u orden escrita donde se anota qué pidió el cliente en un restaurante (representa tu archivo **`.yaml`**).
+> * **📦 Inmutable:** Sellado de fábrica; no se puede abrir para modificar su contenido, sino que se fabrica un paquete nuevo con otra etiqueta (`v2`).
+
+| Concepto Técnico | Analogía del Café | ¿Cuál es su función? |
+| :--- | :--- | :--- |
+| **Código Fuente** | 🌱 Grano verde / crudo | Tu receta original y lógica de negocio. |
+| **Dockerfile** | 📜 Receta del tostador | Pasos exactos para tostar, moler y empacar. |
+| **Imagen Docker** | 📦 Bolsa de café sellada | Paquete inmutable, listo para distribuir en cualquier sucursal. |
+| **Contenedor** | ☕ Taza de café servida | La bebida lista y ejecutándose en memoria/CPU. |
+| **Pod** | 🍽️ Bandeja de servicio | Unidad mínima: taza de café principal + vaso de agua (*Sidecar*). |
+| **Worker Node** | 🪵 Mesa de barismo | Estación de trabajo con agua (RAM) y molinos (CPU). |
+| **Kubelet** | 👨‍🍳 Barista de la mesa | Recibe órdenes de gerencia y cuida que las tazas no se enfríen. |
+| **Control Plane** | 🏢 Oficina de Gerencia | Coordina toda la cafetería sin servir café directamente. |
+| **kube-apiserver** | 🛎️ Caja / Mostrador | Ventanilla única: todos los pedidos y comandos entran aquí. |
+| **etcd** | 📖 Libro contable | Registro absoluto e inmutable de comandas, recetas y mesas. |
+| **kube-scheduler** | 📋 Despachador de mesas | Mira qué mesa tiene molino y agua libre para poner la taza. |
+| **Controller Manager** | 🧐 Supervisor de salón | Si una taza se derrama, ordena preparar otra inmediatamente. |
+| **Service** | 🤵 Mesero de barra fija | Atiende a los clientes con un menú fijo sin importar la taza concreta. |
+| **Ingress** | 🚪 Puerta y Anfitriona | Recibe gente de la calle y los encamina según lo que piden (`/frio`, `/postres`). |
+| **ConfigMap** | 🧂 Azúcar y especias | Ajusta el sabor sin cambiar la receta sellada de la bolsa. |
+| **Secret** | 🔐 Caja fuerte con llaves | Recetas secretas y contraseñas de la caja guardadas bajo llave. |
+| **Persistent Volume** | 🏬 Bodega externa | Sacos de café permanentes que no se pierden si se cae una taza. |
+
+👉 [**Abrir la Guía Completa e Interactiva de KubeCafé con Diagramas y Trivia (`recursos/de-un-tinto-a-kubernetes.md`)**](./recursos/de-un-tinto-a-kubernetes.md)
+</details>
 
 ---
 
