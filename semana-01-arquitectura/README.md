@@ -79,12 +79,12 @@ kubectl cluster-info
 kubectl get nodes
 ```
 
-### Paso 2: Despliega tu primer Pod
+### Paso 2: Despliega tu primer Pod (y tu primer Pod de Inferencia de IA 🤖)
 Explora la carpeta [`1.ejemplos`](./1.ejemplos) y aplica el primer Pod básico en tu clúster:
 ```bash
 kubectl apply -f semana-01-arquitectura/1.ejemplos/01-mi-primer-pod.yaml
 ```
-*(También puedes probar un Pod multi-contenedor con dos contenedores usando `02-pod-multi-contenedor.yaml`)*
+*(También puedes desplegar un Pod con dos contenedores en [`02-pod-multi-contenedor.yaml`](./1.ejemplos/02-pod-multi-contenedor.yaml) o un **Pod de Inferencia de Inteligencia Artificial Local con Ollama** en [`06-pod-inferencia-ia-ollama.yaml`](./1.ejemplos/06-pod-inferencia-ia-ollama.yaml) — [ver guía paso a paso](./1.ejemplos/README.md#-8-pod-de-inferencia-de-ia-local-en-kubernetes-ollama)).*
 
 
 Revisa que esté corriendo (`Running`):

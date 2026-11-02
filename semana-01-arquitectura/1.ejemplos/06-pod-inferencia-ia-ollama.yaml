@@ -1,0 +1,67 @@
+# ==============================================================================
+# 🤖 EJEMPLO 06: Pod de Inferencia de IA Local en Kubernetes (Ollama)
+# ==============================================================================
+# En ☕ KubeCafé: Es nuestro "Barista Sommelier con IA", capaz de responder
+# preguntas y recomendar recetas en tiempo real dentro del clúster sin pagar
+# tokens en la nube ni enviar datos privados fuera de tu computador.
+#
+# Conceptos de la Semana 01 que reúne este Pod:
+# 1. Contenedor de inferencia LLM en CPU (ollama/ollama) escuchando en :11434.
+# 2. Volumen 'emptyDir' para almacenar los pesos del modelo (/root/.ollama).
+# 3. Límites de CPU y Memoria RAM (requests/limits) para proteger el Worker Node.
+# 4. Sondas de salud (readinessProbe y livenessProbe) sobre la API de inferencia.
+# ==============================================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-inferencia-ia
+  labels:
+    app: kubecafe-ia
+    componente: inferencia-llm
+    comunidad: cloud-native-medellin
+    semana: "1"
+spec:
+  containers:
+    - name: motor-ollama
+      image: ollama/ollama:latest
+      ports:
+        - name: http-llm
+          containerPort: 11434
+      env:
+        # Escuchar en todas las interfaces del Pod para permitir port-forward y Services
+        - name: OLLAMA_HOST
+          value: "0.0.0.0:11434"
+        # Mantener el modelo cargado en RAM por 5 minutos tras cada consulta
+        - name: OLLAMA_KEEP_ALIVE
+          value: "5m"
+        - name: OLLAMA_NUM_PARALLEL
+          value: "1"
+      # ⚖️ Dosificador de recursos (vital en cargas de Inteligencia Artificial)
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "500m"
+        limits:
+          memory: "2Gi"
+          cpu: "2000m"
+      # 🌡️ Termómetros de calidad: verifican que el motor de IA responda "Ollama is running"
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 11434
+        initialDelaySeconds: 5
+        periodSeconds: 10
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 11434
+        initialDelaySeconds: 15
+        periodSeconds: 20
+      volumeMounts:
+        - name: cache-modelos-ia
+          mountPath: /root/.ollama
+  volumes:
+    # Almacenamiento temporal en el nodo para guardar el modelo descargado mientras viva el Pod
+    - name: cache-modelos-ia
+      emptyDir: {}
+

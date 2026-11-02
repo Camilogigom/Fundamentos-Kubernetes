@@ -14,8 +14,9 @@ En esta carpeta aprenderás las dos formas de trabajar con Kubernetes (**Modo Im
 3. [🧪 Simulación con `--dry-run` y Exportación a YAML (`> file.yaml`)](#-3-simulación-con---dry-run-y-exportación-a-yaml--fileyaml)
 4. [📖 Ayuda Integrada en Terminal: `--help`, `kubectl explain` y `--recursive`](#-4-ayuda-integrada-en-terminal---help-kubectl-explain-y---recursive)
 5. [🔄 Ciclo de Vida con Manifiestos (`-f`): `apply`, `create`, `replace/edit` y `delete`](#-5-ciclo-de-vida-con-manifiestos--f-apply-create-replaceedit-y-delete)
-6. [📑 Catálogo de Manifiestos YAML de Ejemplo](#-6-catálogo-de-manifiestos-yaml-de-ejemplo)
-7. [🔍 Detalle del Pod con 2 Contenedores (Patrón Sidecar)](#-7-detalle-del-pod-con-2-contenedores-patrón-sidecar)
+6. [📑 Catálogo de Manifiestos YAML de Ejemplo](#-6-catálogo-de-manifiestos-yaml-de-ejemplo-las-bandejas-de-kubecafé)
+7. [🔍 Detalle del Pod con 2 Contenedores (Patrón Sidecar)](#-7-detalle-del-pod-con-2-contenedores-la-bandeja-de-servicio-patrón-sidecar)
+8. [🤖 Pod de Inferencia de IA Local en Kubernetes (Ollama)](#-8-pod-de-inferencia-de-ia-local-en-kubernetes-ollama)
 
 ---
 
@@ -218,6 +219,7 @@ k delete -f .
 | [`03-pod-con-recursos-y-env.yaml`](./03-pod-con-recursos-y-env.yaml) | Pod con Variables y Recursos | ⚖️ Medidor de agua/molino y 🧂 azúcar del día | `requests`, `limits` de CPU/RAM y Downward API (`fieldRef`). |
 | [`04-pod-con-init-container.yaml`](./04-pod-con-init-container.yaml) | Pod con `initContainers` | 🧼 Calentar y limpiar la máquina antes de servir | Tareas previas bloqueantes antes de iniciar la app principal. |
 | [`05-pod-con-health-checks.yaml`](./05-pod-con-health-checks.yaml) | Pod con Sondas de Salud | 🌡️ Termómetro para saber si el café sigue caliente | `readinessProbe` y `livenessProbe` para auto-recuperación. |
+| [`06-pod-inferencia-ia-ollama.yaml`](./06-pod-inferencia-ia-ollama.yaml) | **🤖 Pod de Inferencia de IA (LLM)** | 🤖 Barista Sommelier con IA Local en la bandeja | Inferencia LLM en CPU con **Ollama**, volumen `emptyDir`, `resources` y `Probes`. |
 
 ---
 
@@ -280,3 +282,63 @@ k exec -it pod-dos-contenedores -c servidor-web -- sh
 k port-forward pod/pod-dos-contenedores 8080:80
 ```
 Abre en tu navegador **[http://localhost:8080](http://localhost:8080)** y refresca cada pocos segundos para ver la fecha/hora actualizarse dinámicamente.
+
+---
+
+## 🤖 8. Pod de Inferencia de IA Local en Kubernetes (Ollama)
+
+En la **Semana 00** ejecutamos un modelo de Inteligencia Artificial local con Docker ([`06-ia-local-ollama`](../../semana-00-fundamentos-docker/1.ejemplos/06-ia-local-ollama/README.md)). Ahora en la **Semana 01**, llevamos ese motor de inferencia directamente a **Kubernetes** con [`06-pod-inferencia-ia-ollama.yaml`](./06-pod-inferencia-ia-ollama.yaml).
+
+### ☕ En KubeCafé: El Barista Sommelier con IA
+Imagina tener un **🤖 Barista Sommelier con Inteligencia Artificial** dentro de tu propia cafetería que responde preguntas sobre recetas y Kubernetes en tiempo real, **100% gratis (cero costo por token)**, **privado** y corriendo en **CPU** (sin requerir tarjeta gráfica GPU).
+
+```mermaid
+flowchart LR
+    U["👨‍💻 Tú (Terminal / curl)"] -->|"port-forward :11434"| API["⚙️ Contenedor: motor-ollama\n(API REST :11434)"]
+    subgraph PodIA ["🍽️🤖 Pod: pod-inferencia-ia"]
+        API -->|"Carga pesos GGUF"| V[("💾 Volumen emptyDir\n(/root/.ollama)")]
+        P["🌡️ readinessProbe & livenessProbe\n(GET / :11434)"] -.->|"Vigila salud"| API
+        R["⚖️ Limits: 2Gi RAM / 2 CPU"] -.->|"Protege al Nodo"| API
+    end
+```
+
+### 🚀 Paso a Paso: Despliega y Chatea con tu Pod de IA
+
+#### 1. Desplegar el Pod de Inferencia
+```bash
+k apply -f 06-pod-inferencia-ia-ollama.yaml
+
+# Verificar que pase a Running y 1/1 Ready:
+k get pod pod-inferencia-ia -w
+```
+
+#### 2. Descargar un micro-modelo ultra ligero (~90 MB, ideal para CPU)
+Usaremos **`smollm2:135m`** (solo ~90 MB) o **`qwen2.5:0.5b`** (~390 MB) para que descargue en pocos segundos y corra fluido en cualquier portátil:
+```bash
+k exec -it pod-inferencia-ia -- ollama pull smollm2:135m
+```
+
+#### 3. Opción A — Chatear de forma interactiva desde la terminal (`k exec -it`)
+```bash
+# Hacer una pregunta directa:
+k exec -it pod-inferencia-ia -- ollama run smollm2:135m "Explain what a Kubernetes Pod is in two short sentences"
+```
+
+#### 4. Opción B — Consumir el Pod como una API REST de Inferencia (`port-forward` + `curl`)
+Abre un túnel hacia el puerto `11434` del Pod:
+```bash
+k port-forward pod/pod-inferencia-ia 11434:11434
+```
+Y en otra pestaña de tu terminal, envíale una petición HTTP JSON igual que lo haría un microservicio de tu empresa:
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "smollm2:135m",
+  "prompt": "Why do we use containers and Kubernetes?",
+  "stream": false
+}'
+```
+
+#### 5. Limpiar el laboratorio cuando termines
+```bash
+k delete -f 06-pod-inferencia-ia-ollama.yaml
+```
