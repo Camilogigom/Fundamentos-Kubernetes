@@ -1,0 +1,122 @@
+# ==============================================================================
+# 📊 EJEMPLO 07: Observabilidad Sencilla en un Pod (Métricas + Logs JSON)
+# ==============================================================================
+# En ☕ KubeCafé: Es una bandeja equipada con:
+# 1. ☕ 'app-cafetera' (Nginx): Sirve pedidos en :80 y activa su medidor interno
+#    de estado (stub_status) en :8080/stub_status.
+# 2. 📈 'exportador-metricas' (nginx-prometheus-exporter): Sidecar que lee el
+#    medidor interno por localhost y expone métricas estándar de Prometheus en
+#    el puerto :9113/metrics (nginx_http_requests_total, nginx_connections_active).
+# 3. 📢 'simulador-pedidos' (Busybox): Genera peticiones reales cada 3 segundos
+#    y emite logs estructurados en formato JSON hacia stdout para observarlos
+#    con 'kubectl logs', 'stern', 'k9s' y 'Headlamp'.
+# ==============================================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-observabilidad-kubecafe
+  labels:
+    app: kubecafe
+    componente: observabilidad
+    comunidad: cloud-native-medellin
+    semana: "1"
+spec:
+  # Inicializador que escribe la configuración de Nginx con el endpoint /stub_status activo
+  initContainers:
+    - name: configurar-medidor-nginx
+      image: busybox:1.36
+      command:
+        - sh
+        - -c
+        - |
+          cat << 'EOF' > /etc/nginx/conf.d/default.conf
+          server {
+              listen 80;
+              location / {
+                  root /usr/share/nginx/html;
+                  index index.html;
+              }
+              location /stub_status {
+                  stub_status on;
+                  access_log off;
+              }
+          }
+          EOF
+          echo "<h1>☕ KubeCafe - Estacion Monitoreada</h1>" > /usr/share/nginx/html/index.html
+      volumeMounts:
+        - name: config-nginx
+          mountPath: /etc/nginx/conf.d
+        - name: html-nginx
+          mountPath: /usr/share/nginx/html
+
+  containers:
+    # 1. Contenedor Principal: Servidor Web de KubeCafé
+    - name: app-cafetera
+      image: nginx:1.27-alpine
+      ports:
+        - name: http
+          containerPort: 80
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "50m"
+        limits:
+          memory: "64Mi"
+          cpu: "150m"
+      readinessProbe:
+        httpGet:
+          path: /stub_status
+          port: 80
+        initialDelaySeconds: 2
+        periodSeconds: 5
+      volumeMounts:
+        - name: config-nginx
+          mountPath: /etc/nginx/conf.d
+        - name: html-nginx
+          mountPath: /usr/share/nginx/html
+
+    # 2. Sidecar de Métricas: Exportador oficial de Prometheus para Nginx
+    - name: exportador-metricas
+      image: nginx/nginx-prometheus-exporter:1.3.0
+      args:
+        - "-nginx.scrape-uri=http://localhost:80/stub_status"
+      ports:
+        - name: metrics
+          containerPort: 9113
+      resources:
+        requests:
+          memory: "16Mi"
+          cpu: "25m"
+        limits:
+          memory: "64Mi"
+          cpu: "100m"
+
+    # 3. Sidecar Simulador de Tráfico y Logs Estructurados (JSON)
+    - name: simulador-pedidos
+      image: busybox:1.36
+      command:
+        - sh
+        - -c
+        - |
+          CONTADOR=1
+          while true; do
+            wget -qO /dev/null http://localhost:80/
+            FECHA=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            printf '{"timestamp":"%s","nivel":"INFO","servicio":"kubecafe","pedido_id":%d,"bebida":"espresso","estado":"servido_200_ok"}\n' "$FECHA" "$CONTADOR"
+            CONTADOR=$((CONTADOR + 1))
+            sleep 3
+          done
+      resources:
+        requests:
+          memory: "16Mi"
+          cpu: "10m"
+        limits:
+          memory: "32Mi"
+          cpu: "50m"
+
+  volumes:
+    - name: config-nginx
+      emptyDir: {}
+    - name: html-nginx
+      emptyDir: {}
+

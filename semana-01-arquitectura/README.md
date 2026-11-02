@@ -84,7 +84,7 @@ Explora la carpeta [`1.ejemplos`](./1.ejemplos) y aplica el primer Pod básico e
 ```bash
 kubectl apply -f semana-01-arquitectura/1.ejemplos/01-mi-primer-pod.yaml
 ```
-*(También puedes desplegar un Pod con dos contenedores en [`02-pod-multi-contenedor.yaml`](./1.ejemplos/02-pod-multi-contenedor.yaml) o un **Pod de Inferencia de Inteligencia Artificial Local con Ollama** en [`06-pod-inferencia-ia-ollama.yaml`](./1.ejemplos/06-pod-inferencia-ia-ollama.yaml) — [ver guía paso a paso](./1.ejemplos/README.md#-8-pod-de-inferencia-de-ia-local-en-kubernetes-ollama)).*
+*(También puedes desplegar un Pod con dos contenedores en [`02-pod-multi-contenedor.yaml`](./1.ejemplos/02-pod-multi-contenedor.yaml), un **Pod de Inferencia de IA Local con Ollama** en [`06-pod-inferencia-ia-ollama.yaml`](./1.ejemplos/06-pod-inferencia-ia-ollama.yaml) o un **Pod con Observabilidad (Métricas Prometheus + Logs JSON)** en [`07-pod-observabilidad-metricas-logs.yaml`](./1.ejemplos/07-pod-observabilidad-metricas-logs.yaml) — [ver guía paso a paso](./1.ejemplos/README.md)).*
 
 
 Revisa que esté corriendo (`Running`):

@@ -17,6 +17,7 @@ En esta carpeta aprenderás las dos formas de trabajar con Kubernetes (**Modo Im
 6. [📑 Catálogo de Manifiestos YAML de Ejemplo](#-6-catálogo-de-manifiestos-yaml-de-ejemplo-las-bandejas-de-kubecafé)
 7. [🔍 Detalle del Pod con 2 Contenedores (Patrón Sidecar)](#-7-detalle-del-pod-con-2-contenedores-la-bandeja-de-servicio-patrón-sidecar)
 8. [🤖 Pod de Inferencia de IA Local en Kubernetes (Ollama)](#-8-pod-de-inferencia-de-ia-local-en-kubernetes-ollama)
+9. [📊 Observabilidad Sencilla en tus Ejercicios (Métricas, Logs y Eventos)](#-9-observabilidad-sencilla-en-tus-ejercicios-métricas-logs-y-eventos)
 
 ---
 
@@ -220,6 +221,7 @@ k delete -f .
 | [`04-pod-con-init-container.yaml`](./04-pod-con-init-container.yaml) | Pod con `initContainers` | 🧼 Calentar y limpiar la máquina antes de servir | Tareas previas bloqueantes antes de iniciar la app principal. |
 | [`05-pod-con-health-checks.yaml`](./05-pod-con-health-checks.yaml) | Pod con Sondas de Salud | 🌡️ Termómetro para saber si el café sigue caliente | `readinessProbe` y `livenessProbe` para auto-recuperación. |
 | [`06-pod-inferencia-ia-ollama.yaml`](./06-pod-inferencia-ia-ollama.yaml) | **🤖 Pod de Inferencia de IA (LLM)** | 🤖 Barista Sommelier con IA Local en la bandeja | Inferencia LLM en CPU con **Ollama**, volumen `emptyDir`, `resources` y `Probes`. |
+| [`07-pod-observabilidad-metricas-logs.yaml`](./07-pod-observabilidad-metricas-logs.yaml) | **📊 Pod con Observabilidad (3 Contenedores)** | 📈 Manómetro de máquina + Bitácora JSON en vivo | Exportador de métricas **Prometheus (`:9113/metrics`)** + simulador de logs JSON. |
 
 ---
 
@@ -341,4 +343,108 @@ curl http://localhost:11434/api/generate -d '{
 #### 5. Limpiar el laboratorio cuando termines
 ```bash
 k delete -f 06-pod-inferencia-ia-ollama.yaml
+```
+
+---
+
+## 📊 9. Observabilidad Sencilla en tus Ejercicios (Métricas, Logs y Eventos)
+
+En un entorno local como **Kind**, no necesitas instalar plataformas pesadas que consuman 8 GB de RAM para tener **observabilidad real**. Podemos aplicar los **3 pilares de observabilidad** (**Métricas**, **Logs** y **Eventos**) directamente sobre los ejercicios `01` al `07`:
+
+| Pilar | En ☕ KubeCafé | Herramienta Ligera en nuestro Laboratorio |
+| :--- | :--- | :--- |
+| **1. Métricas (CPU, RAM y Tráfico)** | 📈 Manómetro de presión y báscula de agua/café en cada mesa | **`Metrics Server`** (`kubectl top`) + Exportador **Prometheus** en [`07-pod-observabilidad-metricas-logs.yaml`](./07-pod-observabilidad-metricas-logs.yaml) |
+| **2. Logs (Bitácora en vivo)** | 📢 Comandas cantadas por los baristas en tiempo real | **`stern`** (logs multi-contenedor a color) y `kubectl logs -f` |
+| **3. Eventos y Estado Visual** | 📋 Libro de novedades de gerencia y pantallas del salón | `kubectl get events -w`, **`k9s`** y consola web **[Headlamp](../headlamp.md)** |
+
+---
+
+### Paso 1: Activar `Metrics Server` en Kind (Para habilitar `kubectl top`, `k9s` y `Headlamp`)
+
+Por defecto, Kind viene sin recolector de métricas para ahorrar batería. Actívalo en **10 segundos** con estos dos comandos:
+
+```bash
+# 1. Instalar el Metrics Server oficial de Kubernetes:
+k apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+# 2. Habilitar certificados locales de Kind (--kubelet-insecure-tls):
+k patch deployment metrics-server -n kube-system --type='json' \
+  -p='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--kubelet-insecure-tls"}]'
+```
+
+Espera ~20 segundos a que el Pod de `metrics-server` esté `1/1 Running` (`k get pods -n kube-system -l k8s-app=metrics-server`) y prueba:
+
+```bash
+# Ver cuánta CPU y RAM consume cada Nodo (Mesa de barismo):
+k top nodes
+
+# Ver cuánta CPU y RAM consume cada Pod y cada Contenedor individual:
+k top pods --containers
+```
+> 💡 **Truco:** Si ahora abres **`k9s`** o **[Headlamp](../headlamp.md)**, verás que las gráficas y barras de porcentaje de CPU y Memoria RAM se encienden automáticamente en tiempo real.
+
+---
+
+### Paso 2: Laboratorio Práctico con `07-pod-observabilidad-metricas-logs.yaml`
+
+El archivo [`07-pod-observabilidad-metricas-logs.yaml`](./07-pod-observabilidad-metricas-logs.yaml) despliega una bandeja (`Pod`) con **3 contenedores** que trabajan juntos para enseñarte cómo funciona la observabilidad moderna en producción:
+
+```mermaid
+flowchart LR
+    subgraph PodObs ["🍽️📊 Pod: pod-observabilidad-kubecafe"]
+        S["📢 Sidecar: simulador-pedidos\n(Pide café cada 3s y emite Logs JSON)"] -->|"GET http://localhost:80"| C1["☕ Principal: app-cafetera\n(Nginx + /stub_status)"]
+        E["📈 Sidecar: exportador-metricas\n(nginx-prometheus-exporter :9113)"] -->|"Lee /stub_status"| C1
+    end
+    U["👨‍💻 Tú (Terminal / Navegador)"] -->|"port-forward :9113/metrics"| E
+    U -->|"stern / kubectl logs"| S
+```
+
+#### A. Desplegar el Pod de Observabilidad
+```bash
+k apply -f 07-pod-observabilidad-metricas-logs.yaml
+k get pods
+```
+*(Verás `READY 3/3` porque tiene el servidor web, el exportador de métricas y el simulador de pedidos).*
+
+#### B. Observar Logs Estructurados (JSON) en Tiempo Real
+En la industria los logs se emiten en **formato JSON** para poder filtrarlos fácilmente:
+```bash
+# Opción 1: Con kubectl nativo viendo el contenedor simulador:
+k logs -f pod-observabilidad-kubecafe -c simulador-pedidos
+
+# Opción 2: Con 'stern' viendo los 3 contenedores simultáneamente y a color:
+stern pod-observabilidad-kubecafe
+```
+Verás fluir líneas como:
+```json
+{"timestamp":"2026-11-02T14:00:03Z","nivel":"INFO","servicio":"kubecafe","pedido_id":14,"bebida":"espresso","estado":"servido_200_ok"}
+```
+
+#### C. Inspeccionar las Métricas en Formato Prometheus (`:9113/metrics`)
+Abre un túnel hacia el contenedor `exportador-metricas`:
+```bash
+k port-forward pod/pod-observabilidad-kubecafe 9113:9113
+```
+En otra terminal (o en tu navegador en **[http://localhost:9113/metrics](http://localhost:9113/metrics)**), consulta las métricas reales de la cafetera:
+```bash
+curl -s http://localhost:9113/metrics | grep ^nginx_
+```
+Verás cómo `nginx_http_requests_total` aumenta cada 3 segundos automáticamente:
+```text
+nginx_connections_accepted 42
+nginx_connections_active 1
+nginx_connections_handled 42
+nginx_http_requests_total 42
+nginx_up 1
+```
+
+#### D. Observar Eventos del Clúster en Vivo
+En otra pestaña, deja corriendo el radar de eventos del clúster para ver qué hace Kubernetes por debajo cuando creas, escalas o eliminas un Pod:
+```bash
+k get events --sort-by='.lastTimestamp' -w
+```
+
+#### E. Limpiar el ejercicio
+```bash
+k delete -f 07-pod-observabilidad-metricas-logs.yaml
 ```
