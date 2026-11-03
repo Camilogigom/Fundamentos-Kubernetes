@@ -157,11 +157,11 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
 ---
 
 <!-- INICIO_MOSAICO_TRIPULACION -->
-## 👥 Tripulación a Bordo y Ranking (40 Tripulantes)
+## 👥 Tripulación a Bordo y Ranking (43 Tripulantes)
 
 <div align="center">
 
-[![Tripulantes a Bordo](https://img.shields.io/badge/⛵_Tripulantes_a_Bordo-40-00C7B7?style=for-the-badge)](./ASISTENTES.md)
+[![Tripulantes a Bordo](https://img.shields.io/badge/⛵_Tripulantes_a_Bordo-43-00C7B7?style=for-the-badge)](./ASISTENTES.md)
 [![Registrarme en 30 seg](https://img.shields.io/badge/➕_¡Regístrate_Aquí!_(Formulario_Visual)-2ea44f?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
 [![Actualizar mis Datos](https://img.shields.io/badge/✏️_Actualizar_mis_Datos_o_Redes-f57c00?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
 [![Ver Ranking Completo](https://img.shields.io/badge/🏆_Ver_Tabla_de_Puntajes_y_Redes-326CE5?style=for-the-badge)](./ASISTENTES.md)
@@ -208,7 +208,7 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
   </tr>
 </table>
 
-### 🏆 Ranking de la Tripulación (40 Tripulantes)
+### 🏆 Ranking de la Tripulación (43 Tripulantes)
 
 <table>
   <tr>
@@ -220,9 +220,23 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
+      <a href="https://www.linkedin.com/in/carlos-andres-montoya-alzate-044ba433" title="Carlos Andres Montoya Alzate (@calichem26) — 60 XP">
+        <img src="https://github.com/calichem26.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="calichem26"/><br/>
+        <sub><b>🥈 Carlos Andres</b></sub>
+      </a><br/>
+      <sub>⛵ Marinero • <b>60 XP</b></sub>
+    </td>
+    <td align="center" width="140">
+      <a href="https://github.com/karolrojas68" title="Karol Rojas (@karolrojas68) — 60 XP">
+        <img src="https://github.com/karolrojas68.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="karolrojas68"/><br/>
+        <sub><b>🥉 Karol Rojas</b></sub>
+      </a><br/>
+      <sub>⛵ Marinero • <b>60 XP</b></sub>
+    </td>
+    <td align="center" width="140">
       <a href="https://www.linkedin.com/in/glgaviria" title="Gloria Gaviria (@glgaviria64) — 30 XP">
         <img src="https://github.com/glgaviria64.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="glgaviria64"/><br/>
-        <sub><b>🥈 Gloria Gaviria</b></sub>
+        <sub><b>Gloria Gaviria</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>30 XP</b></sub>
     </td>
@@ -240,6 +254,8 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="140">
       <a href="https://www.linkedin.com/in/dlapaz" title="Eduardo D. La paz (@VivaGarp) — 10 XP">
         <img src="https://github.com/VivaGarp.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="VivaGarp"/><br/>
@@ -254,8 +270,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="140">
       <a href="https://www.linkedin.com/in/juan-jose-jaramillo-a8966123a/" title="Juan Jose Jaramillo (@jujo23z) — 10 XP">
         <img src="https://github.com/jujo23z.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="jujo23z"/><br/>
@@ -284,6 +298,8 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="140">
       <a href="https://www.linkedin.com/in/jcrvillamizar" title="Juan Carlos Rodriguez Villamizar (@jcrvillamizar) — 10 XP">
         <img src="https://github.com/jcrvillamizar.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="jcrvillamizar"/><br/>
@@ -298,8 +314,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="140">
       <a href="https://linkedin.com/in/dupegui" title="David Upegui (@DavidUpegui) — 10 XP">
         <img src="https://github.com/DavidUpegui.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="DavidUpegui"/><br/>
@@ -328,6 +342,8 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="140">
       <a href="https://www.linkedin.com/in/JhonnyPong/" title="Jhonnatan Gil (@jthan24) — 10 XP">
         <img src="https://github.com/jthan24.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="jthan24"/><br/>
@@ -335,15 +351,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
-    <td align="center" width="140">
-      <a href="https://github.com/karolrojas68" title="Karol Rojas (@karolrojas68) — 10 XP">
-        <img src="https://github.com/karolrojas68.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="karolrojas68"/><br/>
-        <sub><b>Karol Rojas</b></sub>
-      </a><br/>
-      <sub>⛵ Marinero • <b>10 XP</b></sub>
-    </td>
-  </tr>
-  <tr>
     <td align="center" width="140">
       <a href="https://linkedin.com/in/danielestebanosoriodavid/" title="Daniel Esteban (@da237) — 10 XP">
         <img src="https://github.com/da237.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="da237"/><br/>
@@ -379,6 +386,8 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="140">
       <a href="https://linkedin.com/in/cristian-gonzalez-9b646a265/" title="Cristian Gonzalez (@CristianCGonzalezO) — 10 XP">
         <img src="https://github.com/CristianCGonzalezO.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="CristianCGonzalezO"/><br/>
@@ -386,8 +395,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="140">
       <a href="https://linkedin.com/in/santiagoasz/" title="Santiago Sanchez (@santiagoalex) — 10 XP">
         <img src="https://github.com/santiagoalex.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="santiagoalex"/><br/>
@@ -423,6 +430,8 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="140">
       <a href="https://github.com/Danielgiraldo2010" title="Daniel Giraldo (@Danielgiraldo2010) — 10 XP">
         <img src="https://github.com/Danielgiraldo2010.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="Danielgiraldo2010"/><br/>
@@ -430,8 +439,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="140">
       <a href="https://linkedin.com/in/emmanuel-uribe-89890525a" title="Emmanuel Uribe (@emmanuel-uribe) — 10 XP">
         <img src="https://github.com/emmanuel-uribe.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="emmanuel-uribe"/><br/>
@@ -467,6 +474,8 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="140">
       <a href="https://github.com/SirJulianM3003" title="Julián Esteban Madrid (@SirJulianM3003) — 10 XP">
         <img src="https://github.com/SirJulianM3003.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="SirJulianM3003"/><br/>
@@ -474,8 +483,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="140">
       <a href="https://www.linkedin.com/in/edwinalexanderrg" title="Edwin Restrepo (@edwin8855) — 10 XP">
         <img src="https://github.com/edwin8855.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="edwin8855"/><br/>
@@ -501,6 +508,22 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       <a href="https://www.linkedin.com/in/camilo-rendon-3671a0208/" title="Camilo Rendon (@camilorendon08) — 10 XP">
         <img src="https://github.com/camilorendon08.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="camilorendon08"/><br/>
         <sub><b>Camilo Rendon</b></sub>
+      </a><br/>
+      <sub>⛵ Marinero • <b>10 XP</b></sub>
+    </td>
+    <td align="center" width="140">
+      <a href="https://www.linkedin.com/in/sergio-andres-garcia-jaramillo" title="Sergio Andres Garcia Jaramillo (@sergiogarciaj01) — 10 XP">
+        <img src="https://github.com/sergiogarciaj01.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="sergiogarciaj01"/><br/>
+        <sub><b>Sergio Andres</b></sub>
+      </a><br/>
+      <sub>⛵ Marinero • <b>10 XP</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="140">
+      <a href="https://www.linkedin.com/in/yepesd/" title="Juan D Yepes (@yepesd86) — 10 XP">
+        <img src="https://github.com/yepesd86.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="yepesd86"/><br/>
+        <sub><b>Juan D</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
