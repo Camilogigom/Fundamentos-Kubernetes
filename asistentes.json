@@ -75,6 +75,16 @@
     "motivacion": "Aprender de la comunidad y fortalecer mis conocimientos en Kubernetes"
   },
   {
+    "github": "jujo23z",
+    "nombre": "Juan Jose Jaramillo",
+    "rol": "Ingeniero de Sistemas",
+    "linkedin": "https://www.linkedin.com/in/juan-jose-jaramillo-a8966123a/",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 60,
+    "motivacion": "Quiero aprender todo lo posible de la comunidad y si es posible aportar."
+  },
+  {
     "github": "glgaviria64",
     "nombre": "Gloria Gaviria",
     "rol": "👩‍💻 Estudiante<br>Desarrolladora Jr",
@@ -123,16 +133,6 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Me gustaría fortalecer conocimientos en contenerización y servicios/recursos nativos de la nube, addemás de contribuir a la comunidad."
-  },
-  {
-    "github": "jujo23z",
-    "nombre": "Juan Jose Jaramillo",
-    "rol": "Ingeniero de Sistemas",
-    "linkedin": "https://www.linkedin.com/in/juan-jose-jaramillo-a8966123a/",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 10,
-    "motivacion": "Quiero aprender todo lo posible de la comunidad y si es posible aportar."
   },
   {
     "github": "Jera26",
