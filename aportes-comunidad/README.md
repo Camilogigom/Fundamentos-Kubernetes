@@ -11,9 +11,9 @@ Este espacio está reservado para el trabajo, soluciones y contribuciones de tod
 
 ---
 
-## 🧭 Manual Paso a Paso para Principiantes: Cómo Resolver y Entregar tus Retos
+## 🧭 Manual Paso a Paso para la Comunidad: Cómo Resolver y Entregar tus Retos
 
-Si nunca has usado **Git**, **GitHub** o la **Terminal**, ¡tranquilo! Sigue este manual en orden y en pocos minutos tendrás tus retos listos y tu **Pull Request** enviado para ganar puntos (**+XP**) en el [Muro de Asistentes (`ASISTENTES.md`)](../ASISTENTES.md).
+Si estás dando tus primeros pasos con **Git**, **GitHub** o la **Terminal**, ¡estás en el lugar indicado! Sigue este manual en orden y en pocos minutos tendrás tus retos listos y tu **Pull Request** enviado para ganar puntos (**+XP**) en el [Muro de Asistentes (`ASISTENTES.md`)](../ASISTENTES.md).
 
 ```mermaid
 flowchart TD
@@ -182,7 +182,7 @@ git push origin TU-USUARIO/semana-01
 
 ---
 
-## ❓ Solución de Problemas Frecuentes para Principiantes
+## ❓ Preguntas y Dudas Frecuentes de la Comunidad
 
 <details>
 <summary><b>1. ¿Puedo subir mis archivos directamente desde la página web de GitHub sin usar comandos Git?</b></summary>

@@ -2,7 +2,7 @@
 
 ¡Bienvenido al espacio donde los asistentes del workshop comparten sus soluciones a los **Retos Rotos** de cada semana y suman experiencia (**+XP**) en [`ASISTENTES.md`](../../ASISTENTES.md)!
 
-👉 **¿Es tu primera vez entregando un reto?** Lee el [**🧭 Manual Paso a Paso para Principiantes (`aportes-comunidad/README.md`)**](../README.md).
+👉 **¿Estás dando tus primeros pasos entregando un reto?** Lee el [**🧭 Manual Paso a Paso para la Comunidad (`aportes-comunidad/README.md`)**](../README.md).
 
 ---
 

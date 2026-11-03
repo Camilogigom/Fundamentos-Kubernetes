@@ -1,4 +1,4 @@
-# 🤝 Guía para Principiantes: Cómo Contribuir a Fundamentos-Kubernetes
+# 🤝 Guía de la Comunidad: Cómo Contribuir y Dar tus Primeros Pasos en Fundamentos-Kubernetes
 
 ¡Qué alegría que quieras aportar! Aquí **cualquier mejora cuenta**: desde agregar tu nombre a la lista de asistentes hasta resolver un reto técnico de Kubernetes.
 
@@ -136,7 +136,7 @@ git push origin TU-USUARIO/semana-01
 
 ---
 
-## ❓ Preguntas Frecuentes de Principiantes
+## ❓ Preguntas Frecuentes de la Comunidad
 
 <details>
 <summary><b>1. ¿Tengo que hacer Fork y Clone cada semana?</b></summary>
