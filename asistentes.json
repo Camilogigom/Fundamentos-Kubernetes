@@ -475,5 +475,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Mejor los conocimientos y conceptos optenidos en docker y kubernetes aplicarlos y replicarlos en mi entorno de trabajo"
+  },
+  {
+    "github": "josedavid9316",
+    "nombre": "Jose David Moncada Arango",
+    "rol": "SRE / DevOps",
+    "linkedin": "https://www.linkedin.com/in/josedavid9316/",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Aprender y fortalecer mis conocimientos de Docker y Kubernetes y aportar en lo que mas se pueda"
   }
 ]
