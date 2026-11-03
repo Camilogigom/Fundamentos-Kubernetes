@@ -17,9 +17,16 @@ FROM python:3.12-alpine
 
 WORKDIR /app
 
+RUN addgroup -g 10001 -S appgroup && \
+    adduser -u 10001 -S appuser -G appgroup
+
+COPY --chown=appuser:appgroup app.py .
+
 # ❌ ERROR: Copia el archivo como root y no define un usuario no privilegiado
 COPY app.py .
 
 EXPOSE 8080
+
+USER appuser
 
 CMD ["python", "app.py"]

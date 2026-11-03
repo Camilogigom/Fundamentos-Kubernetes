@@ -5,12 +5,12 @@ import sys
 
 # ❌ ERROR 1: La aplicación está escuchando en el puerto 5000,
 # pero el Dockerfile expone el 8080 y docker run mapea el 8080.
-PORT = int(os.environ.get("PORT", 5000))
+PORT = int(os.environ.get("PORT", 8080))
 
 # ❌ ERROR 2: Escucha únicamente en la interfaz local interna '127.0.0.1' del contenedor.
 # En Docker, para que el tráfico externo que llega por el mapeo de puertos (-p)
 # pueda entrar al proceso, se DEBE escuchar en todas las interfaces ('0.0.0.0').
-HOST = "127.0.0.1"
+HOST = "0.0.0.0"
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
