@@ -84,7 +84,7 @@ Si prefieres hacerlo con comandos de `git`, edita tu bloque en [`asistentes.json
 
 ---
 
-## 👥 Tabla de Posiciones de la Tripulación (44 Tripulantes)
+## 👥 Tabla de Posiciones de la Tripulación (45 Tripulantes)
 
 <!-- INICIO_TABLA_ASISTENTES -->
 | # | 👤 Tripulante | 💼 Rol / Especialidad | 🌐 Redes Profesionales | 🎖️ Rango y Progreso (XP) | 🎯 ¿Qué te motivó a unirte? |
@@ -133,6 +133,7 @@ Si prefieres hacerlo con comandos de `git`, edita tu bloque en [`asistentes.json
 | #42 | <img src="https://github.com/sergiogarciaj01.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Sergio Andres Garcia Jaramillo** | Middleware Architect | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/sergiogarciaj01)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sergio-andres-garcia-jaramillo) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Mi objetivo es fortalecer mis competencias técnicas en Docker, Kubernetes, OpenShift y servicios de nube como AWS EKS, para poder participar en proyectos de modernización tecnológica, automatización, alta disponibilidad y administración de plataformas empresariales. |
 | #43 | <img src="https://github.com/yepesd86.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Juan D Yepes** | Lider Plataformas Cloud | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/yepesd86)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yepesd/) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Mejor los conocimientos y conceptos optenidos en docker y kubernetes aplicarlos y replicarlos en mi entorno de trabajo |
 | #44 | <img src="https://github.com/josedavid9316.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Jose David Moncada Arango** | SRE / DevOps | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/josedavid9316)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/josedavid9316/) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Aprender y fortalecer mis conocimientos de Docker y Kubernetes y aportar en lo que mas se pueda |
+| #45 | <img src="https://github.com/juand-alvarado.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Juan Diego Alvarado** | DevOps | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/juand-alvarado)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-diego-alvarado-gantiva-7801a816a/) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Profundizar en mis conocimientos de K8s y acercarme al ecosistema de la CNCF |
 <!-- FIN_TABLA_ASISTENTES -->
 
 > [!TIP]

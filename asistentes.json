@@ -485,5 +485,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Aprender y fortalecer mis conocimientos de Docker y Kubernetes y aportar en lo que mas se pueda"
+  },
+  {
+    "github": "juand-alvarado",
+    "nombre": "Juan Diego Alvarado",
+    "rol": "DevOps",
+    "linkedin": "https://www.linkedin.com/in/juan-diego-alvarado-gantiva-7801a816a/",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Profundizar en mis conocimientos de K8s y acercarme al ecosistema de la CNCF"
   }
 ]
