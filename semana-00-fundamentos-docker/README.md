@@ -4,6 +4,8 @@
 
 En este módulo aprenderás qué es realmente un contenedor, cómo escribir un `Dockerfile`, cómo construir y correr imágenes con Docker, y el truco fundamental para conectar tus imágenes locales directamente con tu clúster de **Kind**.
 
+> 📊 **Presentación de la Semana 00 (PDF):** [**Descargar `0.Fundamentos-Docker.pdf`**](../recursos/diapositivas/0.Fundamentos-Docker.pdf)
+
 ---
 
 ## 🧠 Resumen en 2 minutos (Sin enredos)

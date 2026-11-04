@@ -2,6 +2,8 @@
 
 ¡Bienvenido a la primera semana! Hoy pasaremos de entender qué hace Kubernetes en teoría a levantar nuestro propio clúster local y desplegar nuestra primera aplicación.
 
+> 📊 **Presentación de la Semana 01 (PDF):** [**Descargar `1.KubeCafe-De-Docker-a-Kubernetes.pdf`**](../recursos/diapositivas/1.KubeCafe-De-Docker-a-Kubernetes.pdf)
+
 ---
 
 ## 🧠 Resumen en 2 minutos: Bienvenido a ☕ KubeCafé

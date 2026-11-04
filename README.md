@@ -14,6 +14,7 @@
   Aprende haciendo, rompe cosas sin miedo en tu entorno local y haz tu primer aporte al Open Source.
 </p>
 
+[📊 Diapositivas (PDF)](./recursos/diapositivas/README.md) •
 [☕ Analogía KubeCafé](./recursos/de-un-tinto-a-kubernetes.md) •
 [⚓ Guía de Harbor](./recursos/guia-harbor-registry.md) •
 [🛡️ Guía de Trivy](./recursos/guia-trivy-seguridad.md) •
@@ -33,7 +34,9 @@
 
 > [!NOTE]
 > ☕ **Hilo Conductor del Workshop — KubeCafé (La Analogía del Café):**  
-> Todo lo que aprenderás desde la **Semana 00** hasta la **Semana 06** está conectado mediante la operación de una cafetería de especialidad de alta escala (**KubeCafé**). Explora la guía interactiva con diagramas y retos: [**☕ Kubernetes explicado con la Analogía del Café (KubeCafé)**](./recursos/de-un-tinto-a-kubernetes.md).
+> Todo lo que aprenderás desde la **Semana 00** hasta la **Semana 06** está conectado mediante la operación de una cafetería de especialidad de alta escala (**KubeCafé**).  
+> * 📖 Guía interactiva con diagramas y retos: [**☕ Kubernetes explicado con la Analogía del Café (`de-un-tinto-a-kubernetes.md`)**](./recursos/de-un-tinto-a-kubernetes.md)  
+> * 📊 Presentaciones en PDF: [**🐳 Semana 00 — Fundamentos de Docker**](./recursos/diapositivas/0.Fundamentos-Docker.pdf) | [**☕ Semana 01 — KubeCafé: De Docker a Kubernetes**](./recursos/diapositivas/1.KubeCafe-De-Docker-a-Kubernetes.pdf)
 
 > [!IMPORTANT]
 > 📢 **¿Hiciste Fork de este repositorio antes?**  
