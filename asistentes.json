@@ -495,5 +495,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Profundizar en mis conocimientos de K8s y acercarme al ecosistema de la CNCF"
+  },
+  {
+    "github": "YimmyZuluaga",
+    "nombre": "Yimmy Zuluaga",
+    "rol": "Estudiante de ingeniería",
+    "linkedin": "",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Aprender de kubernetes, docker"
   }
 ]
