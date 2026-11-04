@@ -95,6 +95,16 @@
     "motivacion": "Aprender todo estos temas de performance y escalabilidad"
   },
   {
+    "github": "parte193",
+    "nombre": "Johan Andrés López Zuluaga",
+    "rol": "Desarrollador Full-Stack",
+    "linkedin": "https://www.linkedin.com/in/johan-andres-lopez-zuluaga",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 60,
+    "motivacion": "Entender de verdad cómo funcionan los contenedores y poder llevar mis propias apps de mi computador a producción sin miedo"
+  },
+  {
     "github": "glgaviria64",
     "nombre": "Gloria Gaviria",
     "rol": "👩‍💻 Estudiante<br>Desarrolladora Jr",
@@ -213,16 +223,6 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Aprender Docker y Kubernetes y aportar a la comunidad Cloud Native."
-  },
-  {
-    "github": "parte193",
-    "nombre": "Johan Andrés López Zuluaga",
-    "rol": "Desarrollador Full-Stack",
-    "linkedin": "https://www.linkedin.com/in/johan-andres-lopez-zuluaga",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 10,
-    "motivacion": "Entender de verdad cómo funcionan los contenedores y poder llevar mis propias apps de mi computador a producción sin miedo"
   },
   {
     "github": "Hedache77",
