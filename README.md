@@ -260,6 +260,13 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
   </tr>
   <tr>
     <td align="center" width="140">
+      <a href="https://www.linkedin.com/in/raymundo-avila-r-04775932" title="Fernando Avila (@RAVILA28) — 50 XP">
+        <img src="https://github.com/RAVILA28.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="RAVILA28"/><br/>
+        <sub><b>Fernando Avila</b></sub>
+      </a><br/>
+      <sub>⛵ Marinero • <b>50 XP</b></sub>
+    </td>
+    <td align="center" width="140">
       <a href="https://www.linkedin.com/in/glgaviria" title="Gloria Gaviria (@glgaviria64) — 30 XP">
         <img src="https://github.com/glgaviria64.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="glgaviria64"/><br/>
         <sub><b>Gloria Gaviria</b></sub>
@@ -294,6 +301,8 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="140">
       <a href="https://www.linkedin.com/in/jeraldin-caliz/" title="Jeraldin Caliz (@Jera26) — 10 XP">
         <img src="https://github.com/Jera26.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="Jera26"/><br/>
@@ -301,8 +310,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="140">
       <a href="https://linkedin.com/in/maria-nathali-anzola" title="Nathali Anzola (@marnathali) — 10 XP">
         <img src="https://github.com/marnathali.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="marnathali"/><br/>
@@ -338,6 +345,8 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="140">
       <a href="https://www.linkedin.com/in/ymqc01" title="Yeison Mateo Quintero Carmona (@mateoqc123) — 10 XP">
         <img src="https://github.com/mateoqc123.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="mateoqc123"/><br/>
@@ -345,8 +354,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="140">
       <a href="https://www.linkedin.com/in/diego-mona/" title="Diego Moná (@Hedache77) — 10 XP">
         <img src="https://github.com/Hedache77.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="Hedache77"/><br/>
@@ -382,6 +389,8 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="140">
       <a href="https://linkedin.com/in/maria-camila-zapata-arrubla-a594041b1/" title="Maria Camila Zapata Arrubla (@Camilaux) — 10 XP">
         <img src="https://github.com/Camilaux.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="Camilaux"/><br/>
@@ -389,8 +398,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="140">
       <a href="https://linkedin.com/in/cristian-gonzalez-9b646a265/" title="Cristian Gonzalez (@CristianCGonzalezO) — 10 XP">
         <img src="https://github.com/CristianCGonzalezO.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="CristianCGonzalezO"/><br/>
@@ -416,13 +423,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       <a href="https://www.linkedin.com/in/mao-correa/" title="Hector Mauricio Forero Correa (@maocorrea1015) — 10 XP">
         <img src="https://github.com/maocorrea1015.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="maocorrea1015"/><br/>
         <sub><b>Hector Mauricio</b></sub>
-      </a><br/>
-      <sub>⛵ Marinero • <b>10 XP</b></sub>
-    </td>
-    <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/raymundo-avila-r-04775932" title="Fernando Avila (@RAVILA28) — 10 XP">
-        <img src="https://github.com/RAVILA28.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="RAVILA28"/><br/>
-        <sub><b>Fernando Avila</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
