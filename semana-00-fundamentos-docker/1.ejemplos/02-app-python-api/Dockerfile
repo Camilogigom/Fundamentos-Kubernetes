@@ -7,11 +7,15 @@ FROM python:3.12-alpine
 RUN addgroup -g 10001 -S appgroup && \
     adduser -u 10001 -S appuser -G appgroup
 
+RUN pip install --no-cache-dir --upgrade "pip>=26.2.0" "setuptools>=84.1.0" wheel
+
 # 3. Definimos la carpeta de trabajo dentro del contenedor
 WORKDIR /app
 
 # 4. Copiamos el código asignando la propiedad directamente al usuario no-root (--chown)
 COPY --chown=appuser:appgroup app.py .
+
+
 
 # 5. Definimos variables de entorno por defecto (pueden ser sobrescritas al correr)
 ENV PORT=8080
