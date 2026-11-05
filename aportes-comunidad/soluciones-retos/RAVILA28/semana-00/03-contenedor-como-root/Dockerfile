@@ -19,13 +19,14 @@ WORKDIR /app
 
 #Crea un grupo y un usuario no privilegiado 
 RUN addgroup -g 10001 -S appgroup && \
-    adduser -u 10001 -S userapp -G appgroup
+    adduser -u 10001 -S appuser -G appgroup
 
 # Asigna la propiedad del archivo copiado al nuevo usuario 
-COPY --chown=userapp:appgroup app.py .
+COPY --chown=appuser:appgroup app.py .
 
 #se cambia de usuario para no usar root
-USER userapp
+USER appuser
+
 
 EXPOSE 8080
 
