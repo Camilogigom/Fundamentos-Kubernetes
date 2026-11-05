@@ -505,5 +505,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Aprender de kubernetes, docker"
+  },
+  {
+    "github": "DrSiker",
+    "nombre": "Didier Alexander Rendón Chaverra",
+    "rol": "DevSecOps/Cloud Engineer",
+    "linkedin": "https://www.linkedin.com/in/didierendon",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Reforzar mis fundamentos sobre Kubernetes y Docker, y lograr certificarme y lograr la kubestronaut en un futuro"
   }
 ]
