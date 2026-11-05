@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Interactivo de Arquitectura Kubernetes — De Cero a Capitán (KubeCafé)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        k8s: {
+                            blue: '#326CE5',
+                            light: '#6099FF',
+                            dark: '#1D4ED8',
+                            cyber: '#00F0FF',
+                            term: '#10B981',
+                            bg: '#070B14',
+                            panel: '#0F172A',
+                            border: '#1E293B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #070B14;
+            background-image: 
+                radial-gradient(circle at 12% 18%, rgba(50, 108, 229, 0.14) 0%, transparent 38%),
+                radial-gradient(circle at 88% 82%, rgba(16, 185, 129, 0.10) 0%, transparent 38%),
+                linear-gradient(to right, rgba(30, 41, 59, 0.22) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.22) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090D16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #326CE5;
+        }
+
+        /* Component Node Styling & Cyber Glows */
+        .k8s-node {
+            transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 10;
+        }
+        .k8s-node:hover {
+            transform: translateY(-2px);
+            border-color: #6099FF;
+            box-shadow: 0 0 22px rgba(50, 108, 229, 0.28);
+        }
+        .k8s-node.active-step-blue {
+            border-color: #00F0FF !important;
+            background: linear-gradient(145deg, rgba(50, 108, 229, 0.28), rgba(15, 23, 42, 0.96)) !important;
+            box-shadow: 0 0 28px rgba(0, 240, 255, 0.45), inset 0 0 14px rgba(50, 108, 229, 0.35) !important;
+            transform: scale(1.025);
+        }
+        .k8s-node.active-step-green {
+            border-color: #10B981 !important;
+            background: linear-gradient(145deg, rgba(16, 185, 129, 0.25), rgba(15, 23, 42, 0.96)) !important;
+            box-shadow: 0 0 28px rgba(16, 185, 129, 0.45), inset 0 0 14px rgba(16, 185, 129, 0.3) !important;
+            transform: scale(1.025);
+        }
+        .k8s-node.active-step-amber {
+            border-color: #F59E0B !important;
+            background: linear-gradient(145deg, rgba(245, 158, 11, 0.25), rgba(15, 23, 42, 0.96)) !important;
+            box-shadow: 0 0 28px rgba(245, 158, 11, 0.45), inset 0 0 14px rgba(245, 158, 11, 0.3) !important;
+            transform: scale(1.025);
+        }
+        .k8s-node.active-step-rose {
+            border-color: #F43F5E !important;
+            background: linear-gradient(145deg, rgba(244, 63, 94, 0.25), rgba(15, 23, 42, 0.96)) !important;
+            box-shadow: 0 0 28px rgba(244, 63, 94, 0.45), inset 0 0 14px rgba(244, 63, 94, 0.3) !important;
+            transform: scale(1.025);
+        }
+        .k8s-node.selected-inspect {
+            outline: 2px dashed #F59E0B;
+            outline-offset: 3px;
+        }
+
+        /* Animated SVG Connection Lines */
+        .conn-line {
+            fill: none;
+            stroke: #1E293B;
+            stroke-width: 2;
+            transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
+        }
+        .conn-line.active-blue {
+            stroke: #00F0FF;
+            stroke-width: 3.5;
+            stroke-dasharray: 8 6;
+            animation: dashFlow 0.65s linear infinite;
+            filter: drop-shadow(0 0 6px #00F0FF);
+        }
+        .conn-line.active-green {
+            stroke: #10B981;
+            stroke-width: 3.5;
+            stroke-dasharray: 8 6;
+            animation: dashFlow 0.65s linear infinite;
+            filter: drop-shadow(0 0 6px #10B981);
+        }
+        .conn-line.active-amber {
+            stroke: #F59E0B;
+            stroke-width: 3.5;
+            stroke-dasharray: 8 6;
+            animation: dashFlow 0.65s linear infinite;
+            filter: drop-shadow(0 0 6px #F59E0B);
+        }
+        .conn-line.active-rose {
+            stroke: #F43F5E;
+            stroke-width: 3.5;
+            stroke-dasharray: 8 6;
+            animation: dashFlow 0.65s linear infinite;
+            filter: drop-shadow(0 0 6px #F43F5E);
+        }
+
+        @keyframes dashFlow {
+            to {
+                stroke-dashoffset: -28;
+            }
+        }
+
+        /* Blinking Cursor */
+        .cursor-blink {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background-color: #10B981;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-k8s-blue selection:text-white">
+
+    <!-- TOP HEADER BAR -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-[1680px] mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+            <!-- Brand & Title -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-k8s-blue/20 border border-k8s-blue/50 flex items-center justify-center shadow-[0_0_15px_rgba(50,108,229,0.35)]">
+                    <svg class="w-6 h-6 text-[#326CE5]" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L4 5.5v13L12 22l8-3.5v-13L12 2zm0 2.3l5.8 2.5-2.1 1.3a4.5 4.5 0 00-7.4 0L6.2 6.8 12 4.3zm0 5.2a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm-6 1.2l2.1 1.2a4.5 4.5 0 000 2.2L6 15.3V9.7zm12 0v5.6l-2.1-1.2a4.5 4.5 0 000-2.2l2.1-1.2zm-9.7 6.2a4.5 4.5 0 007.4 0l2.1 1.3L12 20.7l-5.8-2.5 2.1-1.3z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Simulador Interactivo de Kubernetes</h1>
+                        <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-xs font-mono font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40">☕ Edición KubeCafé</span>
+                    </div>
+                    <p class="text-xs text-slate-400">De Cero a Capitán • Sigue el viaje completo de cada componente desde el inicio hasta el final</p>
+                </div>
+            </div>
+
+            <!-- 4 Flow Switcher Tabs -->
+            <div class="flex flex-wrap items-center bg-slate-900/95 p-1 rounded-xl border border-slate-800 gap-1">
+                <button id="btn-flow-1" onclick="switchFlow(1)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-k8s-blue text-white shadow-[0_0_15px_rgba(50,108,229,0.4)]">
+                    <span class="w-2 h-2 rounded-full bg-cyan-300 animate-pulse"></span>
+                    <span>1. Despliegue (<code class="font-mono">apply</code>)</span>
+                </button>
+                <button id="btn-flow-2" onclick="switchFlow(2)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>2. Tráfico Cliente (<code class="font-mono">curl</code>)</span>
+                </button>
+                <button id="btn-flow-3" onclick="switchFlow(3)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
+                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                    <span>3. Auto-Curación (Self-Healing)</span>
+                </button>
+                <button id="btn-flow-4" onclick="switchFlow(4)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
+                    <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+                    <span>4. Diagnóstico (Retos Rotos)</span>
+                </button>
+            </div>
+
+            <!-- Playback Controls & Speed -->
+            <div class="flex items-center gap-2">
+                <!-- Café Analogy Toggle -->
+                <button onclick="toggleCafeMode()" id="btn-cafe" class="px-2.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-semibold flex items-center gap-1.5 transition" title="Mostrar/Ocultar etiquetas de la analogía KubeCafé en el mapa">
+                    <span>☕ KubeCafé: ON</span>
+                </button>
+
+                <button onclick="prevStep()" id="btn-prev" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700/80 text-xs font-medium flex items-center gap-1 transition disabled:opacity-40 disabled:pointer-events-none" title="Paso Anterior (Flecha Izquierda)">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span class="hidden md:inline">Anterior</span>
+                </button>
+
+                <button onclick="nextStep()" id="btn-next" class="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-k8s-blue to-cyan-600 hover:from-blue-600 hover:to-cyan-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-[0_0_15px_rgba(50,108,229,0.4)] transition" title="Siguiente Paso (Flecha Derecha)">
+                    <span>Siguiente</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+
+                <button onclick="toggleAutoPlay()" id="btn-auto" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 text-xs font-medium flex items-center gap-1.5 transition">
+                    <svg id="icon-play" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                    <span id="text-auto">Auto</span>
+                </button>
+
+                <button onclick="resetSim()" class="p-1.5 rounded-lg bg-slate-900 hover:bg-rose-950/60 text-slate-400 hover:text-rose-400 border border-slate-800 transition" title="Reiniciar Simulación">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT GRID -->
+    <main class="flex-1 max-w-[1680px] w-full mx-auto px-4 sm:px-6 py-4 grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
+
+        <!-- LEFT & CENTER: INTERACTIVE ARCHITECTURE MAP (8 COLS ON XL) -->
+        <div class="xl:col-span-8 flex flex-col gap-4">
+
+            <!-- Step Progress Bar & Interactive Command Banner -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                    <!-- Interactive Terminal Input Prompt -->
+                    <div class="flex items-center gap-2.5 bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 flex-1 font-mono text-xs sm:text-sm">
+                        <span class="text-emerald-400 font-bold select-none">➜ ~</span>
+                        <span id="terminal-command" class="text-cyan-300 font-semibold">kubectl apply -f deployment.yaml</span>
+                        <span class="cursor-blink"></span>
+                        <button onclick="runFromStart()" class="ml-auto px-3 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-sans font-semibold transition flex items-center gap-1">
+                            <span>⚡ Simular Flujo Completo</span>
+                        </button>
+                    </div>
+
+                    <!-- Step Counter Badge -->
+                    <div class="flex items-center justify-between sm:justify-end gap-2">
+                        <span class="text-xs text-slate-400 font-medium">Progreso:</span>
+                        <span id="step-counter-badge" class="px-2.5 py-1 rounded-lg bg-k8s-blue/20 border border-k8s-blue/40 font-mono text-xs font-bold text-cyan-300">
+                            Paso 1 / 8
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Stepper Pills -->
+                <div id="stepper-pills" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-1.5">
+                    <!-- Populated dynamically by JS -->
+                </div>
+            </div>
+
+            <!-- CLUSTER VISUAL DIAGRAM CONTAINER -->
+            <div id="diagram-canvas" class="relative bg-slate-950/90 border border-slate-800/90 rounded-2xl p-4 sm:p-5 shadow-2xl overflow-hidden flex flex-col justify-between">
+                
+                <!-- Dynamic SVG Overlay for Lines & Moving Data Packets -->
+                <svg id="svg-connections" class="absolute inset-0 w-full h-full pointer-events-none z-0"></svg>
+
+                <!-- Floating Animated Data Packet -->
+                <div id="data-packet" class="hidden pointer-events-none fixed z-30 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-in-out">
+                    <div id="packet-pill" class="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-lg border">
+                        <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                        <span id="packet-label">YAML</span>
+                    </div>
+                </div>
+
+                <!-- Top Notice Tip -->
+                <div class="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-800/60 text-xs text-slate-400">
+                    <div class="flex items-center gap-2">
+                        <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span>💡 <strong>Interactivo:</strong> Haz clic en cualquier componente del mapa para inspeccionar su función, analogía en KubeCafé y comandos útiles.</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs">
+                        <button onclick="triggerKillPodDemo()" class="px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 font-semibold transition flex items-center gap-1">
+                            <span>🔥 Simular Caída de Pod</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DIAGRAM GRID LAYOUT: LEFT (EXTERNAL/REGISTRY) | RIGHT (CLUSTER: CONTROL PLANE + WORKER NODE) -->
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-4 my-auto">
+
+                    <!-- COLUMN 1: EXTERNAL WORLD (CLI / CLIENT / LOAD BALANCER / REGISTRY) - 3 COLS -->
+                    <div class="lg:col-span-3 flex flex-col justify-between gap-3 border border-slate-800/80 bg-slate-900/40 rounded-xl p-3">
+                        <div class="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center justify-between border-b border-slate-800 pb-1.5">
+                            <span>Mundo Exterior</span>
+                            <span class="text-xs px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">Admin / Web</span>
+                        </div>
+
+                        <!-- 1. DevOps Terminal (kubectl) -->
+                        <div id="node-kubectl" onclick="inspectComponent('kubectl')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">CLI Ingeniero</span>
+                                <span class="cafe-badge text-xs text-amber-300 font-medium">👨‍💻 Cliente VIP</span>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-cyan-400 font-mono font-bold text-xs border border-slate-700">
+                                    &gt;_
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white">Terminal (kubectl)</h3>
+                                    <p class="text-xs text-slate-400">Envía orden YAML (:6443)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. External User Client (Browser / curl) -->
+                        <div id="node-client" onclick="inspectComponent('client')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Usuario Final</span>
+                                <span class="cafe-badge text-xs text-amber-300 font-medium">🙋‍♂️ Comensal</span>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-emerald-400 border border-slate-700">
+                                    🌐
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white">Cliente Web / App</h3>
+                                    <p class="text-xs text-slate-400">Petición HTTPS GET</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Cloud LoadBalancer -->
+                        <div id="node-lb" onclick="inspectComponent('lb')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">Cloud LB</span>
+                                <span class="cafe-badge text-xs text-amber-300 font-medium">🛣️ Entrada Calle</span>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400 border border-slate-700">
+                                    ⚖️
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white">LoadBalancer</h3>
+                                    <p class="text-xs text-slate-400">IP Pública 203.0.113.50</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Container Registry (Harbor / Docker Hub) -->
+                        <div id="node-registry" onclick="inspectComponent('registry')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">OCI Registry</span>
+                                <span class="cafe-badge text-xs text-amber-300 font-medium">🏪 Bodega Café</span>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-sky-400 border border-slate-700">
+                                    📦
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white">Harbor / Docker Hub</h3>
+                                    <p class="text-xs text-slate-400">Almacén de Imágenes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COLUMN 2: KUBERNETES CLUSTER (9 COLS) -->
+                    <div class="lg:col-span-9 flex flex-col gap-4">
+
+                        <!-- SECTION A: CONTROL PLANE (EL CEREBRO / OFICINA DE GERENCIA) -->
+                        <div class="rounded-xl border border-k8s-blue/40 bg-gradient-to-b from-blue-950/25 to-slate-900/60 p-3.5 relative">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-1.5 border-b border-blue-500/20">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-k8s-blue shadow-[0_0_8px_#326CE5]"></span>
+                                    <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-blue-300 font-mono">Control Plane (Cerebro del Clúster)</h2>
+                                </div>
+                                <span class="cafe-badge text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">🏢 Oficina de Gerencia en KubeCafé</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                                <!-- API Server -->
+                                <div id="node-apiserver" onclick="inspectComponent('apiserver')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-1.5">
+                                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-k8s-blue/25 text-cyan-300 border border-k8s-blue/40">Front-Door</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🛎️ Caja / Mostrador</span>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">kube-apiserver</h3>
+                                        <p class="text-xs text-slate-400 mt-1">Ventanilla única REST. Valida permisos y coordina todo.</p>
+                                    </div>
+                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-cyan-400">
+                                        <span>AuthN / RBAC</span>
+                                        <span>Admission</span>
+                                    </div>
+                                </div>
+
+                                <!-- etcd -->
+                                <div id="node-etcd" onclick="inspectComponent('etcd')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-1.5">
+                                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Key-Value DB</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">📖 Libro Contable</span>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">etcd</h3>
+                                        <p class="text-xs text-slate-400 mt-1">Base de datos oficial e inmutable del estado del clúster.</p>
+                                    </div>
+                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-indigo-300">
+                                        <span>/registry/</span>
+                                        <span>Quorum Raft</span>
+                                    </div>
+                                </div>
+
+                                <!-- Controller Manager -->
+                                <div id="node-controller" onclick="inspectComponent('controller')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-1.5">
+                                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Reconciliación</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🧐 Supervisor</span>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">Controller Manager</h3>
+                                        <p class="text-xs text-slate-400 mt-1">Compara estado deseado vs actual. Repone Pods caídos.</p>
+                                    </div>
+                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-purple-300">
+                                        <span>ReplicaSet</span>
+                                        <span>Self-Heal</span>
+                                    </div>
+                                </div>
+
+                                <!-- Scheduler -->
+                                <div id="node-scheduler" onclick="inspectComponent('scheduler')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-1.5">
+                                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">Asignador</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">📋 Despachador</span>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">kube-scheduler</h3>
+                                        <p class="text-xs text-slate-400 mt-1">Filtra y puntúa los nodos según CPU/RAM disponible.</p>
+                                    </div>
+                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-amber-300">
+                                        <span>Filter &amp; Score</span>
+                                        <span>Bind Node</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECTION B: WORKER NODE & DATA PLANE (MESAS DE BARISMO) -->
+                        <div class="rounded-xl border border-emerald-500/35 bg-gradient-to-b from-emerald-950/15 to-slate-900/70 p-3.5 relative">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-1.5 border-b border-emerald-500/20">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]"></span>
+                                    <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-emerald-300 font-mono">Worker Node (`worker-node-01` • 192.168.1.10)</h2>
+                                </div>
+                                <span class="cafe-badge text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">🪵 Mesa de Barismo (Molinos CPU + Agua RAM)</span>
+                            </div>
+
+                            <!-- Worker Node Internal Grid: 3 Columns -->
+                            <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+
+                                <!-- Col 1 (4 cols): Networking + Config/Storage -->
+                                <div class="md:col-span-4 flex flex-col gap-2.5">
+                                    <!-- Ingress / Gateway Controller -->
+                                    <div id="node-ingress" onclick="inspectComponent('ingress')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-2.5">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Ruteo L7</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🚪 La Anfitriona</span>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">Ingress / Gateway API</h3>
+                                        <p class="text-xs text-slate-400 mt-0.5">Enruta <code class="text-emerald-300">mi-app.com/api</code> al Service.</p>
+                                    </div>
+
+                                    <!-- Service & kube-proxy -->
+                                    <div id="node-service" onclick="inspectComponent('service')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-2.5">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">VIP 10.96.0.15</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🤵 Mesero Fijo</span>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">Service &amp; kube-proxy</h3>
+                                        <p class="text-xs text-slate-400 mt-0.5">Balancea tráfico solo hacia Pods sanos (eBPF/IPVS).</p>
+                                    </div>
+
+                                    <!-- ConfigMap, Secret & PVC -->
+                                    <div id="node-config" onclick="inspectComponent('config')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-2.5">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">Config &amp; PVC</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🧂 Especias y Bodega</span>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">ConfigMap, Secret &amp; PV</h3>
+                                        <p class="text-xs text-slate-400 mt-0.5">Variables, credenciales y disco persistente.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Col 2 (4 cols): Node Agents (Kubelet + Container Runtime) -->
+                                <div class="md:col-span-4 flex flex-col gap-2.5 justify-between">
+                                    <!-- Kubelet -->
+                                    <div id="node-kubelet" onclick="inspectComponent('kubelet')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex-1 flex flex-col justify-between">
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Agente Nodo</span>
+                                                <span class="cafe-badge text-xs text-amber-300 font-medium">👨‍🍳 El Barista</span>
+                                            </div>
+                                            <h3 class="text-sm font-bold text-white">kubelet</h3>
+                                            <p class="text-xs text-slate-400 mt-1">Recibe órdenes del API Server, monta volúmenes y ejecuta sondas (`liveness` / `readiness`).</p>
+                                        </div>
+                                        <div class="mt-2 pt-1.5 border-t border-slate-800 text-xs font-mono text-cyan-300 flex justify-between">
+                                            <span>CRI gRPC</span>
+                                            <span>Probes: HTTP :8080</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Container Runtime + CNI -->
+                                    <div id="node-runtime" onclick="inspectComponent('runtime')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex-1 flex flex-col justify-between">
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">containerd + CNI</span>
+                                                <span class="cafe-badge text-xs text-amber-300 font-medium">☕ Máquina Cafetera</span>
+                                            </div>
+                                            <h3 class="text-sm font-bold text-white">Runtime + Plugin CNI</h3>
+                                            <p class="text-xs text-slate-400 mt-1">Extrae la imagen OCI, crea namespaces/cgroups y asigna IP con Cilium/Calico.</p>
+                                        </div>
+                                        <div class="mt-2 pt-1.5 border-t border-slate-800 text-xs font-mono text-sky-300 flex justify-between">
+                                            <span>Pull Image</span>
+                                            <span>veth0 ↔ cni0</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Col 3 (4 cols): Target Pods Running -->
+                                <div id="node-pod" onclick="inspectComponent('pod')" class="md:col-span-4 k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-1.5">
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🍽️ Bandejas de Servicio</span>
+                                            <span id="pod-status-badge" class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+                                                <span id="pod-status-dot" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                                                <span id="pod-status-text">Running (2/2)</span>
+                                            </span>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">Pods de Aplicación</h3>
+                                        <p class="text-xs text-slate-400 mt-0.5">Contenedor Principal (☕ App) + Sidecar (🥛 Logs/Métricas).</p>
+
+                                        <!-- Visual Replica Boxes -->
+                                        <div class="mt-2.5 space-y-2">
+                                            <div id="pod-replica-1" class="p-2 rounded-lg bg-slate-950 border border-emerald-500/40 flex items-center justify-between text-xs font-mono transition-all">
+                                                <div class="flex items-center gap-1.5">
+                                                    <span id="pod-rep1-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                                    <span id="pod-rep1-name" class="text-slate-200">mi-app-7d9f-x8k2</span>
+                                                </div>
+                                                <span id="pod-rep1-ip" class="text-emerald-400">10.244.1.42</span>
+                                            </div>
+                                            <div id="pod-replica-2" class="p-2 rounded-lg bg-slate-950 border border-emerald-500/40 flex items-center justify-between text-xs font-mono transition-all">
+                                                <div class="flex items-center gap-1.5">
+                                                    <span id="pod-rep2-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                                    <span id="pod-rep2-name" class="text-slate-200">mi-app-7d9f-m4p9</span>
+                                                </div>
+                                                <span id="pod-rep2-ip" class="text-emerald-400">10.244.1.43</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800 text-xs font-mono text-slate-400 flex justify-between">
+                                        <span>Puerto: 8080</span>
+                                        <span id="pod-ready-Summary" class="text-emerald-400">Endpoints Activos</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: EXPLANATION, YAML STATE, COMPONENT INSPECTOR & LIVE TERMINAL LOGS (4 COLS ON XL) -->
+        <div class="xl:col-span-4 flex flex-col gap-4">
+
+            <!-- CARD 1: PASO A PASO EXPLICACIÓN (KUBECAFÉ + SENCILLA + TÉCNICA + YAML) -->
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-2xl relative overflow-hidden">
+                <div class="flex items-center justify-between gap-2 mb-2">
+                    <span id="step-flow-tag" class="text-xs font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-k8s-blue/20 text-cyan-300 border border-k8s-blue/40">
+                        Flujo 1 • Despliegue
+                    </span>
+                    <span id="step-number-label" class="text-xs font-mono text-slate-400">Paso 1 de 8</span>
+                </div>
+
+                <h2 id="step-title" class="text-base sm:text-lg font-bold text-white leading-snug mb-3">
+                    1. Terminal CLI (kubectl): Envío del Manifiesto
+                </h2>
+
+                <!-- KubeCafé Analogy Box -->
+                <div class="p-3 rounded-xl bg-amber-950/25 border border-amber-500/30 mb-2.5">
+                    <div class="flex items-center gap-1.5 text-xs font-bold text-amber-300 mb-1">
+                        <span>☕ ¿Qué pasa en KubeCafé?</span>
+                    </div>
+                    <p id="step-cafe-desc" class="text-xs text-amber-100/90 leading-relaxed">
+                        Entregas tu orden escrita en la Caja Registradora pidiendo: «Quiero mantener siempre 2 bandejas de Espresso listas en el salón».
+                    </p>
+                </div>
+
+                <!-- Simple Explanation Box -->
+                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 mb-2.5">
+                    <div class="flex items-center gap-1.5 text-xs font-semibold text-emerald-300 mb-1">
+                        <span>💡 En palabras sencillas:</span>
+                    </div>
+                    <p id="step-simple-desc" class="text-xs text-slate-300 leading-relaxed">
+                        Escribes la receta de tu aplicación en un archivo YAML y presionas Enter. kubectl la empaqueta y la envía por conexión segura al cerebro del clúster.
+                    </p>
+                </div>
+
+                <!-- Exact Technical Detail -->
+                <div class="p-3 rounded-xl bg-blue-950/20 border border-blue-500/25 mb-2.5">
+                    <div class="flex items-center gap-1.5 text-xs font-semibold text-cyan-300 mb-1 font-mono">
+                        <span>⚙️ Bajo el capó (Técnico):</span>
+                    </div>
+                    <p id="step-tech-desc" class="text-xs text-slate-300 leading-relaxed">
+                        kubectl convierte el YAML a JSON y envía un HTTP POST autenticado con TLS a /apis/apps/v1/namespaces/default/deployments.
+                    </p>
+                </div>
+
+                <!-- Live YAML / Object State Mutating at this step -->
+                <div class="rounded-xl bg-[#050811] border border-slate-800 p-2.5 font-mono text-xs">
+                    <div class="flex items-center justify-between text-slate-400 pb-1 mb-1 border-b border-slate-800/80">
+                        <span>📄 Estado del Objeto en este Paso:</span>
+                        <span id="yaml-step-badge" class="text-cyan-400">YAML / JSON</span>
+                    </div>
+                    <pre id="step-yaml-code" class="text-xs text-emerald-300 overflow-x-auto leading-relaxed"></pre>
+                </div>
+            </div>
+
+            <!-- CARD 2: LIVE TERMINAL LOGS STREAM -->
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+                <div class="bg-slate-900 px-4 py-2 border-b border-slate-800 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                        <span class="text-xs font-mono text-slate-300 ml-1">eventos-del-cluster.log</span>
+                    </div>
+                    <span class="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">EN VIVO</span>
+                </div>
+                <div id="terminal-logs" class="p-3.5 font-mono text-xs space-y-1.5 h-44 overflow-y-auto bg-[#050811]">
+                    <!-- Dynamically populated logs -->
+                </div>
+            </div>
+
+            <!-- CARD 3: INTERACTIVE COMPONENT INSPECTOR (ON CLICK) -->
+            <div id="inspector-card" class="bg-slate-900/95 border border-amber-500/30 rounded-2xl p-4 shadow-xl transition-all">
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="px-2 py-0.5 rounded text-xs font-mono uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">Inspector de Componente</span>
+                    <span id="inspector-badge" class="text-xs font-mono text-slate-400">Haz clic en un nodo del mapa</span>
+                </div>
+                <h3 id="inspector-title" class="text-sm font-bold text-white mb-1">
+                    🛎️ kube-apiserver (Caja Registradora)
+                </h3>
+                <p id="inspector-cafe" class="text-xs text-amber-300 font-medium mb-1.5">
+                    ☕ En KubeCafé: Es el mostrador único donde se reciben y validan todas las órdenes.
+                </p>
+                <p id="inspector-body" class="text-xs text-slate-300 leading-relaxed mb-2.5">
+                    Es el recepcionista central del clúster. Ningún componente habla directamente con la base de datos etcd; todos deben pasar por el API Server.
+                </p>
+                <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-emerald-300 flex items-center justify-between gap-2">
+                    <div class="truncate">
+                        <span class="text-slate-500">$ </span>
+                        <span id="inspector-cmd">kubectl get --raw='/readyz?verbose'</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JAVASCRIPT LOGIC: 4 COMPLETE FLOWS, SVG CONNECTIONS, PACKET ANIMATIONS & INSPECTOR -->
+    <script>
+        // ============================================================================
+        // 1. BASE DE DATOS DE LOS 4 FLUJOS PASO A PASO (DE INICIO A FIN)
+        // ============================================================================
+        const FLOWS = {
+            1: {
+                name: "Flujo 1 • Despliegue Completo (De YAML a Pod Running)",
+                command: "kubectl apply -f deployment.yaml",
+                theme: "blue",
+                steps: [
+                    {
+                        id: 1,
+                        shortName: "1. kubectl",
+                        title: "1. Terminal CLI (kubectl): Envío del Pedido YAML",
+                        activeNodes: ["node-kubectl", "node-apiserver"],
+                        fromNode: "node-kubectl",
+                        toNode: "node-apiserver",
+                        packetText: "POST YAML/JSON",
+                        podStatus: "No creado aún",
+                        podVisualState: "pending",
+                        cafeDesc: "Llegaste al mostrador de KubeCafé con tu orden escrita: «Necesito 2 bandejas de café mi-app siempre listas en el salón».",
+                        simpleDesc: "Escribes tu archivo YAML y ejecutas 'kubectl apply'. La herramienta revisa que no tenga errores básicos de formato y se lo envía por red segura al recepcionista del clúster.",
+                        techDesc: "kubectl lee ~/.kube/config, convierte el manifiesto YAML a JSON y envía una petición HTTP POST cifrada con TLS al puerto 6443 del kube-apiserver (/apis/apps/v1/namespaces/default/deployments).",
+                        yamlCode: `kind: Deployment\nmetadata:\n  name: mi-app\nspec:\n  replicas: 2\n  template:\n    spec:\n      containers:\n      - name: web\n        image: harbor.io/mi-app:v1`,
+                        logs: [
+                            "[kubectl] Leyendo credenciales desde ~/.kube/config",
+                            "[TLS] Conectando con kube-apiserver:6443...",
+                            "[HTTP] POST /apis/apps/v1/namespaces/default/deployments"
+                        ]
+                    },
+                    {
+                        id: 2,
+                        shortName: "2. API Server",
+                        title: "2. kube-apiserver: Autenticación, RBAC y Admisión",
+                        activeNodes: ["node-apiserver"],
+                        fromNode: "node-kubectl",
+                        toNode: "node-apiserver",
+                        packetText: "AuthN + RBAC OK",
+                        podStatus: "Validando...",
+                        podVisualState: "pending",
+                        cafeDesc: "En la Caja Registradora verifican tu carnet, confirman que tienes permiso para pedir 2 bandejas y sellan la orden como válida.",
+                        simpleDesc: "El API Server pasa tu petición por 3 filtros de seguridad: ¿Quién eres? (Autenticación), ¿Tienes permiso? (Autorización RBAC) y ¿Cumple las reglas del clúster? (Controladores de Admisión).",
+                        techDesc: "kube-apiserver valida el certificado X.509/Token (AuthN), evalúa los RoleBindings (AuthZ RBAC) y ejecuta Mutating/Validating Admission Webhooks (inyectando valores por defecto y validando cuotas).",
+                        yamlCode: `# Validación en kube-apiserver:\nAuthentication: User "admin-cnm" [OK]\nAuthorization:  RBAC Permit "create deployments" [OK]\nAdmission:      ResourceQuota & LimitRange [OK]`,
+                        logs: [
+                            "[apiserver] AuthN exitoso: usuario='admin-cnm'",
+                            "[apiserver] AuthZ RBAC permitido: verb='create' resource='deployments'",
+                            "[apiserver] Admission Webhooks superados sin errores"
+                        ]
+                    },
+                    {
+                        id: 3,
+                        shortName: "3. etcd",
+                        title: "3. etcd: Registro Inmutable del Estado Deseado",
+                        activeNodes: ["node-apiserver", "node-etcd"],
+                        fromNode: "node-apiserver",
+                        toNode: "node-etcd",
+                        packetText: "gRPC Save Raft",
+                        podStatus: "Guardado en etcd",
+                        podVisualState: "pending",
+                        cafeDesc: "El cajero anota con tinta indeleble en el Libro Contable (etcd): «Estado deseado: 2 bandejas activas de mi-app».",
+                        simpleDesc: "Una vez aprobado tu pedido, el API Server lo guarda en la base de datos etcd y te responde en tu terminal: 'deployment.apps/mi-app created'.",
+                        techDesc: "kube-apiserver escribe el objeto mediante gRPC en etcd bajo la clave /registry/deployments/default/mi-app. etcd confirma el consenso Raft en disco y devuelve confirmación.",
+                        yamlCode: `# Clave guardada en etcd:\nKEY: /registry/deployments/default/mi-app\nSTATUS:\n  desiredReplicas: 2\n  readyReplicas: 0`,
+                        logs: [
+                            "[etcd] gRPC Put -> /registry/deployments/default/mi-app",
+                            "[etcd] Consenso Raft confirmado en disco",
+                            "[kubectl] deployment.apps/mi-app created"
+                        ]
+                    },
+                    {
+                        id: 4,
+                        shortName: "4. Controller",
+                        title: "4. Controller Manager: Bucle de Reconciliación",
+                        activeNodes: ["node-controller", "node-apiserver"],
+                        fromNode: "node-controller",
+                        toNode: "node-apiserver",
+                        packetText: "Crea 2 Pods",
+                        podStatus: "Pending (0/2)",
+                        podVisualState: "pending",
+                        cafeDesc: "El Supervisor de Salón ve en el libro que deben existir 2 bandejas, pero en las mesas hay 0. De inmediato genera las órdenes para preparar 2 bandejas nuevas.",
+                        simpleDesc: "El Controller Manager nota que pediste 2 copias pero hay 0 funcionando. Entonces crea el ReplicaSet y las 2 fichas de Pods en estado 'Pending' (aún sin servidor asignado).",
+                        techDesc: "El Deployment Controller detecta el cambio por Watch y crea el ReplicaSet 'mi-app-7d9f'. El ReplicaSet Controller ve 0/2 Pods y envía peticiones al API Server para crear 2 objetos Pod con spec.nodeName vacío.",
+                        yamlCode: `kind: Pod\nmetadata:\n  name: mi-app-7d9f-x8k2\nspec:\n  nodeName: <none> # <-- Sin mesa asignada\nstatus:\n  phase: Pending`,
+                        logs: [
+                            "[controller] DeploymentController creó ReplicaSet 'mi-app-7d9f'",
+                            "[controller] ReplicaSetController detectó: Actual=0 vs Deseado=2",
+                            "[controller] Creados Pods 'mi-app-7d9f-x8k2' y 'mi-app-7d9f-m4p9' (Pending)"
+                        ]
+                    },
+                    {
+                        id: 5,
+                        shortName: "5. Scheduler",
+                        title: "5. kube-scheduler: Elección de la Mesa (Worker Node)",
+                        activeNodes: ["node-scheduler", "node-apiserver"],
+                        fromNode: "node-scheduler",
+                        toNode: "node-apiserver",
+                        packetText: "Bind worker-node-01",
+                        podStatus: "Scheduled",
+                        podVisualState: "pending",
+                        cafeDesc: "El Despachador de Mesas revisa qué estación de barismo tiene molinos (CPU) y agua (RAM) libres, y asigna las bandejas a la Mesa 1.",
+                        simpleDesc: "El Scheduler busca entre todos tus servidores cuál tiene suficiente memoria RAM y CPU libre, elige 'worker-node-01' y anota esa asignación en el API Server.",
+                        techDesc: "kube-scheduler detecta Pods con nodeName vacío, ejecuta las fases de Filtering (recursos, taints, nodeSelector) y Scoring (afinidad y balanceo), y hace un Bind actualizando spec.nodeName = 'worker-node-01'.",
+                        yamlCode: `kind: Pod\nmetadata:\n  name: mi-app-7d9f-x8k2\nspec:\n  nodeName: worker-node-01 # <-- Asignado por Scheduler\nstatus:\n  phase: Pending`,
+                        logs: [
+                            "[scheduler] Evaluando nodos para 'mi-app-7d9f-x8k2'...",
+                            "[scheduler] Fase Filter & Score: 'worker-node-01' seleccionado (98 pts)",
+                            "[scheduler] Binding registrado en API Server -> nodeName='worker-node-01'"
+                        ]
+                    },
+                    {
+                        id: 6,
+                        shortName: "6. Kubelet+Config",
+                        title: "6. kubelet + ConfigMap/Secret: Preparación en el Nodo",
+                        activeNodes: ["node-apiserver", "node-kubelet", "node-config"],
+                        fromNode: "node-apiserver",
+                        toNode: "node-kubelet",
+                        packetText: "PodSpec + Config",
+                        podStatus: "ContainerCreating",
+                        podVisualState: "creating",
+                        cafeDesc: "El Barista de la Mesa 1 recibe la comanda de la Caja, alista las especias (ConfigMap), saca la receta secreta (Secret) y prepara los insumos.",
+                        simpleDesc: "El agente Kubelet que vive dentro de 'worker-node-01' ve que le asignaron 2 Pods nuevos. Descarga sus variables de configuración (ConfigMap/Secret) y prepara los volúmenes.",
+                        techDesc: "kubelet recibe el evento Watch del API Server para su nodo, monta en memoria (tmpfs) los Secrets y ConfigMaps requeridos, conecta volúmenes PVC y llama al runtime vía CRI (Container Runtime Interface).",
+                        yamlCode: `# kubelet preparando el entorno del Pod:\nVolumes Mounted:\n  - configmap/app-config -> /etc/config\n  - secret/db-creds      -> /var/run/secrets\nStatus: ContainerCreating`,
+                        logs: [
+                            "[kubelet] Recibido PodSpec para 'worker-node-01'",
+                            "[kubelet] Inyectando variables de ConfigMap y montando Secret",
+                            "[kubelet] Llamando a containerd vía gRPC CRI: RunPodSandbox()"
+                        ]
+                    },
+                    {
+                        id: 7,
+                        shortName: "7. Runtime+Registry",
+                        title: "7. Container Runtime + Registry + CNI: Descarga y Red",
+                        activeNodes: ["node-runtime", "node-registry"],
+                        fromNode: "node-registry",
+                        toNode: "node-runtime",
+                        packetText: "Pull Image + IP",
+                        podStatus: "Starting...",
+                        podVisualState: "creating",
+                        cafeDesc: "La Máquina Cafetera trae la bolsa sellada de la Bodega Mayorista (Registry), sirve la taza y la coloca en la bandeja con su número de ubicación (IP).",
+                        simpleDesc: "El motor containerd descarga la imagen desde Harbor/Docker Hub, arranca los contenedores y el plugin de red (CNI) les asigna sus direcciones IP internas.",
+                        techDesc: "containerd hace pull de las capas OCI desde el Registry, crea los Linux Namespaces y Cgroups, e invoca al plugin CNI (Cilium/Calico) que crea el cable virtual veth0 y asigna las IPs 10.244.1.42 y 10.244.1.43.",
+                        yamlCode: `# Red CNI e Imagen lista:\nImage:  harbor.io/mi-app:v1 (Pulled)\nCNI IP: 10.244.1.42/24 (veth0@if12)\n        10.244.1.43/24 (veth0@if13)`,
+                        logs: [
+                            "[containerd] Pulling image 'harbor.io/mi-app:v1' desde Registry...",
+                            "[cni-cilium] Asignadas IPs de Pod: 10.244.1.42 y 10.244.1.43",
+                            "[containerd] Contenedores iniciados exitosamente (PID 1 activo)"
+                        ]
+                    },
+                    {
+                        id: 8,
+                        shortName: "8. Pod Running!",
+                        title: "8. Sondas Superadas y Registro en Service: ¡Pods Running!",
+                        activeNodes: ["node-kubelet", "node-pod", "node-service"],
+                        fromNode: "node-kubelet",
+                        toNode: "node-pod",
+                        packetText: "Probes 200 OK",
+                        podStatus: "Running (2/2)",
+                        podVisualState: "running",
+                        cafeDesc: "El Barista prueba la temperatura con su termómetro (Probes). ¡Están perfectas! El Mesero (Service) las anota en su lista para empezar a atender clientes.",
+                        simpleDesc: "Kubelet verifica que la aplicación responda bien (Readiness Probe). Al dar OK, el Pod pasa a estado 'Running' y el Service empieza a enviarle tráfico real.",
+                        techDesc: "kubelet ejecuta livenessProbe y readinessProbe (HTTP GET :8080/healthz -> 200 OK), reporta Ready=True al API Server y el EndpointSlice Controller agrega ambas IPs al Service ClusterIP.",
+                        yamlCode: `status:\n  phase: Running\n  conditions:\n  - type: Ready\n    status: "True"\n  podIP: 10.244.1.42 # <-- Listo en el Service`,
+                        logs: [
+                            "[kubelet] Readiness Probe HTTP 200 OK en :8080/healthz",
+                            "[apiserver] Pod status actualizado a 'Running' (2/2 Ready)",
+                            "[service] EndpointSlices actualizados: [10.244.1.42, 10.244.1.43] 🎉"
+                        ]
+                    }
+                ]
+            },
+            2: {
+                name: "Flujo 2 • Tráfico de un Cliente (De Internet hasta el Pod)",
+                command: "curl -i https://mi-app.com/api/menu",
+                theme: "green",
+                steps: [
+                    {
+                        id: 1,
+                        shortName: "1. Cliente Web",
+                        title: "1. Cliente Externo: Petición HTTPS al Dominio",
+                        activeNodes: ["node-client", "node-lb"],
+                        fromNode: "node-client",
+                        toNode: "node-lb",
+                        packetText: "GET /api/menu",
+                        podStatus: "Running (2/2)",
+                        podVisualState: "running",
+                        cafeDesc: "Un comensal llega desde la calle buscando la cafetería 'mi-app.com' para pedir el menú del día.",
+                        simpleDesc: "Un usuario abre su navegador o ejecuta curl hacia https://mi-app.com/api/menu. El DNS traduce el nombre a la IP pública del balanceador en la nube.",
+                        techDesc: "El cliente resuelve el registro DNS A/AAAA de mi-app.com hacia la IP pública 203.0.113.50 y abre una conexión TCP/TLS hacia el puerto 443.",
+                        yamlCode: `GET /api/menu HTTP/2\nHost: mi-app.com\nUser-Agent: curl/8.4.0\nAccept: application/json`,
+                        logs: [
+                            "[cliente] $ curl -i https://mi-app.com/api/menu",
+                            "[dns] mi-app.com resuelto a VIP pública 203.0.113.50",
+                            "[tls] Conexión HTTPS establecida con LoadBalancer externo"
+                        ]
+                    },
+                    {
+                        id: 2,
+                        shortName: "2. LoadBalancer",
+                        title: "2. Cloud LoadBalancer: Entrada al Worker Node",
+                        activeNodes: ["node-lb", "node-ingress"],
+                        fromNode: "node-lb",
+                        toNode: "node-ingress",
+                        packetText: "Forward TCP :443",
+                        podStatus: "Running (2/2)",
+                        podVisualState: "running",
+                        cafeDesc: "La entrada principal del local recibe al cliente de la calle y lo dirige directamente hacia la Anfitriona en la puerta del salón.",
+                        simpleDesc: "El balanceador de la nube recibe el paquete de Internet y lo reenvía hacia el controlador Ingress que está escuchando dentro de los Worker Nodes.",
+                        techDesc: "El Cloud LoadBalancer (AWS ALB / GCP LB / MetalLB) hace health-check de los nodos y reenvía el flujo TCP al NodePort o IP del Pod del Ingress/Gateway Controller.",
+                        yamlCode: `kind: Service\nmetadata:\n  name: ingress-gateway\nspec:\n  type: LoadBalancer\nstatus:\n  loadBalancer:\n    ingress:\n    - ip: 203.0.113.50`,
+                        logs: [
+                            "[cloud-lb] Paquete recibido en 203.0.113.50:443",
+                            "[cloud-lb] Nodo 'worker-node-01' saludable -> reenviando tráfico",
+                            "[cloud-lb] Conectado con Ingress / Gateway Controller"
+                        ]
+                    },
+                    {
+                        id: 3,
+                        shortName: "3. Ingress L7",
+                        title: "3. Ingress / Gateway API: Ruteo Inteligente por Dominio y Ruta",
+                        activeNodes: ["node-ingress", "node-service"],
+                        fromNode: "node-ingress",
+                        toNode: "node-service",
+                        packetText: "Host+Path -> Svc",
+                        podStatus: "Running (2/2)",
+                        podVisualState: "running",
+                        cafeDesc: "La Anfitriona (Ingress) mira qué pide el cliente: «¿Viene por /api/menu? ¡Adelante, el Mesero Fijo del salón principal lo atenderá!».",
+                        simpleDesc: "El Ingress lee el dominio 'mi-app.com' y la ruta '/api/menu'. Según su tabla de reglas, envía la petición al Service interno 'mi-app-svc'.",
+                        techDesc: "El proxy L7 (NGINX / Envoy / Cilium Gateway) desencripta TLS, inspecciona las cabeceras HTTP Host y Path, y hace match con la regla HTTPRoute/Ingress hacia el backend Service 'mi-app-svc:80'.",
+                        yamlCode: `kind: Ingress\nspec:\n  rules:\n  - host: mi-app.com\n    http:\n      paths:\n      - path: /api\n        backend:\n          service:\n            name: mi-app-svc`,
+                        logs: [
+                            "[ingress] Terminación TLS exitosa para 'mi-app.com'",
+                            "[ingress] Regla coincidente: Host='mi-app.com' Path='/api/menu'",
+                            "[ingress] Enrutando hacia Service interno 'mi-app-svc' (10.96.0.15:80)"
+                        ]
+                    },
+                    {
+                        id: 4,
+                        shortName: "4. Service/NAT",
+                        title: "4. Service & kube-proxy (eBPF): De IP Virtual a IP Real del Pod",
+                        activeNodes: ["node-service", "node-pod"],
+                        fromNode: "node-service",
+                        toNode: "node-pod",
+                        packetText: "DNAT -> 10.244.1.42",
+                        podStatus: "Atendiendo Tráfico",
+                        podVisualState: "running",
+                        cafeDesc: "El Mesero Fijo (Service) nunca cambia de lugar aunque cambien las tazas. Elige una bandeja caliente y sana (10.244.1.42) y le lleva el pedido.",
+                        simpleDesc: "La IP del Service (10.96.0.15) es virtual. kube-proxy o Cilium eBPF intercepta el paquete en el kernel y cambia la dirección de destino por la IP real de uno de los Pods vivos.",
+                        techDesc: "El plano de datos del kernel (eBPF / IPVS programado por kube-proxy) consulta los EndpointSlices activos del Service y aplica DNAT (Destination NAT) reescribiendo el destino 10.96.0.15:80 -> 10.244.1.42:8080.",
+                        yamlCode: `kind: EndpointSlice\nmetadata:\n  name: mi-app-svc-slice\nendpoints:\n- addresses: ["10.244.1.42"]\n  conditions: { ready: true }\n- addresses: ["10.244.1.43"]\n  conditions: { ready: true }`,
+                        logs: [
+                            "[kube-proxy/ebpf] Paquete hacia ClusterIP 10.96.0.15:80 interceptado",
+                            "[kube-proxy/ebpf] Balanceo Round-Robin -> elegido Endpoint 10.244.1.42:8080",
+                            "[kernel-net] DNAT aplicado: paquete enviado por interfaz veth0"
+                        ]
+                    },
+                    {
+                        id: 5,
+                        shortName: "5. Pod + Config",
+                        title: "5. Pod en Ejecución: Procesa Petición y Registra Métricas",
+                        activeNodes: ["node-pod", "node-config"],
+                        fromNode: "node-config",
+                        toNode: "node-pod",
+                        packetText: "Lee Config + DB",
+                        podStatus: "200 OK Generado",
+                        podVisualState: "running",
+                        cafeDesc: "En la Bandeja, la taza principal sirve el café con las especias del ConfigMap mientras el vaso acompañante (Sidecar) anota la venta en las métricas.",
+                        simpleDesc: "El contenedor de tu aplicación recibe la petición en el puerto 8080, usa sus variables de entorno/volúmenes y genera la respuesta JSON mientras el contenedor Sidecar registra el log.",
+                        techDesc: "El proceso dentro del Pod 'mi-app-7d9f-x8k2' recibe el paquete en :8080, lee su configuración montada e imprime el log estructurado en stdout, mientras el exporter Sidecar incrementa el contador http_requests_total.",
+                        yamlCode: `# Respuesta generada por el Pod:\n{\n  "menu": "Espresso Cloud Native",\n  "pod": "mi-app-7d9f-x8k2",\n  "ip": "10.244.1.42",\n  "status": "200 OK"\n}`,
+                        logs: [
+                            "[pod:mi-app-7d9f-x8k2] GET /api/menu recibido en :8080",
+                            "[sidecar-metrics] http_requests_total{status='200'} +1",
+                            "[pod:mi-app-7d9f-x8k2] Respuesta JSON generada en 3.1ms"
+                        ]
+                    },
+                    {
+                        id: 6,
+                        shortName: "6. Respuesta 200",
+                        title: "6. Retorno al Cliente: Respuesta HTTP 200 OK Entregada",
+                        activeNodes: ["node-pod", "node-client"],
+                        fromNode: "node-pod",
+                        toNode: "node-client",
+                        packetText: "HTTP 200 OK JSON",
+                        podStatus: "Running (2/2)",
+                        podVisualState: "running",
+                        cafeDesc: "¡El comensal recibe su café recién hecho en su mesa en cuestión de milisegundos y queda feliz!",
+                        simpleDesc: "La respuesta viaja de vuelta hacia el usuario con código 'HTTP 200 OK' y el contenido JSON aparece en su pantalla o terminal.",
+                        techDesc: "El paquete de respuesta deshace la traducción NAT (conntrack un-DNAT), regresa por el Ingress/LoadBalancer y llega al cliente cerrando el ciclo de red de extremo a extremo.",
+                        yamlCode: `HTTP/2 200 OK\ncontent-type: application/json\nx-served-by: mi-app-7d9f-x8k2\n\n{"menu":"Espresso Cloud Native","status":"200 OK"}`,
+                        logs: [
+                            "[kernel-net] Conntrack un-DNAT completado hacia Ingress",
+                            "[ingress] Enviando respuesta TLS al cliente externo",
+                            "[cliente] < HTTP/2 200 OK recibido con éxito 🚀"
+                        ]
+                    }
+                ]
+            },
+            3: {
+                name: "Flujo 3 • Auto-Curación (Self-Healing cuando un Pod muere)",
+                command: "kubectl delete pod mi-app-7d9f-x8k2 # (o fallo OOMKilled)",
+                theme: "amber",
+                steps: [
+                    {
+                        id: 1,
+                        shortName: "1. Caída de Pod",
+                        title: "1. ¡Incidente en Vivo! El Pod #1 Sufre un Fallo Crítico",
+                        activeNodes: ["node-pod"],
+                        fromNode: "node-pod",
+                        toNode: "node-kubelet",
+                        packetText: " Exit Code 137 / Crash",
+                        podStatus: "Degraded (1/2)",
+                        podVisualState: "crashed",
+                        cafeDesc: "¡Accidente en la Mesa 1! Se cayó y se rompió la primera taza de café (`mi-app-7d9f-x8k2`). Solo queda 1 bandeja sana atendiendo.",
+                        simpleDesc: "Por un pico de memoria o un error interno, el contenedor del Pod #1 se apaga inesperadamente (Error / OOMKilled) o alguien lo borra por accidente.",
+                        techDesc: "El proceso PID 1 del contenedor en 'mi-app-7d9f-x8k2' termina con código de error (Exit Code 1 o 137 OOMKilled), o falla repetidamente la sonda livenessProbe.",
+                        yamlCode: `metadata:\n  name: mi-app-7d9f-x8k2\nstatus:\n  phase: Failed\n  containerStatuses:\n  - state:\n      terminated:\n        reason: OOMKilled\n        exitCode: 137`,
+                        logs: [
+                            "🔥 [ALERTA] Contenedor en Pod 'mi-app-7d9f-x8k2' terminó con ExitCode=137",
+                            "[kubelet] Liveness probe falló en 10.244.1.42:8080",
+                            "[pod] Estado de 'mi-app-7d9f-x8k2' cambió a Error / Terminating"
+                        ]
+                    },
+                    {
+                        id: 2,
+                        shortName: "2. Reporte Kubelet",
+                        title: "2. kubelet Reporta la Baja al API Server",
+                        activeNodes: ["node-kubelet", "node-apiserver", "node-etcd"],
+                        fromNode: "node-kubelet",
+                        toNode: "node-apiserver",
+                        packetText: "Status: NotReady",
+                        podStatus: "1/2 Ready",
+                        podVisualState: "crashed",
+                        cafeDesc: "El Barista (`kubelet`) avisa de inmediato por radio a la Caja Registradora (`apiserver`): «¡Se rompió la bandeja x8k2, solo nos queda 1 activa!».",
+                        simpleDesc: "El agente Kubelet detecta al instante que el contenedor murió y envía un reporte urgente al API Server actualizando el estado en etcd.",
+                        techDesc: "kubelet detecta el evento PLEG (Pod Lifecycle Event Generator) del runtime y envía un HTTP PATCH al API Server marcando el Pod como NotReady / Failed en etcd.",
+                        yamlCode: `# Actualización en API Server / etcd:\nDeployment: mi-app\n  desiredReplicas: 2\n  readyReplicas:   1  # <-- ¡Desajuste detectado!`,
+                        logs: [
+                            "[kubelet] PLEG event: container died en 'mi-app-7d9f-x8k2'",
+                            "[apiserver] PATCH status de 'mi-app-7d9f-x8k2' -> Ready=False",
+                            "[etcd] Estado actualizado: 1/2 réplicas listas"
+                        ]
+                    },
+                    {
+                        id: 3,
+                        shortName: "3. Corte Service",
+                        title: "3. Service & kube-proxy: Aislamiento Instantáneo del Tráfico",
+                        activeNodes: ["node-apiserver", "node-service", "node-pod"],
+                        fromNode: "node-apiserver",
+                        toNode: "node-service",
+                        packetText: "Remove Endpoint .42",
+                        podStatus: "Tráfico Protegido",
+                        podVisualState: "crashed",
+                        cafeDesc: "El Mesero Fijo (`Service`) tacha de inmediato la bandeja rota de su libreta y envía todos los pedidos de los clientes a la bandeja #2 que sigue sana.",
+                        simpleDesc: "¡Por esto los usuarios no sufren caídas! El Service saca inmediatamente la IP del Pod roto de su lista y envía el 100% del tráfico al Pod #2 que sigue vivo.",
+                        techDesc: "El EndpointSlice Controller marca la IP 10.244.1.42 como ready=false. kube-proxy/Cilium actualiza las tablas eBPF/IPVS en el nodo para que ningún paquete nuevo vaya al Pod caído.",
+                        yamlCode: `kind: EndpointSlice\nendpoints:\n- addresses: ["10.244.1.42"]\n  conditions: { ready: false } # <-- Excluido del balanceo\n- addresses: ["10.244.1.43"]\n  conditions: { ready: true }  # <-- Recibe el 100%`,
+                        logs: [
+                            "[endpointslice] Retirando IP 10.244.1.42 de los endpoints activos",
+                            "[kube-proxy] Reglas eBPF/IPVS actualizadas sin cortar conexiones",
+                            "[service] 100% del tráfico enrutado a 'mi-app-7d9f-m4p9' (10.244.1.43)"
+                        ]
+                    },
+                    {
+                        id: 4,
+                        shortName: "4. Reconciliación",
+                        title: "4. Controller Manager: Ordena Crear un Pod de Reemplazo",
+                        activeNodes: ["node-controller", "node-apiserver"],
+                        fromNode: "node-controller",
+                        toNode: "node-apiserver",
+                        packetText: "Create Pod z9v4",
+                        podStatus: "Reemplazando (1/2)",
+                        podVisualState: "creating",
+                        cafeDesc: "El Supervisor de Salón (`Controller Manager`) ve que el libro exige «Siempre 2 bandejas» pero solo hay 1. Ordena preparar una bandeja nueva (`z9v4`) al instante.",
+                        simpleDesc: "Sin que ningún humano tenga que despertarse a las 3 AM, el Controller Manager detecta que falta 1 Pod para cumplir los 2 deseados y crea automáticamente un Pod nuevo de reemplazo.",
+                        techDesc: "El ReplicaSet Controller (en su bucle de control continuo) observa que readyReplicas (1) < spec.replicas (2) y envía un POST al API Server creando el nuevo Pod 'mi-app-7d9f-z9v4'.",
+                        yamlCode: `kind: Pod\nmetadata:\n  name: mi-app-7d9f-z9v4 # <-- Nuevo Pod de reemplazo\n  ownerReferences:\n  - kind: ReplicaSet\n    name: mi-app-7d9f\nstatus:\n  phase: Pending`,
+                        logs: [
+                            "[controller] ReplicaSet 'mi-app-7d9f': faltan réplicas (1 actual vs 2 deseadas)",
+                            "[controller] Creando Pod de reemplazo 'mi-app-7d9f-z9v4'",
+                            "[apiserver] Pod 'mi-app-7d9f-z9v4' registrado en estado Pending"
+                        ]
+                    },
+                    {
+                        id: 5,
+                        shortName: "5. Nuevo Pod",
+                        title: "5. Scheduler + Kubelet + Runtime: Levantan el Reemplazo",
+                        activeNodes: ["node-scheduler", "node-kubelet", "node-runtime", "node-pod"],
+                        fromNode: "node-runtime",
+                        toNode: "node-pod",
+                        packetText: "Start IP 10.244.1.48",
+                        podStatus: "Recuperado (2/2)",
+                        podVisualState: "healed",
+                        cafeDesc: "El Despachador asigna la mesa, la Cafetera sirve la nueva taza caliente `z9v4` con IP nueva (`10.244.1.48`) y el Mesero vuelve a tener 2 bandejas listas.",
+                        simpleDesc: "El Scheduler le asigna nodo, containerd arranca el nuevo contenedor con una IP nueva (10.244.1.48), pasa las pruebas de salud y el clúster vuelve a tener 2/2 Pods sanos.",
+                        techDesc: "kube-scheduler asigna 'worker-node-01', kubelet/containerd inician el contenedor y CNI le otorga la IP 10.244.1.48. Al pasar readinessProbe, el Service vuelve a balancear entre ambos Pods.",
+                        yamlCode: `status:\n  phase: Running\n  readyReplicas: 2/2 # <-- ¡Clúster Auto-Curado!\n  activePods:\n  - name: mi-app-7d9f-z9v4 (10.244.1.48)\n  - name: mi-app-7d9f-m4p9 (10.244.1.43)`,
+                        logs: [
+                            "[scheduler] 'mi-app-7d9f-z9v4' asignado a 'worker-node-01'",
+                            "[cni-cilium] Nueva IP asignada al reemplazo: 10.244.1.48",
+                            "[kubelet] Readiness Probe OK -> ¡Auto-curación completada (2/2 Ready)! 🛡️🎉"
+                        ]
+                    }
+                ]
+            },
+            4: {
+                name: "Flujo 4 • Diagnóstico de Errores (¿Dónde Falla cada Reto Roto?)",
+                command: "kubectl describe pod <nombre>  &&  kubectl logs <nombre>",
+                theme: "rose",
+                steps: [
+                    {
+                        id: 1,
+                        shortName: "1. Error YAML",
+                        title: "1. Reto Roto 04: Error de Sintaxis YAML (Rechazado en API Server)",
+                        activeNodes: ["node-kubectl", "node-apiserver"],
+                        fromNode: "node-kubectl",
+                        toNode: "node-apiserver",
+                        packetText: "❌ 400 Bad Request",
+                        podStatus: "Rechazado en Caja",
+                        podVisualState: "crashed",
+                        cafeDesc: "En la Caja Registradora (`apiserver`) rechazan tu papel porque escribiste `imaeg:` en vez de `image:` y `apiVersion: v2`. ¡El pedido ni siquiera entra al libro!",
+                        simpleDesc: "Si escribes mal el nombre de un campo en tu YAML, el API Server lo bloquea en la puerta. El Pod ni siquiera llega a crearse.",
+                        techDesc: "kube-apiserver valida el esquema OpenAPI v3 del recurso Pod. Al encontrar campos desconocidos ('imaeg' o 'apiVersion: v2'), responde inmediatamente con HTTP 400 Bad Request / ValidationError.",
+                        yamlCode: `# ❌ ERROR EN YAML:\napiVersion: v2        # Debe ser v1\nkind: Pod\nspec:\n  containers:\n  - name: web\n    imaeg: nginx      # Typo: debe ser 'image'`,
+                        logs: [
+                            "[kubectl] $ kubectl apply -f 04-pod-yaml-molesto.yaml",
+                            "❌ [apiserver] Error from server (BadRequest): unknown field 'imaeg'",
+                            "💡 [Solución] Usa 'kubectl explain pod.spec.containers' para ver los nombres exactos"
+                        ]
+                    },
+                    {
+                        id: 2,
+                        shortName: "2. Pending CPU",
+                        title: "2. Reto Roto 03: Pod en 'Pending' Infinito (Frena en el Scheduler)",
+                        activeNodes: ["node-scheduler", "node-apiserver"],
+                        fromNode: "node-scheduler",
+                        toNode: "node-apiserver",
+                        packetText: "❌ 0/1 Nodes Available",
+                        podStatus: "Pending (Sin Nodo)",
+                        podVisualState: "pending",
+                        cafeDesc: "El pedido entró a Caja, pero pide 64 molinos de café (CPU) y 500 litros de agua (500Gi RAM). El Despachador (`scheduler`) mira las mesas y ninguna tiene tanta capacidad.",
+                        simpleDesc: "El Pod se crea, pero se queda en estado 'Pending' para siempre porque ningún Worker Node tiene los recursos exagerados que solicitó.",
+                        techDesc: "En la fase Filtering, kube-scheduler comprueba que 'requests.cpu: 64' y 'requests.memory: 500Gi' superan el Allocatable del nodo. Emite un evento Warning FailedScheduling.",
+                        yamlCode: `# ❌ ERROR DE RECURSOS EXAGERADOS:\nresources:\n  requests:\n    memory: "500Gi"  # Cambiar a "64Mi"\n    cpu: "64"        # Cambiar a "100m"`,
+                        logs: [
+                            "[kubectl] $ kubectl describe pod reto-03-exigente",
+                            "❌ [scheduler] Warning FailedScheduling: 0/1 nodes are available: 1 Insufficient cpu, 1 Insufficient memory",
+                            "💡 [Solución] Ajusta resources.requests a valores realistas (ej. cpu: 100m, memory: 64Mi)"
+                        ]
+                    },
+                    {
+                        id: 3,
+                        shortName: "3. ImagePull",
+                        title: "3. Reto Roto 01: 'ImagePullBackOff' (Falla entre Runtime y Registry)",
+                        activeNodes: ["node-runtime", "node-registry", "node-kubelet"],
+                        fromNode: "node-runtime",
+                        toNode: "node-registry",
+                        packetText: "❌ 404 Image Not Found",
+                        podStatus: "ImagePullBackOff",
+                        podVisualState: "crashed",
+                        cafeDesc: "El pedido llegó a la Mesa 1, pero pide una bolsa de café `'nginx:version-fantasma-999'`. La Cafetera (`containerd`) va a la Bodega (`Registry`) y esa etiqueta no existe.",
+                        simpleDesc: "El Scheduler sí asignó servidor, pero cuando containerd intenta descargar la imagen de Internet, Docker Hub responde que no existe y queda en 'ImagePullBackOff'.",
+                        techDesc: "containerd solicita el manifiesto OCI al Registry y recibe 404 Not Found. kubelet registra el error 'ErrImagePull' y aplica un backoff exponencial ('ImagePullBackOff').",
+                        yamlCode: `# ❌ ERROR DE IMAGEN INEXISTENTE:\ncontainers:\n- name: servidor-web\n  image: nginx:version-fantasma-999 # Cambiar a nginx:alpine\n  ports:\n  - containerPort: 80`,
+                        logs: [
+                            "[kubectl] $ kubectl describe pod reto-01-imagen",
+                            "❌ [kubelet] Failed to pull image 'nginx:version-fantasma-999': not found",
+                            "💡 [Solución] Corrige el nombre/tag de la imagen a 'nginx:alpine' o 'nginx:latest'"
+                        ]
+                    },
+                    {
+                        id: 4,
+                        shortName: "4. CrashLoop",
+                        title: "4. Reto Roto 02: 'CrashLoopBackOff' (Falla Dentro del Contenedor)",
+                        activeNodes: ["node-kubelet", "node-pod"],
+                        fromNode: "node-pod",
+                        toNode: "node-kubelet",
+                        packetText: "❌ sh: echho: not found",
+                        podStatus: "CrashLoopBackOff",
+                        podVisualState: "crashed",
+                        cafeDesc: "La imagen sí descargó y la taza se sirvió en la bandeja, pero la instrucción adentro tenía un error (`echho`), así que la taza se derrama apenas arranca una y otra vez.",
+                        simpleDesc: "La imagen existe y el contenedor enciende, pero el comando interno falla al primer segundo y se apaga. Kubelet intenta reiniciarlo en bucle ('CrashLoopBackOff').",
+                        techDesc: "El contenedor arranca pero el comando ['sh', '-c', 'echho ...'] devuelve código de salida 127 (command not found). Para ver qué ocurrió adentro, se usa 'kubectl logs <pod>'.",
+                        yamlCode: `# ❌ ERROR EN EL COMANDO DEL CONTENEDOR:\ncontainers:\n- name: trabajador\n  image: busybox:latest\n  command: ["sh", "-c", "echho Hola && sleep 3600"]\n  # Corregir 'echho' -> 'echo'`,
+                        logs: [
+                            "[kubectl] $ kubectl logs reto-02-crash",
+                            "❌ [pod-stdout] sh: echho: not found (Exit Code 127)",
+                            "💡 [Solución] Revisa siempre 'kubectl logs <pod>' cuando veas CrashLoopBackOff"
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // ============================================================================
+        // 2. DICCIONARIO COMPLETO DE COMPONENTES PARA EL INSPECTOR
+        // ============================================================================
+        const COMPONENT_INFO = {
+            kubectl: {
+                title: "💻 Terminal CLI (kubectl)",
+                role: "Mundo Exterior • Cliente Administrativo",
+                cafe: "☕ En KubeCafé: Eres tú entregando tu pedido escrito (YAML) en la ventanilla.",
+                body: "Es la herramienta oficial de línea de comandos con la que hablas con el clúster. Convierte tus archivos YAML en peticiones HTTP REST hacia el API Server usando las credenciales de ~/.kube/config.",
+                cmd: "kubectl get pods -o wide"
+            },
+            client: {
+                title: "🌐 Cliente Externo (Navegador / App / curl)",
+                role: "Mundo Exterior • Usuario Final",
+                cafe: "☕ En KubeCafé: Es el comensal que entra desde la calle a pedir un café.",
+                body: "Representa a los usuarios reales de tu aplicación que hacen peticiones HTTPS desde Internet hacia tu dominio público sin saber cuántos Pods o servidores hay por detrás.",
+                cmd: "curl -i https://mi-app.com/api/menu"
+            },
+            lb: {
+                title: "⚖️ Cloud LoadBalancer",
+                role: "Red Externa • Punto de Entrada Público",
+                cafe: "☕ En KubeCafé: Es la puerta principal del edificio sobre la avenida.",
+                body: "Proporciona una dirección IP pública fija fuera del clúster y reparte el tráfico entrante de Internet entre los Worker Nodes saludables.",
+                cmd: "kubectl get svc -A | grep LoadBalancer"
+            },
+            registry: {
+                title: "📦 Container Registry (Harbor / Docker Hub)",
+                role: "Almacén de Imágenes OCI",
+                cafe: "☕ En KubeCafé: Es la Bodega Mayorista donde se guardan las bolsas de café selladas.",
+                body: "Almacena las imágenes de contenedor construidas con 'docker build'. Cuando un Worker Node necesita arrancar un Pod, su motor containerd descarga la imagen desde aquí.",
+                cmd: "crictl images"
+            },
+            apiserver: {
+                title: "🛎️ kube-apiserver (API Server)",
+                role: "Control Plane • Ventanilla Única Central",
+                cafe: "☕ En KubeCafé: Es la Caja Registradora y Mostrador Central.",
+                body: "Es el corazón comunicador de Kubernetes. Humanos (kubectl) y componentes internos hablan exclusivamente con él por HTTPS. Autentica, valida permisos (RBAC) y es el único que habla con etcd.",
+                cmd: "kubectl api-resources"
+            },
+            etcd: {
+                title: "📖 etcd (Base de Datos Clave-Valor)",
+                role: "Control Plane • Fuente de la Verdad",
+                cafe: "☕ En KubeCafé: Es el Libro Contable inmutable donde se registra todo.",
+                body: "Base de datos distribuida ultra consistente (algoritmo Raft). Guarda todos los objetos, configuraciones, secretos y estados del clúster. Si está en etcd, existe para Kubernetes.",
+                cmd: "kubectl get --raw='/healthz/etcd'"
+            },
+            controller: {
+                title: "🧐 kube-controller-manager",
+                role: "Control Plane • Bucle de Reconciliación",
+                cafe: "☕ En KubeCafé: Es el Supervisor de Salón que vigila que no falte ninguna taza.",
+                body: "Ejecuta controladores en bucle (Deployment, ReplicaSet, Node, EndpointSlice). Compara permanentemente el 'estado deseado' en etcd contra el 'estado real' y corrige cualquier diferencia.",
+                cmd: "kubectl get deploy,rs,pods"
+            },
+            scheduler: {
+                title: "📋 kube-scheduler",
+                role: "Control Plane • Asignador Inteligente",
+                cafe: "☕ En KubeCafé: Es el Despachador que decide qué mesa tiene agua y molinos libres.",
+                body: "Observa los Pods recién creados que no tienen nodo asignado. Filtra los Worker Nodes según CPU, RAM, Taints y afinidades, los califica y elige el servidor óptimo.",
+                cmd: "kubectl get events --sort-by=.metadata.creationTimestamp"
+            },
+            ingress: {
+                title: "🚪 Ingress Controller / Gateway API",
+                role: "Worker Node • Enrutador HTTP/HTTPS (Capa 7)",
+                cafe: "☕ En KubeCafé: Es la Anfitriona que recibe al cliente y lo guía según lo que pide.",
+                body: "Entiende el protocolo HTTP/HTTPS: lee el dominio (Host) y la ruta (/api, /ventas), gestiona los certificados TLS y dirige el tráfico hacia el Service interno correcto.",
+                cmd: "kubectl get ingress,httproute"
+            },
+            service: {
+                title: "🤵 Service (ClusterIP) & kube-proxy / eBPF",
+                role: "Worker Node • IP Virtual Fija y Balanceador Interno",
+                cafe: "☕ En KubeCafé: Es el Mesero de barra fija que reparte pedidos solo a tazas sanas.",
+                body: "Como los Pods nacen y mueren cambiando de IP, el Service ofrece una IP virtual fija (ClusterIP). kube-proxy (o Cilium eBPF) traduce esa IP virtual a la IP real de un Pod saludable.",
+                cmd: "kubectl get svc,endpointslices"
+            },
+            config: {
+                title: "🧂 ConfigMap, Secret & PersistentVolume (PVC)",
+                role: "Worker Node • Configuración y Almacenamiento",
+                cafe: "☕ En KubeCafé: Son el Azúcar/Especias (ConfigMap), la Caja Fuerte (Secret) y la Alacena (PV).",
+                body: "Permiten inyectar variables de entorno, archivos de configuración, contraseñas seguras y discos persistentes dentro del Pod sin tener que reconstruir la imagen Docker.",
+                cmd: "kubectl get cm,secret,pvc"
+            },
+            kubelet: {
+                title: "👨‍🍳 kubelet",
+                role: "Worker Node • Agente Capitán del Servidor",
+                cafe: "☕ En KubeCafé: Es el Barista experto a cargo de su estación de trabajo.",
+                body: "Es el agente que corre en cada Worker Node. Recibe órdenes del API Server, le pide a containerd que levante los contenedores y ejecuta las sondas de salud (liveness/readiness probes).",
+                cmd: "kubectl describe node worker-node-01"
+            },
+            runtime: {
+                title: "☕ Container Runtime (containerd) + Plugin CNI",
+                role: "Worker Node • Motor de Contenedores y Red",
+                cafe: "☕ En KubeCafé: Es la Máquina Cafetera de alta presión y sus tuberías.",
+                body: "containerd descarga las imágenes desde el Registry y arranca los procesos aislados en Linux. El plugin CNI (Cilium/Calico) conecta el contenedor a la red del clúster dándole su propia IP.",
+                cmd: "kubectl get pods -o wide"
+            },
+            pod: {
+                title: "🍽️ Pod (Contenedor Principal + Sidecar)",
+                role: "Worker Node • Unidad Mínima de Kubernetes",
+                cafe: "☕ En KubeCafé: Es la Bandeja de Servicio con la taza de café y su vaso de agua (Sidecar).",
+                body: "Es la unidad más pequeña en Kubernetes. Envuelve uno o más contenedores que comparten la misma dirección IP, red (localhost) y volúmenes de almacenamiento.",
+                cmd: "kubectl logs -l app=mi-app -c web"
+            }
+        };
+
+        // ============================================================================
+        // 3. ESTADO GLOBAL DEL SIMULADOR
+        // ============================================================================
+        let currentFlow = 1;
+        let currentStepIndex = 0;
+        let autoPlayInterval = null;
+        let showCafeLabels = true;
+
+        // Conexiones base para el mapa SVG
+        const STATIC_CONNECTIONS = [
+            { from: "node-kubectl", to: "node-apiserver" },
+            { from: "node-apiserver", to: "node-etcd" },
+            { from: "node-controller", to: "node-apiserver" },
+            { from: "node-scheduler", to: "node-apiserver" },
+            { from: "node-apiserver", to: "node-kubelet" },
+            { from: "node-kubelet", to: "node-runtime" },
+            { from: "node-registry", to: "node-runtime" },
+            { from: "node-runtime", to: "node-pod" },
+            { from: "node-config", to: "node-pod" },
+            { from: "node-client", to: "node-lb" },
+            { from: "node-lb", to: "node-ingress" },
+            { from: "node-ingress", to: "node-service" },
+            { from: "node-service", to: "node-pod" }
+        ];
+
+        // ============================================================================
+        // 4. CONTROLES DE NAVEGACIÓN Y REPRODUCCIÓN
+        // ============================================================================
+        function switchFlow(flowId) {
+            stopAutoPlay();
+            currentFlow = flowId;
+            currentStepIndex = 0;
+
+            const activeStyles = {
+                1: "bg-k8s-blue text-white shadow-[0_0_15px_rgba(50,108,229,0.4)]",
+                2: "bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]",
+                3: "bg-amber-600 text-white shadow-[0_0_15px_rgba(245,158,11,0.4)]",
+                4: "bg-rose-600 text-white shadow-[0_0_15px_rgba(244,63,94,0.4)]"
+            };
+
+            [1, 2, 3, 4].forEach(id => {
+                const btn = document.getElementById(`btn-flow-${id}`);
+                if (!btn) return;
+                if (id === flowId) {
+                    btn.className = `flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeStyles[id]}`;
+                } else {
+                    btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white";
+                }
+            });
+
+            renderUI();
+        }
+
+        function toggleCafeMode() {
+            showCafeLabels = !showCafeLabels;
+            const btn = document.getElementById("btn-cafe");
+            btn.innerHTML = showCafeLabels ? "<span>☕ KubeCafé: ON</span>" : "<span>☕ KubeCafé: OFF</span>";
+            btn.className = showCafeLabels
+                ? "px-2.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-semibold flex items-center gap-1.5 transition"
+                : "px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition";
+
+            document.querySelectorAll(".cafe-badge").forEach(el => {
+                el.style.display = showCafeLabels ? "inline-flex" : "none";
+            });
+        }
+
+        function triggerKillPodDemo() {
+            switchFlow(3);
+            toggleAutoPlay();
+        }
+
+        function goToStep(index) {
+            const steps = FLOWS[currentFlow].steps;
+            if (index >= 0 && index < steps.length) {
+                currentStepIndex = index;
+                renderUI();
+            }
+        }
+
+        function nextStep() {
+            const steps = FLOWS[currentFlow].steps;
+            if (currentStepIndex < steps.length - 1) {
+                currentStepIndex++;
+            } else {
+                currentStepIndex = 0;
+            }
+            renderUI();
+        }
+
+        function prevStep() {
+            if (currentStepIndex > 0) {
+                currentStepIndex--;
+                renderUI();
+            }
+        }
+
+        function runFromStart() {
+            stopAutoPlay();
+            currentStepIndex = 0;
+            renderUI();
+            toggleAutoPlay();
+        }
+
+        function resetSim() {
+            stopAutoPlay();
+            currentStepIndex = 0;
+            renderUI();
+        }
+
+        function toggleAutoPlay() {
+            if (autoPlayInterval) {
+                stopAutoPlay();
+            } else {
+                const btnAuto = document.getElementById("btn-auto");
+                const textAuto = document.getElementById("text-auto");
+                btnAuto.classList.add("bg-emerald-600/20", "border-emerald-400");
+                textAuto.textContent = "Pausar";
+
+                autoPlayInterval = setInterval(() => {
+                    const steps = FLOWS[currentFlow].steps;
+                    if (currentStepIndex < steps.length - 1) {
+                        currentStepIndex++;
+                        renderUI();
+                    } else {
+                        stopAutoPlay();
+                    }
+                }, 3400);
+            }
+        }
+
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+            const btnAuto = document.getElementById("btn-auto");
+            const textAuto = document.getElementById("text-auto");
+            if (btnAuto && textAuto) {
+                btnAuto.classList.remove("bg-emerald-600/20", "border-emerald-400");
+                textAuto.textContent = "Auto";
+            }
+        }
+
+        // ============================================================================
+        // 5. RENDERIZADO DE LA INTERFAZ Y ESTADO DE LOS PODS
+        // ============================================================================
+        function renderUI() {
+            const flow = FLOWS[currentFlow];
+            const steps = flow.steps;
+            const stepData = steps[currentStepIndex];
+            const theme = flow.theme; // 'blue' | 'green' | 'amber' | 'rose'
+
+            // 1. Update Terminal Command Banner
+            document.getElementById("terminal-command").textContent = flow.command;
+            document.getElementById("step-counter-badge").textContent = `Paso ${currentStepIndex + 1} / ${steps.length}`;
+            document.getElementById("btn-prev").disabled = currentStepIndex === 0;
+
+            // 2. Render Stepper Pills
+            const pillsContainer = document.getElementById("stepper-pills");
+            pillsContainer.className = `grid grid-cols-2 sm:grid-cols-4 md:grid-cols-${steps.length} gap-1.5`;
+
+            const pillActiveTheme = {
+                blue: "bg-k8s-blue/30 text-cyan-300 border-cyan-400 shadow-[0_0_10px_rgba(0,240,255,0.3)] font-bold",
+                green: "bg-emerald-500/30 text-emerald-300 border-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.3)] font-bold",
+                amber: "bg-amber-500/30 text-amber-300 border-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.3)] font-bold",
+                rose: "bg-rose-500/30 text-rose-300 border-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.3)] font-bold"
+            };
+
+            pillsContainer.innerHTML = steps.map((s, idx) => {
+                const isCurrent = idx === currentStepIndex;
+                const isDone = idx < currentStepIndex;
+                let colorClasses = "bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700";
+                if (isCurrent) {
+                    colorClasses = pillActiveTheme[theme];
+                } else if (isDone) {
+                    colorClasses = "bg-slate-900 text-slate-300 border-slate-700";
+                }
+                return `
+                    <button onclick="goToStep(${idx})" class="px-2 py-1.5 rounded-lg border text-xs font-mono truncate transition-all ${colorClasses}">
+                        ${s.shortName}
+                    </button>
+                `;
+            }).join("");
+
+            // 3. Highlight Active Nodes on Diagram
+            document.querySelectorAll(".k8s-node").forEach(el => {
+                el.classList.remove("active-step-blue", "active-step-green", "active-step-amber", "active-step-rose");
+            });
+            stepData.activeNodes.forEach(nodeId => {
+                const el = document.getElementById(nodeId);
+                if (el) {
+                    el.classList.add(`active-step-${theme}`);
+                }
+            });
+
+            // 4. Update Pod Replica Boxes Visuals
+            updatePodVisualBox(stepData);
+
+            // 5. Update Right Panel Explanation Card
+            const flowTag = document.getElementById("step-flow-tag");
+            flowTag.textContent = flow.name;
+            const tagTheme = {
+                blue: "bg-k8s-blue/20 text-cyan-300 border-k8s-blue/40",
+                green: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+                amber: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                rose: "bg-rose-500/20 text-rose-300 border-rose-500/40"
+            };
+            flowTag.className = `text-xs font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${tagTheme[theme]}`;
+
+            document.getElementById("step-number-label").textContent = `Paso ${currentStepIndex + 1} de ${steps.length}`;
+            document.getElementById("step-title").textContent = stepData.title;
+            document.getElementById("step-cafe-desc").textContent = stepData.cafeDesc;
+            document.getElementById("step-simple-desc").textContent = stepData.simpleDesc;
+            document.getElementById("step-tech-desc").textContent = stepData.techDesc;
+            document.getElementById("step-yaml-code").textContent = stepData.yamlCode;
+
+            // 6. Update Live Terminal Logs
+            const logsContainer = document.getElementById("terminal-logs");
+            let accumulatedLogsHTML = "";
+            const logHighlightColor = {
+                blue: "text-cyan-300 font-semibold",
+                green: "text-emerald-300 font-semibold",
+                amber: "text-amber-300 font-semibold",
+                rose: "text-rose-300 font-semibold"
+            }[theme];
+
+            for (let i = 0; i <= currentStepIndex; i++) {
+                const sLogs = steps[i].logs;
+                const isLatest = i === currentStepIndex;
+                sLogs.forEach(line => {
+                    const textColor = isLatest ? logHighlightColor : "text-slate-500";
+                    accumulatedLogsHTML += `<div class="${textColor} leading-relaxed"><span class="text-slate-600 select-none mr-1.5">[P${i + 1}]</span>${escapeHtml(line)}</div>`;
+                });
+            }
+            logsContainer.innerHTML = accumulatedLogsHTML;
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+
+            // 7. Auto-update Inspector to the destination node of current step
+            if (stepData.toNode) {
+                const compKey = stepData.toNode.replace("node-", "");
+                inspectComponent(compKey, false);
+            }
+
+            // 8. Draw SVG Connections & Trigger Moving Packet
+            drawConnectionsAndPacket(stepData, theme);
+        }
+
+        function updatePodVisualBox(stepData) {
+            const podStatusText = document.getElementById("pod-status-text");
+            const podStatusBadge = document.getElementById("pod-status-badge");
+            const podStatusDot = document.getElementById("pod-status-dot");
+            const rep1 = document.getElementById("pod-replica-1");
+            const rep2 = document.getElementById("pod-replica-2");
+            const rep1Dot = document.getElementById("pod-rep1-dot");
+            const rep1Name = document.getElementById("pod-rep1-name");
+            const rep1Ip = document.getElementById("pod-rep1-ip");
+
+            podStatusText.textContent = stepData.podStatus;
+            const state = stepData.podVisualState;
+
+            if (state === "pending" || state === "creating") {
+                podStatusBadge.className = "text-xs font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1";
+                podStatusDot.className = "w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping";
+                rep1.className = "p-2 rounded-lg bg-slate-950 border border-amber-500/40 flex items-center justify-between text-xs font-mono opacity-65 transition-all";
+                rep2.className = "p-2 rounded-lg bg-slate-950 border border-amber-500/40 flex items-center justify-between text-xs font-mono opacity-65 transition-all";
+                rep1Dot.className = "w-2 h-2 rounded-full bg-amber-400";
+                rep1Name.textContent = "mi-app-7d9f-x8k2";
+                rep1Ip.textContent = state === "creating" ? "Asignando..." : "Pending";
+                rep1Ip.className = "text-amber-300";
+            } else if (state === "crashed") {
+                podStatusBadge.className = "text-xs font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40 flex items-center gap-1";
+                podStatusDot.className = "w-1.5 h-1.5 rounded-full bg-rose-400 animate-ping";
+                rep1.className = "p-2 rounded-lg bg-rose-950/30 border border-rose-500/60 flex items-center justify-between text-xs font-mono transition-all";
+                rep1Dot.className = "w-2 h-2 rounded-full bg-rose-500";
+                rep1Name.textContent = "mi-app-7d9f-x8k2 (Failed)";
+                rep1Ip.textContent = "Terminated";
+                rep1Ip.className = "text-rose-400";
+                rep2.className = "p-2 rounded-lg bg-slate-950 border border-emerald-500/50 flex items-center justify-between text-xs font-mono transition-all";
+            } else if (state === "healed") {
+                podStatusBadge.className = "text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1";
+                podStatusDot.className = "w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping";
+                rep1.className = "p-2 rounded-lg bg-emerald-950/30 border border-emerald-400 flex items-center justify-between text-xs font-mono shadow-[0_0_12px_rgba(16,185,129,0.25)] transition-all";
+                rep1Dot.className = "w-2 h-2 rounded-full bg-emerald-400";
+                rep1Name.textContent = "mi-app-7d9f-z9v4 (Nuevo)";
+                rep1Ip.textContent = "10.244.1.48";
+                rep1Ip.className = "text-emerald-400";
+                rep2.className = "p-2 rounded-lg bg-slate-950 border border-emerald-500/50 flex items-center justify-between text-xs font-mono transition-all";
+            } else {
+                // running
+                podStatusBadge.className = "text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1";
+                podStatusDot.className = "w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping";
+                rep1.className = "p-2 rounded-lg bg-slate-950 border border-emerald-500/50 flex items-center justify-between text-xs font-mono shadow-[0_0_10px_rgba(16,185,129,0.18)] transition-all";
+                rep2.className = "p-2 rounded-lg bg-slate-950 border border-emerald-500/50 flex items-center justify-between text-xs font-mono shadow-[0_0_10px_rgba(16,185,129,0.18)] transition-all";
+                rep1Dot.className = "w-2 h-2 rounded-full bg-emerald-400";
+                rep1Name.textContent = "mi-app-7d9f-x8k2";
+                rep1Ip.textContent = "10.244.1.42";
+                rep1Ip.className = "text-emerald-400";
+            }
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // ============================================================================
+        // 6. DIBUJO DE LÍNEAS SVG Y PAQUETE DE DATOS EN MOVIMIENTO
+        // ============================================================================
+        function getCenterRelativeToCanvas(elementId, canvasRect) {
+            const el = document.getElementById(elementId);
+            if (!el) return { x: 0, y: 0 };
+            const r = el.getBoundingClientRect();
+            return {
+                x: (r.left - canvasRect.left) + r.width / 2,
+                y: (r.top - canvasRect.top) + r.height / 2
+            };
+        }
+
+        function drawConnectionsAndPacket(stepData, theme) {
+            const canvas = document.getElementById("diagram-canvas");
+            const svg = document.getElementById("svg-connections");
+            if (!canvas || !svg) return;
+
+            const canvasRect = canvas.getBoundingClientRect();
+            let pathsHTML = "";
+
+            STATIC_CONNECTIONS.forEach(conn => {
+                const p1 = getCenterRelativeToCanvas(conn.from, canvasRect);
+                const p2 = getCenterRelativeToCanvas(conn.to, canvasRect);
+
+                const isActiveConn =
+                    (conn.from === stepData.fromNode && conn.to === stepData.toNode) ||
+                    (conn.to === stepData.fromNode && conn.from === stepData.toNode);
+
+                const dx = p2.x - p1.x;
+                const cx1 = p1.x + dx * 0.45;
+                const cy1 = p1.y;
+                const cx2 = p1.x + dx * 0.55;
+                const cy2 = p2.y;
+
+                const d = `M ${p1.x} ${p1.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${p2.x} ${p2.y}`;
+                const activeClass = isActiveConn ? `active-${theme}` : "";
+
+                pathsHTML += `<path d="${d}" class="conn-line ${activeClass}" />`;
+            });
+
+            // Direct curved line if active step connects two nodes not in STATIC_CONNECTIONS
+            const hasStatic = STATIC_CONNECTIONS.some(c =>
+                (c.from === stepData.fromNode && c.to === stepData.toNode) ||
+                (c.to === stepData.fromNode && c.from === stepData.toNode)
+            );
+            if (!hasStatic && stepData.fromNode && stepData.toNode) {
+                const p1 = getCenterRelativeToCanvas(stepData.fromNode, canvasRect);
+                const p2 = getCenterRelativeToCanvas(stepData.toNode, canvasRect);
+                const d = `M ${p1.x} ${p1.y} Q ${(p1.x + p2.x) / 2} ${Math.min(p1.y, p2.y) - 55}, ${p2.x} ${p2.y}`;
+                pathsHTML += `<path d="${d}" class="conn-line active-${theme}" />`;
+            }
+
+            svg.innerHTML = pathsHTML;
+            animatePacket(stepData.fromNode, stepData.toNode, stepData.packetText, theme);
+        }
+
+        let packetAnimTimeout = null;
+        function animatePacket(fromId, toId, labelText, theme) {
+            const packet = document.getElementById("data-packet");
+            const pill = document.getElementById("packet-pill");
+            const label = document.getElementById("packet-label");
+            const fromEl = document.getElementById(fromId);
+            const toEl = document.getElementById(toId);
+
+            if (!packet || !fromEl || !toEl) return;
+            if (packetAnimTimeout) clearTimeout(packetAnimTimeout);
+
+            const r1 = fromEl.getBoundingClientRect();
+            const r2 = toEl.getBoundingClientRect();
+
+            const startX = r1.left + r1.width / 2;
+            const startY = r1.top + r1.height / 2;
+            const endX = r2.left + r2.width / 2;
+            const endY = r2.top + r2.height / 2;
+
+            label.textContent = labelText;
+            const pillThemes = {
+                blue: "shadow-[0_0_20px_#00F0FF] bg-cyan-950 text-cyan-200 border-cyan-400",
+                green: "shadow-[0_0_20px_#10B981] bg-emerald-950 text-emerald-200 border-emerald-400",
+                amber: "shadow-[0_0_20px_#F59E0B] bg-amber-950 text-amber-200 border-amber-400",
+                rose: "shadow-[0_0_20px_#F43F5E] bg-rose-950 text-rose-200 border-rose-400"
+            };
+            pill.className = `px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 border ${pillThemes[theme]}`;
+
+            packet.style.transition = "none";
+            packet.classList.remove("hidden");
+            packet.style.left = `${startX}px`;
+            packet.style.top = `${startY}px`;
+            packet.style.opacity = "1";
+
+            void packet.offsetWidth;
+            packet.style.transition = "left 0.85s cubic-bezier(0.22, 1, 0.36, 1), top 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease";
+            packet.style.left = `${endX}px`;
+            packet.style.top = `${endY}px`;
+
+            packetAnimTimeout = setTimeout(() => {
+                packet.style.opacity = "0";
+            }, 1450);
+        }
+
+        // ============================================================================
+        // 7. INSPECTOR DE COMPONENTES AL HACER CLIC
+        // ============================================================================
+        function inspectComponent(compKey, highlightRing = true) {
+            const info = COMPONENT_INFO[compKey];
+            if (!info) return;
+
+            document.querySelectorAll(".k8s-node").forEach(n => n.classList.remove("selected-inspect"));
+            const clickedNode = document.getElementById(`node-${compKey}`);
+            if (clickedNode) clickedNode.classList.add("selected-inspect");
+
+            document.getElementById("inspector-badge").textContent = info.role;
+            document.getElementById("inspector-title").textContent = info.title;
+            document.getElementById("inspector-cafe").textContent = info.cafe;
+            document.getElementById("inspector-body").textContent = info.body;
+            document.getElementById("inspector-cmd").textContent = info.cmd;
+
+            if (highlightRing) {
+                const card = document.getElementById("inspector-card");
+                card.classList.add("ring-2", "ring-amber-400/60");
+                setTimeout(() => card.classList.remove("ring-2", "ring-amber-400/60"), 600);
+            }
+        }
+
+        // Keyboard navigation (Left/Right arrows)
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") nextStep();
+            if (e.key === "ArrowLeft") prevStep();
+        });
+
+        // Redraw SVG lines on window resize
+        window.addEventListener("resize", () => {
+            const flow = FLOWS[currentFlow];
+            drawConnectionsAndPacket(flow.steps[currentStepIndex], flow.theme);
+        });
+
+        // Initialize on load
+        window.onload = () => {
+            renderUI();
+        };
+    </script>
+</body>
+</html>
+

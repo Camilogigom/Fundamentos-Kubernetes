@@ -2,7 +2,8 @@
 
 ¡Bienvenido a la primera semana! Hoy pasaremos de entender qué hace Kubernetes en teoría a levantar nuestro propio clúster local y desplegar nuestra primera aplicación.
 
-> 📊 **Presentación de la Semana 01 (PDF):** [**Descargar `1.KubeCafe-De-Docker-a-Kubernetes.pdf`**](../recursos/diapositivas/1.KubeCafe-De-Docker-a-Kubernetes.pdf)
+> 📊 **Presentación de la Semana 01 (PDF):** [**Descargar `1.KubeCafe-De-Docker-a-Kubernetes.pdf`**](../recursos/diapositivas/1.KubeCafe-De-Docker-a-Kubernetes.pdf)  
+> 🎮 **Simulador Visual Interactivo (Paso a Paso):** [**Abrir Simulador de Arquitectura K8s en el Navegador**](https://htmlpreview.github.io/?https://github.com/edwinbermudez91/Fundamentos-Kubernetes/blob/main/recursos/simulador-interactivo-kubernetes.html) *(o abre localmente [`../recursos/simulador-interactivo-kubernetes.html`](../recursos/simulador-interactivo-kubernetes.html))*
 
 ---
 
