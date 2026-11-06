@@ -18,7 +18,7 @@ A medida que avances semana a semana, nuestro bot de GitHub Actions inspeccionar
 | Acción / Logro | Puntos (XP) | Regla de Validación Estricta |
 | :--- | :---: | :--- |
 | **1. Registro en el Muro** | **+10 XP** | Por registrarte en el formulario o vía Pull Request. |
-| **2. Reto Roto Resuelto y Validado** | **+10 XP por reto** | Cada ejercicio de `2.reto-roto/` (`semana-00` (5 retos rotos), `semana-01` (4 retos rotos)) que resuelvas y pase la validación de contenido suma **+10 XP** en la tabla de posiciones (ej. Semana 00 completa = +50 XP, Semana 01 completa = +40 XP). Si subes un archivo que no corresponde al reto roto, no suma puntos. |
+| **2. Reto Roto Resuelto y Validado** | **+10 XP por reto** | Cada ejercicio de `2.reto-roto/` (`semana-00` (5 retos rotos), `semana-01` (4 retos rotos), `semana-02` (4 retos rotos)) que resuelvas y pase la validación de contenido suma **+10 XP** en la tabla de posiciones (ej. Semana 00 completa = +50 XP, Semana 01 completa = +40 XP). Si subes un archivo que no corresponde al reto roto, no suma puntos. |
 
 ### 🎖️ Requisitos para subir de Rango:
 | Rango | Requisito | Lo que representa en la travesía |
