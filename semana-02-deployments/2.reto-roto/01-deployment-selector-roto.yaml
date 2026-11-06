@@ -1,0 +1,30 @@
+# 🚨 RETO 1 (Nivel Fácil): El Selector que no reconoce a sus propios Pods 🚨
+# Síntoma: Al hacer 'kubectl apply', el API Server rechaza el manifiesto con un error de validación:
+#          "The Deployment is invalid: spec.template.metadata.labels: Invalid value: `selector` does not match template `labels`"
+#
+# Pista: En Kubernetes, el Deployment usa 'spec.selector.matchLabels' para saber qué Pods le pertenecen.
+#        Si las etiquetas en 'spec.template.metadata.labels' no coinciden exactamente, el despliegue es rechazado.
+# Misión: Corrige las etiquetas para que 'matchLabels' y 'template.metadata.labels' coincidan y el Deployment cree sus 3 réplicas.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reto-01-selector
+  labels:
+    reto: "1"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cafeteriamovil-api
+  template:
+    metadata:
+      labels:
+        app: etiqueta-equivocada-web
+        reto: "1"
+    spec:
+      containers:
+        - name: web
+          image: nginx:alpine
+          ports:
+            - containerPort: 80

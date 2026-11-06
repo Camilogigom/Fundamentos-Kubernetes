@@ -1,0 +1,83 @@
+# ☕ KubeCafé: Deployment Profesional para Producción
+# Combina todo lo aprendido:
+# - ReplicaSet con 3 réplicas
+# - Sondas liveness y readiness para autorreparación
+# - Recursos garantizados (requests) y techos de seguridad (limits)
+# - Variables de entorno y usuario no privilegiado (Security Context)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal-clientes-prod
+  labels:
+    app: portal-clientes
+    tier: frontend
+    version: "v1.0"
+spec:
+  replicas: 3
+  revisionHistoryLimit: 10 # Guarda el historial de las últimas 10 versiones para rollbacks
+  
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
+  selector:
+    matchLabels:
+      app: portal-clientes
+      tier: frontend
+
+  template:
+    metadata:
+      labels:
+        app: portal-clientes
+        tier: frontend
+        version: "v1.0"
+    spec:
+      # Seguridad: ejecutar como usuario no-root en Linux
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+
+      containers:
+        - name: web
+          image: nginxinc/nginx-unprivileged:alpine
+          ports:
+            - containerPort: 8080
+              name: http
+          
+          env:
+            - name: ENTORNO
+              value: "produccion"
+            - name: SUCURSAL
+              value: "KubeCafe-Medellin-Poblado"
+
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "128Mi"
+
+          # ¿Sigue vivo el contenedor? Si falla 3 veces seguidas, kubelet lo reinicia
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          # ¿Está listo para atender tráfico? Si no responde 200 OK, el Service no le envía clientes
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 2

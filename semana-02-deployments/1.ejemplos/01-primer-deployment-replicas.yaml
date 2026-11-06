@@ -1,0 +1,40 @@
+# ☕ KubeCafé: La Orden Permanente al Supervisor de Salón
+# En lugar de pedir una sola taza suelta, le ordenas al Supervisor (Deployment):
+# "Mantén siempre 3 bandejas de café listas y calientes para los clientes".
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cafecito-app
+  labels:
+    app: cafecito
+    entorno: produccion
+spec:
+  # Número deseado de réplicas (tazas activas)
+  replicas: 3
+  
+  # Selector: cómo sabe el Deployment qué Pods le pertenecen
+  # ⚠️ Regla de oro: debe coincidir exactamente con template.metadata.labels
+  selector:
+    matchLabels:
+      app: cafecito
+      
+  # Plantilla (receta) para fabricar cada nuevo Pod
+  template:
+    metadata:
+      labels:
+        app: cafecito
+        entorno: produccion
+    spec:
+      containers:
+        - name: servidor-web
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"

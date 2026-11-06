@@ -177,6 +177,8 @@ Si creas una bandeja suelta (`Pod`) y alguien la tropieza, nadie prepara otra. P
 * **📝 `Deployment` y `ReplicaSet`:** Dejas una orden permanente: *"Quiero que SIEMPRE haya 3 bandejas de Espresso listas"*.
 * **⚡ Auto-Curación (*Self-Healing*):** Si una taza se derrama (`CrashLoopBackOff`) o una mesa entera se queda sin luz (`Node NotReady`), el Supervisor cuenta solo 2 bandejas y ordena preparar la 3.ª de inmediato en una mesa sana.
 * **🔄 Cambio de Receta sin Cerrar (*Rolling Update*):** ¿Pasamos de *Café Origen Huila v1* a *Café Origen Antioquia v2*? El Supervisor va reemplazando bandeja por bandeja sin que ningún cliente se quede sin servicio. Y si el café v2 salió amargo, haces **`kubectl rollout undo`** (*Rollback*) y vuelves a la v1 en segundos.
+
+👉 **Módulo práctico disponible:** Revisa la [**Semana 02: Despliegues sin Caídas y Autorreparación**](../semana-02-deployments/) con ejemplos listos y 4 retos de diagnóstico (+40 XP).
 </details>
 
 <details>

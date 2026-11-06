@@ -1,0 +1,68 @@
+# ☕ KubeCafé: Cambio de Receta Taza por Taza (RollingUpdate sin Caídas)
+# Cuando cambiamos de café Origen Huila (v1) a Origen Antioquia (v2),
+# nunca cerramos la cafetería ni dejamos a los clientes con sed:
+# preparamos una taza nueva y solo cuando está lista retiramos una vieja.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-pedidos-rolling
+  labels:
+    app: api-pedidos
+spec:
+  replicas: 4
+  
+  # Estrategia de actualización progresiva (Zero Downtime)
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # maxSurge: ¿Cuántos Pods extra podemos crear por encima de las 4 réplicas durante el cambio?
+      # 1 o 25% significa que temporalmente puede haber hasta 5 Pods mientras se crean los nuevos.
+      maxSurge: 1
+      # maxUnavailable: ¿Cuántos Pods pueden estar apagados como máximo durante la actualización?
+      # 0 garantiza que NUNCA habrá menos de las 4 réplicas atendiendo tráfico.
+      maxUnavailable: 0
+
+  selector:
+    matchLabels:
+      app: api-pedidos
+
+  template:
+    metadata:
+      labels:
+        app: api-pedidos
+        version: "v1.0"
+    spec:
+      containers:
+        - name: api
+          image: python:3.12-alpine
+          command: ["sh", "-c"]
+          args:
+            - |
+              python -c '
+              import http.server, socketserver, os
+              class Handler(http.server.SimpleHTTPRequestHandler):
+                  def do_GET(self):
+                      self.send_response(200)
+                      self.send_header("Content-type", "application/json")
+                      self.end_headers()
+                      self.wfile.write(b"{\"mensaje\":\"KubeCafe API v1.0 - Origen Huila\",\"estado\":\"sirviendo\"}\n")
+              with socketserver.TCPServer(("", 8080), Handler) as httpd:
+                  httpd.serve_forever()
+              '
+          ports:
+            - containerPort: 8080
+              name: api-port
+          # Readiness Probe: El mesero no le manda tráfico hasta que responda 200 OK
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 2
+            periodSeconds: 3
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "150m"
+              memory: "128Mi"

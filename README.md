@@ -72,7 +72,7 @@ flowchart LR
 | :---: | :--- | :--- | :--- | :---: |
 | **00** | [**De Código a Contenedor con Docker**](./semana-00-fundamentos-docker) | 🌱 Grano → 📜 Receta → 📦 Bolsa sellada → ☕ Taza servida | `Dockerfile`, imágenes OCI, ciclo de vida de contenedores y puente a Kind/K8s. | 🟢 Disponible |
 | **01** | [**El motor por dentro y tu primer Pod**](./semana-01-arquitectura) | 🍽️ Bandeja (`Pod`), 🪵 Mesas (`Nodes`), 👨‍🍳 Barista (`kubelet`) y 🏢 Gerencia | Control Plane vs. Nodos, `kubectl` (imperativo/declarativo) y Pods en YAML. | 🟢 Disponible |
-| **02** | [**Despliegues sin caídas y autorreparación**](./semana-02-deployments) | 🧐 Supervisor (`Controller Manager`) y 📝 Orden de Producción | ReplicaSets, Deployments, *Self-healing*, *Rolling Updates* y *Rollbacks*. | 🔜 Próximamente |
+| **02** | [**Despliegues sin caídas y autorreparación**](./semana-02-deployments) | 🧐 Supervisor (`Controller Manager`) y 📝 Orden de Producción | ReplicaSets, Deployments, *Self-healing*, *Rolling Updates* y *Rollbacks*. | 🟢 Disponible |
 | **03** | [**Conectando todo: Redes en K8s**](./semana-03-redes) | 🤵 Mesero de barra fija (`Service`) y 🚪 Anfitriona (`Ingress`) | Comunicación interna y externa: `ClusterIP`, `NodePort` e `Ingress`. | 🔜 Próximamente |
 | **04** | [**Configuración y Datos Persistentes**](./semana-04-almacenamiento) | 🧂 Especias (`ConfigMap`), 🔐 Caja fuerte (`Secret`) y 🏬 Bodega (`PV`) | Desacoplar configuración con `ConfigMaps`, `Secrets` y volúmenes (`PVC`). | 🔜 Próximamente |
 | **05** | [**Salud, Límites y Seguridad Básica**](./semana-05-operacion-seguridad) | 🌡️ Termómetro (`Probes`), ⚖️ Dosificador (`Limits`) y 🪪 Carnets (`RBAC`) | `Liveness/Readiness Probes`, límites de CPU/RAM y permisos con `RBAC`. | 🔜 Próximamente |

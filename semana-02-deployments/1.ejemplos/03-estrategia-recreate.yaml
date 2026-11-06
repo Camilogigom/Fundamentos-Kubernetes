@@ -1,0 +1,40 @@
+# ☕ KubeCafé: Limpieza Total de Salón (Estrategia Recreate)
+# A diferencia de RollingUpdate, la estrategia "Recreate" apaga todos los Pods viejos
+# ANTES de encender los nuevos. 
+# ⚠️ Produce un corte temporal de servicio (Downtime), pero es indispensable cuando:
+# 1. Dos versiones no pueden escribir al mismo tiempo en la misma base de datos.
+# 2. Se usa un disco persistente (PVC ReadWriteOnce) que solo puede conectarse a un Pod a la vez.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: batch-procesador-recreate
+  labels:
+    app: batch-procesador
+spec:
+  replicas: 2
+  
+  # Estrategia Recreate: apaga la v1 al 100% antes de iniciar la v2
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app: batch-procesador
+
+  template:
+    metadata:
+      labels:
+        app: batch-procesador
+        version: "v1.0"
+    spec:
+      containers:
+        - name: worker
+          image: busybox:latest
+          command: ["sh", "-c", "echo 'Procesando pedidos v1.0...' && sleep 3600"]
+          resources:
+            requests:
+              cpu: "30m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"

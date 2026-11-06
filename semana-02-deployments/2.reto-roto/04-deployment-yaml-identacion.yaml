@@ -1,0 +1,30 @@
+# 🚨 RETO 4 (Nivel Ninja): El Manifiesto con Indentación Rota y apiVersion Incompatible 🚨
+# Síntoma: Al hacer 'kubectl apply', la terminal muestra:
+#          "error: error parsing 04-deployment-yaml-identacion.yaml: error converting YAML to JSON"
+#          o indica que el recurso no es reconocido en ese apiVersion.
+#
+# Pista: Revisa con lupa dos cosas:
+#        1. Para un Deployment, el apiVersion estándar en Kubernetes es 'apps/v1' (no 'v1').
+#        2. La sangría (indentación con espacios) de YAML es estricta: 'template:' debe estar dentro
+#           de 'spec:', y 'containers:' debe estar dentro de 'template.spec:'.
+# Misión: Arregla la estructura y la indentación de espacios para que el Deployment se aplique limpiamente.
+
+apiVersion: v1 # ❌ Error: Los Deployments pertenecen al grupo 'apps/v1'
+kind: Deployment
+metadata:
+  name: reto-04-estructura
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pagos
+template: # ❌ Error de indentación: 'template' debe estar indentado dentro de 'spec'
+  metadata:
+    labels:
+      app: pagos
+  spec:
+containers: # ❌ Error de indentación: 'containers' debe estar dentro de 'template.spec'
+  - name: servicio-pagos
+    image: nginx:alpine
+    ports:
+      - containerPort: 80

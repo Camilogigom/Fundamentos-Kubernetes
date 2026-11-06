@@ -1,0 +1,86 @@
+# 🤖 KubeCafé: Barista Virtual — Deployment de Inferencia de IA Escalable
+# En la Semana 01 desplegamos un Pod de IA suelto.
+# Ahora en la Semana 02 creamos un Deployment con 2 réplicas de una API de inferencia ligera,
+# lista para escalar en horas pico con `kubectl scale deployment barista-ia --replicas=4`.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: barista-ia
+  labels:
+    app: barista-ia
+    servicio: inferencia
+spec:
+  replicas: 2
+  
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
+  selector:
+    matchLabels:
+      app: barista-ia
+
+  template:
+    metadata:
+      labels:
+        app: barista-ia
+        servicio: inferencia
+        version: "v1.0"
+    spec:
+      containers:
+        - name: api-ia
+          image: python:3.12-alpine
+          command: ["sh", "-c"]
+          args:
+            - |
+              python -c '
+              import http.server, socketserver, json, time, os
+
+              # Respuestas inteligentes simuladas del Barista IA
+              RECOMMENDATIONS = [
+                  "Te recomiendo un Espresso doble con granos de origen Huila (tueste medio).",
+                  "Para esta tarde va perfecto un Cold Brew con notas cítricas y panela.",
+                  "Prueba un Cappuccino con leche texturizada a 65°C y café de Jericó.",
+                  "Nuestra recomendación de hoy: Filtrado V60 con café Geisha de Fredonia."
+              ]
+
+              class AIHandler(http.server.SimpleHTTPRequestHandler):
+                  def do_GET(self):
+                      import random
+                      self.send_response(200)
+                      self.send_header("Content-type", "application/json; charset=utf-8")
+                      self.end_headers()
+                      
+                      response = {
+                          "modelo": "KubeCafe-Barista-AI-v1",
+                          "pod": os.environ.get("HOSTNAME", "desconocido"),
+                          "recomendacion": random.choice(RECOMMENDATIONS),
+                          "latencia_inferencia_ms": round(random.uniform(12.5, 35.8), 2),
+                          "timestamp": time.time()
+                      }
+                      self.wfile.write(json.dumps(response, ensure_ascii=False).encode("utf-8") + b"\n")
+
+              with socketserver.TCPServer(("", 8080), AIHandler) as httpd:
+                  print("Barista IA escuchando en el puerto 8080...")
+                  httpd.serve_forever()
+              '
+          ports:
+            - containerPort: 8080
+              name: http-ia
+          
+          resources:
+            requests:
+              cpu: "60m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "128Mi"
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 2
+            periodSeconds: 4

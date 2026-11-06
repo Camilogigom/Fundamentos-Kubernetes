@@ -265,6 +265,70 @@ const CHALLENGE_VALIDATORS = {
           );
         })
     }
+  ],
+  'semana-02': [
+    {
+      id: '01',
+      name: '01-deployment-selector-roto',
+      validate: files =>
+        files.some(f => {
+          const code = stripComments(f.content);
+          const isReto01 = /kubecafe-pedidos-api/.test(code) || /0?1/.test(f.relPath);
+          return (
+            isReto01 &&
+            /kind:\s*Deployment/.test(code) &&
+            !code.includes('etiqueta-equivocada-web') &&
+            /app:\s*cafeteriamovil-api/.test(code)
+          );
+        })
+    },
+    {
+      id: '02',
+      name: '02-deployment-imagen-caida-rollback',
+      validate: files =>
+        files.some(f => {
+          const code = stripComments(f.content);
+          const isReto02 = /kubecafe-checkout-v2/.test(code) || /0?2/.test(f.relPath);
+          return (
+            isReto02 &&
+            /kind:\s*Deployment/.test(code) &&
+            !code.includes('version-fantasma-prod-999') &&
+            /image:\s*nginx/.test(code)
+          );
+        })
+    },
+    {
+      id: '03',
+      name: '03-deployment-estrategia-invalida',
+      validate: files =>
+        files.some(f => {
+          const code = stripComments(f.content);
+          const isReto03 = /kubecafe-notificaciones/.test(code) || /0?3/.test(f.relPath);
+          return (
+            isReto03 &&
+            /kind:\s*Deployment/.test(code) &&
+            !code.includes('Rollingupdates') &&
+            /type:\s*RollingUpdate/.test(code) &&
+            /rollingUpdate:/.test(code)
+          );
+        })
+    },
+    {
+      id: '04',
+      name: '04-deployment-yaml-identacion',
+      validate: files =>
+        files.some(f => {
+          const code = stripComments(f.content);
+          const isReto04 = /kubecafe-fidelizacion/.test(code) || /0?4/.test(f.relPath);
+          return (
+            isReto04 &&
+            /kind:\s*Deployment/.test(code) &&
+            !/apiVersion:\s*v1\b/.test(code) &&
+            /apiVersion:\s*apps\/v1/.test(code) &&
+            /replicas:\s*2/.test(code)
+          );
+        })
+    }
   ]
 };
 
