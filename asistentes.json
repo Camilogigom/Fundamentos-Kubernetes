@@ -135,6 +135,16 @@
     "motivacion": "Aprender de la comunidad de Cloud Native Medellín. 🏔️☕"
   },
   {
+    "github": "DrSiker",
+    "nombre": "Didier Alexander Rendón Chaverra",
+    "rol": "DevSecOps/Cloud Engineer",
+    "linkedin": "https://www.linkedin.com/in/didierendon",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 20,
+    "motivacion": "Reforzar mis fundamentos sobre Kubernetes y Docker, y lograr certificarme y lograr la kubestronaut en un futuro"
+  },
+  {
     "github": "ccsanchezb04",
     "nombre": "Cristian Sanchez",
     "rol": "Desarrollador Fullstack",
@@ -505,15 +515,5 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Aprender de kubernetes, docker"
-  },
-  {
-    "github": "DrSiker",
-    "nombre": "Didier Alexander Rendón Chaverra",
-    "rol": "DevSecOps/Cloud Engineer",
-    "linkedin": "https://www.linkedin.com/in/didierendon",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 10,
-    "motivacion": "Reforzar mis fundamentos sobre Kubernetes y Docker, y lograr certificarme y lograr la kubestronaut en un futuro"
   }
 ]
