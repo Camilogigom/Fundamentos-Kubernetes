@@ -515,5 +515,15 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Aprender de kubernetes, docker"
+  },
+  {
+    "github": "eandreaja",
+    "nombre": "Andrea Jaramillo",
+    "rol": "Python Developer",
+    "linkedin": "https://www.linkedin.com/in/eandreaja/",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 10,
+    "motivacion": "Estoy en camino a Data Scientis y este conocimiento es un hueco que tengo , por lo que es de gran interés hacer este curso."
   }
 ]

@@ -84,7 +84,7 @@ Si prefieres hacerlo con comandos de `git`, edita tu bloque en [`asistentes.json
 
 ---
 
-## 👥 Tabla de Posiciones de la Tripulación (47 Tripulantes)
+## 👥 Tabla de Posiciones de la Tripulación (48 Tripulantes)
 
 <!-- INICIO_TABLA_ASISTENTES -->
 | # | 👤 Tripulante | 💼 Rol / Especialidad | 🌐 Redes Profesionales | 🎖️ Rango y Progreso (XP) | 🎯 ¿Qué te motivó a unirte? |
@@ -136,6 +136,7 @@ Si prefieres hacerlo con comandos de `git`, edita tu bloque en [`asistentes.json
 | #45 | <img src="https://github.com/josedavid9316.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Jose David Moncada Arango** | SRE / DevOps | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/josedavid9316)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/josedavid9316/) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Aprender y fortalecer mis conocimientos de Docker y Kubernetes y aportar en lo que mas se pueda |
 | #46 | <img src="https://github.com/juand-alvarado.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Juan Diego Alvarado** | DevOps | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/juand-alvarado)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-diego-alvarado-gantiva-7801a816a/) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Profundizar en mis conocimientos de K8s y acercarme al ecosistema de la CNCF |
 | #47 | <img src="https://github.com/YimmyZuluaga.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Yimmy Zuluaga** | Estudiante de ingeniería | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/YimmyZuluaga) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Aprender de kubernetes, docker |
+| #48 | <img src="https://github.com/eandreaja.png?size=50" width="32" height="32" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;"> **Andrea Jaramillo** | Python Developer | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/eandreaja)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/eandreaja/) | ⛵ Marinero<br><sub>**10 XP** (Registro inicial)</sub> | Estoy en camino a Data Scientis y este conocimiento es un hueco que tengo , por lo que es de gran interés hacer este curso. |
 <!-- FIN_TABLA_ASISTENTES -->
 
 > [!TIP]

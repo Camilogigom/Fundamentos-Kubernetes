@@ -162,11 +162,11 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
 ---
 
 <!-- INICIO_MOSAICO_TRIPULACION -->
-## 👥 Tripulación a Bordo y Ranking (47 Tripulantes)
+## 👥 Tripulación a Bordo y Ranking (48 Tripulantes)
 
 <div align="center">
 
-[![Tripulantes a Bordo](https://img.shields.io/badge/⛵_Tripulantes_a_Bordo-47-00C7B7?style=for-the-badge)](./ASISTENTES.md)
+[![Tripulantes a Bordo](https://img.shields.io/badge/⛵_Tripulantes_a_Bordo-48-00C7B7?style=for-the-badge)](./ASISTENTES.md)
 [![Registrarme en 30 seg](https://img.shields.io/badge/➕_¡Regístrate_Aquí!_(Formulario_Visual)-2ea44f?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
 [![Actualizar mis Datos](https://img.shields.io/badge/✏️_Actualizar_mis_Datos_o_Redes-f57c00?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
 [![Ver Ranking Completo](https://img.shields.io/badge/🏆_Ver_Tabla_de_Puntajes_y_Redes-326CE5?style=for-the-badge)](./ASISTENTES.md)
@@ -213,7 +213,7 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
   </tr>
 </table>
 
-### 🏆 Ranking de la Tripulación (47 Tripulantes)
+### 🏆 Ranking de la Tripulación (48 Tripulantes)
 
 <table>
   <tr>
@@ -557,6 +557,13 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       <a href="https://github.com/YimmyZuluaga" title="Yimmy Zuluaga (@YimmyZuluaga) — 10 XP">
         <img src="https://github.com/YimmyZuluaga.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="YimmyZuluaga"/><br/>
         <sub><b>Yimmy Zuluaga</b></sub>
+      </a><br/>
+      <sub>⛵ Marinero • <b>10 XP</b></sub>
+    </td>
+    <td align="center" width="140">
+      <a href="https://www.linkedin.com/in/eandreaja/" title="Andrea Jaramillo (@eandreaja) — 10 XP">
+        <img src="https://github.com/eandreaja.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="eandreaja"/><br/>
+        <sub><b>Andrea Jaramillo</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>10 XP</b></sub>
     </td>
