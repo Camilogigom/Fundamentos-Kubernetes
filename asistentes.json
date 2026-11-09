@@ -125,6 +125,16 @@
     "motivacion": "Reforzar conocimiento y aportar a la comunidad."
   },
   {
+    "github": "marnathali",
+    "nombre": "Nathali Anzola",
+    "rol": "Software Engineer",
+    "linkedin": "https://linkedin.com/in/maria-nathali-anzola",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 60,
+    "motivacion": "Aprender a contenizar y desplegar mis aplicaciones con Docker y Kubernetes"
+  },
+  {
     "github": "glgaviria64",
     "nombre": "Gloria Gaviria",
     "rol": "👩‍💻 Estudiante<br>Desarrolladora Jr",
@@ -193,16 +203,6 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Quiero llevar la teoría a la práctica, aprender de los errores y construir una base sólida que me permita crecer en el mundo de Cloud Native, la nube y DevOps"
-  },
-  {
-    "github": "marnathali",
-    "nombre": "Nathali Anzola",
-    "rol": "Software Engineer",
-    "linkedin": "https://linkedin.com/in/maria-nathali-anzola",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 10,
-    "motivacion": "Aprender a contenizar y desplegar mis aplicaciones con Docker y Kubernetes"
   },
   {
     "github": "kevindazardev",
