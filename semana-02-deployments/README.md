@@ -1,6 +1,9 @@
 # ☕ Semana 02: Despliegues sin Caídas y Autorreparación
 
 > *"En KubeCafé, si a un barista se le cae una jarra o se enferma a mitad del turno, no cerramos la tienda: hay un supervisor vigilando en todo momento que siempre haya exactamente tres baristas en la barra sirviendo café."*
+>
+> 🎮 **Simulador KubeCafé (Deployments y Self-Healing):** [**Ver cómo opera Kubernetes en vivo**](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html)  
+> 🧪 **Laboratorio Online (sin instalación):** [**Playground del Workshop en iximiuz**](https://labs.iximiuz.com/trainings/fundamentos-de-docker-y-kubernetes-2ae16ea8/)
 
 ---
 

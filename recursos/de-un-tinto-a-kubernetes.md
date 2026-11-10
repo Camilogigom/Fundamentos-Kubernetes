@@ -7,7 +7,7 @@ Una guía intuitiva, visual e interactiva para comprender toda la arquitectura d
 > [!TIP]
 > **¿Cómo usar esta guía?**  
 > Este documento es el **hilo conductor de todo el workshop (Semanas 00 a 06)**. Úsalo para traducir cualquier concepto técnico de Kubernetes a una situación real que puedes imaginar en segundos, y pon a prueba tu intuición con los **Retos Interactivos de Gerencia** al final.  
-> 🎮 **¡Nuevo!** Explora también el [**Simulador Visual Interactivo de Kubernetes (Edición KubeCafé)**](https://htmlpreview.github.io/?https://github.com/edwinbermudez91/Fundamentos-Kubernetes/blob/main/recursos/simulador-interactivo-kubernetes.html) ([`simulador-interactivo-kubernetes.html`](./simulador-interactivo-kubernetes.html)) para ver en movimiento cómo viaja cada orden desde `kubectl` hasta el `Pod`, el tráfico de un cliente, la auto-curación y el diagnóstico de los Retos Rotos.
+> 🎮 **¡Nuevo!** Explora también el [**Simulador Visual Interactivo de Kubernetes (Edición KubeCafé)**](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html) ([`simulador-interactivo-kubernetes.html`](./simulador-interactivo-kubernetes.html)) para ver en movimiento cómo viaja cada orden desde `kubectl` hasta el `Pod`, el tráfico de un cliente, la auto-curación y el diagnóstico de los Retos Rotos.
 
 ---
 
