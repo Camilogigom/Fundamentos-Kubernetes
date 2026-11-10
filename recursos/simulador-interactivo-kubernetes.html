@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -36,7 +39,7 @@
     <style>
         body {
             background-color: #070B14;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 12% 18%, rgba(50, 108, 229, 0.14) 0%, transparent 38%),
                 radial-gradient(circle at 88% 82%, rgba(16, 185, 129, 0.10) 0%, transparent 38%),
                 linear-gradient(to right, rgba(30, 41, 59, 0.22) 1px, transparent 1px),
@@ -50,13 +53,16 @@
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: #090D16;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #1E293B;
             border-radius: 9999px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #326CE5;
         }
@@ -67,35 +73,41 @@
             position: relative;
             z-index: 10;
         }
+
         .k8s-node:hover {
             transform: translateY(-2px);
             border-color: #6099FF;
             box-shadow: 0 0 22px rgba(50, 108, 229, 0.28);
         }
+
         .k8s-node.active-step-blue {
             border-color: #00F0FF !important;
             background: linear-gradient(145deg, rgba(50, 108, 229, 0.28), rgba(15, 23, 42, 0.96)) !important;
             box-shadow: 0 0 28px rgba(0, 240, 255, 0.45), inset 0 0 14px rgba(50, 108, 229, 0.35) !important;
             transform: scale(1.025);
         }
+
         .k8s-node.active-step-green {
             border-color: #10B981 !important;
             background: linear-gradient(145deg, rgba(16, 185, 129, 0.25), rgba(15, 23, 42, 0.96)) !important;
             box-shadow: 0 0 28px rgba(16, 185, 129, 0.45), inset 0 0 14px rgba(16, 185, 129, 0.3) !important;
             transform: scale(1.025);
         }
+
         .k8s-node.active-step-amber {
             border-color: #F59E0B !important;
             background: linear-gradient(145deg, rgba(245, 158, 11, 0.25), rgba(15, 23, 42, 0.96)) !important;
             box-shadow: 0 0 28px rgba(245, 158, 11, 0.45), inset 0 0 14px rgba(245, 158, 11, 0.3) !important;
             transform: scale(1.025);
         }
+
         .k8s-node.active-step-rose {
             border-color: #F43F5E !important;
             background: linear-gradient(145deg, rgba(244, 63, 94, 0.25), rgba(15, 23, 42, 0.96)) !important;
             box-shadow: 0 0 28px rgba(244, 63, 94, 0.45), inset 0 0 14px rgba(244, 63, 94, 0.3) !important;
             transform: scale(1.025);
         }
+
         .k8s-node.selected-inspect {
             outline: 2px dashed #F59E0B;
             outline-offset: 3px;
@@ -108,6 +120,7 @@
             stroke-width: 2;
             transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
         }
+
         .conn-line.active-blue {
             stroke: #00F0FF;
             stroke-width: 3.5;
@@ -115,6 +128,7 @@
             animation: dashFlow 0.65s linear infinite;
             filter: drop-shadow(0 0 6px #00F0FF);
         }
+
         .conn-line.active-green {
             stroke: #10B981;
             stroke-width: 3.5;
@@ -122,6 +136,7 @@
             animation: dashFlow 0.65s linear infinite;
             filter: drop-shadow(0 0 6px #10B981);
         }
+
         .conn-line.active-amber {
             stroke: #F59E0B;
             stroke-width: 3.5;
@@ -129,6 +144,7 @@
             animation: dashFlow 0.65s linear infinite;
             filter: drop-shadow(0 0 6px #F59E0B);
         }
+
         .conn-line.active-rose {
             stroke: #F43F5E;
             stroke-width: 3.5;
@@ -152,12 +168,21 @@
             vertical-align: middle;
             animation: blink 1s step-end infinite;
         }
+
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col selection:bg-k8s-blue selection:text-white">
 
     <!-- TOP HEADER BAR -->
@@ -165,35 +190,45 @@
         <div class="max-w-[1680px] mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
             <!-- Brand & Title -->
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-k8s-blue/20 border border-k8s-blue/50 flex items-center justify-center shadow-[0_0_15px_rgba(50,108,229,0.35)]">
+                <div
+                    class="w-10 h-10 rounded-xl bg-k8s-blue/20 border border-k8s-blue/50 flex items-center justify-center shadow-[0_0_15px_rgba(50,108,229,0.35)]">
                     <svg class="w-6 h-6 text-[#326CE5]" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2L4 5.5v13L12 22l8-3.5v-13L12 2zm0 2.3l5.8 2.5-2.1 1.3a4.5 4.5 0 00-7.4 0L6.2 6.8 12 4.3zm0 5.2a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm-6 1.2l2.1 1.2a4.5 4.5 0 000 2.2L6 15.3V9.7zm12 0v5.6l-2.1-1.2a4.5 4.5 0 000-2.2l2.1-1.2zm-9.7 6.2a4.5 4.5 0 007.4 0l2.1 1.3L12 20.7l-5.8-2.5 2.1-1.3z"/>
+                        <path
+                            d="M12 2L4 5.5v13L12 22l8-3.5v-13L12 2zm0 2.3l5.8 2.5-2.1 1.3a4.5 4.5 0 00-7.4 0L6.2 6.8 12 4.3zm0 5.2a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm-6 1.2l2.1 1.2a4.5 4.5 0 000 2.2L6 15.3V9.7zm12 0v5.6l-2.1-1.2a4.5 4.5 0 000-2.2l2.1-1.2zm-9.7 6.2a4.5 4.5 0 007.4 0l2.1 1.3L12 20.7l-5.8-2.5 2.1-1.3z" />
                     </svg>
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Simulador Interactivo de Kubernetes</h1>
-                        <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-xs font-mono font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40">☕ Edición KubeCafé</span>
+                        <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Simulador Interactivo de
+                            Kubernetes</h1>
+                        <span
+                            class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-xs font-mono font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40">☕
+                            Edición KubeCafé</span>
                     </div>
-                    <p class="text-xs text-slate-400">De Cero a Capitán • Sigue el viaje completo de cada componente desde el inicio hasta el final</p>
+                    <p class="text-xs text-slate-400">De Cero a Capitán • Sigue el viaje completo de cada componente
+                        desde el inicio hasta el final</p>
                 </div>
             </div>
 
             <!-- 4 Flow Switcher Tabs -->
             <div class="flex flex-wrap items-center bg-slate-900/95 p-1 rounded-xl border border-slate-800 gap-1">
-                <button id="btn-flow-1" onclick="switchFlow(1)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-k8s-blue text-white shadow-[0_0_15px_rgba(50,108,229,0.4)]">
+                <button id="btn-flow-1" onclick="switchFlow(1)"
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-k8s-blue text-white shadow-[0_0_15px_rgba(50,108,229,0.4)]">
                     <span class="w-2 h-2 rounded-full bg-cyan-300 animate-pulse"></span>
                     <span>1. Despliegue (<code class="font-mono">apply</code>)</span>
                 </button>
-                <button id="btn-flow-2" onclick="switchFlow(2)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
+                <button id="btn-flow-2" onclick="switchFlow(2)"
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
                     <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                     <span>2. Tráfico Cliente (<code class="font-mono">curl</code>)</span>
                 </button>
-                <button id="btn-flow-3" onclick="switchFlow(3)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
+                <button id="btn-flow-3" onclick="switchFlow(3)"
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
                     <span class="w-2 h-2 rounded-full bg-amber-400"></span>
                     <span>3. Auto-Curación (Self-Healing)</span>
                 </button>
-                <button id="btn-flow-4" onclick="switchFlow(4)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
+                <button id="btn-flow-4" onclick="switchFlow(4)"
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
                     <span class="w-2 h-2 rounded-full bg-rose-400"></span>
                     <span>4. Diagnóstico (Retos Rotos)</span>
                 </button>
@@ -202,34 +237,54 @@
             <!-- Playback Controls & Speed -->
             <div class="flex items-center gap-2">
                 <!-- Café Analogy Toggle -->
-                <button onclick="toggleCafeMode()" id="btn-cafe" class="px-2.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-semibold flex items-center gap-1.5 transition" title="Mostrar/Ocultar etiquetas de la analogía KubeCafé en el mapa">
+                <button onclick="toggleCafeMode()" id="btn-cafe"
+                    class="px-2.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-semibold flex items-center gap-1.5 transition"
+                    title="Mostrar/Ocultar etiquetas de la analogía KubeCafé en el mapa">
                     <span>☕ KubeCafé: ON</span>
                 </button>
 
-                <button onclick="prevStep()" id="btn-prev" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700/80 text-xs font-medium flex items-center gap-1 transition disabled:opacity-40 disabled:pointer-events-none" title="Paso Anterior (Flecha Izquierda)">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                <button onclick="prevStep()" id="btn-prev"
+                    class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700/80 text-xs font-medium flex items-center gap-1 transition disabled:opacity-40 disabled:pointer-events-none"
+                    title="Paso Anterior (Flecha Izquierda)">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
                     <span class="hidden md:inline">Anterior</span>
                 </button>
 
-                <button onclick="nextStep()" id="btn-next" class="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-k8s-blue to-cyan-600 hover:from-blue-600 hover:to-cyan-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-[0_0_15px_rgba(50,108,229,0.4)] transition" title="Siguiente Paso (Flecha Derecha)">
+                <button onclick="nextStep()" id="btn-next"
+                    class="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-k8s-blue to-cyan-600 hover:from-blue-600 hover:to-cyan-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-[0_0_15px_rgba(50,108,229,0.4)] transition"
+                    title="Siguiente Paso (Flecha Derecha)">
                     <span>Siguiente</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
                 </button>
 
-                <button onclick="toggleAutoPlay()" id="btn-auto" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 text-xs font-medium flex items-center gap-1.5 transition">
-                    <svg id="icon-play" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                <button onclick="toggleAutoPlay()" id="btn-auto"
+                    class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 text-xs font-medium flex items-center gap-1.5 transition">
+                    <svg id="icon-play" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                    </svg>
                     <span id="text-auto">Auto</span>
                 </button>
 
-                <button onclick="resetSim()" class="p-1.5 rounded-lg bg-slate-900 hover:bg-rose-950/60 text-slate-400 hover:text-rose-400 border border-slate-800 transition" title="Reiniciar Simulación">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                <button onclick="resetSim()"
+                    class="p-1.5 rounded-lg bg-slate-900 hover:bg-rose-950/60 text-slate-400 hover:text-rose-400 border border-slate-800 transition"
+                    title="Reiniciar Simulación">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- MAIN CONTENT GRID -->
-    <main class="flex-1 max-w-[1680px] w-full mx-auto px-4 sm:px-6 py-4 grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
+    <main
+        class="flex-1 max-w-[1680px] w-full mx-auto px-4 sm:px-6 py-4 grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
 
         <!-- LEFT & CENTER: INTERACTIVE ARCHITECTURE MAP (8 COLS ON XL) -->
         <div class="xl:col-span-8 flex flex-col gap-4">
@@ -238,11 +293,14 @@
             <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                     <!-- Interactive Terminal Input Prompt -->
-                    <div class="flex items-center gap-2.5 bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 flex-1 font-mono text-xs sm:text-sm">
+                    <div
+                        class="flex items-center gap-2.5 bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 flex-1 font-mono text-xs sm:text-sm">
                         <span class="text-emerald-400 font-bold select-none">➜ ~</span>
-                        <span id="terminal-command" class="text-cyan-300 font-semibold">kubectl apply -f deployment.yaml</span>
+                        <span id="terminal-command" class="text-cyan-300 font-semibold">kubectl apply -f
+                            deployment.yaml</span>
                         <span class="cursor-blink"></span>
-                        <button onclick="runFromStart()" class="ml-auto px-3 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-sans font-semibold transition flex items-center gap-1">
+                        <button onclick="runFromStart()"
+                            class="ml-auto px-3 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-sans font-semibold transition flex items-center gap-1">
                             <span>⚡ Simular Flujo Completo</span>
                         </button>
                     </div>
@@ -250,7 +308,8 @@
                     <!-- Step Counter Badge -->
                     <div class="flex items-center justify-between sm:justify-end gap-2">
                         <span class="text-xs text-slate-400 font-medium">Progreso:</span>
-                        <span id="step-counter-badge" class="px-2.5 py-1 rounded-lg bg-k8s-blue/20 border border-k8s-blue/40 font-mono text-xs font-bold text-cyan-300">
+                        <span id="step-counter-badge"
+                            class="px-2.5 py-1 rounded-lg bg-k8s-blue/20 border border-k8s-blue/40 font-mono text-xs font-bold text-cyan-300">
                             Paso 1 / 8
                         </span>
                     </div>
@@ -263,27 +322,33 @@
             </div>
 
             <!-- CLUSTER VISUAL DIAGRAM CONTAINER -->
-            <div id="diagram-canvas" class="relative bg-slate-950/90 border border-slate-800/90 rounded-2xl p-4 sm:p-5 shadow-2xl overflow-hidden flex flex-col justify-between">
-                
+            <div id="diagram-canvas"
+                class="relative bg-slate-950/90 border border-slate-800/90 rounded-2xl p-4 sm:p-5 shadow-2xl overflow-hidden flex flex-col justify-between">
+
                 <!-- Dynamic SVG Overlay for Lines & Moving Data Packets -->
                 <svg id="svg-connections" class="absolute inset-0 w-full h-full pointer-events-none z-0"></svg>
 
                 <!-- Floating Animated Data Packet -->
-                <div id="data-packet" class="hidden pointer-events-none fixed z-30 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-in-out">
-                    <div id="packet-pill" class="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-lg border">
+                <div id="data-packet"
+                    class="hidden pointer-events-none fixed z-30 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-in-out">
+                    <div id="packet-pill"
+                        class="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-lg border">
                         <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
                         <span id="packet-label">YAML</span>
                     </div>
                 </div>
 
                 <!-- Top Notice Tip -->
-                <div class="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-800/60 text-xs text-slate-400">
+                <div
+                    class="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-800/60 text-xs text-slate-400">
                     <div class="flex items-center gap-2">
                         <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                        <span>💡 <strong>Interactivo:</strong> Haz clic en cualquier componente del mapa para inspeccionar su función, analogía en KubeCafé y comandos útiles.</span>
+                        <span>💡 <strong>Interactivo:</strong> Haz clic en cualquier componente del mapa para
+                            inspeccionar su función, analogía en KubeCafé y comandos útiles.</span>
                     </div>
                     <div class="flex items-center gap-3 text-xs">
-                        <button onclick="triggerKillPodDemo()" class="px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 font-semibold transition flex items-center gap-1">
+                        <button onclick="triggerKillPodDemo()"
+                            class="px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 font-semibold transition flex items-center gap-1">
                             <span>🔥 Simular Caída de Pod</span>
                         </button>
                     </div>
@@ -293,20 +358,26 @@
                 <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-4 my-auto">
 
                     <!-- COLUMN 1: EXTERNAL WORLD (CLI / CLIENT / LOAD BALANCER / REGISTRY) - 3 COLS -->
-                    <div class="lg:col-span-3 flex flex-col justify-between gap-3 border border-slate-800/80 bg-slate-900/40 rounded-xl p-3">
-                        <div class="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center justify-between border-b border-slate-800 pb-1.5">
+                    <div
+                        class="lg:col-span-3 flex flex-col justify-between gap-3 border border-slate-800/80 bg-slate-900/40 rounded-xl p-3">
+                        <div
+                            class="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center justify-between border-b border-slate-800 pb-1.5">
                             <span>Mundo Exterior</span>
                             <span class="text-xs px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">Admin / Web</span>
                         </div>
 
                         <!-- 1. DevOps Terminal (kubectl) -->
-                        <div id="node-kubectl" onclick="inspectComponent('kubectl')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
+                        <div id="node-kubectl" onclick="inspectComponent('kubectl')"
+                            class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
                             <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">CLI Ingeniero</span>
+                                <span
+                                    class="text-xs font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">CLI
+                                    Ingeniero</span>
                                 <span class="cafe-badge text-xs text-amber-300 font-medium">👨‍💻 Cliente VIP</span>
                             </div>
                             <div class="flex items-center gap-2.5">
-                                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-cyan-400 font-mono font-bold text-xs border border-slate-700">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-cyan-400 font-mono font-bold text-xs border border-slate-700">
                                     &gt;_
                                 </div>
                                 <div>
@@ -317,13 +388,17 @@
                         </div>
 
                         <!-- 2. External User Client (Browser / curl) -->
-                        <div id="node-client" onclick="inspectComponent('client')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
+                        <div id="node-client" onclick="inspectComponent('client')"
+                            class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
                             <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Usuario Final</span>
+                                <span
+                                    class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Usuario
+                                    Final</span>
                                 <span class="cafe-badge text-xs text-amber-300 font-medium">🙋‍♂️ Comensal</span>
                             </div>
                             <div class="flex items-center gap-2.5">
-                                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-emerald-400 border border-slate-700">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-emerald-400 border border-slate-700">
                                     🌐
                                 </div>
                                 <div>
@@ -334,13 +409,17 @@
                         </div>
 
                         <!-- 3. Cloud LoadBalancer -->
-                        <div id="node-lb" onclick="inspectComponent('lb')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
+                        <div id="node-lb" onclick="inspectComponent('lb')"
+                            class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
                             <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">Cloud LB</span>
+                                <span
+                                    class="text-xs font-mono px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">Cloud
+                                    LB</span>
                                 <span class="cafe-badge text-xs text-amber-300 font-medium">🛣️ Entrada Calle</span>
                             </div>
                             <div class="flex items-center gap-2.5">
-                                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400 border border-slate-700">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400 border border-slate-700">
                                     ⚖️
                                 </div>
                                 <div>
@@ -351,13 +430,17 @@
                         </div>
 
                         <!-- 4. Container Registry (Harbor / Docker Hub) -->
-                        <div id="node-registry" onclick="inspectComponent('registry')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
+                        <div id="node-registry" onclick="inspectComponent('registry')"
+                            class="k8s-node cursor-pointer rounded-xl bg-slate-900/90 border border-slate-700/80 p-3">
                             <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">OCI Registry</span>
+                                <span
+                                    class="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">OCI
+                                    Registry</span>
                                 <span class="cafe-badge text-xs text-amber-300 font-medium">🏪 Bodega Café</span>
                             </div>
                             <div class="flex items-center gap-2.5">
-                                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-sky-400 border border-slate-700">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-sky-400 border border-slate-700">
                                     📦
                                 </div>
                                 <div>
@@ -372,75 +455,102 @@
                     <div class="lg:col-span-9 flex flex-col gap-4">
 
                         <!-- SECTION A: CONTROL PLANE (EL CEREBRO / OFICINA DE GERENCIA) -->
-                        <div class="rounded-xl border border-k8s-blue/40 bg-gradient-to-b from-blue-950/25 to-slate-900/60 p-3.5 relative">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-1.5 border-b border-blue-500/20">
+                        <div
+                            class="rounded-xl border border-k8s-blue/40 bg-gradient-to-b from-blue-950/25 to-slate-900/60 p-3.5 relative">
+                            <div
+                                class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-1.5 border-b border-blue-500/20">
                                 <div class="flex items-center gap-2">
                                     <span class="w-2.5 h-2.5 rounded-full bg-k8s-blue shadow-[0_0_8px_#326CE5]"></span>
-                                    <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-blue-300 font-mono">Control Plane (Cerebro del Clúster)</h2>
+                                    <h2
+                                        class="text-xs sm:text-sm font-bold uppercase tracking-wider text-blue-300 font-mono">
+                                        Control Plane (Cerebro del Clúster)</h2>
                                 </div>
-                                <span class="cafe-badge text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">🏢 Oficina de Gerencia en KubeCafé</span>
+                                <span
+                                    class="cafe-badge text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">🏢
+                                    Oficina de Gerencia en KubeCafé</span>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                                 <!-- API Server -->
-                                <div id="node-apiserver" onclick="inspectComponent('apiserver')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                <div id="node-apiserver" onclick="inspectComponent('apiserver')"
+                                    class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
                                     <div>
                                         <div class="flex items-center justify-between mb-1.5">
-                                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-k8s-blue/25 text-cyan-300 border border-k8s-blue/40">Front-Door</span>
-                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🛎️ Caja / Mostrador</span>
+                                            <span
+                                                class="text-xs font-mono px-2 py-0.5 rounded bg-k8s-blue/25 text-cyan-300 border border-k8s-blue/40">Front-Door</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🛎️ Caja /
+                                                Mostrador</span>
                                         </div>
                                         <h3 class="text-sm font-bold text-white">kube-apiserver</h3>
-                                        <p class="text-xs text-slate-400 mt-1">Ventanilla única REST. Valida permisos y coordina todo.</p>
+                                        <p class="text-xs text-slate-400 mt-1">Ventanilla única REST. Valida permisos y
+                                            coordina todo.</p>
                                     </div>
-                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-cyan-400">
+                                    <div
+                                        class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-cyan-400">
                                         <span>AuthN / RBAC</span>
                                         <span>Admission</span>
                                     </div>
                                 </div>
 
                                 <!-- etcd -->
-                                <div id="node-etcd" onclick="inspectComponent('etcd')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                <div id="node-etcd" onclick="inspectComponent('etcd')"
+                                    class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
                                     <div>
                                         <div class="flex items-center justify-between mb-1.5">
-                                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Key-Value DB</span>
-                                            <span class="cafe-badge text-xs text-amber-300 font-medium">📖 Libro Contable</span>
+                                            <span
+                                                class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Key-Value
+                                                DB</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">📖 Libro
+                                                Contable</span>
                                         </div>
                                         <h3 class="text-sm font-bold text-white">etcd</h3>
-                                        <p class="text-xs text-slate-400 mt-1">Base de datos oficial e inmutable del estado del clúster.</p>
+                                        <p class="text-xs text-slate-400 mt-1">Base de datos oficial e inmutable del
+                                            estado del clúster.</p>
                                     </div>
-                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-indigo-300">
+                                    <div
+                                        class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-indigo-300">
                                         <span>/registry/</span>
                                         <span>Quorum Raft</span>
                                     </div>
                                 </div>
 
                                 <!-- Controller Manager -->
-                                <div id="node-controller" onclick="inspectComponent('controller')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                <div id="node-controller" onclick="inspectComponent('controller')"
+                                    class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
                                     <div>
                                         <div class="flex items-center justify-between mb-1.5">
-                                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Reconciliación</span>
-                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🧐 Supervisor</span>
+                                            <span
+                                                class="text-xs font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Reconciliación</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🧐
+                                                Supervisor</span>
                                         </div>
                                         <h3 class="text-sm font-bold text-white">Controller Manager</h3>
-                                        <p class="text-xs text-slate-400 mt-1">Compara estado deseado vs actual. Repone Pods caídos.</p>
+                                        <p class="text-xs text-slate-400 mt-1">Compara estado deseado vs actual. Repone
+                                            Pods caídos.</p>
                                     </div>
-                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-purple-300">
+                                    <div
+                                        class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-purple-300">
                                         <span>ReplicaSet</span>
                                         <span>Self-Heal</span>
                                     </div>
                                 </div>
 
                                 <!-- Scheduler -->
-                                <div id="node-scheduler" onclick="inspectComponent('scheduler')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                <div id="node-scheduler" onclick="inspectComponent('scheduler')"
+                                    class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
                                     <div>
                                         <div class="flex items-center justify-between mb-1.5">
-                                            <span class="text-xs font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">Asignador</span>
-                                            <span class="cafe-badge text-xs text-amber-300 font-medium">📋 Despachador</span>
+                                            <span
+                                                class="text-xs font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">Asignador</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">📋
+                                                Despachador</span>
                                         </div>
                                         <h3 class="text-sm font-bold text-white">kube-scheduler</h3>
-                                        <p class="text-xs text-slate-400 mt-1">Filtra y puntúa los nodos según CPU/RAM disponible.</p>
+                                        <p class="text-xs text-slate-400 mt-1">Filtra y puntúa los nodos según CPU/RAM
+                                            disponible.</p>
                                     </div>
-                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-amber-300">
+                                    <div
+                                        class="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-amber-300">
                                         <span>Filter &amp; Score</span>
                                         <span>Bind Node</span>
                                     </div>
@@ -449,13 +559,23 @@
                         </div>
 
                         <!-- SECTION B: WORKER NODE & DATA PLANE (MESAS DE BARISMO) -->
-                        <div class="rounded-xl border border-emerald-500/35 bg-gradient-to-b from-emerald-950/15 to-slate-900/70 p-3.5 relative">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-1.5 border-b border-emerald-500/20">
+                        <div
+                            class="rounded-xl border border-emerald-500/35 bg-gradient-to-b from-emerald-950/15 to-slate-900/70 p-3.5 relative">
+                            <div
+                                class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-1.5 border-b border-emerald-500/20">
                                 <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]"></span>
-                                    <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-emerald-300 font-mono">Worker Node (`worker-node-01` • 192.168.1.10)</h2>
+                                    <span
+                                        class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]"></span>
+                                    <h2
+                                        class="text-xs sm:text-sm font-bold uppercase tracking-wider text-emerald-300 font-mono">
+                                        Worker Node (`worker-node-01` • 192.168.1.10)</h2>
                                 </div>
-                                <span class="cafe-badge text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">🪵 Mesa de Barismo (Cafeteras CPU + Agua RAM)</span>
+                                <span
+                                    class="cafe-badge text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">🪵
+                                    Mesa de Barismo (Molinos CPU + Agua RAM)</span>
+                                <span
+                                    class="cafe-badge text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">🪵
+                                    Mesa de Barismo (Cafeteras CPU + Agua RAM)</span>
                             </div>
 
                             <!-- Worker Node Internal Grid: 3 Columns -->
@@ -464,65 +584,92 @@
                                 <!-- Col 1 (4 cols): Networking + Config/Storage -->
                                 <div class="md:col-span-4 flex flex-col gap-2.5">
                                     <!-- Ingress / Gateway Controller -->
-                                    <div id="node-ingress" onclick="inspectComponent('ingress')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-2.5">
+                                    <div id="node-ingress" onclick="inspectComponent('ingress')"
+                                        class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-2.5">
                                         <div class="flex items-center justify-between mb-1">
-                                            <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Ruteo L7</span>
-                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🚪 La Anfitriona</span>
+                                            <span
+                                                class="text-xs font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Ruteo
+                                                L7</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🚪 La
+                                                Anfitriona</span>
                                         </div>
                                         <h3 class="text-sm font-bold text-white">Ingress / Gateway API</h3>
-                                        <p class="text-xs text-slate-400 mt-0.5">Enruta <code class="text-emerald-300">mi-app.com/api</code> al Service.</p>
+                                        <p class="text-xs text-slate-400 mt-0.5">Enruta <code
+                                                class="text-emerald-300">mi-app.com/api</code> al Service.</p>
                                     </div>
 
                                     <!-- Service & kube-proxy -->
-                                    <div id="node-service" onclick="inspectComponent('service')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-2.5">
+                                    <div id="node-service" onclick="inspectComponent('service')"
+                                        class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-2.5">
                                         <div class="flex items-center justify-between mb-1">
-                                            <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">VIP 10.96.0.15</span>
-                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🤵 Mesero Fijo</span>
+                                            <span
+                                                class="text-xs font-mono px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">VIP
+                                                10.96.0.15</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🤵 Mesero
+                                                Fijo</span>
                                         </div>
                                         <h3 class="text-sm font-bold text-white">Service &amp; kube-proxy</h3>
-                                        <p class="text-xs text-slate-400 mt-0.5">Balancea tráfico solo hacia Pods sanos (eBPF/IPVS).</p>
+                                        <p class="text-xs text-slate-400 mt-0.5">Balancea tráfico solo hacia Pods sanos
+                                            (eBPF/IPVS).</p>
                                     </div>
 
                                     <!-- ConfigMap, Secret & PVC -->
-                                    <div id="node-config" onclick="inspectComponent('config')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-2.5">
+                                    <div id="node-config" onclick="inspectComponent('config')"
+                                        class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-2.5">
                                         <div class="flex items-center justify-between mb-1">
-                                            <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">Config &amp; PVC</span>
-                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🧂 Especias y Bodega</span>
+                                            <span
+                                                class="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">Config
+                                                &amp; PVC</span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🧂 Especias y
+                                                Bodega</span>
                                         </div>
                                         <h3 class="text-sm font-bold text-white">ConfigMap, Secret &amp; PV</h3>
-                                        <p class="text-xs text-slate-400 mt-0.5">Variables, credenciales y disco persistente.</p>
+                                        <p class="text-xs text-slate-400 mt-0.5">Variables, credenciales y disco
+                                            persistente.</p>
                                     </div>
                                 </div>
 
                                 <!-- Col 2 (4 cols): Node Agents (Kubelet + Container Runtime) -->
                                 <div class="md:col-span-4 flex flex-col gap-2.5 justify-between">
                                     <!-- Kubelet -->
-                                    <div id="node-kubelet" onclick="inspectComponent('kubelet')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex-1 flex flex-col justify-between">
+                                    <div id="node-kubelet" onclick="inspectComponent('kubelet')"
+                                        class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex-1 flex flex-col justify-between">
                                         <div>
                                             <div class="flex items-center justify-between mb-1">
-                                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Agente Nodo</span>
-                                                <span class="cafe-badge text-xs text-amber-300 font-medium">👨‍🍳 El Barista</span>
+                                                <span
+                                                    class="text-xs font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Agente
+                                                    Nodo</span>
+                                                <span class="cafe-badge text-xs text-amber-300 font-medium">👨‍🍳 El
+                                                    Barista</span>
                                             </div>
                                             <h3 class="text-sm font-bold text-white">kubelet</h3>
-                                            <p class="text-xs text-slate-400 mt-1">Recibe órdenes del API Server, monta volúmenes y ejecuta sondas (`liveness` / `readiness`).</p>
+                                            <p class="text-xs text-slate-400 mt-1">Recibe órdenes del API Server, monta
+                                                volúmenes y ejecuta sondas (`liveness` / `readiness`).</p>
                                         </div>
-                                        <div class="mt-2 pt-1.5 border-t border-slate-800 text-xs font-mono text-cyan-300 flex justify-between">
+                                        <div
+                                            class="mt-2 pt-1.5 border-t border-slate-800 text-xs font-mono text-cyan-300 flex justify-between">
                                             <span>CRI gRPC</span>
                                             <span>Probes: HTTP :8080</span>
                                         </div>
                                     </div>
 
                                     <!-- Container Runtime + CNI -->
-                                    <div id="node-runtime" onclick="inspectComponent('runtime')" class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex-1 flex flex-col justify-between">
+                                    <div id="node-runtime" onclick="inspectComponent('runtime')"
+                                        class="k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex-1 flex flex-col justify-between">
                                         <div>
                                             <div class="flex items-center justify-between mb-1">
-                                                <span class="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">containerd + CNI</span>
-                                                <span class="cafe-badge text-xs text-amber-300 font-medium">☕ Máquina Cafetera</span>
+                                                <span
+                                                    class="text-xs font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">containerd
+                                                    + CNI</span>
+                                                <span class="cafe-badge text-xs text-amber-300 font-medium">☕ Máquina
+                                                    Cafetera</span>
                                             </div>
                                             <h3 class="text-sm font-bold text-white">Runtime + Plugin CNI</h3>
-                                            <p class="text-xs text-slate-400 mt-1">Extrae la imagen OCI, crea namespaces/cgroups y asigna IP con Cilium/Calico.</p>
+                                            <p class="text-xs text-slate-400 mt-1">Extrae la imagen OCI, crea
+                                                namespaces/cgroups y asigna IP con Cilium/Calico.</p>
                                         </div>
-                                        <div class="mt-2 pt-1.5 border-t border-slate-800 text-xs font-mono text-sky-300 flex justify-between">
+                                        <div
+                                            class="mt-2 pt-1.5 border-t border-slate-800 text-xs font-mono text-sky-300 flex justify-between">
                                             <span>Pull Image</span>
                                             <span>veth0 ↔ cni0</span>
                                         </div>
@@ -530,38 +677,50 @@
                                 </div>
 
                                 <!-- Col 3 (4 cols): Target Pods Running -->
-                                <div id="node-pod" onclick="inspectComponent('pod')" class="md:col-span-4 k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
+                                <div id="node-pod" onclick="inspectComponent('pod')"
+                                    class="md:col-span-4 k8s-node cursor-pointer rounded-xl bg-slate-900/95 border border-slate-700/80 p-3 flex flex-col justify-between">
                                     <div>
                                         <div class="flex items-center justify-between mb-1.5">
-                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🍽️ Bandejas de Servicio</span>
-                                            <span id="pod-status-badge" class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
-                                                <span id="pod-status-dot" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                                            <span class="cafe-badge text-xs text-amber-300 font-medium">🍽️ Bandejas de
+                                                Servicio</span>
+                                            <span id="pod-status-badge"
+                                                class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+                                                <span id="pod-status-dot"
+                                                    class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                                                 <span id="pod-status-text">Running (2/2)</span>
                                             </span>
                                         </div>
                                         <h3 class="text-sm font-bold text-white">Pods de Aplicación</h3>
-                                        <p class="text-xs text-slate-400 mt-0.5">Contenedor Principal (☕ App) + Sidecar (🥛 Logs/Métricas).</p>
+                                        <p class="text-xs text-slate-400 mt-0.5">Contenedor Principal (☕ App) + Sidecar
+                                            (🥛 Logs/Métricas).</p>
 
                                         <!-- Visual Replica Boxes -->
                                         <div class="mt-2.5 space-y-2">
-                                            <div id="pod-replica-1" class="p-2 rounded-lg bg-slate-950 border border-emerald-500/40 flex items-center justify-between text-xs font-mono transition-all">
+                                            <div id="pod-replica-1"
+                                                class="p-2 rounded-lg bg-slate-950 border border-emerald-500/40 flex items-center justify-between text-xs font-mono transition-all">
                                                 <div class="flex items-center gap-1.5">
-                                                    <span id="pod-rep1-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                                                    <span id="pod-rep1-name" class="text-slate-200">mi-app-7d9f-x8k2</span>
+                                                    <span id="pod-rep1-dot"
+                                                        class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                                    <span id="pod-rep1-name"
+                                                        class="text-slate-200">mi-app-7d9f-x8k2</span>
                                                 </div>
                                                 <span id="pod-rep1-ip" class="text-emerald-400">10.244.1.42</span>
                                             </div>
-                                            <div id="pod-replica-2" class="p-2 rounded-lg bg-slate-950 border border-emerald-500/40 flex items-center justify-between text-xs font-mono transition-all">
+                                            <div id="pod-replica-2"
+                                                class="p-2 rounded-lg bg-slate-950 border border-emerald-500/40 flex items-center justify-between text-xs font-mono transition-all">
                                                 <div class="flex items-center gap-1.5">
-                                                    <span id="pod-rep2-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                                                    <span id="pod-rep2-name" class="text-slate-200">mi-app-7d9f-m4p9</span>
+                                                    <span id="pod-rep2-dot"
+                                                        class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                                    <span id="pod-rep2-name"
+                                                        class="text-slate-200">mi-app-7d9f-m4p9</span>
                                                 </div>
                                                 <span id="pod-rep2-ip" class="text-emerald-400">10.244.1.43</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="mt-2.5 pt-1.5 border-t border-slate-800 text-xs font-mono text-slate-400 flex justify-between">
+                                    <div
+                                        class="mt-2.5 pt-1.5 border-t border-slate-800 text-xs font-mono text-slate-400 flex justify-between">
                                         <span>Puerto: 8080</span>
                                         <span id="pod-ready-Summary" class="text-emerald-400">Endpoints Activos</span>
                                     </div>
@@ -581,7 +740,8 @@
             <!-- CARD 1: PASO A PASO EXPLICACIÓN (KUBECAFÉ + SENCILLA + TÉCNICA + YAML) -->
             <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center justify-between gap-2 mb-2">
-                    <span id="step-flow-tag" class="text-xs font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-k8s-blue/20 text-cyan-300 border border-k8s-blue/40">
+                    <span id="step-flow-tag"
+                        class="text-xs font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-k8s-blue/20 text-cyan-300 border border-k8s-blue/40">
                         Flujo 1 • Despliegue
                     </span>
                     <span id="step-number-label" class="text-xs font-mono text-slate-400">Paso 1 de 8</span>
@@ -597,7 +757,8 @@
                         <span>☕ ¿Qué pasa en KubeCafé?</span>
                     </div>
                     <p id="step-cafe-desc" class="text-xs text-amber-100/90 leading-relaxed">
-                        Entregas tu orden escrita en la Caja Registradora pidiendo: «Quiero mantener siempre 2 bandejas de Espresso listas en el salón».
+                        Entregas tu orden escrita en la Caja Registradora pidiendo: «Quiero mantener siempre 2 bandejas
+                        de Espresso listas en el salón».
                     </p>
                 </div>
 
@@ -607,7 +768,8 @@
                         <span>💡 En palabras sencillas:</span>
                     </div>
                     <p id="step-simple-desc" class="text-xs text-slate-300 leading-relaxed">
-                        Escribes la receta de tu aplicación en un archivo YAML y presionas Enter. kubectl la empaqueta y la envía por conexión segura al cerebro del clúster.
+                        Escribes la receta de tu aplicación en un archivo YAML y presionas Enter. kubectl la empaqueta y
+                        la envía por conexión segura al cerebro del clúster.
                     </p>
                 </div>
 
@@ -617,13 +779,15 @@
                         <span>⚙️ Bajo el capó (Técnico):</span>
                     </div>
                     <p id="step-tech-desc" class="text-xs text-slate-300 leading-relaxed">
-                        kubectl convierte el YAML a JSON y envía un HTTP POST autenticado con TLS a /apis/apps/v1/namespaces/default/deployments.
+                        kubectl convierte el YAML a JSON y envía un HTTP POST autenticado con TLS a
+                        /apis/apps/v1/namespaces/default/deployments.
                     </p>
                 </div>
 
                 <!-- Live YAML / Object State Mutating at this step -->
                 <div class="rounded-xl bg-[#050811] border border-slate-800 p-2.5 font-mono text-xs">
-                    <div class="flex items-center justify-between text-slate-400 pb-1 mb-1 border-b border-slate-800/80">
+                    <div
+                        class="flex items-center justify-between text-slate-400 pb-1 mb-1 border-b border-slate-800/80">
                         <span>📄 Estado del Objeto en este Paso:</span>
                         <span id="yaml-step-badge" class="text-cyan-400">YAML / JSON</span>
                     </div>
@@ -640,7 +804,9 @@
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
                         <span class="text-xs font-mono text-slate-300 ml-1">eventos-del-cluster.log</span>
                     </div>
-                    <span class="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">EN VIVO</span>
+                    <span
+                        class="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">EN
+                        VIVO</span>
                 </div>
                 <div id="terminal-logs" class="p-3.5 font-mono text-xs space-y-1.5 h-44 overflow-y-auto bg-[#050811]">
                     <!-- Dynamically populated logs -->
@@ -648,10 +814,14 @@
             </div>
 
             <!-- CARD 3: INTERACTIVE COMPONENT INSPECTOR (ON CLICK) -->
-            <div id="inspector-card" class="bg-slate-900/95 border border-amber-500/30 rounded-2xl p-4 shadow-xl transition-all">
+            <div id="inspector-card"
+                class="bg-slate-900/95 border border-amber-500/30 rounded-2xl p-4 shadow-xl transition-all">
                 <div class="flex items-center justify-between mb-1.5">
-                    <span class="px-2 py-0.5 rounded text-xs font-mono uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">Inspector de Componente</span>
-                    <span id="inspector-badge" class="text-xs font-mono text-slate-400">Haz clic en un nodo del mapa</span>
+                    <span
+                        class="px-2 py-0.5 rounded text-xs font-mono uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">Inspector
+                        de Componente</span>
+                    <span id="inspector-badge" class="text-xs font-mono text-slate-400">Haz clic en un nodo del
+                        mapa</span>
                 </div>
                 <h3 id="inspector-title" class="text-sm font-bold text-white mb-1">
                     🛎️ kube-apiserver (Caja Registradora)
@@ -660,9 +830,11 @@
                     ☕ En KubeCafé: Es el mostrador único donde se reciben y validan todas las órdenes.
                 </p>
                 <p id="inspector-body" class="text-xs text-slate-300 leading-relaxed mb-2.5">
-                    Es el recepcionista central del clúster. Ningún componente habla directamente con la base de datos etcd; todos deben pasar por el API Server.
+                    Es el recepcionista central del clúster. Ningún componente habla directamente con la base de datos
+                    etcd; todos deben pasar por el API Server.
                 </p>
-                <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-emerald-300 flex items-center justify-between gap-2">
+                <div
+                    class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-emerald-300 flex items-center justify-between gap-2">
                     <div class="truncate">
                         <span class="text-slate-500">$ </span>
                         <span id="inspector-cmd">kubectl get --raw='/readyz?verbose'</span>
@@ -774,6 +946,7 @@
                         packetText: "Bind worker-node-01",
                         podStatus: "Scheduled",
                         podVisualState: "pending",
+                        cafeDesc: "El Despachador de Mesas revisa qué estación de barismo tiene molinos (CPU) y agua (RAM) libres, y asigna las bandejas a la Mesa 1.",
                         cafeDesc: "El Despachador de Mesas revisa qué estación de barismo tiene cafeteras (CPU) y agua (RAM) libres, y asigna las bandejas a la Mesa 1.",
                         simpleDesc: "El Scheduler busca entre todos tus servidores cuál tiene suficiente memoria RAM y CPU libre, elige 'worker-node-01' y anota esa asignación en el API Server.",
                         techDesc: "kube-scheduler detecta Pods con nodeName vacío, ejecuta las fases de Filtering (recursos, taints, nodeSelector) y Scoring (afinidad y balanceo), y hace un Bind actualizando spec.nodeName = 'worker-node-01'.",
@@ -1115,6 +1288,7 @@
                         packetText: "❌ 0/1 Nodes Available",
                         podStatus: "Pending (Sin Nodo)",
                         podVisualState: "pending",
+                        cafeDesc: "El pedido entró a Caja, pero pide 64 molinos de café (CPU) y 500 litros de agua (500Gi RAM). El Despachador (`scheduler`) mira las mesas y ninguna tiene tanta capacidad.",
                         cafeDesc: "El pedido entró a Caja, pero pide 64 cafeteras (CPU) y 500 litros de agua (500Gi RAM). El Despachador (`scheduler`) mira las mesas y ninguna tiene tanta capacidad.",
                         simpleDesc: "El Pod se crea, pero se queda en estado 'Pending' para siempre porque ningún Worker Node tiene los recursos exagerados que solicitó.",
                         techDesc: "En la fase Filtering, kube-scheduler comprueba que 'requests.cpu: 64' y 'requests.memory: 500Gi' superan el Allocatable del nodo. Emite un evento Warning FailedScheduling.",
@@ -1225,6 +1399,7 @@
             scheduler: {
                 title: "📋 kube-scheduler",
                 role: "Control Plane • Asignador Inteligente",
+                cafe: "☕ En KubeCafé: Es el Despachador que decide qué mesa tiene agua y molinos libres.",
                 cafe: "☕ En KubeCafé: Es el Despachador que decide qué mesa tiene agua y cafeteras libres.",
                 body: "Observa los Pods recién creados que no tienen nodo asignado. Filtra los Worker Nodes según CPU, RAM, Taints y afinidades, los califica y elige el servidor óptimo.",
                 cmd: "kubectl get events --sort-by=.metadata.creationTimestamp"
@@ -1720,5 +1895,5 @@
         };
     </script>
 </body>
-</html>
 
+</html>
