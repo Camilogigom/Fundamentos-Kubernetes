@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/Cuburi.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="Cuburi"/> Yorman Agudelo (`@Cuburi`)
+
+<img src="https://github.com/Cuburi.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="Cuburi"/><br/>
+
+### Yorman Agudelo (`@Cuburi`)
 **Fullstack Developer**
 
 *«Aprovechar al maximo esta oportunidad de aprender»*

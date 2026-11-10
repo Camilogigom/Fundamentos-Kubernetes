@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/calichem26.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="calichem26"/> Carlos Andres Montoya Alzate (`@calichem26`)
+
+<img src="https://github.com/calichem26.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="calichem26"/><br/>
+
+### Carlos Andres Montoya Alzate (`@calichem26`)
 **Devops**
 
 *«Reforzar mis conocimientos y aportar en lo que mas se pueda»*

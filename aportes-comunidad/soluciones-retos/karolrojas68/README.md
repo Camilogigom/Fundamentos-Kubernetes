@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/karolrojas68.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="karolrojas68"/> Karol Rojas (`@karolrojas68`)
+
+<img src="https://github.com/karolrojas68.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="karolrojas68"/><br/>
+
+### Karol Rojas (`@karolrojas68`)
 **Tripulante de la Comunidad**
 
 *«Aprender de la comunidad y fortalecer mis conocimientos en Kubernetes»*

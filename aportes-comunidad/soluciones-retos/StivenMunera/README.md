@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/StivenMunera.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="StivenMunera"/> Stiven Munera (`@StivenMunera`)
+
+<img src="https://github.com/StivenMunera.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="StivenMunera"/><br/>
+
+### Stiven Munera (`@StivenMunera`)
 **FullStack Developer Jr**
 
 *«Aprender todo estos temas de performance y escalabilidad»*

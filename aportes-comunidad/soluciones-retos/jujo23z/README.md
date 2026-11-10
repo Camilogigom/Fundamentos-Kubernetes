@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/jujo23z.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="jujo23z"/> Juan Jose Jaramillo (`@jujo23z`)
+
+<img src="https://github.com/jujo23z.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="jujo23z"/><br/>
+
+### Juan Jose Jaramillo (`@jujo23z`)
 **Ingeniero de Sistemas**
 
 *«Quiero aprender todo lo posible de la comunidad y si es posible aportar.»*

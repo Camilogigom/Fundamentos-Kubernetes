@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/glgaviria64.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="glgaviria64"/> Gloria Gaviria (`@glgaviria64`)
+
+<img src="https://github.com/glgaviria64.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="glgaviria64"/><br/>
+
+### Gloria Gaviria (`@glgaviria64`)
 **👩‍💻 Estudiante<br>Desarrolladora Jr**
 
 *«Aprender de la comunidad de Cloud Native Medellín. 🏔️☕»*

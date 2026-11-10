@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/juanjosegonzalezrosales.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="juanjosegonzalezrosales"/> Juan José González Rosales (`@juanjosegonzalezrosales`)
+
+<img src="https://github.com/juanjosegonzalezrosales.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="juanjosegonzalezrosales"/><br/>
+
+### Juan José González Rosales (`@juanjosegonzalezrosales`)
 **Desarrollador Jr**
 
 *«Aprender sobre contenedores y kubernetes con el ánimo de crecer profesionalmente.»*

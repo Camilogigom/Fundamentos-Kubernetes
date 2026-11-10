@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/parte193.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="parte193"/> Johan Andrés López Zuluaga (`@parte193`)
+
+<img src="https://github.com/parte193.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="parte193"/><br/>
+
+### Johan Andrés López Zuluaga (`@parte193`)
 **Desarrollador Full-Stack**
 
 *«Entender de verdad cómo funcionan los contenedores y poder llevar mis propias apps de mi computador a producción sin miedo»*

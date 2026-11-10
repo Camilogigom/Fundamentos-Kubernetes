@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/sanjavier88.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="sanjavier88"/> Jorge Alberto Monsalve Ruiz (`@sanjavier88`)
+
+<img src="https://github.com/sanjavier88.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="sanjavier88"/><br/>
+
+### Jorge Alberto Monsalve Ruiz (`@sanjavier88`)
 **Estudiante**
 
 *«No tengo conocimiento de la nube, así que con el curso espero poder aprender a utilizarla.»*

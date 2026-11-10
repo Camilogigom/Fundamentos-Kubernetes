@@ -1,7 +1,10 @@
 <div align="center">
 
 # 🎓 Portafolio Profesional Cloud Native & Kubernetes
-### <img src="https://github.com/devdavco.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="devdavco"/> David Corrales (`@devdavco`)
+
+<img src="https://github.com/devdavco.png?size=160" width="80" height="80" style="border-radius: 50%; object-fit: cover; margin-top: 8px;" alt="devdavco"/><br/>
+
+### David Corrales (`@devdavco`)
 **Desarrollador Fullstack Java**
 
 *«El conocimiento es la clave para mi avance tanto profesional como laboral.»*
