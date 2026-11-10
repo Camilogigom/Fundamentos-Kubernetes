@@ -1,5 +1,5 @@
 name: "📔 Bitácora de Aprendizaje Semanal y Portafolio Profesional"
-description: "Registra en 1 minuto lo que aprendiste esta semana, genera/actualiza tu Portafolio K8s y obtén tu insignia para compartir en redes"
+description: "Registra en 1 minuto lo que aprendiste esta semana y actualiza tu Portafolio Profesional K8s"
 title: "📔 Bitácora Semanal: [Escribe tu Usuario de GitHub]"
 labels: ["bitacora-semanal"]
 body:
@@ -39,7 +39,6 @@ body:
         - "semana-04 — 💾 Configuración y Datos Persistentes (ConfigMaps, Secrets, PV)"
         - "semana-05 — 🛡️ Salud, Límites y Seguridad (Probes, Quotas, RBAC)"
         - "semana-06 — 🎓 Empaquetado con Helm y Proyecto Final KubeCafé"
-      default: 0
     validations:
       required: true
 
@@ -73,7 +72,6 @@ body:
         kubectl get pods -o wide
         kubectl describe pod reto-01-imagen
         kubectl rollout status deployment/kubecafe-web
-      render: bash
     validations:
       required: false
 
