@@ -53,44 +53,65 @@ Puedes copiar cualquiera de estas insignias y pegarlas en el archivo `README.md`
 
 ---
 
-## 📣 3. Comparte tu Progreso en Varias Redes Sociales (1 Clic)
+## 📣 3. Comparte tu Progreso en Redes Sociales
 
-Cada vez que llenas tu bitácora o entras a tu portafolio personal (`aportes-comunidad/soluciones-retos/<TU-USUARIO>/README.md`), encontrarás botones personalizados. También puedes usar estos accesos rápidos:
+Cada vez que llenas tu bitácora o entras a tu portafolio personal (`aportes-comunidad/soluciones-retos/<TU-USUARIO>/README.md`), encontrarás la sección de difusión profesional.
+
+### 🚀 Publicar en LinkedIn con Alto Alcance (Recomendado)
+
+> [!TIP]
+> **¿Por qué copiar el texto y adjuntar imagen en LinkedIn en lugar de un enlace directo?**  
+> 1. **Políticas de LinkedIn:** Por privacidad y anti-spam, LinkedIn **no permite pre-llenar texto automáticamente** desde enlaces externos ni generar vistas previas de subcarpetas de GitHub (muestra *"Cannot display preview"*).  
+> 2. **Mayor visibilidad profesional:** El algoritmo de LinkedIn premia las publicaciones nativas con **texto + imagen (captura de pantalla)** con hasta **10 veces más alcance e interacción** en el feed que los enlaces externos compartidos directamente.
+
+#### Flujo en 3 Pasos:
+1. **Copia la plantilla de texto** que está abajo (o la que se genera automáticamente con tu rango y XP en tu portafolio).
+2. **Toma una captura de pantalla** de tu portafolio en GitHub (o de tus terminales superando los retos).
+3. **Haz clic en el botón de abajo**, pega el texto (`Ctrl+V` / `Cmd+V`) y adjunta la captura de pantalla:
 
 <div align="center">
 
-[![Compartir en LinkedIn](https://img.shields.io/badge/Compartir_en-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgithub.com%2Fedwinbermudez91%2FFundamentos-Kubernetes)
-[![Instagram @colombiacloudnative](https://img.shields.io/badge/Instagram-@colombiacloudnative-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/colombiacloudnative/)
-[![YouTube @CloudNativeColombia](https://img.shields.io/badge/YouTube-@CloudNativeColombia-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@CloudNativeColombia)
-[![LinkedIn Empresa](https://img.shields.io/badge/LinkedIn-Cloud_Native_Colombia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/cloud-native-colombia/)
-[![Compartir en WhatsApp](https://img.shields.io/badge/Compartir_en-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://api.whatsapp.com/send?text=%E2%98%B8%EF%B8%8F%20Estoy%20construyendo%20mi%20Portafolio%20Pr%C3%A1ctico%20de%20Docker%20y%20Kubernetes%20en%20el%20workshop%20De%20Cero%20a%20Capit%C3%A1n%20en%20Kubernetes%20%28CNCF%20Medell%C3%ADn%29%20%F0%9F%8F%94%EF%B8%8F%E2%98%95%20https%3A%2F%2Fgithub.com%2Fedwinbermudez91%2FFundamentos-Kubernetes)
-[![Compartir en Telegram](https://img.shields.io/badge/Compartir_en-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/share/url?url=https%3A%2F%2Fgithub.com%2Fedwinbermudez91%2FFundamentos-Kubernetes&text=%E2%98%B8%EF%B8%8F%20Portafolio%20Pr%C3%A1ctico%20de%20Docker%20y%20Kubernetes%20%E2%80%94%20Cloud%20Native%20Medell%C3%ADn%20%28CNCF%29)
+[![Publicar en LinkedIn](https://img.shields.io/badge/1._Abrir_y_Crear_Post_en-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/feed/?shareActive=true)
 
 </div>
 
-### 📝 Plantilla lista para un Post de Alto Impacto en LinkedIn
-
-Copia esta plantilla, ajústala con lo que aprendiste en la semana y acompáñala con una captura del [**Simulador KubeCafé**](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html) o de tu Portafolio en GitHub:
+### 📝 Plantilla de Post de Alto Impacto para LinkedIn:
 
 ```text
 ☸️ ¡Semana [XX] superada en "De Cero a Capitán en Kubernetes" con la comunidad Cloud Native Medellín (CNCF)! 🏔️☕
-
+⠀
 Esta semana estuve practicando y resolviendo escenarios reales de Troubleshooting en contenedores y Kubernetes:
+⠀
 ✅ [Escribe aquí tu aprendizaje #1, ej: Empaquetado seguro de imágenes Docker sin usuario root]
 ✅ [Escribe aquí tu aprendizaje #2, ej: Diagnóstico de Pods en CrashLoopBackOff y Pending con kubectl]
 ✅ [Escribe aquí tu aprendizaje #3, ej: Alta disponibilidad y Rolling Updates sin caídas con Deployments]
-
+⠀
 📂 Toda mi evidencia práctica, manifiestos corregidos y bitácora técnica están verificados con CI/CD en mi portafolio de GitHub:
 👉 https://github.com/edwinbermudez91/Fundamentos-Kubernetes/tree/main/aportes-comunidad/soluciones-retos/TU-USUARIO
-
-Gracias a la comunidad @Cloud Native Colombia por este espacio de formación abierta:
+⠀
+Agradecimientos a Cloud Native Colombia (Armenia, Bogota, Cali, Medellin) por este espacio de formación abierta:
+⠀
 🏢 LinkedIn: https://www.linkedin.com/company/cloud-native-colombia/
 📸 Instagram: https://www.instagram.com/colombiacloudnative/
 ▶️ YouTube: https://www.youtube.com/@CloudNativeColombia
 🔗 Capítulo oficial CNCF: https://ocgroups.dev/cncf/group/2majk4r
-
+⠀
 #Kubernetes #Docker #CloudNative #DevOps #SRE #CNCF #KubeCafe #OpenSource
 ```
+
+### 🌐 Canales y otras Redes Sociales (1 Clic)
+
+En WhatsApp y Telegram el mensaje y enlace se cargan automáticamente en 1 solo clic:
+
+<div align="center">
+
+[![Compartir en WhatsApp](https://img.shields.io/badge/Compartir_en-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://api.whatsapp.com/send?text=%E2%98%B8%EF%B8%8F%20Estoy%20construyendo%20mi%20Portafolio%20Pr%C3%A1ctico%20de%20Docker%20y%20Kubernetes%20en%20el%20workshop%20De%20Cero%20a%20Capit%C3%A1n%20en%20Kubernetes%20%28CNCF%20Medell%C3%ADn%29%20%F0%9F%8F%94%EF%B8%8F%E2%98%95%20https%3A%2F%2Fgithub.com%2Fedwinbermudez91%2FFundamentos-Kubernetes)
+[![Compartir en Telegram](https://img.shields.io/badge/Compartir_en-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/share/url?url=https%3A%2F%2Fgithub.com%2Fedwinbermudez91%2FFundamentos-Kubernetes&text=%E2%98%B8%EF%B8%8F%20Portafolio%20Pr%C3%A1ctico%20de%20Docker%20y%20Kubernetes%20%E2%80%94%20Cloud%20Native%20Medell%C3%ADn%20%28CNCF%29)
+[![Instagram @colombiacloudnative](https://img.shields.io/badge/Instagram-@colombiacloudnative-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/colombiacloudnative/)
+[![YouTube @CloudNativeColombia](https://img.shields.io/badge/YouTube-@CloudNativeColombia-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@CloudNativeColombia)
+[![LinkedIn Comunidad](https://img.shields.io/badge/LinkedIn-Cloud_Native_Colombia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/cloud-native-colombia/)
+
+</div>
 
 ---
 

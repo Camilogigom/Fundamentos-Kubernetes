@@ -617,9 +617,31 @@ function buildShareLinks(user, nombre, rango, points, hasPortfolioDir = false, f
         ? `https://img.shields.io/badge/KubeCafé_CNCF-🧭_Timonel_K8s_(${points}_XP)-7c3aed?style=for-the-badge&logo=kubernetes&logoColor=white`
         : `https://img.shields.io/badge/KubeCafé_CNCF-⛵_Tripulante_K8s_(${points}_XP)-0284c7?style=for-the-badge&logo=kubernetes&logoColor=white`;
 
-  const shareMessage = `☸️ ¡Sigo construyendo mi Portafolio Práctico de Docker y Kubernetes en el workshop "De Cero a Capitán en Kubernetes" con la comunidad Cloud Native Medellín (CNCF)! 🏔️☕\n\n🎖️ Rango actual: ${rango} (${points} XP)\n📂 Mi Portafolio de Laboratorios y Bitácora verificada: ${portfolioUrl}\n\nAgradecimientos a @Cloud Native Colombia por este espacio de formación abierta:\n🏢 LinkedIn: https://www.linkedin.com/company/cloud-native-colombia/\n📸 Instagram: https://www.instagram.com/colombiacloudnative/\n▶️ YouTube: https://www.youtube.com/@CloudNativeColombia\n🔗 Capítulo oficial CNCF: https://ocgroups.dev/cncf/group/2majk4r\n\n#Kubernetes #Docker #CloudNative #DevOps #KubeCafe #CNCFMedellin #OpenSource`;
+  // U+2800 (Braille blank): Carácter invisible que obliga al editor de LinkedIn a respetar saltos y párrafos sin unirlos
+  const B = '⠀';
 
-  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(portfolioUrl)}`;
+  const shareMessage = [
+    `☸️ ¡Sigo construyendo mi Portafolio Práctico de Docker y Kubernetes en el workshop "De Cero a Capitán en Kubernetes" con la comunidad Cloud Native Medellín (CNCF)! 🏔️☕`,
+    B,
+    `🎖️ Rango actual: ${rango} (${points} XP)`,
+    B,
+    `📂 Mi Portafolio de Laboratorios y Bitácora verificada:`,
+    `${portfolioUrl}`,
+    B,
+    `Agradecimientos a Cloud Native Colombia (Armenia, Bogota, Cali, Medellin) por este espacio de formación abierta:`,
+    B,
+    `🏢 LinkedIn: https://www.linkedin.com/company/cloud-native-colombia/`,
+    B,
+    `📸 Instagram: https://www.instagram.com/colombiacloudnative/`,
+    B,
+    `▶️ YouTube: https://www.youtube.com/@CloudNativeColombia`,
+    B,
+    `🔗 Capítulo oficial CNCF: https://ocgroups.dev/cncf/group/2majk4r`,
+    B,
+    `#Kubernetes #Docker #CloudNative #DevOps #KubeCafe #CNCFMedellin #OpenSource`
+  ].join('\n');
+
+  const linkedinShareUrl = 'https://www.linkedin.com/feed/?shareActive=true';
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`;
   const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(portfolioUrl)}&text=${encodeURIComponent(
     `☸️ Mi Portafolio Práctico de Docker y Kubernetes en Cloud Native Medellín (${rango} • ${points} XP) 🏔️☕`
@@ -630,10 +652,10 @@ function buildShareLinks(user, nombre, rango, points, hasPortfolioDir = false, f
   const linkedinCompanyUrl = 'https://www.linkedin.com/company/cloud-native-colombia/';
 
   const badgesBar = [
-    `[![Compartir en LinkedIn](https://img.shields.io/badge/Compartir_en-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${linkedinShareUrl})`,
+    `[![Publicar en LinkedIn](https://img.shields.io/badge/Publicar_en-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${linkedinShareUrl})`,
     `[![Instagram @colombiacloudnative](https://img.shields.io/badge/Instagram-@colombiacloudnative-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](${instagramShareUrl})`,
     `[![YouTube @CloudNativeColombia](https://img.shields.io/badge/YouTube-@CloudNativeColombia-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](${youtubeShareUrl})`,
-    `[![LinkedIn Empresa](https://img.shields.io/badge/LinkedIn-Cloud_Native_Colombia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${linkedinCompanyUrl})`,
+    `[![LinkedIn Comunidad](https://img.shields.io/badge/LinkedIn-Cloud_Native_Colombia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${linkedinCompanyUrl})`,
     `[![Compartir en WhatsApp](https://img.shields.io/badge/Compartir_en-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](${whatsappShareUrl})`,
     `[![Compartir en Telegram](https://img.shields.io/badge/Compartir_en-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](${telegramShareUrl})`
   ].join(' ');
@@ -790,35 +812,60 @@ ${bitacorasSection}
 
 ---
 
-## 📣 Comparte tu Portafolio e Insignia en Redes Sociales
+## 📣 Comparte tu Portafolio Profesional en Redes Sociales
 
-Comparte tus avances con reclutadores, colegas y la comunidad haciendo clic en cualquiera de estos botones:
+Publica tus avances prácticos y tu progreso verificado por CI/CD ante reclutadores, líderes técnicos y la comunidad Cloud Native.
 
-<div align="center">
+---
 
-${share.badgesBar}
+### 🚀 Publicar en LinkedIn (Recomendado para Reclutadores)
 
-</div>
+> [!TIP]
+> **¿Por qué copiar el texto y adjuntar imagen en LinkedIn?**  
+> 1. **Espaciado protegido:** El bloque de texto ya incluye separadores invisibles (\`U+2800\`) para que el editor de LinkedIn **no comprima ni junte todo el texto** en un solo párrafo al pegar.  
+> 2. **Mayor visibilidad profesional:** Las publicaciones nativas en LinkedIn con **texto + imagen propia (captura de pantalla)** tienen **hasta 10 veces más alcance e interacción** en el feed que compartir un enlace suelto (el cual además arroja *"Cannot display preview"* en carpetas de GitHub).
 
-<details>
-<summary><b>📋 Ver texto listo para copiar y publicar en LinkedIn + Insignia para tu Perfil de GitHub</b></summary>
-<br>
+Sigue estos **3 sencillos pasos**:
 
-### 1️⃣ Texto sugerido para publicación en LinkedIn:
-Copia y pega este texto en un post de LinkedIn (puedes adjuntar una captura de este portafolio o de tu terminal):
-
+1. **Copia el texto pre-armado** (haz clic en el ícono de copiar en la esquina superior derecha del bloque de código):
 \`\`\`text
 ${share.shareMessage}
 \`\`\`
 
-### 2️⃣ Insignia dinámica para el README de tu perfil personal de GitHub (\`github.com/${user}/${user}\`):
-Pega esta línea en el \`README.md\` de tu perfil de GitHub para mostrar tu rango y enlazar a este portafolio verificado:
+2. **Toma una captura de pantalla** de la cabecera de tu portafolio (donde se ven tu foto, tu rango **${rango}**, tus **${points} XP** y las insignias de tus retos resueltos).
+3. **Abre el creador de publicaciones de LinkedIn:** Haz clic en el botón de abajo, pega el texto (\`Ctrl+V\` / \`Cmd+V\`) y adjunta tu captura de pantalla:
+
+<div align="center">
+
+[![Publicar en LinkedIn](https://img.shields.io/badge/1._Abrir_y_Crear_Post_en-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${share.linkedinShareUrl})
+
+</div>
+
+---
+
+### 🌐 Compartir en otras Redes y Canales Oficiales
+
+En WhatsApp y Telegram el mensaje y enlace a tu portafolio se cargan automáticamente en 1 solo clic:
+
+<div align="center">
+
+[![Compartir en WhatsApp](https://img.shields.io/badge/Compartir_en-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](${share.whatsappShareUrl})
+[![Compartir en Telegram](https://img.shields.io/badge/Compartir_en-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](${share.telegramShareUrl})
+[![Instagram @colombiacloudnative](https://img.shields.io/badge/Instagram-@colombiacloudnative-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](${share.instagramShareUrl})
+[![YouTube @CloudNativeColombia](https://img.shields.io/badge/YouTube-@CloudNativeColombia-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](${share.youtubeShareUrl})
+[![LinkedIn Comunidad](https://img.shields.io/badge/LinkedIn-Cloud_Native_Colombia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${share.linkedinCompanyUrl})
+
+</div>
+
+---
+
+### 🎖️ Insignia Dinámica para tu Perfil de GitHub (\`github.com/${user}/${user}\`)
+
+Pega esta línea en el \`README.md\` de tu perfil personal de GitHub para mostrar tu rango oficial y enlazar directamente a este portafolio verificado:
 
 \`\`\`markdown
 ${share.githubProfileSnippet}
 \`\`\`
-
-</details>
 
 ---
 
