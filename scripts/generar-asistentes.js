@@ -601,7 +601,7 @@ function evaluateUserProgress(githubUser, officialChallenges) {
 }
 
 /**
- * Construye enlaces y textos pre-armados para compartir en LinkedIn, X/Twitter, WhatsApp y Telegram.
+ * Construye enlaces y textos pre-armados para compartir en LinkedIn, Instagram, YouTube, WhatsApp y Telegram.
  */
 function buildShareLinks(user, nombre, rango, points, hasPortfolioDir = false, folderName = '') {
   const cleanUser = cleanGithubUser(user);
@@ -617,23 +617,23 @@ function buildShareLinks(user, nombre, rango, points, hasPortfolioDir = false, f
         ? `https://img.shields.io/badge/KubeCafé_CNCF-🧭_Timonel_K8s_(${points}_XP)-7c3aed?style=for-the-badge&logo=kubernetes&logoColor=white`
         : `https://img.shields.io/badge/KubeCafé_CNCF-⛵_Tripulante_K8s_(${points}_XP)-0284c7?style=for-the-badge&logo=kubernetes&logoColor=white`;
 
-  const shareMessage = `☸️ ¡Sigo construyendo mi Portafolio Práctico de Docker y Kubernetes en el workshop "De Cero a Capitán en Kubernetes" de Cloud Native Medellín (CNCF)! 🏔️☕\n\n🎖️ Rango actual: ${rango} (${points} XP)\n📂 Mi Portafolio de Laboratorios y Bitácora: ${portfolioUrl}\n\n#Kubernetes #Docker #CloudNative #DevOps #KubeCafe #CNCFMedellin`;
+  const shareMessage = `☸️ ¡Sigo construyendo mi Portafolio Práctico de Docker y Kubernetes en el workshop "De Cero a Capitán en Kubernetes" con la comunidad Cloud Native Medellín (CNCF)! 🏔️☕\n\n🎖️ Rango actual: ${rango} (${points} XP)\n📂 Mi Portafolio de Laboratorios y Bitácora verificada: ${portfolioUrl}\n\nAgradecimientos a @Cloud Native Colombia por este espacio de formación abierta:\n🏢 LinkedIn: https://www.linkedin.com/company/cloud-native-colombia/\n📸 Instagram: https://www.instagram.com/colombiacloudnative/\n▶️ YouTube: https://www.youtube.com/@CloudNativeColombia\n🔗 Capítulo oficial CNCF: https://ocgroups.dev/cncf/group/2majk4r\n\n#Kubernetes #Docker #CloudNative #DevOps #KubeCafe #CNCFMedellin #OpenSource`;
 
   const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(portfolioUrl)}`;
-  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-    `☸️ Construyendo mi Portafolio Práctico de #Docker y #Kubernetes en @CloudNativeCol (CNCF Medellín) 🏔️☕\n🎖️ Rango: ${rango} (${points} XP)\n#CloudNative #DevOps #KubeCafe`
-  )}&url=${encodeURIComponent(portfolioUrl)}`;
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`;
   const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(portfolioUrl)}&text=${encodeURIComponent(
     `☸️ Mi Portafolio Práctico de Docker y Kubernetes en Cloud Native Medellín (${rango} • ${points} XP) 🏔️☕`
   )}`;
 
-  const instagramShareUrl = 'https://www.instagram.com/';
+  const instagramShareUrl = 'https://www.instagram.com/colombiacloudnative/';
+  const youtubeShareUrl = 'https://www.youtube.com/@CloudNativeColombia';
+  const linkedinCompanyUrl = 'https://www.linkedin.com/company/cloud-native-colombia/';
 
   const badgesBar = [
     `[![Compartir en LinkedIn](https://img.shields.io/badge/Compartir_en-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${linkedinShareUrl})`,
-    `[![Compartir en X](https://img.shields.io/badge/Compartir_en-X_/_Twitter-000000?style=for-the-badge&logo=x&logoColor=white)](${xShareUrl})`,
-    `[![Compartir en Instagram](https://img.shields.io/badge/Compartir_en-Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](${instagramShareUrl})`,
+    `[![Instagram @colombiacloudnative](https://img.shields.io/badge/Instagram-@colombiacloudnative-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](${instagramShareUrl})`,
+    `[![YouTube @CloudNativeColombia](https://img.shields.io/badge/YouTube-@CloudNativeColombia-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](${youtubeShareUrl})`,
+    `[![LinkedIn Empresa](https://img.shields.io/badge/LinkedIn-Cloud_Native_Colombia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${linkedinCompanyUrl})`,
     `[![Compartir en WhatsApp](https://img.shields.io/badge/Compartir_en-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](${whatsappShareUrl})`,
     `[![Compartir en Telegram](https://img.shields.io/badge/Compartir_en-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](${telegramShareUrl})`
   ].join(' ');
@@ -645,8 +645,9 @@ function buildShareLinks(user, nombre, rango, points, hasPortfolioDir = false, f
     rankBadgeUrl,
     shareMessage,
     linkedinShareUrl,
-    xShareUrl,
     instagramShareUrl,
+    youtubeShareUrl,
+    linkedinCompanyUrl,
     whatsappShareUrl,
     telegramShareUrl,
     badgesBar,
@@ -1028,7 +1029,7 @@ A medida que avances semana a semana, nuestro bot de GitHub Actions inspeccionar
 | :--- | :---: | :--- |
 | **1. Registro en el Muro** | **+10 XP** | Por registrarte en el formulario o vía Pull Request. |
 | **2. Reto Roto Resuelto y Validado** | **+10 XP por reto** | Cada ejercicio de \`2.reto-roto/\` (${weekChallengesText}) que resuelvas y pase la validación de contenido suma **+10 XP** en la tabla de posiciones (ej. Semana 00 completa = +50 XP, Semana 01 completa = +40 XP). |
-| **3. Bitácora de Navegación y Portafolio KubeCafé** | **🎓 Portafolio + 📔 Insignia** | Registra lo aprendido en el **[📔 Formulario Visual de Bitácora](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)** (o incluye \`bitacora.md\` en tu PR) para desbloquear tu **Portafolio Profesional K8s** con botones para compartir en LinkedIn, X y WhatsApp. |
+| **3. Bitácora de Navegación y Portafolio KubeCafé** | **🎓 Portafolio + 📔 Insignia** | Registra lo aprendido en el **[📔 Formulario Visual de Bitácora](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)** (o incluye \`bitacora.md\` en tu PR) para desbloquear tu **Portafolio Profesional K8s** con botones para compartir en LinkedIn, Instagram, WhatsApp y Telegram. |
 
 ### 🎖️ Requisitos para subir de Rango:
 | Rango | Requisito | Insignia Oficial para tu Perfil | Lo que representa en la travesía |
@@ -1048,7 +1049,7 @@ No necesitas tocar código para registrarte o documentar tu bitácora semanal:
    - Completa tu nombre, usuario de GitHub, rol y enlaces a LinkedIn/Redes, y haz clic en **\`Create\`**. En 15 segundos aparecerás en la tabla con tu foto oficial.
 2. **📔 Bitácora de Aprendizaje Semanal y Portafolio Profesional (1 minuto):**
    - 👉 **[Abrir Formulario Visual de Bitácora Semanal](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)**
-   - Elige la semana, escribe qué aprendiste y qué reto solucionaste, y haz clic en **\`Create\`**. El bot creará tu archivo \`bitacora.md\`, actualizará tu **🎓 Portafolio K8s** y te dará enlaces de 1 clic para compartir tu logro en LinkedIn, X/Twitter y WhatsApp.
+   - Elige la semana, escribe qué aprendiste y qué reto solucionaste, y haz clic en **\`Create\`**. El bot creará tu archivo \`bitacora.md\`, actualizará tu **🎓 Portafolio K8s** y te dará enlaces de 1 clic para compartir tu logro en LinkedIn, Instagram, WhatsApp y Telegram.
 3. **🛠️ Vía Pull Request desde tu terminal (Para practicar Git):**
    - También puedes editar tu bloque en [\`asistentes.json\`](./asistentes.json) o copiar la [\`PLANTILLA-BITACORA.md\`](./aportes-comunidad/soluciones-retos/PLANTILLA-BITACORA.md) dentro de tu carpeta semanal.
 

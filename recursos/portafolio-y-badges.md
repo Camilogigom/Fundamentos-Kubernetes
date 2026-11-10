@@ -60,8 +60,9 @@ Cada vez que llenas tu bitácora o entras a tu portafolio personal (`aportes-com
 <div align="center">
 
 [![Compartir en LinkedIn](https://img.shields.io/badge/Compartir_en-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgithub.com%2Fedwinbermudez91%2FFundamentos-Kubernetes)
-[![Compartir en X / Twitter](https://img.shields.io/badge/Compartir_en-X_/_Twitter-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/intent/tweet?text=%E2%98%B8%EF%B8%8F%20Construyendo%20mi%20Portafolio%20Pr%C3%A1ctico%20de%20%23Docker%20y%20%23Kubernetes%20con%20la%20comunidad%20Cloud%20Native%20Medell%C3%ADn%20%28CNCF%29%20%F0%9F%8F%94%EF%B8%8F%E2%98%95%0A%23CloudNative%20%23DevOps%20%23KubeCafe&url=https%3A%2F%2Fgithub.com%2Fedwinbermudez91%2FFundamentos-Kubernetes)
-[![Compartir en Instagram](https://img.shields.io/badge/Compartir_en-Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/)
+[![Instagram @colombiacloudnative](https://img.shields.io/badge/Instagram-@colombiacloudnative-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/colombiacloudnative/)
+[![YouTube @CloudNativeColombia](https://img.shields.io/badge/YouTube-@CloudNativeColombia-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@CloudNativeColombia)
+[![LinkedIn Empresa](https://img.shields.io/badge/LinkedIn-Cloud_Native_Colombia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/cloud-native-colombia/)
 [![Compartir en WhatsApp](https://img.shields.io/badge/Compartir_en-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://api.whatsapp.com/send?text=%E2%98%B8%EF%B8%8F%20Estoy%20construyendo%20mi%20Portafolio%20Pr%C3%A1ctico%20de%20Docker%20y%20Kubernetes%20en%20el%20workshop%20De%20Cero%20a%20Capit%C3%A1n%20en%20Kubernetes%20%28CNCF%20Medell%C3%ADn%29%20%F0%9F%8F%94%EF%B8%8F%E2%98%95%20https%3A%2F%2Fgithub.com%2Fedwinbermudez91%2FFundamentos-Kubernetes)
 [![Compartir en Telegram](https://img.shields.io/badge/Compartir_en-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/share/url?url=https%3A%2F%2Fgithub.com%2Fedwinbermudez91%2FFundamentos-Kubernetes&text=%E2%98%B8%EF%B8%8F%20Portafolio%20Pr%C3%A1ctico%20de%20Docker%20y%20Kubernetes%20%E2%80%94%20Cloud%20Native%20Medell%C3%ADn%20%28CNCF%29)
 
@@ -82,7 +83,10 @@ Esta semana estuve practicando y resolviendo escenarios reales de Troubleshootin
 📂 Toda mi evidencia práctica, manifiestos corregidos y bitácora técnica están verificados con CI/CD en mi portafolio de GitHub:
 👉 https://github.com/edwinbermudez91/Fundamentos-Kubernetes/tree/main/aportes-comunidad/soluciones-retos/TU-USUARIO
 
-Gracias a la comunidad @Cloud Native Medellín por este espacio de aprendizaje abierto.
+Gracias a la comunidad @Cloud Native Colombia por este espacio de formación abierta:
+🏢 LinkedIn: https://www.linkedin.com/company/cloud-native-colombia/
+📸 Instagram: https://www.instagram.com/colombiacloudnative/
+▶️ YouTube: https://www.youtube.com/@CloudNativeColombia
 🔗 Capítulo oficial CNCF: https://ocgroups.dev/cncf/group/2majk4r
 
 #Kubernetes #Docker #CloudNative #DevOps #SRE #CNCF #KubeCafe #OpenSource

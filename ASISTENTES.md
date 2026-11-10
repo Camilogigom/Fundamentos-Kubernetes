@@ -22,7 +22,7 @@ A medida que avances semana a semana, nuestro bot de GitHub Actions inspeccionar
 | :--- | :---: | :--- |
 | **1. Registro en el Muro** | **+10 XP** | Por registrarte en el formulario o vía Pull Request. |
 | **2. Reto Roto Resuelto y Validado** | **+10 XP por reto** | Cada ejercicio de `2.reto-roto/` (`semana-00` (5 retos rotos), `semana-01` (4 retos rotos), `semana-02` (4 retos rotos)) que resuelvas y pase la validación de contenido suma **+10 XP** en la tabla de posiciones (ej. Semana 00 completa = +50 XP, Semana 01 completa = +40 XP). |
-| **3. Bitácora de Navegación y Portafolio KubeCafé** | **🎓 Portafolio + 📔 Insignia** | Registra lo aprendido en el **[📔 Formulario Visual de Bitácora](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)** (o incluye `bitacora.md` en tu PR) para desbloquear tu **Portafolio Profesional K8s** con botones para compartir en LinkedIn, X y WhatsApp. |
+| **3. Bitácora de Navegación y Portafolio KubeCafé** | **🎓 Portafolio + 📔 Insignia** | Registra lo aprendido en el **[📔 Formulario Visual de Bitácora](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)** (o incluye `bitacora.md` en tu PR) para desbloquear tu **Portafolio Profesional K8s** con botones para compartir en LinkedIn, Instagram, WhatsApp y Telegram. |
 
 ### 🎖️ Requisitos para subir de Rango:
 | Rango | Requisito | Insignia Oficial para tu Perfil | Lo que representa en la travesía |
@@ -42,7 +42,7 @@ No necesitas tocar código para registrarte o documentar tu bitácora semanal:
    - Completa tu nombre, usuario de GitHub, rol y enlaces a LinkedIn/Redes, y haz clic en **`Create`**. En 15 segundos aparecerás en la tabla con tu foto oficial.
 2. **📔 Bitácora de Aprendizaje Semanal y Portafolio Profesional (1 minuto):**
    - 👉 **[Abrir Formulario Visual de Bitácora Semanal](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)**
-   - Elige la semana, escribe qué aprendiste y qué reto solucionaste, y haz clic en **`Create`**. El bot creará tu archivo `bitacora.md`, actualizará tu **🎓 Portafolio K8s** y te dará enlaces de 1 clic para compartir tu logro en LinkedIn, X/Twitter y WhatsApp.
+   - Elige la semana, escribe qué aprendiste y qué reto solucionaste, y haz clic en **`Create`**. El bot creará tu archivo `bitacora.md`, actualizará tu **🎓 Portafolio K8s** y te dará enlaces de 1 clic para compartir tu logro en LinkedIn, Instagram, WhatsApp y Telegram.
 3. **🛠️ Vía Pull Request desde tu terminal (Para practicar Git):**
    - También puedes editar tu bloque en [`asistentes.json`](./asistentes.json) o copiar la [`PLANTILLA-BITACORA.md`](./aportes-comunidad/soluciones-retos/PLANTILLA-BITACORA.md) dentro de tu carpeta semanal.
 
