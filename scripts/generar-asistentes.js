@@ -628,9 +628,12 @@ function buildShareLinks(user, nombre, rango, points, hasPortfolioDir = false, f
     `☸️ Mi Portafolio Práctico de Docker y Kubernetes en Cloud Native Medellín (${rango} • ${points} XP) 🏔️☕`
   )}`;
 
+  const instagramShareUrl = 'https://www.instagram.com/';
+
   const badgesBar = [
     `[![Compartir en LinkedIn](https://img.shields.io/badge/Compartir_en-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${linkedinShareUrl})`,
     `[![Compartir en X](https://img.shields.io/badge/Compartir_en-X_/_Twitter-000000?style=for-the-badge&logo=x&logoColor=white)](${xShareUrl})`,
+    `[![Compartir en Instagram](https://img.shields.io/badge/Compartir_en-Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](${instagramShareUrl})`,
     `[![Compartir en WhatsApp](https://img.shields.io/badge/Compartir_en-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](${whatsappShareUrl})`,
     `[![Compartir en Telegram](https://img.shields.io/badge/Compartir_en-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](${telegramShareUrl})`
   ].join(' ');
@@ -643,6 +646,7 @@ function buildShareLinks(user, nombre, rango, points, hasPortfolioDir = false, f
     shareMessage,
     linkedinShareUrl,
     xShareUrl,
+    instagramShareUrl,
     whatsappShareUrl,
     telegramShareUrl,
     badgesBar,
@@ -697,7 +701,7 @@ function generateStudentPortfolioReadme(student, evalResult) {
         ? `[📔 Leer Bitácora](./${rep.weekDirName}/bitacora.md)`
         : `[➕ Crear Bitácora](${REPO_URL}/issues/new?template=bitacora-semanal.yml)`;
 
-    return `| **${meta.title}** | ${ meta.skills } | ${statusBadge} | ${folderLink} | ${bitacoraLink} |`;
+    return `| **${meta.title}** | ${meta.skills} | ${statusBadge} | ${folderLink} | ${bitacoraLink} |`;
   });
 
   // Listar bitácoras escritas para mostrarlas destacadas
