@@ -25,7 +25,7 @@
 [🛡️ Guía de Trivy](./recursos/guia-trivy-seguridad.md) •
 [🤖 Guía de Ollama](./recursos/guia-ollama-ia-local.md) •
 [🚀 Empezar Ahora](#paso-0-prepara-tu-laboratorio) •
-[🗺️ Mapa de Ruta](#️-mapa-de-ruta) •
+[🗺️ Mapa de Ruta](#mapa-de-ruta) •
 [🏆 Rangos y Premios](#-rangos-de-navegación-y-puntaje-gamificación)
 
 </div>
@@ -54,37 +54,143 @@
 
 ---
 
-## 🗺️ Mapa de Ruta (Conectado con ☕ KubeCafé)
+<a id="mapa-de-ruta"></a>
 
-Así evolucionaremos paso a paso desde el grano de café empaquetado con Docker hasta inaugurar una franquicia completa en Kubernetes:
+## 🗺️ Mapa de Ruta Interactivo (Conectado con ☕ KubeCafé)
+
+<div align="center">
+
+[![Progreso del Workshop](https://img.shields.io/badge/🚂_Estación_Actual-Semana_02_(Deployments_y_Auto--Curación)-00C7B7?style=for-the-badge)](./semana-02-deployments)
+[![XP Desbloqueable Hoy](https://img.shields.io/badge/⚡_XP_Disponible_en_Retos-130_XP_(Semanas_00,_01_y_02)-f59e0b?style=for-the-badge)](./ASISTENTES.md)
+[![Abrir Simulador KubeCafé](https://img.shields.io/badge/🎮_Probar_en_Vivo-Simulador_KubeCafé-326CE5?style=for-the-badge)](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html)
+
+**Progreso de la Travesía Cloud Native (3 de 7 módulos activos):**  
+`🟢 Semana 00` ━━━▶ `🟢 Semana 01` ━━━▶ `🔥 Semana 02 (ACTUAL)` ━━━▶ `⚪ Semana 03` ━━━▶ `⚪ Semana 04` ━━━▶ `⚪ Semana 05` ━━━▶ `⚪ Semana 06`
+
+</div>
+
+Así evolucionaremos paso a paso desde el **grano de café crudo** empaquetado con Docker hasta inaugurar una **franquicia automatizada de alta disponibilidad** en Kubernetes *(haz clic en los bloques o en los botones de la tabla para saltar a cada laboratorio)*:
 
 ```mermaid
-flowchart LR
-    S0["🐳 Semana 0\nFundamentos de Docker\n(🌱 Grano → 📦 Bolsa → ☕ Taza)"] --> S1["🌱 Semana 1\nArquitectura y Pods\n(🍽️ Bandeja, 🪵 Mesas y 🏢 Gerencia)"]
-    S1 --> S2["🔄 Semana 2\nDeployments y Réplicas\n(🧐 Supervisor y Auto-Curación)"]
-    S2 --> S3["🌐 Semana 3\nServices e Ingress\n(🤵 Mesero y 🚪 Anfitriona)"]
-    S3 --> S4["💾 Semana 4\nConfigMaps, Secrets y PV\n(🧂 Especias, 🔐 Caja Fuerte y 🏬 Bodega)"]
-    S4 --> S5["🛡️ Semana 5\nProbes, Recursos y RBAC\n(🌡️ Termómetro, ⚖️ Agua y 🪪 Carnets)"]
-    S5 --> S6["🚀 Semana 6\nHelm y Proyecto Final\n(🍱 Kit de Franquicia)"]
+flowchart TB
+    subgraph F1["🏭 ETAPA 1: Tostaduría y Empaque (Contenedores)"]
+        S0["🐳 Semana 00 • 🟢 DISPONIBLE\nFundamentos de Docker\n🌱 Grano → 📜 Receta → 📦 Bolsa → ☕ Taza\n🎯 +50 XP (5 Retos)"]
+    end
 
-    style S0 fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000
-    style S1 fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#000
-    style S2 fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#000
-    style S3 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#000
-    style S4 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#000
-    style S5 fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
-    style S6 fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#000
+    subgraph F2["☕ ETAPA 2: Apertura y Supervisión del Salón (Core K8s)"]
+        S1["🌱 Semana 01 • 🟢 DISPONIBLE\nArquitectura y Pods\n🍽️ Bandeja, 🪵 Mesas y 🏢 Gerencia\n🎯 +40 XP (4 Retos)"]
+        S2["🔄 Semana 02 • 🔥 EN CURSO\nDeployments y Autorreparación\n🧐 Supervisor, Réplicas y Rollbacks\n🎯 +40 XP (4 Retos)"]
+    end
+
+    subgraph F3["🌐 ETAPA 3: Atención al Cliente y Bodega (Red y Datos)"]
+        S3["🌐 Semana 03 • 🔜 PRÓXIMAMENTE\nServices e Ingress\n🤵 Mesero de Barra y 🚪 Anfitriona"]
+        S4["💾 Semana 04 • 🔜 PRÓXIMAMENTE\nConfigMaps, Secrets y PV\n🧂 Especias, 🔐 Caja Fuerte y 🏬 Bodega"]
+    end
+
+    subgraph F4["🚀 ETAPA 4: Calidad Industrial y Franquicia (Producción)"]
+        S5["🛡️ Semana 05 • 🔜 PRÓXIMAMENTE\nProbes, Recursos y RBAC\n🌡️ Termómetro, ⚖️ Dosificador y 🪪 Carnets"]
+        S6["🎓 Semana 06 • 🔜 PRÓXIMAMENTE\nHelm y Proyecto Final\n🍱 Kit de Franquicia de 3 Capas"]
+    end
+
+    S0 ==> S1
+    S1 ==> S2
+    S2 -.-> S3
+    S3 -.-> S4
+    S4 -.-> S5
+    S5 -.-> S6
+
+    click S0 "https://github.com/edwinbermudez91/Fundamentos-Kubernetes/tree/main/semana-00-fundamentos-docker" "Ir a Semana 00: Fundamentos de Docker"
+    click S1 "https://github.com/edwinbermudez91/Fundamentos-Kubernetes/tree/main/semana-01-arquitectura" "Ir a Semana 01: Arquitectura y Pods"
+    click S2 "https://github.com/edwinbermudez91/Fundamentos-Kubernetes/tree/main/semana-02-deployments" "Ir a Semana 02: Deployments y Réplicas"
+
+    style F1 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
+    style F2 fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#064e3b
+    style F3 fill:#fefce8,stroke:#ca8a04,stroke-width:1px,stroke-dasharray: 5 5,color:#713f12
+    style F4 fill:#fdf2f8,stroke:#db2777,stroke-width:1px,stroke-dasharray: 5 5,color:#831843
+
+    style S0 fill:#bae6fd,stroke:#0284c7,stroke-width:2px,color:#000
+    style S1 fill:#a7f3d0,stroke:#059669,stroke-width:2px,color:#000
+    style S2 fill:#6ee7b7,stroke:#047857,stroke-width:3px,color:#000
+    style S3 fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569
+    style S4 fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569
+    style S5 fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569
+    style S6 fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569
 ```
 
-| Semana | Módulo | Equivalente en ☕ KubeCafé | Lo que vas a dominar | Estado |
-| :---: | :--- | :--- | :--- | :---: |
-| **00** | [**De Código a Contenedor con Docker**](./semana-00-fundamentos-docker) | 🌱 Grano → 📜 Receta → 📦 Bolsa sellada → ☕ Taza servida | `Dockerfile`, imágenes OCI, ciclo de vida de contenedores y puente a Kind/K8s. | 🟢 Disponible |
-| **01** | [**El motor por dentro y tu primer Pod**](./semana-01-arquitectura) | 🍽️ Bandeja (`Pod`), 🪵 Mesas (`Nodes`), 👨‍🍳 Barista (`kubelet`) y 🏢 Gerencia | Control Plane vs. Nodos, `kubectl` (imperativo/declarativo) y Pods en YAML. | 🟢 Disponible |
-| **02** | [**Despliegues sin caídas y autorreparación**](./semana-02-deployments) | 🧐 Supervisor (`Controller Manager`) y 📝 Orden de Producción | ReplicaSets, Deployments, *Self-healing*, *Rolling Updates* y *Rollbacks*. | 🟢 Disponible |
-| **03** | [**Conectando todo: Redes en K8s**](./semana-03-redes) | 🤵 Mesero de barra fija (`Service`) y 🚪 Anfitriona (`Ingress`) | Comunicación interna y externa: `ClusterIP`, `NodePort` e `Ingress`. | 🔜 Próximamente |
-| **04** | [**Configuración y Datos Persistentes**](./semana-04-almacenamiento) | 🧂 Especias (`ConfigMap`), 🔐 Caja fuerte (`Secret`) y 🏬 Bodega (`PV`) | Desacoplar configuración con `ConfigMaps`, `Secrets` y volúmenes (`PVC`). | 🔜 Próximamente |
-| **05** | [**Salud, Límites y Seguridad Básica**](./semana-05-operacion-seguridad) | 🌡️ Termómetro (`Probes`), ⚖️ Dosificador (`Limits`) y 🪪 Carnets (`RBAC`) | `Liveness/Readiness Probes`, límites de CPU/RAM y permisos con `RBAC`. | 🔜 Próximamente |
-| **06** | [**Empaquetado con Helm y Proyecto Final**](./semana-06-proyecto-final) | 🍱 Kit de Franquicia (`Helm Chart`) para abrir sucursales | Creación de Charts básicos y despliegue de una app completa de 3 capas. | 🔜 Próximamente |
+### 🧭 Tablero de Navegación Rápida por Semana
+
+| Semana | Módulo y Analogía en ☕ KubeCafé | Lo que vas a dominar | XP en Juego | Accesos Directos al Material |
+| :---: | :--- | :--- | :---: | :--- |
+| **00**<br>🟢 *Activo* | [**De Código a Contenedor con Docker**](./semana-00-fundamentos-docker)<br><sub>🌱 Grano → 📜 Receta → 📦 Bolsa → ☕ Taza</sub> | `Dockerfile`, imágenes OCI, capas, seguridad rootless y puente a Kind/K8s. | **+50 XP**<br><sub>(5 Retos)</sub> | [📖 Guía](./semana-00-fundamentos-docker/README.md) • [🧪 Ejemplos](./semana-00-fundamentos-docker/1.ejemplos) • [💥 Retos](./semana-00-fundamentos-docker/2.reto-roto) • [📊 PDF](./recursos/diapositivas/0.Fundamentos-Docker.pdf) |
+| **01**<br>🟢 *Activo* | [**El motor por dentro y tu primer Pod**](./semana-01-arquitectura)<br><sub>🍽️ Bandeja (`Pod`), 🪵 Mesas (`Nodes`) y 🏢 Gerencia</sub> | Control Plane vs. Worker Nodes, `kubectl`, Pods multicontenedor y sondas. | **+40 XP**<br><sub>(4 Retos)</sub> | [📖 Guía](./semana-01-arquitectura/README.md) • [🧪 Ejemplos](./semana-01-arquitectura/1.ejemplos) • [💥 Retos](./semana-01-arquitectura/2.reto-roto) • [📊 PDF](./recursos/diapositivas/1.KubeCafe-De-Docker-a-Kubernetes.pdf) |
+| **02**<br>🔥 *En Curso* | [**Despliegues sin caídas y autorreparación**](./semana-02-deployments)<br><sub>🧐 Supervisor (`Controller`) y 📝 Orden de Turno</sub> | `ReplicaSets`, `Deployments`, *Self-healing*, *Rolling Updates* y *Rollbacks*. | **+40 XP**<br><sub>(4 Retos)</sub> | [📖 Guía](./semana-02-deployments/README.md) • [🧪 Ejemplos](./semana-02-deployments/1.ejemplos) • [💥 Retos](./semana-02-deployments/2.reto-roto) • [🎮 Simular](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html) |
+| **03**<br>🔜 *Pronto* | **Conectando todo: Redes en K8s**<br><sub>🤵 Mesero de barra (`Service`) y 🚪 Anfitriona (`Ingress`)</sub> | Comunicación interna y externa: `ClusterIP`, `NodePort`, DNS e `Ingress`. | **+40 XP** | *Se desbloquea en la próxima sesión* 🔒 |
+| **04**<br>🔜 *Pronto* | **Configuración y Datos Persistentes**<br><sub>🧂 Especias (`ConfigMap`), 🔐 Caja fuerte y 🏬 Bodega</sub> | Desacoplar configuración con `ConfigMaps`, `Secrets` y volúmenes (`PV`/`PVC`). | **+40 XP** | *Se desbloquea próximamente* 🔒 |
+| **05**<br>🔜 *Pronto* | **Salud, Límites y Seguridad Básica**<br><sub>🌡️ Termómetro (`Probes`), ⚖️ Agua y 🪪 Carnets (`RBAC`)</sub> | `Liveness/Readiness Probes`, `Requests/Limits` de CPU/RAM y permisos `RBAC`. | **+40 XP** | *Se desbloquea próximamente* 🔒 |
+| **06**<br>🔜 *Pronto* | **Empaquetado con Helm y Proyecto Final**<br><sub>🍱 Kit de Franquicia (`Helm Chart`)</sub> | Creación de Charts y despliegue completo de **KubeCafé** en 3 capas. | **+50 XP** | *Gran Misión Final* 🏆 |
+
+---
+
+### 🎒 Explorador Interactivo de Misiones (Haz clic para inspeccionar cada semana)
+
+<details>
+<summary><b>🐳 Semana 00: De Código a Contenedor con Docker (🟢 Disponible — Gana +50 XP)</b></summary>
+<br>
+
+> ☕ **Misión en KubeCafé:** Antes de abrir una sucursal con múltiples mesas, debes aprender a tostar el grano (`Código`), escribir la receta exacta (`Dockerfile`) y sellar bolsas de café idénticas (`Imágenes OCI`) que sepan igual en cualquier computador.
+
+* 🧪 **Laboratorios Prácticos ([`semana-00-fundamentos-docker/1.ejemplos`](./semana-00-fundamentos-docker/1.ejemplos)):**
+  1. Tu primer contenedor y exploración de procesos aislados.
+  2. Empaquetado de una API web con `Dockerfile` y variables de entorno.
+  3. Construcción *Multi-Stage* y optimización de capas.
+  4. Puente hacia Kubernetes: cargar tu imagen local dentro de un clúster **Kind**.
+* 💥 **Los 5 Retos Rotos ([`semana-00-fundamentos-docker/2.reto-roto`](./semana-00-fundamentos-docker/2.reto-roto)):**
+  `01-dockerfile-roto` • `02-variable-entorno-faltante` • `03-contenedor-como-root` • `04-dockerignore-y-archivos-secretos` • `05-puerto-y-host-desalineado`
+* 🚀 [**Entrar a la Semana 00**](./semana-00-fundamentos-docker) | 📊 [**Ver Diapositivas PDF**](./recursos/diapositivas/0.Fundamentos-Docker.pdf)
+</details>
+
+<details>
+<summary><b>🌱 Semana 01: El Motor por Dentro y tu Primer Pod (🟢 Disponible — Gana +40 XP)</b></summary>
+<br>
+
+> ☕ **Misión en KubeCafé:** Inauguramos el local entendiendo cómo la **Oficina de Gerencia (`Control Plane`)** recibe comandas en la **Caja (`API Server`)**, las anota en el **Libro Contable (`etcd`)**, elige una **Mesa libre (`Scheduler`)** y le ordena al **Barista (`kubelet`)** servir tu primera **Bandeja (`Pod`)**.
+
+* 🧪 **Laboratorios Prácticos ([`semana-01-arquitectura/1.ejemplos`](./semana-01-arquitectura/1.ejemplos)):**
+  1. `01-mi-primer-pod.yaml` — Tu primera bandeja servida en el clúster.
+  2. `02-pod-con-variables-y-recursos.yaml` — Dosificación de agua (RAM) y molino (CPU).
+  3. `03-pod-multicontenedor-sidecar.yaml` — Café principal + vaso de agua acompañante (*Sidecar*).
+  4. `04-pod-sondas-salud.yaml` y `05-pod-ia-inferencia.yaml` — Termómetros de salud y microservicio de IA.
+* 💥 **Los 4 Retos Rotos ([`semana-01-arquitectura/2.reto-roto`](./semana-01-arquitectura/2.reto-roto)):**
+  `01-pod-con-errores.yaml` (`ImagePullBackOff`) • `02-pod-crashloop.yaml` (`CrashLoopBackOff`) • `03-pod-pendiente-infinito.yaml` (`Pending`) • `04-pod-yaml-molesto.yaml`
+* 🚀 [**Entrar a la Semana 01**](./semana-01-arquitectura) | 🖥️ [**Guía Visual Headlamp**](./semana-01-arquitectura/headlamp.md) | 📊 [**Ver Diapositivas PDF**](./recursos/diapositivas/1.KubeCafe-De-Docker-a-Kubernetes.pdf)
+</details>
+
+<details open>
+<summary><b>🔥 Semana 02 (ESTACIÓN ACTUAL): Despliegues sin Caídas y Autorreparación (🟢 Disponible — Gana +40 XP)</b></summary>
+<br>
+
+> ☕ **Misión en KubeCafé:** Un Pod suelto es frágil: si se derrama la taza, nadie la repone. Aquí contratamos al **Supervisor de Barra (`ReplicaSet` + `Deployment`)** para garantizar que **siempre haya 3 baristas activos** (*Self-Healing*) y cambiar la receta del café en caliente sin cerrar la tienda (*Rolling Update* y *Rollback*).
+
+* 🧪 **Laboratorios Prácticos ([`semana-02-deployments/1.ejemplos`](./semana-02-deployments/1.ejemplos)):**
+  1. [`01-primer-deployment-replicas.yaml`](./semana-02-deployments/1.ejemplos/01-primer-deployment-replicas.yaml) — 3 réplicas activas + prueba de fuego borrando un Pod en vivo.
+  2. [`02-rolling-update-cero-caidas.yaml`](./semana-02-deployments/1.ejemplos/02-rolling-update-cero-caidas.yaml) — Actualización taza por taza con `maxSurge: 1` y `maxUnavailable: 0`.
+  3. [`03-estrategia-recreate.yaml`](./semana-02-deployments/1.ejemplos/03-estrategia-recreate.yaml) — Apagado total previo para migraciones críticas.
+  4. [`04-deployment-con-recursos-y-probes.yaml`](./semana-02-deployments/1.ejemplos/04-deployment-con-recursos-y-probes.yaml) — Estándar de producción con seguridad rootless y sondas HTTP.
+  5. [`05-deployment-ia-inferencia.yaml`](./semana-02-deployments/1.ejemplos/05-deployment-ia-inferencia.yaml) — Clúster escalable del **Barista IA** recomendador de café.
+* 💥 **Los 4 Retos Rotos ([`semana-02-deployments/2.reto-roto`](./semana-02-deployments/2.reto-roto)):**
+  `01-deployment-selector-roto.yaml` • `02-deployment-imagen-caida-rollback.yaml` • `03-deployment-estrategia-invalida.yaml` • `04-deployment-yaml-identacion.yaml`
+* 🚀 [**Entrar a la Semana 02**](./semana-02-deployments) | 🧪 [**Ir a los Ejemplos**](./semana-02-deployments/1.ejemplos) | 💥 [**Resolver los Retos Rotos (+40 XP)**](./semana-02-deployments/2.reto-roto)
+</details>
+
+<details>
+<summary><b>🔮 Semanas 03 a 06: Vista Previa de las Próximas Estaciones de KubeCafé</b></summary>
+<br>
+
+* **🌐 Semana 03 — Redes en K8s (`Services` e `Ingress`):** Pondremos un **Mesero de barra fija (`Service`)** para que los clientes no tengan que perseguir a los Pods cuando cambian de IP, y una **Anfitriona en la puerta (`Ingress`)** que reciba pedidos desde internet por dominio y ruta (`/menu`, `/pagos`).
+* **💾 Semana 04 — Configuración y Persistencia (`ConfigMaps`, `Secrets` y `PV`):** Separaremos las **especias (`ConfigMap`)** y la **receta secreta de la casa (`Secret`)** de la bolsa sellada, y conectaremos una **Bodega externa (`PersistentVolume`)** para que los datos sobrevivan aunque se reinicie todo el salón.
+* **🛡️ Semana 05 — Operación y Seguridad (`Probes`, `Limits` y `RBAC`):** Instalaremos **termómetros automáticos (`Liveness/Readiness`)**, topes de agua y electricidad por mesa (`ResourceQuotas`) y carnets de empleado con permisos estrictos (`RBAC`).
+* **🎓 Semana 06 — Empaquetado con Helm y Proyecto Final:** Crearemos el **Kit de Franquicia (`Helm Chart`)** para inaugurar sucursales completas de KubeCafé (Frontend + API + Base de Datos) con un solo comando `helm install`.
+</details>
 
 <details>
 <summary><b>☕ Desplegar Vista Rápida de KubeCafé (Tabla de Correspondencia y Glosario Cafetero)</b></summary>
