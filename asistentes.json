@@ -135,6 +135,26 @@
     "motivacion": "Aprender a contenizar y desplegar mis aplicaciones con Docker y Kubernetes"
   },
   {
+    "github": "Cuburi",
+    "nombre": "Yorman Agudelo",
+    "rol": "Fullstack Developer",
+    "linkedin": "https://www.linkedin.com/in/yorman-agudelo/",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 60,
+    "motivacion": "Aprovechar al maximo esta oportunidad de aprender"
+  },
+  {
+    "github": "sanjavier88",
+    "nombre": "Jorge Alberto Monsalve Ruiz",
+    "rol": "Estudiante",
+    "linkedin": "",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 50,
+    "motivacion": "No tengo conocimiento de la nube, así que con el curso espero poder aprender a utilizarla."
+  },
+  {
     "github": "glgaviria64",
     "nombre": "Gloria Gaviria",
     "rol": "👩‍💻 Estudiante<br>Desarrolladora Jr",
@@ -153,16 +173,6 @@
     "rango": "⛵ Marinero",
     "puntos": 20,
     "motivacion": "Reforzar mis fundamentos sobre Kubernetes y Docker, y lograr certificarme y lograr la kubestronaut en un futuro"
-  },
-  {
-    "github": "sanjavier88",
-    "nombre": "Jorge Alberto Monsalve Ruiz",
-    "rol": "Estudiante",
-    "linkedin": "",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 20,
-    "motivacion": "No tengo conocimiento de la nube, así que con el curso espero poder aprender a utilizarla."
   },
   {
     "github": "ccsanchezb04",
@@ -293,16 +303,6 @@
     "rango": "⛵ Marinero",
     "puntos": 10,
     "motivacion": "Fortalecer mis conocimientos y escalara laboralmenete aprovechando a maximo esta oportunidad"
-  },
-  {
-    "github": "Cuburi",
-    "nombre": "Yorman Agudelo",
-    "rol": "Fullstack Developer",
-    "linkedin": "https://www.linkedin.com/in/yorman-agudelo/",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 10,
-    "motivacion": "Aprovechar al maximo esta oportunidad de aprender"
   },
   {
     "github": "ggarzons",
