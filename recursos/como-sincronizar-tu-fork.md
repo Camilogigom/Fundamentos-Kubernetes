@@ -40,6 +40,12 @@ flowchart LR
    `https://github.com/TU-USUARIO/Fundamentos-Kubernetes`
 2. Debajo del botón verde **`<> Code`**, haz clic en el botón **`Sync fork`**.
 3. Si aparece un botón verde que dice **`Update branch`**, haz clic en él. *(Si dice "This branch is not behind the upstream", significa que tu nube ya está al día).*
+
+   <div align="center">
+
+   ![Sincronizar Fork con Update Branch en GitHub](./img/sync-fork-update-branch.jpg)
+
+   </div>
 4. Ahora abre la terminal en tu computador dentro de la carpeta `Fundamentos-Kubernetes` y descarga esos cambios a tu disco:
 
 ```bash
