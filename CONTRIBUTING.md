@@ -4,6 +4,10 @@
 
 Si es tu primera vez usando **Git** o haciendo un **Pull Request (PR)** en GitHub, ¡respira tranquilo! Esta guía está diseñada paso a paso para que no te pierdas y aprendas haciendo.
 
+> [!IMPORTANT]
+> 🇨🇴 **Capítulo Oficial Cloud Native Medellín (CNCF):**  
+> Antes de empezar, asegúrate de estar registrado en la comunidad oficial de [**Cloud Native Medellín en CNCF Community Groups**](https://ocgroups.dev/cncf/group/2majk4r) para enterarte de próximos meetups presenciales, talleres prácticos y noticias del ecosistema.
+
 ---
 
 ## 🎯 3 Formas Fáciles de Empezar Hoy Mismo

@@ -4,6 +4,7 @@
 
 <div align="center">
 
+[![Comunidad Oficial CNCF Medellín](https://img.shields.io/badge/🇨🇴_Únete_al_Capítulo-CNCF_Medellín-00C7B7?style=for-the-badge&logo=cncf&logoColor=white)](https://ocgroups.dev/cncf/group/2majk4r)
 [![Registrarme en 30 seg](https://img.shields.io/badge/➕_¡Regístrate_Aquí!_(Nuevos_Tripulantes)-2ea44f?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
 [![Actualizar mis Datos](https://img.shields.io/badge/✏️_Actualizar_mis_Datos_o_Redes_Sociales-f57c00?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
 

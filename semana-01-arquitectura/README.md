@@ -3,7 +3,8 @@
 ¡Bienvenido a la primera semana! Hoy pasaremos de entender qué hace Kubernetes en teoría a levantar nuestro propio clúster local y desplegar nuestra primera aplicación.
 
 > 📊 **Presentación de la Semana 01 (PDF):** [**Descargar `1.KubeCafe-De-Docker-a-Kubernetes.pdf`**](../recursos/diapositivas/1.KubeCafe-De-Docker-a-Kubernetes.pdf)  
-> 🎮 **Simulador Visual Interactivo (Paso a Paso):** [**Abrir Simulador de Arquitectura K8s en el Navegador**](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html) *(o abre localmente [`../recursos/simulador-interactivo-kubernetes.html`](../recursos/simulador-interactivo-kubernetes.html))*
+> 🎮 **Simulador Visual Interactivo (Paso a Paso):** [**Abrir Simulador de Arquitectura K8s en el Navegador**](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html) *(o abre localmente [`../recursos/simulador-interactivo-kubernetes.html`](../recursos/simulador-interactivo-kubernetes.html))*  
+> 🇨🇴 **Comunidad Oficial CNCF:** [**Únete a Cloud Native Medellín en CNCF Community Groups**](https://ocgroups.dev/cncf/group/2majk4r)
 
 ---
 

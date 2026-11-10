@@ -4,7 +4,7 @@
 ### Workshop Práctico de 6 Semanas — Cloud Native Medellín 🏔️☕
 
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/es/)
-[![Cloud Native Medellín](https://img.shields.io/badge/Comunidad-Cloud_Native_Medellín-00C7B7?style=for-the-badge)](https://github.com/)
+[![Cloud Native Medellín CNCF](https://img.shields.io/badge/Comunidad_CNCF-Cloud_Native_Medellín-00C7B7?style=for-the-badge&logo=cncf&logoColor=white)](https://ocgroups.dev/cncf/group/2majk4r)
 [![YouTube Grabaciones](https://img.shields.io/badge/YouTube-@CloudNativeColombia-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@CloudNativeColombia)
 [![Laboratorios iximiuz](https://img.shields.io/badge/Labs-iximiuz_Playground-blueviolet?style=for-the-badge&logo=docker&logoColor=white)](https://labs.iximiuz.com/trainings/fundamentos-de-docker-y-kubernetes-2ae16ea8/)
 [![Simulador KubeCafé](https://img.shields.io/badge/Simulador-KubeCafé_K8s-success?style=for-the-badge&logo=coffeescript&logoColor=white)](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html)
@@ -16,6 +16,7 @@
   Aprende haciendo, rompe cosas sin miedo en tu entorno local y haz tu primer aporte al Open Source.
 </p>
 
+[🇨🇴 Únete al Capítulo CNCF Medellín](https://ocgroups.dev/cncf/group/2majk4r) •
 [📺 Grabaciones en YouTube (@CloudNativeColombia)](https://www.youtube.com/@CloudNativeColombia) •
 [🧪 Laboratorios Online en iximiuz](https://labs.iximiuz.com/trainings/fundamentos-de-docker-y-kubernetes-2ae16ea8/) •
 [☕ Simulador KubeCafé (Cómo Opera K8s)](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html) •
@@ -35,9 +36,9 @@
 
 > [!IMPORTANT]
 > ### 🧭 Recursos Principales del Workshop
-> | 📺 Grabaciones en Vivo | 🧪 Laboratorios Listos en el Navegador | ☕ Simulador KubeCafé |
-> | :--- | :--- | :--- |
-> | [![YouTube Grabaciones](https://img.shields.io/badge/YouTube-@CloudNativeColombia-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@CloudNativeColombia)<br>[**Canal @CloudNativeColombia**](https://www.youtube.com/@CloudNativeColombia)<br>Revive las grabaciones y explicaciones de cada sesión en vivo. | [![Laboratorios iximiuz](https://img.shields.io/badge/Playgrounds-iximiuz_Labs-8A2BE2?style=for-the-badge&logo=docker&logoColor=white)](https://labs.iximiuz.com/trainings/fundamentos-de-docker-y-kubernetes-2ae16ea8/)<br>[**Playgrounds de Docker y Kubernetes**](https://labs.iximiuz.com/trainings/fundamentos-de-docker-y-kubernetes-2ae16ea8/)<br>Entorno de laboratorios online para practicar sin instalar nada. | [![Simulador KubeCafé](https://img.shields.io/badge/KubeCafé-Cómo_Opera_K8s-00C7B7?style=for-the-badge&logo=kubernetes&logoColor=white)](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html)<br>[**Simulador Interactivo K8s**](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html)<br>Aprende visualmente cómo opera Kubernetes y la analogía de KubeCafé. |
+> | 🇨🇴 Comunidad Oficial CNCF | 📺 Grabaciones en Vivo | 🧪 Laboratorios en Navegador | ☕ Simulador KubeCafé |
+> | :--- | :--- | :--- | :--- |
+> | [![Comunidad CNCF](https://img.shields.io/badge/CNCF-Capítulo_Medellín-00C7B7?style=for-the-badge&logo=cncf&logoColor=white)](https://ocgroups.dev/cncf/group/2majk4r)<br>[**Registro en CNCF Medellín**](https://ocgroups.dev/cncf/group/2majk4r)<br>Únete a la comunidad oficial para próximos eventos y meetups. | [![YouTube Grabaciones](https://img.shields.io/badge/YouTube-@CloudNativeColombia-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@CloudNativeColombia)<br>[**Canal @CloudNativeColombia**](https://www.youtube.com/@CloudNativeColombia)<br>Revive las grabaciones y explicaciones de cada sesión en vivo. | [![Laboratorios iximiuz](https://img.shields.io/badge/Playgrounds-iximiuz_Labs-8A2BE2?style=for-the-badge&logo=docker&logoColor=white)](https://labs.iximiuz.com/trainings/fundamentos-de-docker-y-kubernetes-2ae16ea8/)<br>[**Playgrounds de Docker y Kubernetes**](https://labs.iximiuz.com/trainings/fundamentos-de-docker-y-kubernetes-2ae16ea8/)<br>Entorno de laboratorios online para practicar sin instalar nada. | [![Simulador KubeCafé](https://img.shields.io/badge/KubeCafé-Cómo_Opera_K8s-00C7B7?style=for-the-badge&logo=kubernetes&logoColor=white)](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html)<br>[**Simulador Interactivo K8s**](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html)<br>Aprende visualmente cómo opera Kubernetes y la analogía de KubeCafé. |
 
 > [!TIP]
 > **¿Es tu primera vez usando GitHub o Kubernetes?** ¡Estás en el lugar correcto! Tu primera misión toma solo 30 segundos: regístrate en el [**Muro de Asistentes (`ASISTENTES.md`)**](./ASISTENTES.md) usando nuestro [**⛵ Formulario Visual de Registro**](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml).
