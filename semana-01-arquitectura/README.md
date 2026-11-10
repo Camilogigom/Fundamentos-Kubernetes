@@ -4,7 +4,8 @@
 
 > 📊 **Presentación de la Semana 01 (PDF):** [**Descargar `1.KubeCafe-De-Docker-a-Kubernetes.pdf`**](../recursos/diapositivas/1.KubeCafe-De-Docker-a-Kubernetes.pdf)  
 > 🎮 **Simulador Visual Interactivo (Paso a Paso):** [**Abrir Simulador de Arquitectura K8s en el Navegador**](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html) *(o abre localmente [`../recursos/simulador-interactivo-kubernetes.html`](../recursos/simulador-interactivo-kubernetes.html))*  
-> 🇨🇴 **Comunidad Oficial CNCF:** [**Únete a Cloud Native Medellín en CNCF Community Groups**](https://ocgroups.dev/cncf/group/2majk4r)
+> 🇨🇴 **Comunidad Oficial CNCF:** [**Únete a Cloud Native Medellín en CNCF Community Groups**](https://ocgroups.dev/cncf/group/2majk4r)  
+> 📚 **Documentación Oficial de Kubernetes:** [**Documentación Principal (Español)**](https://kubernetes.io/es/docs/home/) • [**Cheat Sheet Oficial de kubectl**](https://kubernetes.io/es/docs/reference/kubectl/cheatsheet/) • [**Componentes de la Arquitectura K8s**](https://kubernetes.io/es/docs/concepts/overview/components/) • [**Guía Oficial de Pods**](https://kubernetes.io/es/docs/concepts/workloads/pods/) • [**InitContainers**](https://kubernetes.io/es/docs/concepts/workloads/pods/init-containers/) • [**Documentación Oficial de Kind**](https://kind.sigs.k8s.io/)
 
 ---
 

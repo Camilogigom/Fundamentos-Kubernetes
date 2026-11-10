@@ -65,3 +65,19 @@ git push origin TU-USUARIO/semana-01
    * ¿Cuál era el fallo original?
    * ¿Con qué comando lo descubriste (`kubectl describe`, `kubectl logs`, `docker logs`, etc.)?
    * ¿Qué ajuste aplicaste para solucionarlo?
+
+---
+
+## 📚 Enlaces a la Documentación Oficial para Resolver Retos
+
+Apóyate siempre en las fuentes oficiales para investigar las causas de error y validar la sintaxis de tus soluciones:
+
+* 🐳 **Docker:**
+  * [Referencia Oficial de Dockerfile](https://docs.docker.com/reference/dockerfile/)
+  * [Comandos y Opciones de Docker CLI](https://docs.docker.com/reference/cli/docker/)
+  * [Mejores Prácticas de Seguridad y Dockerfile](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+* ☸️ **Kubernetes:**
+  * [Cheat Sheet Oficial de kubectl](https://kubernetes.io/es/docs/reference/kubectl/cheatsheet/)
+  * [Guía Oficial de Depuración y Diagnóstico de Pods](https://kubernetes.io/es/docs/tasks/debug/debug-application/debug-pods/)
+  * [Especificación Oficial de Pods](https://kubernetes.io/es/docs/concepts/workloads/pods/)
+  * [Guía Oficial de Deployments, Réplicas y Rollouts](https://kubernetes.io/es/docs/concepts/workloads/controllers/deployment/)

@@ -4,7 +4,8 @@
 >
 > 🎮 **Simulador KubeCafé (Deployments y Self-Healing):** [**Ver cómo opera Kubernetes en vivo**](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html)  
 > 🧪 **Laboratorio Online (sin instalación):** [**Playground del Workshop en iximiuz**](https://labs.iximiuz.com/trainings/fundamentos-de-docker-y-kubernetes-2ae16ea8/)  
-> 🇨🇴 **Comunidad Oficial CNCF:** [**Únete a Cloud Native Medellín en CNCF Community Groups**](https://ocgroups.dev/cncf/group/2majk4r)
+> 🇨🇴 **Comunidad Oficial CNCF:** [**Únete a Cloud Native Medellín en CNCF Community Groups**](https://ocgroups.dev/cncf/group/2majk4r)  
+> 📚 **Documentación Oficial de Kubernetes:** [**Guía Oficial de Deployments**](https://kubernetes.io/es/docs/concepts/workloads/controllers/deployment/) • [**ReplicaSets**](https://kubernetes.io/es/docs/concepts/workloads/controllers/replicaset/) • [**Estrategias de Actualización (RollingUpdate)**](https://kubernetes.io/es/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment) • [**kubectl rollout Cheat Sheet**](https://kubernetes.io/es/docs/reference/kubectl/cheatsheet/#scaling-resources) • [**Sondas de Salud (Liveness/Readiness)**](https://kubernetes.io/es/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 
 ---
 

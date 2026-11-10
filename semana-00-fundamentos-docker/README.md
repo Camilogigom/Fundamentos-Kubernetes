@@ -5,7 +5,8 @@
 En este módulo aprenderás qué es realmente un contenedor, cómo escribir un `Dockerfile`, cómo construir y correr imágenes con Docker, y el truco fundamental para conectar tus imágenes locales directamente con tu clúster de **Kind**.
 
 > 📊 **Presentación de la Semana 00 (PDF):** [**Descargar `0.Fundamentos-Docker.pdf`**](../recursos/diapositivas/0.Fundamentos-Docker.pdf)  
-> 🇨🇴 **Comunidad Oficial CNCF:** [**Únete a Cloud Native Medellín en CNCF Community Groups**](https://ocgroups.dev/cncf/group/2majk4r)
+> 🇨🇴 **Comunidad Oficial CNCF:** [**Únete a Cloud Native Medellín en CNCF Community Groups**](https://ocgroups.dev/cncf/group/2majk4r)  
+> 📚 **Documentación Oficial de Docker:** [**Docker Docs**](https://docs.docker.com/) • [**Referencia de Dockerfile**](https://docs.docker.com/reference/dockerfile/) • [**Referencia de CLI de Docker**](https://docs.docker.com/reference/cli/docker/) • [**Guía de Volúmenes**](https://docs.docker.com/engine/storage/volumes/) • [**Guía de Redes**](https://docs.docker.com/engine/network/) • [**Mejores Prácticas de Dockerfile**](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
 ---
 
