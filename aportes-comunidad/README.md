@@ -6,7 +6,11 @@ Este espacio está reservado para el trabajo, soluciones y contribuciones de tod
 
 ## 📂 ¿Qué encuentras aquí?
 
-* [**🏆 Soluciones de Retos (`./soluciones-retos/`)**](./soluciones-retos/): Las entregas de los miembros a los **"Retos Rotos"** semanales, organizadas por usuario de GitHub y por semana (`semana-00`, `semana-01`, etc.).
+* [**🏆 Soluciones de Retos y Portafolios (`./soluciones-retos/`)**](./soluciones-retos/): Las entregas de los miembros a los **"Retos Rotos"** semanales y sus **Portafolios Profesionales K8s (`README.md`)** + **Bitácoras (`bitacora.md`)**, organizadas por usuario de GitHub y por semana (`semana-00`, `semana-01`, etc.).
+* [**📔 Formulario Visual de Bitácora Semanal (1 minuto)**](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml): Registra lo que aprendiste esta semana desde el navegador; el bot creará tu `bitacora.md`, actualizará tu portafolio y te dará tu insignia para compartir en LinkedIn y redes.
+* [**🎖️ Insignias Oficiales y Portafolio Profesional (`../recursos/portafolio-y-badges.md`)**](../recursos/portafolio-y-badges.md): Cómo lucir tu insignia en tu perfil de GitHub y compartir tus avances en LinkedIn, X/Twitter, WhatsApp y Telegram.
+* [**🔄 Cómo Sincronizar tu Fork sin Conflictos (`../recursos/como-sincronizar-tu-fork.md`)**](../recursos/como-sincronizar-tu-fork.md): Guía dedicada para mantener tu repositorio al día cada semana.
+* [**⚡ Guía Shell DX: Toca tu Terminal como un Instrumento (`../recursos/guia-shell-dx-kubernetes.md`)**](../recursos/guia-shell-dx-kubernetes.md): Autocompletado, Starship, `fzf`, `krew` y alias veloces para `kubectl`.
 * [**🧰 Cheatsheets (`./cheatsheets/`)**](./cheatsheets/): Atajos de terminal, alias de `kubectl`, comandos salvavidas y apuntes compartidos por la comunidad.
 
 ---

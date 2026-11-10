@@ -3,6 +3,7 @@
 ### ¿Qué tipo de aporte estás enviando? (Marca con una `x` entre los corchetes)
 - [ ] 🙌 Me agregué al muro de `ASISTENTES.md`
 - [ ] 🧩 Resolví un **Reto Roto** (en `aportes-comunidad/soluciones-retos/mi-usuario/`)
+- [ ] 📔 Incluí mi **Bitácora Semanal (`bitacora.md`)** para actualizar mi **Portafolio Profesional K8s** *(también puedes llenarla con el [Formulario Visual de Bitácora](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml))*
 - [ ] 📚 Mejoré la documentación, guías de instalación o agregué un *Cheatsheet*
 - [ ] 🐛 Corregí un error de ortografía o formato
 

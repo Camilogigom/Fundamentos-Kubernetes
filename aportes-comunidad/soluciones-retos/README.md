@@ -13,7 +13,9 @@ Para que el robot calificador reconozca tus ejercicios automáticamente y te asi
 ```text
 aportes-comunidad/soluciones-retos/
 └── <tu-usuario-github>/
+    ├── README.md   <-- 🎓 (Generado automáticamente por el bot: ¡Tu Portafolio Profesional K8s!)
     ├── semana-00/
+    │   ├── bitacora.md   <-- 📔 (Tu reflexión de la semana: vía Formulario Visual o plantilla)
     │   ├── 01-dockerfile-roto/
     │   │   └── Dockerfile
     │   ├── 02-variable-entorno-faltante/
@@ -27,11 +29,24 @@ aportes-comunidad/soluciones-retos/
     │       ├── Dockerfile
     │       └── app.py
     └── semana-01/
+        ├── bitacora.md
         ├── 01-pod-con-errores.yaml
         ├── 02-pod-crashloop.yaml
         ├── 03-pod-pendiente-infinito.yaml
         └── 04-pod-yaml-molesto.yaml
 ```
+
+---
+
+## 📔 Registra tu Bitácora Semanal y Obtén tu Portafolio + Insignias
+
+Además de resolver los archivos técnicos, puedes documentar qué aprendiste cada semana de **dos formas súper fáciles**:
+
+1. **🚀 Opción 1 — Formulario Visual en 1 minuto (Recomendado, sin usar Git):**  
+   👉 [**Haz clic aquí para abrir el Formulario de Bitácora Semanal**](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml).  
+   El bot creará tu archivo `bitacora.md`, actualizará tu **Portafolio Profesional (`README.md`)** y te responderá con botones de 1 clic para compartir tu insignia en LinkedIn, X/Twitter, WhatsApp y Telegram.
+2. **🛠️ Opción 2 — Desde tu terminal junto con tu Pull Request:**  
+   Copia la [**`PLANTILLA-BITACORA.md`**](./PLANTILLA-BITACORA.md) dentro de tu carpeta semanal como `bitacora.md` y llénala en VS Code.
 
 ---
 

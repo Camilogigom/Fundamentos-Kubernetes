@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /**
- * Script generador del Muro de Asistentes (ASISTENTES.md) y del Mosaico Visual en README.md
- * a partir de asistentes.json y de la validación de contenido real de cada reto en aportes-comunidad/.
+ * Script generador del Muro de Asistentes (ASISTENTES.md), del Mosaico Visual en README.md
+ * y de los Portafolios Profesionales de Aprendizaje (aportes-comunidad/soluciones-retos/<usuario>/README.md)
+ * a partir de asistentes.json, las soluciones validadas de 2.reto-roto/ y las bitácoras semanales (bitacora.md).
  *
- * - Excluye al dueño/instructor (edwinbermudez91) de la tabla de puntajes y lo muestra como Capitán / Instructor.
+ * - Excluye al dueño/instructor (edwinbermudez91) y colaboradores de la tabla de puntajes y los muestra como Equipo Organizador.
  * - Valida que cada archivo entregado corresponda realmente al ejercicio de 2.reto-roto/ y tenga la solución aplicada.
- * - Solo otorga los puntos de la semana (+50 XP) cuando el estudiante completa TODOS los ejercicios de esa semana.
+ * - Genera automáticamente el Portafolio Profesional KubeCafé (Cloud Native Medellín) con insignias compartibles para cada estudiante activo.
  */
 const fs = require('fs');
 const path = require('path');
@@ -15,8 +16,61 @@ const JSON_PATH = path.join(ROOT, 'asistentes.json');
 const MD_PATH = path.join(ROOT, 'ASISTENTES.md');
 const README_PATH = path.join(ROOT, 'README.md');
 const SOLUCIONES_DIR = path.join(ROOT, 'aportes-comunidad', 'soluciones-retos');
+const REPO_URL = 'https://github.com/edwinbermudez91/Fundamentos-Kubernetes';
 
 const INSTRUCTORS = ['edwinbermudez91', 'santiago1023', 'vdevalen', 'andresqb198', 'ka1999'];
+
+const WEEK_METADATA = {
+  'semana-00': {
+    title: '🐳 Semana 00: Fundamentos de Docker (De Código a Contenedor)',
+    shortBadge: '🐳_Docker_&_OCI',
+    color: '2496ED',
+    logo: 'docker',
+    skills: 'Dockerfile, imágenes OCI, seguridad rootless, .dockerignore y redes en contenedores'
+  },
+  'semana-01': {
+    title: '🌱 Semana 01: Arquitectura de Kubernetes y Pods',
+    shortBadge: '🌱_K8s_Pods_&_Arquitectura',
+    color: '326CE5',
+    logo: 'kubernetes',
+    skills: 'Control Plane, Worker Nodes, kubectl, diagnóstico de Pods (ImagePullBackOff, CrashLoopBackOff, Pending)'
+  },
+  'semana-02': {
+    title: '🔄 Semana 02: Deployments, Réplicas y Autorreparación',
+    shortBadge: '🔄_K8s_Deployments_&_Rollouts',
+    color: '10B981',
+    logo: 'kubernetes',
+    skills: 'ReplicaSets, Deployments, Self-Healing, Rolling Updates con cero caídas y Rollbacks'
+  },
+  'semana-03': {
+    title: '🌐 Semana 03: Redes en Kubernetes (Services e Ingress)',
+    shortBadge: '🌐_K8s_Services_&_Ingress',
+    color: '06B6D4',
+    logo: 'kubernetes',
+    skills: 'ClusterIP, NodePort, CoreDNS y enrutamiento HTTP con Ingress Controllers'
+  },
+  'semana-04': {
+    title: '💾 Semana 04: Configuración y Datos Persistentes',
+    shortBadge: '💾_K8s_Config_&_Storage',
+    color: '8B5CF6',
+    logo: 'kubernetes',
+    skills: 'ConfigMaps, Secrets, PersistentVolumes (PV) y PersistentVolumeClaims (PVC)'
+  },
+  'semana-05': {
+    title: '🛡️ Semana 05: Salud, Límites y Seguridad (RBAC)',
+    shortBadge: '🛡️_K8s_Security_&_Probes',
+    color: 'F59E0B',
+    logo: 'kubernetes',
+    skills: 'Liveness/Readiness Probes, Resource Requests/Limits y control de acceso RBAC'
+  },
+  'semana-06': {
+    title: '🎓 Semana 06: Empaquetado con Helm y Proyecto Final KubeCafé',
+    shortBadge: '🎓_Helm_&_Arquitectura_K8s',
+    color: 'EC4899',
+    logo: 'helm',
+    skills: 'Helm Charts, plantillas parametrizadas y despliegue multicapa de alta disponibilidad'
+  }
+};
 
 function cleanGithubUser(input, fallbackUser = '') {
   if (!input) return fallbackUser;
@@ -374,40 +428,44 @@ function listFilesRecursive(dirPath) {
     const fullPath = path.join(dirPath, entry.name);
     if (entry.isDirectory()) {
       results = results.concat(listFilesRecursive(fullPath));
-    } else if (entry.name.toLowerCase() !== 'readme.md') {
-      results.push(fullPath);
+    } else {
+      const lower = entry.name.toLowerCase();
+      if (lower !== 'readme.md' && lower !== 'bitacora.md') {
+        results.push(fullPath);
+      }
     }
   }
   return results;
 }
 
 /**
- * Evalúa los ejercicios resueltos por un estudiante en aportes-comunidad/soluciones-retos/<usuario>/
- * Regla de puntaje y validación:
- * - Registro inicial = 10 XP
- * - Cada ejercicio resuelto y validado contra el contenido real de 2.reto-roto/ = +10 XP (suma en la tabla de puntaje desde el primer reto logrado)
- * - Para que una semana cuente como 100% completada (para ascenso de rango Timonel / Capitán), debe resolver todos los retos de esa semana (ej. 5/5 en Semana 00, 4/4 en Semana 01).
+ * Evalúa los ejercicios resueltos y las bitácoras de un estudiante en aportes-comunidad/soluciones-retos/<usuario>/
  */
 function evaluateUserProgress(githubUser, officialChallenges) {
   const cleanUser = cleanGithubUser(githubUser);
   let points = 10; // 10 XP base por registrarse
   let completedWeeksCount = 0;
   let totalSolvedChallenges = 0;
+  let totalBitacoras = 0;
   const weekSummaries = [];
   const detailedReport = [];
 
   let userSolDir = null;
+  let userFolderName = null;
   if (fs.existsSync(SOLUCIONES_DIR)) {
     const dirs = fs.readdirSync(SOLUCIONES_DIR, { withFileTypes: true });
     const found = dirs.find(d => d.isDirectory() && d.name.toLowerCase() === cleanUser.toLowerCase());
     if (found) {
       userSolDir = path.join(SOLUCIONES_DIR, found.name);
+      userFolderName = found.name;
     }
   }
 
   for (const [weekKey, expectedNums] of Object.entries(officialChallenges)) {
     const totalExpected = expectedNums.length;
     let solvedCount = 0;
+    let hasBitacora = false;
+    let weekDirName = weekKey;
     const missingNums = [];
     const solvedNums = [];
 
@@ -417,7 +475,14 @@ function evaluateUserProgress(githubUser, officialChallenges) {
         d => d.isDirectory() && d.name.toLowerCase().startsWith(weekKey)
       );
       if (matchingWeekDir) {
+        weekDirName = matchingWeekDir.name;
         const weekPath = path.join(userSolDir, matchingWeekDir.name);
+        const bitacoraFile = path.join(weekPath, 'bitacora.md');
+        if (fs.existsSync(bitacoraFile) && fs.readFileSync(bitacoraFile, 'utf8').trim().length > 40) {
+          hasBitacora = true;
+          totalBitacoras += 1;
+        }
+
         const filePaths = listFilesRecursive(weekPath);
         const files = filePaths.map(fp => ({
           relPath: path.relative(weekPath, fp),
@@ -455,26 +520,59 @@ function evaluateUserProgress(githubUser, officialChallenges) {
 
     const isComplete = solvedCount === totalExpected && totalExpected > 0;
     const shortLabel = weekKey.replace('semana-', 'Sem ');
+    const bitacoraTag = hasBitacora ? ' 📔' : '';
 
     if (solvedCount > 0) {
       points += solvedCount * 10; // +10 XP por cada reto roto validado
       totalSolvedChallenges += solvedCount;
       if (isComplete) {
         completedWeeksCount += 1;
-        weekSummaries.push(`✅ ${shortLabel}: ${solvedCount}/${totalExpected}`);
+        weekSummaries.push(`✅ ${shortLabel}: ${solvedCount}/${totalExpected}${bitacoraTag}`);
       } else {
-        weekSummaries.push(`⏳ ${shortLabel}: ${solvedCount}/${totalExpected}`);
+        weekSummaries.push(`⏳ ${shortLabel}: ${solvedCount}/${totalExpected}${bitacoraTag}`);
       }
+    } else if (hasBitacora) {
+      weekSummaries.push(`📔 ${shortLabel}: Bitácora`);
     }
 
     detailedReport.push({
       weekKey,
+      weekDirName,
       solvedCount,
       totalExpected,
       isComplete,
+      hasBitacora,
       solvedNums,
       missingNums
     });
+  }
+
+  // También revisar si hay bitácoras en semanas futuras (ej. semana-03..06) que aún no tengan validadores activos
+  if (userSolDir) {
+    const weekDirs = fs.readdirSync(userSolDir, { withFileTypes: true });
+    for (const d of weekDirs) {
+      if (!d.isDirectory()) continue;
+      const m = d.name.match(/^(semana-\d+)/i);
+      if (!m) continue;
+      const wk = m[1].toLowerCase();
+      if (officialChallenges[wk]) continue;
+      const bFile = path.join(userSolDir, d.name, 'bitacora.md');
+      if (fs.existsSync(bFile) && fs.readFileSync(bFile, 'utf8').trim().length > 40) {
+        totalBitacoras += 1;
+        const shortLabel = wk.replace('semana-', 'Sem ');
+        weekSummaries.push(`📔 ${shortLabel}: Bitácora`);
+        detailedReport.push({
+          weekKey: wk,
+          weekDirName: d.name,
+          solvedCount: 0,
+          totalExpected: 4,
+          isComplete: false,
+          hasBitacora: true,
+          solvedNums: [],
+          missingNums: []
+        });
+      }
+    }
   }
 
   let rango = '⛵ Marinero';
@@ -493,10 +591,235 @@ function evaluateUserProgress(githubUser, officialChallenges) {
     points,
     completedWeeksCount,
     totalSolvedChallenges,
+    totalBitacoras,
     rango,
     summaryText,
-    detailedReport
+    detailedReport,
+    hasPortfolioDir: Boolean(userSolDir),
+    userFolderName: userFolderName || cleanUser
   };
+}
+
+/**
+ * Construye enlaces y textos pre-armados para compartir en LinkedIn, X/Twitter, WhatsApp y Telegram.
+ */
+function buildShareLinks(user, nombre, rango, points, hasPortfolioDir = false, folderName = '') {
+  const cleanUser = cleanGithubUser(user);
+  const targetFolder = folderName || cleanUser;
+  const portfolioUrl = hasPortfolioDir
+    ? `${REPO_URL}/tree/main/aportes-comunidad/soluciones-retos/${targetFolder}`
+    : `${REPO_URL}/blob/main/ASISTENTES.md`;
+
+  const rankBadgeUrl =
+    rango.includes('Capitán')
+      ? `https://img.shields.io/badge/KubeCafé_CNCF-⚓_Capitán_K8s_(${points}_XP)-f59e0b?style=for-the-badge&logo=kubernetes&logoColor=white`
+      : rango.includes('Timonel')
+        ? `https://img.shields.io/badge/KubeCafé_CNCF-🧭_Timonel_K8s_(${points}_XP)-7c3aed?style=for-the-badge&logo=kubernetes&logoColor=white`
+        : `https://img.shields.io/badge/KubeCafé_CNCF-⛵_Tripulante_K8s_(${points}_XP)-0284c7?style=for-the-badge&logo=kubernetes&logoColor=white`;
+
+  const shareMessage = `☸️ ¡Sigo construyendo mi Portafolio Práctico de Docker y Kubernetes en el workshop "De Cero a Capitán en Kubernetes" de Cloud Native Medellín (CNCF)! 🏔️☕\n\n🎖️ Rango actual: ${rango} (${points} XP)\n📂 Mi Portafolio de Laboratorios y Bitácora: ${portfolioUrl}\n\n#Kubernetes #Docker #CloudNative #DevOps #KubeCafe #CNCFMedellin`;
+
+  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(portfolioUrl)}`;
+  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    `☸️ Construyendo mi Portafolio Práctico de #Docker y #Kubernetes en @CloudNativeCol (CNCF Medellín) 🏔️☕\n🎖️ Rango: ${rango} (${points} XP)\n#CloudNative #DevOps #KubeCafe`
+  )}&url=${encodeURIComponent(portfolioUrl)}`;
+  const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`;
+  const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(portfolioUrl)}&text=${encodeURIComponent(
+    `☸️ Mi Portafolio Práctico de Docker y Kubernetes en Cloud Native Medellín (${rango} • ${points} XP) 🏔️☕`
+  )}`;
+
+  const badgesBar = [
+    `[![Compartir en LinkedIn](https://img.shields.io/badge/Compartir_en-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${linkedinShareUrl})`,
+    `[![Compartir en X](https://img.shields.io/badge/Compartir_en-X_/_Twitter-000000?style=for-the-badge&logo=x&logoColor=white)](${xShareUrl})`,
+    `[![Compartir en WhatsApp](https://img.shields.io/badge/Compartir_en-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](${whatsappShareUrl})`,
+    `[![Compartir en Telegram](https://img.shields.io/badge/Compartir_en-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](${telegramShareUrl})`
+  ].join(' ');
+
+  const githubProfileSnippet = `[![Portafolio Kubernetes KubeCafé](${rankBadgeUrl})](${portfolioUrl})`;
+
+  return {
+    portfolioUrl,
+    rankBadgeUrl,
+    shareMessage,
+    linkedinShareUrl,
+    xShareUrl,
+    whatsappShareUrl,
+    telegramShareUrl,
+    badgesBar,
+    githubProfileSnippet
+  };
+}
+
+/**
+ * Genera el archivo README.md del Portafolio Profesional de Aprendizaje dentro de
+ * aportes-comunidad/soluciones-retos/<usuario>/README.md
+ */
+function generateStudentPortfolioReadme(student, evalResult) {
+  const user = cleanGithubUser(student.github);
+  const folderName = evalResult.userFolderName || user;
+  const userDir = path.join(SOLUCIONES_DIR, folderName);
+  if (!fs.existsSync(userDir)) return;
+
+  const nombre = (student.nombre || user).trim();
+  const rol = (student.rol || 'Tripulante Cloud Native').trim();
+  const rango = evalResult.rango;
+  const points = evalResult.points;
+  const motivacion = (student.motivacion || 'Dominar contenedores y Kubernetes desde la práctica.').trim();
+  const share = buildShareLinks(user, nombre, rango, points, true, folderName);
+
+  // Insignias de módulos
+  const moduleBadges = Object.entries(WEEK_METADATA).map(([wk, meta]) => {
+    const rep = evalResult.detailedReport.find(r => r.weekKey === wk);
+    if (rep && rep.isComplete) {
+      return `![${wk}](https://img.shields.io/badge/${meta.shortBadge}-✅_Completado-${meta.color}?style=for-the-badge&logo=${meta.logo}&logoColor=white)`;
+    }
+    if (rep && (rep.solvedCount > 0 || rep.hasBitacora)) {
+      return `![${wk}](https://img.shields.io/badge/${meta.shortBadge}-⏳_En_Progreso-f59e0b?style=for-the-badge&logo=${meta.logo}&logoColor=white)`;
+    }
+    return `![${wk}](https://img.shields.io/badge/${meta.shortBadge}-⚪_Próximamente-475569?style=for-the-badge&logo=${meta.logo}&logoColor=white)`;
+  });
+
+  // Filas de progreso técnico por semana
+  const tableRows = Object.entries(WEEK_METADATA).map(([wk, meta]) => {
+    const rep = evalResult.detailedReport.find(r => r.weekKey === wk);
+    const weekFolderExists = fs.existsSync(path.join(userDir, rep ? rep.weekDirName : wk));
+    const folderLink = weekFolderExists ? `[📂 Ver Soluciones](./${rep ? rep.weekDirName : wk})` : '—';
+
+    let statusBadge = '`⚪ Pendiente`';
+    if (rep && rep.isComplete) {
+      statusBadge = `\`✅ ${rep.solvedCount}/${rep.totalExpected} Verificados (+${rep.solvedCount * 10} XP)\``;
+    } else if (rep && rep.solvedCount > 0) {
+      statusBadge = `\`⏳ ${rep.solvedCount}/${rep.totalExpected} Verificados (+${rep.solvedCount * 10} XP)\``;
+    }
+
+    const bitacoraLink =
+      rep && rep.hasBitacora
+        ? `[📔 Leer Bitácora](./${rep.weekDirName}/bitacora.md)`
+        : `[➕ Crear Bitácora](${REPO_URL}/issues/new?template=bitacora-semanal.yml)`;
+
+    return `| **${meta.title}** | ${ meta.skills } | ${statusBadge} | ${folderLink} | ${bitacoraLink} |`;
+  });
+
+  // Listar bitácoras escritas para mostrarlas destacadas
+  const bitacoraItems = evalResult.detailedReport
+    .filter(r => r.hasBitacora)
+    .map(r => {
+      const meta = WEEK_METADATA[r.weekKey] || { title: r.weekKey };
+      return `- 📔 **[${meta.title}](./${r.weekDirName}/bitacora.md)** — *Reflexión técnica, diagnóstico de errores y comandos practicados.*`;
+    });
+
+  const bitacorasSection =
+    bitacoraItems.length > 0
+      ? bitacoraItems.join('\n')
+      : `> 💡 *Aún no has registrado bitácoras escritas. Haz clic en **[📔 Registrar mi Bitácora de Aprendizaje en 1 minuto](${REPO_URL}/issues/new?template=bitacora-semanal.yml)** para documentar lo que aprendiste esta semana.*`;
+
+  const socialLinksBar = [
+    `[![GitHub](https://img.shields.io/badge/GitHub-@${user}-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/${user})`
+  ];
+  const linkedin = cleanLinkedin(student.linkedin);
+  if (linkedin) {
+    socialLinksBar.push(
+      `[![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](${linkedin})`
+    );
+  }
+
+  const content = `<div align="center">
+
+# 🎓 Portafolio Profesional Cloud Native & Kubernetes
+### <img src="https://github.com/${user}.png?size=80" width="42" height="42" style="border-radius: 50%; vertical-align: middle; margin-right: 8px;" alt="${user}"/> ${nombre} (\`@${user}\`)
+**${rol}**
+
+*«${motivacion}»*
+
+${socialLinksBar.join(' ')}
+
+---
+
+### 🎖️ Insignias Oficiales y Rango Verificado (CI/CD)
+
+[![Rango Oficial](${share.rankBadgeUrl})](${REPO_URL}/blob/main/ASISTENTES.md)
+[![XP Verificado](https://img.shields.io/badge/⚡_Puntaje_Total-${points}_XP-10b981?style=for-the-badge&logo=githubactions&logoColor=white)](${REPO_URL}/blob/main/ASISTENTES.md)
+[![Retos Superados](https://img.shields.io/badge/🛠️_Retos_Rotos_Resueltos-${evalResult.totalSolvedChallenges}-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](${REPO_URL}/blob/main/ASISTENTES.md)
+[![Comunidad CNCF](https://img.shields.io/badge/🇨🇴_Capítulo_Oficial-CNCF_Medellín-00C7B7?style=for-the-badge&logo=cncf&logoColor=white)](https://ocgroups.dev/cncf/group/2majk4r)
+
+</div>
+
+---
+
+## 🧩 Mapa de Competencias e Insignias por Módulo
+
+<div align="center">
+
+${moduleBadges.join('\n')}
+
+</div>
+
+---
+
+## 📊 Evidencias Técnicas y Laboratorios Resueltos en ☕ KubeCafé
+
+Cada entrega en este portafolio es validada automáticamente por el motor de integración continua de [**De Cero a Capitán en Kubernetes — Cloud Native Medellín (CNCF)**](${REPO_URL}) frente a escenarios reales de resolución de fallos (*Troubleshooting*):
+
+| Módulo del Workshop | Habilidades Practicadas | Estado de Validación | Código / Manifiestos | Bitácora Técnica |
+| :--- | :--- | :---: | :---: | :---: |
+${tableRows.join('\n')}
+
+---
+
+## 📔 Bitácoras de Reflexión e Ingeniería
+
+<div align="left">
+
+${bitacorasSection}
+
+</div>
+
+<div align="center">
+
+[![Agregar Bitácora Semanal](https://img.shields.io/badge/📔_Registrar_o_Actualizar_Bitácora_Semanal_(Formulario_1_min)-2ea44f?style=for-the-badge&logo=github)](${REPO_URL}/issues/new?template=bitacora-semanal.yml)
+
+</div>
+
+---
+
+## 📣 Comparte tu Portafolio e Insignia en Redes Sociales
+
+Comparte tus avances con reclutadores, colegas y la comunidad haciendo clic en cualquiera de estos botones:
+
+<div align="center">
+
+${share.badgesBar}
+
+</div>
+
+<details>
+<summary><b>📋 Ver texto listo para copiar y publicar en LinkedIn + Insignia para tu Perfil de GitHub</b></summary>
+<br>
+
+### 1️⃣ Texto sugerido para publicación en LinkedIn:
+Copia y pega este texto en un post de LinkedIn (puedes adjuntar una captura de este portafolio o de tu terminal):
+
+\`\`\`text
+${share.shareMessage}
+\`\`\`
+
+### 2️⃣ Insignia dinámica para el README de tu perfil personal de GitHub (\`github.com/${user}/${user}\`):
+Pega esta línea en el \`README.md\` de tu perfil de GitHub para mostrar tu rango y enlazar a este portafolio verificado:
+
+\`\`\`markdown
+${share.githubProfileSnippet}
+\`\`\`
+
+</details>
+
+---
+
+<div align="center">
+  <sub>🏔️☕ Portafolio generado y verificado automáticamente por <b><a href="${REPO_URL}">Cloud Native Medellín (CNCF) — De Cero a Capitán en Kubernetes</a></b></sub>
+</div>
+`;
+
+  fs.writeFileSync(path.join(userDir, 'README.md'), content, 'utf8');
 }
 
 function buildSocialBadgesString(entry) {
@@ -509,6 +832,13 @@ function buildSocialBadgesString(entry) {
   if (linkedin) {
     badges.push(
       `[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](${linkedin})`
+    );
+  }
+
+  if (entry.hasPortfolioDir) {
+    const folder = entry.userFolderName || user;
+    badges.push(
+      `[![Portafolio K8s](https://img.shields.io/badge/🎓_Portafolio_K8s-00C7B7?style=flat-square&logo=kubernetes&logoColor=white)](./aportes-comunidad/soluciones-retos/${folder}/README.md)`
     );
   }
 
@@ -571,7 +901,9 @@ function buildReadmeMosaicSection(students, instructorsList = []) {
         else if (pos === 2) medal = '🥈 ';
         else if (pos === 3) medal = '🥉 ';
       }
-      const profileLink = cleanLinkedin(entry.linkedin) || `https://github.com/${user}`;
+      const profileLink = entry.hasPortfolioDir
+        ? `./aportes-comunidad/soluciones-retos/${entry.userFolderName || user}/README.md`
+        : cleanLinkedin(entry.linkedin) || `https://github.com/${user}`;
       return `    <td align="center" width="140">\n      <a href="${profileLink}" title="${fullName} (@${user}) — ${xp} XP">\n        <img src="https://github.com/${user}.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="${user}"/><br/>\n        <sub><b>${medal}${shortName}</b></sub>\n      </a><br/>\n      <sub>${rango} • <b>${xp} XP</b></sub>\n    </td>`;
     });
     rowsHtml.push(`  <tr>\n${cells.join('\n')}\n  </tr>`);
@@ -606,6 +938,7 @@ function buildReadmeMosaicSection(students, instructorsList = []) {
 
 [![Tripulantes a Bordo](https://img.shields.io/badge/⛵_Tripulantes_a_Bordo-${students.length}-00C7B7?style=for-the-badge)](./ASISTENTES.md)
 [![Registrarme en 30 seg](https://img.shields.io/badge/➕_¡Regístrate_Aquí!_(Formulario_Visual)-2ea44f?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
+[![Registrar Bitácora Semanal](https://img.shields.io/badge/📔_Bitácora_Semanal_y_Portafolio-8B5CF6?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)
 [![Actualizar mis Datos](https://img.shields.io/badge/✏️_Actualizar_mis_Datos_o_Redes-f57c00?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
 [![Ver Ranking Completo](https://img.shields.io/badge/🏆_Ver_Tabla_de_Puntajes_y_Redes-326CE5?style=for-the-badge)](./ASISTENTES.md)
 
@@ -613,7 +946,7 @@ ${instructorsBlock}<table>
 ${rowsHtml.join('\n')}
 </table>
 
-<sub>💡 <b>¿Aún no apareces aquí o quieres actualizar tu LinkedIn/Redes?</b> Haz clic en <a href="https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml"><b>➕ Registrarme / ✏️ Actualizar mis Datos</b></a> y nuestro bot actualizará tu tarjeta automáticamente en 15 segundos.</sub>
+<sub>💡 <b>¿Aún no apareces aquí, quieres actualizar tus redes o registrar tu Bitácora Semanal?</b> Haz clic en <a href="https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml"><b>➕ Registrarme / ✏️ Actualizar Datos</b></a> o en <a href="https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml"><b>📔 Llenar Bitácora Semanal</b></a> y nuestro bot actualizará tu tarjeta y portafolio automáticamente en 15 segundos.</sub>
 
 </div>
 <!-- FIN_MOSAICO_TRIPULACION -->`;
@@ -666,90 +999,65 @@ ${instRows}
 
   return `# 🙌 Muro de Asistentes y Ranking de la Tripulación — Cloud Native Medellín 🏔️☕
 
-¡Te damos la bienvenida a bordo! Este muro es el registro histórico y la **tabla de posiciones (Leaderboard)** de todas las personas que hacen parte de esta travesía de aprendizaje: **De Cero a Capitán en Kubernetes**.
+¡Te damos la bienvenida a bordo! Este muro es el registro histórico, el **directorio de Portafolios Profesionales KubeCafé** y la **tabla de posiciones (Leaderboard)** de todas las personas que hacen parte de esta travesía de aprendizaje: **De Cero a Capitán en Kubernetes**.
 
 <div align="center">
 
 [![Comunidad Oficial CNCF Medellín](https://img.shields.io/badge/🇨🇴_Únete_al_Capítulo-CNCF_Medellín-00C7B7?style=for-the-badge&logo=cncf&logoColor=white)](https://ocgroups.dev/cncf/group/2majk4r)
 [![Registrarme en 30 seg](https://img.shields.io/badge/➕_¡Regístrate_Aquí!_(Nuevos_Tripulantes)-2ea44f?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
+[![Registrar Bitácora Semanal](https://img.shields.io/badge/📔_Bitácora_Semanal_y_Portafolio-8B5CF6?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)
 [![Actualizar mis Datos](https://img.shields.io/badge/✏️_Actualizar_mis_Datos_o_Redes_Sociales-f57c00?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
+[![Insignias y Portafolio](https://img.shields.io/badge/🎖️_Insignias_para_LinkedIn_y_GitHub-326CE5?style=for-the-badge&logo=linkedin)](./recursos/portafolio-y-badges.md)
 
 </div>
 
 ---
 
-## 🏆 Sistema de Puntaje (XP) y Validación de Retos Rotos
+## 🏆 Sistema de Puntaje (XP), Portafolio Profesional y Validación
 
-A medida que avances semana a semana, nuestro bot de GitHub Actions inspeccionará tu carpeta \`aportes-comunidad/soluciones-retos/<tu-usuario>/semana-XX/\`, **validará que cada solución corresponda realmente al ejercicio de \`2.reto-roto/\`** y actualizará tu puntaje en este muro:
+A medida que avances semana a semana, nuestro bot de GitHub Actions inspeccionará tu carpeta \`aportes-comunidad/soluciones-retos/<tu-usuario>/semana-XX/\`, **validará tus soluciones de \`2.reto-roto/\`**, generará tu **Portafolio Profesional KubeCafé (\`README.md\`)** y actualizará tu puntaje en este muro:
 
-| Acción / Logro | Puntos (XP) | Regla de Validación Estricta |
+| Acción / Logro | Puntos / Insignia | Regla de Validación Estricta |
 | :--- | :---: | :--- |
 | **1. Registro en el Muro** | **+10 XP** | Por registrarte en el formulario o vía Pull Request. |
-| **2. Reto Roto Resuelto y Validado** | **+10 XP por reto** | Cada ejercicio de \`2.reto-roto/\` (${weekChallengesText}) que resuelvas y pase la validación de contenido suma **+10 XP** en la tabla de posiciones (ej. Semana 00 completa = +50 XP, Semana 01 completa = +40 XP). Si subes un archivo que no corresponde al reto roto, no suma puntos. |
+| **2. Reto Roto Resuelto y Validado** | **+10 XP por reto** | Cada ejercicio de \`2.reto-roto/\` (${weekChallengesText}) que resuelvas y pase la validación de contenido suma **+10 XP** en la tabla de posiciones (ej. Semana 00 completa = +50 XP, Semana 01 completa = +40 XP). |
+| **3. Bitácora de Navegación y Portafolio KubeCafé** | **🎓 Portafolio + 📔 Insignia** | Registra lo aprendido en el **[📔 Formulario Visual de Bitácora](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)** (o incluye \`bitacora.md\` en tu PR) para desbloquear tu **Portafolio Profesional K8s** con botones para compartir en LinkedIn, X y WhatsApp. |
 
 ### 🎖️ Requisitos para subir de Rango:
-| Rango | Requisito | Lo que representa en la travesía |
-| :---: | :---: | :--- |
-| **⛵ Marinero** | Registro inicial (**10 XP**) | Te registraste en este muro y zarpó tu primer Pod en el clúster. |
-| **🧭 Timonel** | **2+ Semanas Completadas al 100%** | Resolviste y validaste **todos** los ejercicios de los _Retos Rotos_ de al menos 2 semanas. |
-| **⚓ Capitán K8s** | **6 Semanas Completadas al 100%** | Dominas la navegación del clúster, completaste todos los ejercicios de las 6 semanas y el proyecto final. |
+| Rango | Requisito | Insignia Oficial para tu Perfil | Lo que representa en la travesía |
+| :---: | :---: | :---: | :--- |
+| **⛵ Marinero** | Registro inicial (**10 XP**) | ![Marinero](https://img.shields.io/badge/KubeCafé-⛵_Marinero-0284c7?style=flat-square&logo=kubernetes&logoColor=white) | Te registraste en este muro y zarpó tu primer Pod en el clúster. |
+| **🧭 Timonel** | **2+ Semanas Completadas al 100%** | ![Timonel](https://img.shields.io/badge/KubeCafé-🧭_Timonel-7c3aed?style=flat-square&logo=kubernetes&logoColor=white) | Resolviste y validaste **todos** los ejercicios de los _Retos Rotos_ de al menos 2 semanas. |
+| **⚓ Capitán K8s** | **6 Semanas Completadas al 100%** | ![Capitán](https://img.shields.io/badge/KubeCafé-⚓_Capitán_K8s-f59e0b?style=flat-square&logo=kubernetes&logoColor=white) | Dominas la navegación del clúster, completaste todos los ejercicios de las 6 semanas y el proyecto final. |
 
 ---
 
-## 📝 ¿Cómo registrarte o actualizar tus datos? (Guía paso a paso)
+## 📝 ¿Cómo registrarte, actualizar tus datos o llenar tu Bitácora Semanal?
 
-Tanto si eres **nuevo/a** como si **ya estás en la tabla y quieres corregir tu nombre, rol o agregar tus redes sociales (LinkedIn, X, Portafolio, etc.)**, usa el mismo Formulario Visual:
+No necesitas tocar código para registrarte o documentar tu bitácora semanal:
 
-### 🚀 Opción 1: Formulario Visual Automático (Para Registrarte o Actualizar tus Datos)
-
-No necesitas instalar nada ni tocar código. Sigue estos **5 pasos**:
-
-1. **Inicia sesión en GitHub:** Asegúrate de haber iniciado sesión con tu cuenta en [github.com](https://github.com).
-2. **Abre el formulario directo:** Haz clic en cualquiera de estos dos enlaces (ambos abren el formulario oficial):
-   - 👉 **[➕ Registrarme por primera vez en el Muro](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)**
-   - 👉 **[✏️ Actualizar mis datos, rol o agregar mi LinkedIn / Redes](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)**
-3. **Completa las casillas del formulario:**
-   - **Title (Título arriba):** Ya viene prellenado, puedes dejarlo así o poner tu nombre.
-   - **1️⃣ Tu Nombre y Apellido \`*\`:** Escribe cómo quieres aparecer en la tabla *(ej: Ana María Gómez)*.
-   - **2️⃣ Tu Usuario de GitHub \`*\`:** Escribe tu usuario exacto de GitHub sin espacios *(ej: \`anagomez-dev\`)*. Con este dato el robot ubicará tu perfil, pondrá tu foto oficial y actualizará tus datos sin duplicarte.
-   - **3️⃣ Tu Rol, Especialidad o Carrera \`*\`:** Qué haces o estudias *(ej: Estudiante, Desarrollador Jr, QA, SysAdmin)*.
-   - **4️⃣ Enlace a tu LinkedIn *(Opcional)*:** Copia y pega la dirección web de tu perfil de LinkedIn.
-   - **5️⃣ Otras Redes Sociales o Portafolio *(Opcional)*:** Si quieres mostrar tu X/Twitter, Instagram, YouTube, Medium, GitLab o página web, pega el enlace aquí.
-   - **6️⃣ ¿Qué te motivó a unirte? \`*\`:** Escribe en una frase qué te gustaría aprender en el curso.
-4. **Envía el formulario:** Baja hasta el final de la página y haz clic en el botón verde que dice **\`Create\`** (o **\`Submit new issue\`**).
-5. **¡Actualización en 15 segundos! 🤖✨:**
-   - Nuestro robot de GitHub Actions leerá tu formulario, actualizará esta tabla y la portada del repositorio, conservará tus puntos ganados y cerrará el ticket automáticamente.
-
----
-
-### 🛠️ Opción 2: Vía Pull Request desde tu terminal (Para practicar Git)
-
-Si prefieres hacerlo con comandos de \`git\`, edita tu bloque en [\`asistentes.json\`](./asistentes.json):
-\`\`\`json
-{
-  "github": "TU-USUARIO",
-  "nombre": "Tu Nombre y Apellido",
-  "rol": "Tu Rol o Carrera",
-  "linkedin": "https://www.linkedin.com/in/tu-perfil",
-  "redes": ["https://x.com/tu-usuario", "https://tu-portafolio.dev"],
-  "rango": "⛵ Marinero",
-  "motivacion": "Tu meta o qué esperas aprender"
-}
-\`\`\`
+1. **➕ Registro o Actualización de Perfil (30 segundos):**
+   - 👉 **[Abrir Formulario Visual de Registro / Actualización](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)**
+   - Completa tu nombre, usuario de GitHub, rol y enlaces a LinkedIn/Redes, y haz clic en **\`Create\`**. En 15 segundos aparecerás en la tabla con tu foto oficial.
+2. **📔 Bitácora de Aprendizaje Semanal y Portafolio Profesional (1 minuto):**
+   - 👉 **[Abrir Formulario Visual de Bitácora Semanal](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)**
+   - Elige la semana, escribe qué aprendiste y qué reto solucionaste, y haz clic en **\`Create\`**. El bot creará tu archivo \`bitacora.md\`, actualizará tu **🎓 Portafolio K8s** y te dará enlaces de 1 clic para compartir tu logro en LinkedIn, X/Twitter y WhatsApp.
+3. **🛠️ Vía Pull Request desde tu terminal (Para practicar Git):**
+   - También puedes editar tu bloque en [\`asistentes.json\`](./asistentes.json) o copiar la [\`PLANTILLA-BITACORA.md\`](./aportes-comunidad/soluciones-retos/PLANTILLA-BITACORA.md) dentro de tu carpeta semanal.
 
 ---
 ${instructorCard}
 ## 👥 Tabla de Posiciones de la Tripulación (${students.length} Tripulantes)
 
 <!-- INICIO_TABLA_ASISTENTES -->
-| # | 👤 Tripulante | 💼 Rol / Especialidad | 🌐 Redes Profesionales | 🎖️ Rango y Progreso (XP) | 🎯 ¿Qué te motivó a unirte? |
+| # | 👤 Tripulante | 💼 Rol / Especialidad | 🌐 Redes y Portafolio | 🎖️ Rango y Progreso (XP) | 🎯 ¿Qué te motivó a unirte? |
 | :---: | :--- | :--- | :---: | :---: | :--- |
 ${rows}
 <!-- FIN_TABLA_ASISTENTES -->
 
 > [!TIP]
-> **Haz Networking:**  
-> Te invitamos a hacer clic en los perfiles de GitHub y LinkedIn de tus compañeros de tripulación. La mayor ventaja del workshop es la red de apoyo y los contactos profesionales que construyes en el camino. 🤝🚀
+> **Impulsa tu Marca Profesional y Haz Networking:**  
+> Haz clic en el botón **\`🎓 Portafolio K8s\`** de los tripulantes para ver sus laboratorios verificados y bitácoras, y visita la [**🎖️ Guía de Portafolio e Insignias para LinkedIn y GitHub (\`recursos/portafolio-y-badges.md\`)**](./recursos/portafolio-y-badges.md) para agregar tu insignia oficial a tu perfil. 🤝🚀
 `;
 }
 
@@ -795,6 +1103,9 @@ function processAndSortData(rawData) {
       item.puntos = evalResult.points;
       item.semanasCompletas = evalResult.completedWeeksCount;
       item.progresoTexto = evalResult.summaryText;
+      item.hasPortfolioDir = evalResult.hasPortfolioDir;
+      item.userFolderName = evalResult.userFolderName;
+      item._evalResult = evalResult;
       item._order = orderIndex++;
       students.push(item);
     }
@@ -841,6 +1152,14 @@ function processAndSortData(rawData) {
 function syncAllFiles(rawData) {
   const { cleanJsonList, students, instructorsList, officialChallenges } = processAndSortData(rawData);
   fs.writeFileSync(JSON_PATH, JSON.stringify(cleanJsonList, null, 2) + '\n', 'utf8');
+
+  // Generar el README.md de Portafolio Profesional para cada estudiante con carpeta en soluciones-retos/
+  for (const s of students) {
+    if (s.hasPortfolioDir && s._evalResult) {
+      generateStudentPortfolioReadme(s, s._evalResult);
+    }
+  }
+
   const md = renderAsistentesMarkdown(students, instructorsList, officialChallenges);
   fs.writeFileSync(MD_PATH, md, 'utf8');
   if (fs.existsSync(README_PATH)) {
@@ -853,17 +1172,21 @@ function syncAllFiles(rawData) {
 if (require.main === module) {
   const data = JSON.parse(fs.readFileSync(JSON_PATH, 'utf8'));
   const { students } = syncAllFiles(data);
-  console.log(`✅ ASISTENTES.md y README.md actualizados y validados (${students.length} estudiantes).`);
+  const withPortfolio = students.filter(s => s.hasPortfolioDir).length;
+  console.log(`✅ ASISTENTES.md, README.md y ${withPortfolio} Portafolios Profesionales actualizados (${students.length} estudiantes).`);
 }
 
 module.exports = {
   INSTRUCTORS,
+  WEEK_METADATA,
   CHALLENGE_VALIDATORS,
   cleanGithubUser,
   cleanLinkedin,
   parseExtraSocialLinks,
   discoverOfficialChallenges,
   evaluateUserProgress,
+  buildShareLinks,
+  generateStudentPortfolioReadme,
   processAndSortData,
   syncAllFiles,
   updateReadmeWithMosaic,

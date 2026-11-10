@@ -98,7 +98,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add asistentes.json ASISTENTES.md README.md
+          git add aportes-comunidad/soluciones-retos/ asistentes.json ASISTENTES.md README.md
           if ! git diff --staged --quiet; then
             git commit -m "chore(asistentes): ${ACTION_TYPE} tripulante @${GH_USER} desde formulario [skip ci]"
             git pull --rebase origin ${{ github.event.repository.default_branch }}
@@ -118,11 +118,14 @@ jobs:
           RANGO: ${{ steps.registro.outputs.rango }}
         with:
           script: |
+            const { buildShareLinks } = require('./scripts/generar-asistentes.js');
             const user = process.env.GH_USER || '';
             const nombre = process.env.NOMBRE || user;
             const actionType = process.env.ACTION_TYPE || 'registrado';
-            const xp = process.env.XP || '10';
+            const xp = parseInt(process.env.XP || '10', 10);
             const rango = process.env.RANGO || '⛵ Marinero';
+
+            const share = buildShareLinks(user, nombre, rango, xp, false, user);
 
             const comment = [
               `### ⛵ ¡Bienvenido/a a bordo, **${nombre}** (@${user})! 🏔️☕`,
@@ -130,6 +133,19 @@ jobs:
               `Tu perfil ha sido **${actionType} automáticamente** en el **[Muro Oficial de Asistentes (\`ASISTENTES.md\`)](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/ASISTENTES.md)** y en el **Mosaico de la Portada** con tu foto oficial de GitHub y tus redes profesionales.`,
               '',
               `🎖️ **Rango actual:** **${rango}** (**${xp} XP**)`,
+              '',
+              '---',
+              '',
+              '### 📣 ¡Comparte tu Insignia de Tripulante en tus Redes Sociales!',
+              '',
+              share.badgesBar,
+              '',
+              '#### 🐙 Insignia para el `README.md` de tu perfil personal de GitHub:',
+              '```markdown',
+              share.githubProfileSnippet,
+              '```',
+              '',
+              `> 📔 **Siguiente paso recomendado:** Cuando avances en la semana, llena en 1 minuto tu **[Formulario Visual de Bitácora Semanal](https://github.com/${context.repo.owner}/${context.repo.repo}/issues/new?template=bitacora-semanal.yml)** para generar tu **Portafolio Profesional K8s**.`,
               '',
               '> 💡 *Cerramos este formulario automáticamente porque tus datos ya quedaron publicados. Si en algún momento deseas actualizar tu información o agregar más redes sociales, puedes volver a llenar el formulario cuando quieras.*'
             ].join('\n');

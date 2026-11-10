@@ -20,6 +20,10 @@
 [📺 Grabaciones en YouTube (@CloudNativeColombia)](https://www.youtube.com/@CloudNativeColombia) •
 [🧪 Laboratorios Online en iximiuz](https://labs.iximiuz.com/trainings/fundamentos-de-docker-y-kubernetes-2ae16ea8/) •
 [☕ Simulador KubeCafé (Cómo Opera K8s)](https://edwinbermudez91.github.io/Fundamentos-Kubernetes/recursos/simulador-interactivo-kubernetes.html) •
+[🎓 Portafolio KubeCafé y Badges](./recursos/portafolio-y-badges.md) •
+[📔 Formulario de Bitácora Semanal](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml) •
+[⚡ Guía Shell DX (Terminal Pro)](./recursos/guia-shell-dx-kubernetes.md) •
+[🔄 Sincronizar tu Fork](./recursos/como-sincronizar-tu-fork.md) •
 [📊 Diapositivas (PDF)](./recursos/diapositivas/README.md) •
 [☕ Analogía KubeCafé](./recursos/de-un-tinto-a-kubernetes.md) •
 [⚓ Guía de Harbor](./recursos/guia-harbor-registry.md) •
@@ -59,7 +63,8 @@
 
 > [!IMPORTANT]
 > 📢 **¿Hiciste Fork de este repositorio antes?**  
-> El repositorio ha sido actualizado recientemente con los nuevos contenidos de Docker y mejoras en las plantillas. **Por favor sincroniza tu copia** entrando a tu repositorio en GitHub y haciendo clic en el botón **"Sync fork" ➔ "Update branch"** (o en tu terminal con `git pull origin main`).
+> El repositorio se actualiza cada semana con nuevos retos, bitácoras y mejoras. **Sincroniza tu copia** entrando a tu repositorio en GitHub y haciendo clic en **"Sync fork" ➔ "Update branch"** (o usando `upstream` en tu terminal).  
+> 👉 [**Ver la Guía Visual Paso a Paso: Cómo Sincronizar tu Fork sin Conflictos (`recursos/como-sincronizar-tu-fork.md`)**](./recursos/como-sincronizar-tu-fork.md)
 
 ---
 
@@ -73,9 +78,9 @@
 | [**`semana-00-fundamentos-docker/`**](./semana-00-fundamentos-docker) | [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](./semana-00-fundamentos-docker)<br>`🟢 DISPONIBLE` | Empaquetado de aplicaciones, imágenes Alpine ligeras, redes bridge y volúmenes persistentes. |
 | [**`semana-01-arquitectura/`**](./semana-01-arquitectura) | [![Kubernetes](https://img.shields.io/badge/K8s_Pods-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](./semana-01-arquitectura)<br>`🟢 DISPONIBLE` | Arquitectura interna (Control Plane vs Workers), creación de Pods y contenedores Sidecar. |
 | [**`semana-02-deployments/`**](./semana-02-deployments) | [![Deployments](https://img.shields.io/badge/Deployments-10B981?style=for-the-badge&logo=kubernetes&logoColor=white)](./semana-02-deployments)<br>`🔥 EN CURSO` | Controladores de réplicas, autorreparación (*self-healing*), rolling updates con cero caídas y rollbacks. |
-| [**`aportes-comunidad/`**](./aportes-comunidad) | [![Comunidad](https://img.shields.io/badge/Comunidad-F59E0B?style=for-the-badge&logo=github&logoColor=white)](./aportes-comunidad)<br>`🏆 RANKING` | Entrega de retos rotos de los asistentes para sumar **XP** y subir de rango en el muro de navegación. |
-| [**`recursos/`**](./recursos) | [![KubeCafé](https://img.shields.io/badge/Recursos-8B5CF6?style=for-the-badge&logo=coffeescript&logoColor=white)](./recursos)<br>`🎮 SIMULADOR` | Simulador interactivo en HTML/JS, diapositivas oficiales en PDF y guías de seguridad (Trivy/Harbor). |
-| [**`scripts/`**](./scripts) | [![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](./scripts)<br>`⚙️ AUTOMATIZACIÓN` | Scripts que leen las entregas, validan los retos y calculan los puntajes automáticamente. |
+| [**`aportes-comunidad/`**](./aportes-comunidad) | [![Comunidad](https://img.shields.io/badge/Comunidad-F59E0B?style=for-the-badge&logo=github&logoColor=white)](./aportes-comunidad)<br>`🎓 PORTAFOLIOS` | Entrega de retos rotos (+XP), **Portafolios Profesionales KubeCafé** verificados y bitácoras semanales. |
+| [**`recursos/`**](./recursos) | [![KubeCafé](https://img.shields.io/badge/Recursos-8B5CF6?style=for-the-badge&logo=coffeescript&logoColor=white)](./recursos)<br>`🎮 SIMULADOR & DX` | Simulador KubeCafé, diapositivas PDF, [**Shell DX (Terminal Pro)**](./recursos/guia-shell-dx-kubernetes.md), [**Insignias LinkedIn**](./recursos/portafolio-y-badges.md), Trivy, Harbor y Ollama. |
+| [**`scripts/`**](./scripts) | [![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](./scripts)<br>`⚙️ AUTOMATIZACIÓN` | Scripts que validan los retos, calculan puntajes y generan el portafolio de cada estudiante. |
 
 ---
 
@@ -301,6 +306,14 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
 *(No requieren tarjeta de crédito ni instalación local; incluyen terminal lista en la nube).*
 </details>
 
+<details>
+<summary><b>🚀 Toca tu terminal como un instrumento (Guía Shell DX para Kubernetes: Starship, fzf, Krew y Alias CKA)</b></summary>
+<br>
+
+¿Quieres ver en tiempo real en qué clúster y namespace estás parado, autocompletar nombres de Pods con `Tab` y cambiar de entorno en dos teclas?  
+👉 [**Abrir la Guía Oficial: Shell DX para Kubernetes (`recursos/guia-shell-dx-kubernetes.md`)**](./recursos/guia-shell-dx-kubernetes.md)
+</details>
+
 ---
 
 <!-- INICIO_MOSAICO_TRIPULACION -->
@@ -310,6 +323,7 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
 
 [![Tripulantes a Bordo](https://img.shields.io/badge/⛵_Tripulantes_a_Bordo-48-00C7B7?style=for-the-badge)](./ASISTENTES.md)
 [![Registrarme en 30 seg](https://img.shields.io/badge/➕_¡Regístrate_Aquí!_(Formulario_Visual)-2ea44f?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
+[![Registrar Bitácora Semanal](https://img.shields.io/badge/📔_Bitácora_Semanal_y_Portafolio-8B5CF6?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)
 [![Actualizar mis Datos](https://img.shields.io/badge/✏️_Actualizar_mis_Datos_o_Redes-f57c00?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)
 [![Ver Ranking Completo](https://img.shields.io/badge/🏆_Ver_Tabla_de_Puntajes_y_Redes-326CE5?style=for-the-badge)](./ASISTENTES.md)
 
@@ -360,42 +374,42 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
 <table>
   <tr>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/juandavidcorrales/" title="David Corrales (@devdavco) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/devdavco/README.md" title="David Corrales (@devdavco) — 60 XP">
         <img src="https://github.com/devdavco.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="devdavco"/><br/>
         <sub><b>🥇 David Corrales</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/carlos-andres-montoya-alzate-044ba433" title="Carlos Andres Montoya Alzate (@calichem26) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/calichem26/README.md" title="Carlos Andres Montoya Alzate (@calichem26) — 60 XP">
         <img src="https://github.com/calichem26.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="calichem26"/><br/>
         <sub><b>🥈 Carlos Andres</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://github.com/karolrojas68" title="Karol Rojas (@karolrojas68) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/karolrojas68/README.md" title="Karol Rojas (@karolrojas68) — 60 XP">
         <img src="https://github.com/karolrojas68.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="karolrojas68"/><br/>
         <sub><b>🥉 Karol Rojas</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/juan-jose-jaramillo-a8966123a/" title="Juan Jose Jaramillo (@jujo23z) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/jujo23z/README.md" title="Juan Jose Jaramillo (@jujo23z) — 60 XP">
         <img src="https://github.com/jujo23z.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="jujo23z"/><br/>
         <sub><b>Juan Jose</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/stiven-munera-quintero-80151721a/" title="Stiven Munera (@StivenMunera) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/StivenMunera/README.md" title="Stiven Munera (@StivenMunera) — 60 XP">
         <img src="https://github.com/StivenMunera.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="StivenMunera"/><br/>
         <sub><b>Stiven Munera</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/johan-andres-lopez-zuluaga" title="Johan Andrés López Zuluaga (@parte193) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/parte193/README.md" title="Johan Andrés López Zuluaga (@parte193) — 60 XP">
         <img src="https://github.com/parte193.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="parte193"/><br/>
         <sub><b>Johan Andrés</b></sub>
       </a><br/>
@@ -404,42 +418,42 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
   </tr>
   <tr>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/juan-josé-gonzález-rosales-40a4a8203?utm_source=share_via&utm_content=profile&utm_medium=member_android" title="Juan José González Rosales (@juanjosegonzalezrosales) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/juanjosegonzalezrosales/README.md" title="Juan José González Rosales (@juanjosegonzalezrosales) — 60 XP">
         <img src="https://github.com/juanjosegonzalezrosales.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="juanjosegonzalezrosales"/><br/>
         <sub><b>Juan José</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/raymundo-avila-r-04775932" title="Fernando Avila (@RAVILA28) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/RAVILA28/README.md" title="Fernando Avila (@RAVILA28) — 60 XP">
         <img src="https://github.com/RAVILA28.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="RAVILA28"/><br/>
         <sub><b>Fernando Avila</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://linkedin.com/in/maria-nathali-anzola" title="Nathali Anzola (@marnathali) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/marnathali/README.md" title="Nathali Anzola (@marnathali) — 60 XP">
         <img src="https://github.com/marnathali.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="marnathali"/><br/>
         <sub><b>Nathali Anzola</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/yorman-agudelo/" title="Yorman Agudelo (@Cuburi) — 60 XP">
+      <a href="./aportes-comunidad/soluciones-retos/Cuburi/README.md" title="Yorman Agudelo (@Cuburi) — 60 XP">
         <img src="https://github.com/Cuburi.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="Cuburi"/><br/>
         <sub><b>Yorman Agudelo</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://github.com/sanjavier88" title="Jorge Alberto Monsalve Ruiz (@sanjavier88) — 50 XP">
+      <a href="./aportes-comunidad/soluciones-retos/sanjavier88/README.md" title="Jorge Alberto Monsalve Ruiz (@sanjavier88) — 50 XP">
         <img src="https://github.com/sanjavier88.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="sanjavier88"/><br/>
         <sub><b>Jorge Alberto</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>50 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/glgaviria" title="Gloria Gaviria (@glgaviria64) — 30 XP">
+      <a href="./aportes-comunidad/soluciones-retos/glgaviria64/README.md" title="Gloria Gaviria (@glgaviria64) — 30 XP">
         <img src="https://github.com/glgaviria64.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="glgaviria64"/><br/>
         <sub><b>Gloria Gaviria</b></sub>
       </a><br/>
@@ -448,7 +462,7 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
   </tr>
   <tr>
     <td align="center" width="140">
-      <a href="https://www.linkedin.com/in/didierendon" title="Didier Alexander Rendón Chaverra (@DrSiker) — 20 XP">
+      <a href="./aportes-comunidad/soluciones-retos/DrSiker/README.md" title="Didier Alexander Rendón Chaverra (@DrSiker) — 20 XP">
         <img src="https://github.com/DrSiker.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="DrSiker"/><br/>
         <sub><b>Didier Alexander</b></sub>
       </a><br/>
@@ -712,7 +726,7 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
   </tr>
 </table>
 
-<sub>💡 <b>¿Aún no apareces aquí o quieres actualizar tu LinkedIn/Redes?</b> Haz clic en <a href="https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml"><b>➕ Registrarme / ✏️ Actualizar mis Datos</b></a> y nuestro bot actualizará tu tarjeta automáticamente en 15 segundos.</sub>
+<sub>💡 <b>¿Aún no apareces aquí, quieres actualizar tus redes o registrar tu Bitácora Semanal?</b> Haz clic en <a href="https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml"><b>➕ Registrarme / ✏️ Actualizar Datos</b></a> o en <a href="https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml"><b>📔 Llenar Bitácora Semanal</b></a> y nuestro bot actualizará tu tarjeta y portafolio automáticamente en 15 segundos.</sub>
 
 </div>
 <!-- FIN_MOSAICO_TRIPULACION -->
@@ -728,6 +742,21 @@ A medida que envíes tus Pull Requests (PRs) resolviendo los retos rotos de cada
 * ⛵ **Marinero (10 XP base):** Te registraste en el Muro de la Tripulación en `ASISTENTES.md` (+10 XP adicionales por cada reto roto validado).
 * 🧭 **Timonel (2+ Semanas Completadas al 100%):** Resolviste y validaste **todos** los ejercicios de los *Retos Rotos* de al menos 2 semanas (`5/5` en Semana 00, `4/4` en Semana 01, etc.).
 * ⚓ **Capitán K8s (6 Semanas Completadas al 100%):** Dominas la navegación del clúster, completaste todos los retos de las 6 semanas y el proyecto final.
+
+### 🎓 Tu Portafolio Profesional KubeCafé, Bitácora de Navegación e Insignias Oficiales
+
+En **Cloud Native Medellín (CNCF)** queremos que tu esfuerzo técnico sea visible en tu carrera profesional. Cada vez que entregas un reto o llenas el [**📔 Formulario Visual de Bitácora Semanal**](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml), nuestro robot genera automáticamente tu **Portafolio Profesional de Aprendizaje** dentro de `aportes-comunidad/soluciones-retos/<tu-usuario>/README.md` y te entrega tus insignias para lucir en **LinkedIn, GitHub, X/Twitter, WhatsApp y Telegram**:
+
+<div align="center">
+
+[![Marinero K8s](https://img.shields.io/badge/KubeCafé_CNCF-⛵_Marinero_Cloud_Native-0284c7?style=for-the-badge&logo=kubernetes&logoColor=white)](./recursos/portafolio-y-badges.md)
+[![Timonel K8s](https://img.shields.io/badge/KubeCafé_CNCF-🧭_Timonel_Kubernetes-7c3aed?style=for-the-badge&logo=kubernetes&logoColor=white)](./recursos/portafolio-y-badges.md)
+[![Capitán K8s](https://img.shields.io/badge/KubeCafé_CNCF-⚓_Capitán_Kubernetes-f59e0b?style=for-the-badge&logo=kubernetes&logoColor=white)](./recursos/portafolio-y-badges.md)
+
+[![Llenar Bitácora Semanal](https://img.shields.io/badge/📔_Llenar_Bitácora_Semanal_(Formulario_1_min)-2ea44f?style=for-the-badge&logo=github)](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)
+[![Ver Catálogo de Badges](https://img.shields.io/badge/🎖️_Insignias_y_Cómo_Compartir_en_Redes-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](./recursos/portafolio-y-badges.md)
+
+</div>
 
 ---
 

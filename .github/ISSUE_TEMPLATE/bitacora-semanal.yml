@@ -1,0 +1,88 @@
+name: "📔 Bitácora de Aprendizaje Semanal y Portafolio Profesional"
+description: "Registra en 1 minuto lo que aprendiste esta semana, genera/actualiza tu Portafolio K8s y obtén tu insignia para compartir en redes"
+title: "📔 Bitácora Semanal: [Escribe tu Usuario de GitHub]"
+labels: ["bitacora-semanal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 📔 ¡Construye tu Bitácora de Navegación y Portafolio KubeCafé! 🏔️☕
+        Con este formulario de **Cloud Native Medellín (CNCF)** conviertes tu paso por el workshop en un **Portafolio Profesional de Kubernetes verificable** para mostrar en **LinkedIn, GitHub, X y tu hoja de vida**.
+        
+        1. **Completa las casillas de abajo** contando brevemente qué aprendiste y qué reto resolviste esta semana (toma menos de 1 minuto).
+        2. Haz clic en el botón verde **`Create`** (o **`Submit new issue`**) al final de la página.
+        
+        🤖 **¿Qué hará nuestro robot en 15 segundos?**
+        * Creará o actualizará tu archivo `bitacora.md` en `aportes-comunidad/soluciones-retos/<tu-usuario>/<semana>/bitacora.md`.
+        * Generará tu **Portafolio Profesional KubeCafé (`aportes-comunidad/soluciones-retos/<tu-usuario>/README.md`)** con tus insignias desbloqueadas y retos verificados.
+        * Te responderá aquí mismo con tu **Insignia Oficial (Badge)** y botones de **1 clic para compartir tu logro en LinkedIn, X/Twitter, WhatsApp y Telegram**.
+
+  - type: input
+    id: github_user
+    attributes:
+      label: "1️⃣ 🐙 Tu Usuario de GitHub"
+      description: "Escribe tu nombre de usuario exacto en GitHub (sin @). Si aún no estabas en el Muro de Asistentes, te registraremos automáticamente."
+      placeholder: "Ej: anagomez-dev"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: semana
+    attributes:
+      label: "2️⃣ 🗓️ ¿Qué semana estás documentando en tu bitácora?"
+      description: "Selecciona el módulo del workshop sobre el que quieres registrar tu reflexión técnica."
+      options:
+        - "semana-00 — 🐳 Fundamentos de Docker (De Código a Contenedor)"
+        - "semana-01 — 🌱 Arquitectura de Kubernetes y Pods"
+        - "semana-02 — 🔄 Deployments, Réplicas y Autorreparación"
+        - "semana-03 — 🌐 Redes en K8s: Services e Ingress"
+        - "semana-04 — 💾 Configuración y Datos Persistentes (ConfigMaps, Secrets, PV)"
+        - "semana-05 — 🛡️ Salud, Límites y Seguridad (Probes, Quotas, RBAC)"
+        - "semana-06 — 🎓 Empaquetado con Helm y Proyecto Final KubeCafé"
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: aprendizaje
+    attributes:
+      label: "3️⃣ 💡 ¿Qué aprendiste esta semana? (Conceptos clave)"
+      description: "Resume en tus propias palabras 1 a 3 cosas que antes no sabías o que ahora entiendes mucho mejor (puedes usar viñetas)."
+      placeholder: |
+        - Entendí por qué un contenedor se apaga si su proceso principal no corre en primer plano (foreground).
+        - Aprendí cómo aislar secretos usando .dockerignore y correr contenedores sin permisos root.
+    validations:
+      required: true
+
+  - type: textarea
+    id: desafio
+    attributes:
+      label: "4️⃣ 🧩 ¿Qué fue lo más retador o qué error lograste diagnosticar?"
+      description: "Cuéntanos qué reto roto o concepto te puso a pensar y cómo descubriste la causa raíz."
+      placeholder: |
+        - En el reto 02 de CrashLoopBackOff usé `kubectl logs` y `kubectl describe pod` para descubrir que el comando tenía un typo (`echho` en lugar de `echo`).
+    validations:
+      required: true
+
+  - type: textarea
+    id: comandos
+    attributes:
+      label: "5️⃣ 💻 Comandos o herramientas que practicaste (Opcional)"
+      description: "Pega aquí los comandos de Docker, kubectl, Kind o herramientas de terminal que más te sirvieron esta semana."
+      placeholder: |
+        kubectl get pods -o wide
+        kubectl describe pod reto-01-imagen
+        kubectl rollout status deployment/kubecafe-web
+      render: bash
+    validations:
+      required: false
+
+  - type: textarea
+    id: aplicacion
+    attributes:
+      label: "6️⃣ 🚀 ¿Cómo aplicarías esto en tu trabajo/estudios o qué duda te quedó? (Opcional)"
+      description: "Reflexión final para tu portafolio: ¿dónde ves útil este tema en la vida real o qué quieres seguir explorando?"
+      placeholder: "Quiero aplicar multi-stage builds y usuarios no-root en las APIs de mi portafolio y profundizar en sondas livenessProbe."
+    validations:
+      required: false
+

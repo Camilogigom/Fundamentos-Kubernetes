@@ -159,13 +159,17 @@ jobs:
             const readmeAfter = fs.existsSync('README.md') ? fs.readFileSync('README.md', 'utf8') : '';
 
             const reportLines = userEval.detailedReport
-              .filter(r => r.solvedCount > 0)
+              .filter(r => r.solvedCount > 0 || r.hasBitacora)
               .map(r => {
                 const earnedXp = r.solvedCount * 10;
+                const bitacoraNote = r.hasBitacora ? ' • 📔 *Bitácora incluida*' : '';
                 if (r.isComplete) {
-                  return `- ✅ **${r.weekKey}:** \`${r.solvedCount}/${r.totalExpected} retos validados\` *(¡Semana 100% completada! +${earnedXp} XP)*`;
+                  return `- ✅ **${r.weekKey}:** \`${r.solvedCount}/${r.totalExpected} retos validados\` *(¡Semana 100% completada! +${earnedXp} XP${bitacoraNote})*`;
                 }
-                return `- ⏳ **${r.weekKey}:** \`${r.solvedCount}/${r.totalExpected} retos validados\` *(+${earnedXp} XP — Faltan por resolver/corregir: ${r.missingNums.join(', ')})*`;
+                if (r.solvedCount > 0) {
+                  return `- ⏳ **${r.weekKey}:** \`${r.solvedCount}/${r.totalExpected} retos validados\` *(+${earnedXp} XP${bitacoraNote} — Faltan por resolver/corregir: ${r.missingNums.join(', ')})*`;
+                }
+                return `- 📔 **${r.weekKey}:** *Bitácora semanal registrada en tu Portafolio*`;
               });
 
             const reportMarkdown =
@@ -173,7 +177,7 @@ jobs:
                 ? reportLines.join('\n')
                 : '- 📝 **Registro en el Muro de la Tripulación:** `+10 XP`';
 
-            core.setOutput('has_updates', (mdBefore !== mdAfter || readmeBefore !== readmeAfter) ? 'true' : 'false');
+            core.setOutput('has_updates', 'true');
             core.setOutput('user', user);
             core.setOutput('new_rank', userEval.rango);
             core.setOutput('points', userEval.points.toString());
@@ -190,9 +194,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add asistentes.json ASISTENTES.md README.md
+          git add aportes-comunidad/soluciones-retos/ asistentes.json ASISTENTES.md README.md
           if ! git diff --staged --quiet; then
-            git commit -m "chore(gamificacion): actualizar puntaje de @${GH_USER} (${POINTS:-10} XP - ${NEW_RANK}) [skip ci]"
+            git commit -m "chore(gamificacion): actualizar puntaje y portafolio de @${GH_USER} (${POINTS:-10} XP - ${NEW_RANK}) [skip ci]"
             git pull --rebase origin "${DEFAULT_BRANCH}"
             git push origin HEAD:"${DEFAULT_BRANCH}"
           fi
@@ -208,6 +212,7 @@ jobs:
           REPORT: ${{ steps.calcular.outputs.report }}
         with:
           script: |
+            const { buildShareLinks } = require('./scripts/generar-asistentes.js');
             const user = process.env.GH_USER || '';
             const prNumber = parseInt(process.env.PR_NUMBER || '0', 10);
             const rank = process.env.NEW_RANK || '';
@@ -216,17 +221,31 @@ jobs:
 
             if (!points || !prNumber) return;
 
+            const share = buildShareLinks(user, user, rank, parseInt(points, 10), true, user);
+
             const comment = [
               `### 🏆 ¡Felicidades @${user}! Tu Pull Request ha sido fusionado con éxito.`,
               '',
-              '📊 **Reporte de Evaluación de tus Ejercicios y Puntaje:**',
+              '📊 **Reporte de Evaluación de tus Ejercicios y Portafolio:**',
               `- 🎖️ **Rango actual:** **${rank}**`,
               `- ⚡ **Puntaje Total:** **${points} XP**`,
+              `- 🎓 **Tu Portafolio Profesional K8s:** **[Ver mi Portafolio Verificado (\`README.md\`)](${share.portfolioUrl})**`,
               '',
               '#### 📋 Detalle por semana:',
               report,
               '',
-              `> 💡 *Recuerda: Cada reto roto resuelto y validado suma **+10 XP**. Para que una semana cuente como **100% Completada** (necesario para ascender a **🧭 Timonel** y **⚓ Capitán K8s**), debes incluir la solución de **todos los ejercicios** de esa semana dentro de tu carpeta \`aportes-comunidad/soluciones-retos/${user}/semana-XX/\`.*`,
+              '---',
+              '',
+              '### 📣 ¡Comparte tu Portafolio e Insignia en Redes Sociales con 1 clic!',
+              '',
+              share.badgesBar,
+              '',
+              '#### 🐙 Insignia para el `README.md` de tu perfil de GitHub:',
+              '```markdown',
+              share.githubProfileSnippet,
+              '```',
+              '',
+              `> 💡 *¿Aún no has escrito tu reflexión de esta semana? Llena en 1 minuto el **[📔 Formulario Visual de Bitácora Semanal](https://github.com/${context.repo.owner}/${context.repo.repo}/issues/new?template=bitacora-semanal.yml)** para enriquecer tu portafolio.*`,
               '',
               `👉 **[Ver la Tabla de Posiciones en ASISTENTES.md](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/ASISTENTES.md)**`
             ].join('\n');

@@ -10,13 +10,14 @@ Si es tu primera vez usando **Git** o haciendo un **Pull Request (PR)** en GitHu
 
 ---
 
-## 🎯 3 Formas Fáciles de Empezar Hoy Mismo
+## 🎯 4 Formas Fáciles de Empezar Hoy Mismo
 
 1. **Regístrate en el Muro de Asistentes ([`ASISTENTES.md`](./ASISTENTES.md)):** Puedes hacerlo en 30 segundos usando nuestro **[⛵ Formulario Visual de Registro](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=registro-asistente.yml)** (¡el bot agregará tu foto y tus datos automáticamente sin errores!) o agregando tus datos en [`asistentes.json`](./asistentes.json) vía Pull Request. ¡Con este paso zarpas en el workshop!
-2. **Solucionar un "Reto Roto":** En cada semana encontrarás una carpeta `2.reto-roto/` con manifiestos YAML que fallan a propósito.
+2. **Solucionar un "Reto Roto":** En cada semana encontrarás una carpeta `2.reto-roto/` con manifiestos YAML o Dockerfiles que fallan a propósito.
    * ⚠️ **Regla de oro:** ¡Nunca modifiques los archivos originales de `2.reto-roto/`!
-   * Crea una carpeta personal: `aportes-comunidad/soluciones-retos/<tu-usuario-github>/semana-XX/` y pega allí tu YAML corregido con comentarios `#` explicando el error y la solución.
-3. **Compartir trucos o apuntes:** ¿Descubriste un comando útil o un alias genial? Agrégalo en [`aportes-comunidad/cheatsheets/`](./aportes-comunidad/cheatsheets).
+   * Crea una carpeta personal: `aportes-comunidad/soluciones-retos/<tu-usuario-github>/semana-XX/` y pega allí tu archivo corregido con comentarios `#` explicando el error y la solución.
+3. **Registrar tu Bitácora de Navegación y Construir tu Portafolio Profesional KubeCafé:** Documenta lo que aprendiste cada semana en 1 minuto usando el **[📔 Formulario Visual de Bitácora Semanal](https://github.com/edwinbermudez91/Fundamentos-Kubernetes/issues/new?template=bitacora-semanal.yml)** (o copiando [`PLANTILLA-BITACORA.md`](./aportes-comunidad/soluciones-retos/PLANTILLA-BITACORA.md) como `bitacora.md`). El bot generará tu **Portafolio Profesional (`aportes-comunidad/soluciones-retos/<tu-usuario>/README.md`)** y tus insignias para compartir en LinkedIn, GitHub y X (ver [`recursos/portafolio-y-badges.md`](./recursos/portafolio-y-badges.md)).
+4. **Compartir trucos o apuntes:** ¿Descubriste un comando útil o un alias genial? Agrégalo en [`aportes-comunidad/cheatsheets/`](./aportes-comunidad/cheatsheets) y revisa nuestra [**⚡ Guía Shell DX para Kubernetes (`recursos/guia-shell-dx-kubernetes.md`)**](./recursos/guia-shell-dx-kubernetes.md) y la [**🔄 Guía para Mantener tu Fork Sincronizado (`recursos/como-sincronizar-tu-fork.md`)**](./recursos/como-sincronizar-tu-fork.md).
 
 > [!TIP]
 > **🤖 Gamificación Automática:** ¡No te preocupes por cambiar tu rango a mano! Cada vez que un mentor apruebe y fusione uno de tus Pull Requests, nuestro bot de GitHub Actions contará tus aportes y actualizará automáticamente tu nivel en [`ASISTENTES.md`](./ASISTENTES.md):
