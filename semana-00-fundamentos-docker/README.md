@@ -58,7 +58,7 @@ Para entender Docker y cómo se conecta con Kubernetes, imagina que estamos mont
 > 💡 **¿Qué significan estos términos de cafetería?**
 > * **📜 Tostador:** Es quien toma el grano de café crudo, lo cocina con calor (*tostar*) y lo tritura (*moler*) para que quede listo (`docker build`).
 > * **📦 Inmutable (Sellado al vacío):** Significa que una vez cerrada la bolsa en fábrica, **no se modifica por dentro**; si cambias la receta, empacas una bolsa nueva con otra etiqueta (`v2`).
-> * **👨‍🍳 Barista y 🪵 Mesa de barismo:** El *barista* es la persona experta que prepara el café detrás de la barra (`kubelet`), y la *mesa de barismo* es su estación o mesón de trabajo equipado con molinos (**CPU**) y agua (**RAM**), es decir, el servidor (`Worker Node`).
+> * **👨‍🍳 Barista y 🪵 Mesa de barismo:** El *barista* es la persona experta que prepara el café detrás de la barra (`kubelet`), y la *mesa de barismo* es su estación o mesón de trabajo equipado con **cafeteras / máquinas de café** (**CPU**) y agua (**RAM**), es decir, el servidor (`Worker Node`).
 
 👉 *¿Quieres ver cómo se conecta toda la cafetería hasta la Semana 06? Explora la guía interactiva: [**☕ Kubernetes explicado con la Analogía del Café (KubeCafé)**](../recursos/de-un-tinto-a-kubernetes.md).*
 

@@ -455,7 +455,7 @@
                                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]"></span>
                                     <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-emerald-300 font-mono">Worker Node (`worker-node-01` • 192.168.1.10)</h2>
                                 </div>
-                                <span class="cafe-badge text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">🪵 Mesa de Barismo (Molinos CPU + Agua RAM)</span>
+                                <span class="cafe-badge text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">🪵 Mesa de Barismo (Cafeteras CPU + Agua RAM)</span>
                             </div>
 
                             <!-- Worker Node Internal Grid: 3 Columns -->
@@ -774,7 +774,7 @@
                         packetText: "Bind worker-node-01",
                         podStatus: "Scheduled",
                         podVisualState: "pending",
-                        cafeDesc: "El Despachador de Mesas revisa qué estación de barismo tiene molinos (CPU) y agua (RAM) libres, y asigna las bandejas a la Mesa 1.",
+                        cafeDesc: "El Despachador de Mesas revisa qué estación de barismo tiene cafeteras (CPU) y agua (RAM) libres, y asigna las bandejas a la Mesa 1.",
                         simpleDesc: "El Scheduler busca entre todos tus servidores cuál tiene suficiente memoria RAM y CPU libre, elige 'worker-node-01' y anota esa asignación en el API Server.",
                         techDesc: "kube-scheduler detecta Pods con nodeName vacío, ejecuta las fases de Filtering (recursos, taints, nodeSelector) y Scoring (afinidad y balanceo), y hace un Bind actualizando spec.nodeName = 'worker-node-01'.",
                         yamlCode: `kind: Pod\nmetadata:\n  name: mi-app-7d9f-x8k2\nspec:\n  nodeName: worker-node-01 # <-- Asignado por Scheduler\nstatus:\n  phase: Pending`,
@@ -1115,7 +1115,7 @@
                         packetText: "❌ 0/1 Nodes Available",
                         podStatus: "Pending (Sin Nodo)",
                         podVisualState: "pending",
-                        cafeDesc: "El pedido entró a Caja, pero pide 64 molinos de café (CPU) y 500 litros de agua (500Gi RAM). El Despachador (`scheduler`) mira las mesas y ninguna tiene tanta capacidad.",
+                        cafeDesc: "El pedido entró a Caja, pero pide 64 cafeteras (CPU) y 500 litros de agua (500Gi RAM). El Despachador (`scheduler`) mira las mesas y ninguna tiene tanta capacidad.",
                         simpleDesc: "El Pod se crea, pero se queda en estado 'Pending' para siempre porque ningún Worker Node tiene los recursos exagerados que solicitó.",
                         techDesc: "En la fase Filtering, kube-scheduler comprueba que 'requests.cpu: 64' y 'requests.memory: 500Gi' superan el Allocatable del nodo. Emite un evento Warning FailedScheduling.",
                         yamlCode: `# ❌ ERROR DE RECURSOS EXAGERADOS:\nresources:\n  requests:\n    memory: "500Gi"  # Cambiar a "64Mi"\n    cpu: "64"        # Cambiar a "100m"`,
@@ -1225,7 +1225,7 @@
             scheduler: {
                 title: "📋 kube-scheduler",
                 role: "Control Plane • Asignador Inteligente",
-                cafe: "☕ En KubeCafé: Es el Despachador que decide qué mesa tiene agua y molinos libres.",
+                cafe: "☕ En KubeCafé: Es el Despachador que decide qué mesa tiene agua y cafeteras libres.",
                 body: "Observa los Pods recién creados que no tienen nodo asignado. Filtra los Worker Nodes según CPU, RAM, Taints y afinidades, los califica y elige el servidor óptimo.",
                 cmd: "kubectl get events --sort-by=.metadata.creationTimestamp"
             },

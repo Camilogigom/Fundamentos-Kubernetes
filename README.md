@@ -159,7 +159,7 @@ flowchart LR
 
 * 🧪 **Laboratorios Prácticos ([`semana-01-arquitectura/1.ejemplos`](./semana-01-arquitectura/1.ejemplos)):**
   1. `01-mi-primer-pod.yaml` — Tu primera bandeja servida en el clúster.
-  2. `02-pod-con-variables-y-recursos.yaml` — Dosificación de agua (RAM) y molino (CPU).
+  2. `02-pod-con-variables-y-recursos.yaml` — Dosificación de agua (RAM) y cafetera (CPU).
   3. `03-pod-multicontenedor-sidecar.yaml` — Café principal + vaso de agua acompañante (*Sidecar*).
   4. `04-pod-sondas-salud.yaml` y `05-pod-ia-inferencia.yaml` — Termómetros de salud y microservicio de IA.
 * 💥 **Los 4 Retos Rotos ([`semana-01-arquitectura/2.reto-roto`](./semana-01-arquitectura/2.reto-roto)):**
@@ -200,7 +200,7 @@ flowchart LR
 
 > 💡 **Glosario rápido de términos cafeteros usados en la analogía:**
 > * **👨‍🍳 Barista:** La persona experta que prepara el café detrás de la barra y opera la cafetera (representa al **`kubelet`**).
-> * **🪵 Barismo / Mesa de barismo:** El *barismo* es el oficio de preparar café de calidad; la *mesa de barismo* es el mesón o estación de trabajo con agua (**RAM**) y molinos (**CPU**) donde trabaja el barista (representa un **`Worker Node`**).
+> * **🪵 Barismo / Mesa de barismo:** El *barismo* es el oficio de preparar café de calidad; la *mesa de barismo* es el mesón o estación de trabajo equipada con agua (**RAM**) y **cafeteras / máquinas de café** (**CPU**) donde trabaja el barista (representa un **`Worker Node`**).
 > * **📜 Tostador:** Quien cocina con calor (*tuesta*) y tritura (*muele*) el grano crudo para que quede listo para preparar (el proceso de **`docker build`** con tu **`Dockerfile`**).
 > * **🧾 Comanda:** El papelito u orden escrita donde se anota qué pidió el cliente en un restaurante (representa tu archivo **`.yaml`**).
 > * **📦 Inmutable:** Sellado de fábrica; no se puede abrir para modificar su contenido, sino que se fabrica un paquete nuevo con otra etiqueta (`v2`).
@@ -212,12 +212,12 @@ flowchart LR
 | **Imagen Docker** | 📦 Bolsa de café sellada | Paquete inmutable, listo para distribuir en cualquier sucursal. |
 | **Contenedor** | ☕ Taza de café servida | La bebida lista y ejecutándose en memoria/CPU. |
 | **Pod** | 🍽️ Bandeja de servicio | Unidad mínima: taza de café principal + vaso de agua (*Sidecar*). |
-| **Worker Node** | 🪵 Mesa de barismo | Estación de trabajo con agua (RAM) y molinos (CPU). |
+| **Worker Node** | 🪵 Mesa de barismo | Estación de trabajo con agua (RAM) y cafeteras (CPU). |
 | **Kubelet** | 👨‍🍳 Barista de la mesa | Recibe órdenes de gerencia y cuida que las tazas no se enfríen. |
 | **Control Plane** | 🏢 Oficina de Gerencia | Coordina toda la cafetería sin servir café directamente. |
 | **kube-apiserver** | 🛎️ Caja / Mostrador | Ventanilla única: todos los pedidos y comandos entran aquí. |
 | **etcd** | 📖 Libro contable | Registro absoluto e inmutable de comandas, recetas y mesas. |
-| **kube-scheduler** | 📋 Despachador de mesas | Mira qué mesa tiene molino y agua libre para poner la taza. |
+| **kube-scheduler** | 📋 Despachador de mesas | Mira qué mesa tiene cafetera y agua libre para poner la taza. |
 | **Controller Manager** | 🧐 Supervisor de salón | Si una taza se derrama, ordena preparar otra inmediatamente. |
 | **Service** | 🤵 Mesero de barra fija | Atiende a los clientes con un menú fijo sin importar la taza concreta. |
 | **Ingress** | 🚪 Puerta y Anfitriona | Recibe gente de la calle y los encamina según lo que piden (`/frio`, `/postres`). |

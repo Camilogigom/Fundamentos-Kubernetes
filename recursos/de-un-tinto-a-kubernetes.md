@@ -18,7 +18,7 @@ En esta guía usamos algunos términos propios de las cafeterías y restaurantes
 | Término en la historia | ¿Qué significa en la vida diaria? | ¿A qué representa en Kubernetes / Docker? |
 | :--- | :--- | :--- |
 | **👨‍🍳 Barista** | Es la **persona que prepara el café** detrás de la barra y maneja la máquina cafetera. | Representa al **`kubelet`**: el agente encargado dentro de cada servidor de encender y cuidar tus contenedores. |
-| **🪵 Barismo / Mesa de barismo** | El *barismo* es el oficio de preparar buen café. Una **mesa de barismo** es el **mesón o estación de trabajo** donde están conectados los molinos y el agua para preparar las bebidas. | Representa a un **`Worker Node` (Nodo trabajador)**: el servidor físico o virtual que aporta **CPU** (molinos) y **RAM** (agua). |
+| **🪵 Barismo / Mesa de barismo** | El *barismo* es el oficio de preparar buen café. Una **mesa de barismo** es el **mesón o estación de trabajo** donde están conectadas las cafeteras y el agua para preparar las bebidas. | Representa a un **`Worker Node` (Nodo trabajador)**: el servidor físico o virtual que aporta **CPU** (cafeteras / máquinas de café) y **RAM** (agua). |
 | **📜 Tostador / Tostar y moler** | El café recién cosechado es un grano verde y duro. El **tostador** es quien lo cocina con calor (*tostar*) y lo tritura (*moler*) para que quede listo para colar. | Representa el proceso de **construir tu aplicación (`docker build`)** siguiendo las instrucciones del **`Dockerfile`**. |
 | **🧾 Comanda** | En los restaurantes, es el **papelito u orden escrita** donde se anota exactamente qué pidió el cliente para pasarlo a la cocina. | Representa tu **archivo manifiesto `.yaml`** donde escribes qué quieres desplegar en el clúster. |
 | **📦 Inmutable (Sellado al vacío)** | Significa que una vez cerrada la bolsa en la fábrica, **nadie puede abrirla para meterle ni quitarle nada**; si quieres otra mezcla, fabricas una bolsa nueva con otra etiqueta. | Así funcionan las **Imágenes de Docker**: nunca se editan por dentro; siempre se construye una versión nueva (`v1`, `v2`). |
@@ -37,12 +37,12 @@ En esta guía usamos algunos términos propios de las cafeterías y restaurantes
 | **S00** | **Registry (Harbor / Hub)** | 🏪 Bodega Mayorista | Catálogo central donde se almacenan, versionan y escanean las bolsas selladas. |
 | **S00** | **Contenedor** | ☕ Taza de café servida | La bebida caliente, lista y ejecutándose en memoria/CPU. |
 | **S01** | **Pod** | 🍽️ Bandeja de servicio | Unidad mínima que se lleva a la mesa: **taza de café principal** + **vaso de agua** (*Sidecar*). |
-| **S01** | **Worker Node** | 🪵 Mesa de barismo | Estación física de trabajo equipada con agua (**RAM**) y molinos (**CPU**). |
+| **S01** | **Worker Node** | 🪵 Mesa de barismo | Estación física de trabajo equipada con agua (**RAM**) y cafeteras (**CPU**). |
 | **S01** | **Kubelet** | 👨‍🍳 Barista de la mesa | Recibe órdenes de la gerencia, prepara la bandeja y vigila que las tazas no se enfríen. |
 | **S01** | **Control Plane** | 🏢 Oficina de Gerencia | Coordina toda la cafetería sin preparar café directamente. |
 | **S01** | **kube-apiserver** | 🛎️ Caja / Mostrador | Ventanilla única: todos los pedidos (`kubectl`) y reportes entran y salen por aquí. |
 | **S01** | **etcd** | 📖 Libro contable | Registro absoluto, oficial e inmutable de todas las comandas, recetas y estado de las mesas. |
-| **S01** | **kube-scheduler** | 📋 Despachador de mesas | Revisa qué mesa de barismo tiene molino (CPU) y agua (RAM) libre para asignar la bandeja. |
+| **S01** | **kube-scheduler** | 📋 Despachador de mesas | Revisa qué mesa de barismo tiene cafetera (CPU) y agua (RAM) libre para asignar la bandeja. |
 | **S01** | **Controller Manager** | 🧐 Supervisor de salón | Vigila que todo coincida con el libro contable; si una taza se derrama, ordena otra al instante. |
 | **S02** | **Deployment y ReplicaSet** | 📝 Orden de Producción | *"Mantengan siempre 3 bandejas listas en barra"* y actualicen la receta sin cerrar el local (*Rolling Update*). |
 | **S02** | **HPA (Autoscaler)** | 📈 Refuerzo de Hora Pico | Si la fila de clientes sube a las 7:00 a. m., multiplica las bandejas automáticamente de 3 a 10. |
@@ -52,7 +52,7 @@ En esta guía usamos algunos términos propios de las cafeterías y restaurantes
 | **S04** | **Secret** | 🔐 Caja fuerte con llaves | Recetas secretas de la casa, claves del Wi-Fi y credenciales guardadas bajo llave. |
 | **S04** | **Persistent Volume (PV/PVC)** | 🏬 Bodega externa | Sacos de café y registros permanentes que **no se pierden** aunque se caiga una taza o se cambie la mesa. |
 | **S05** | **Probes (`Liveness/Readiness`)** | 🌡️ Termómetro de calidad | Comprueba si el café sigue caliente (`liveness`) y si la bandeja ya está completa para entregarse (`readiness`). |
-| **S05** | **Resources y RBAC** | ⚖️ Dosificador y 🪪 Carnets | Cuánta agua/molino puede usar cada taza (`requests/limits`) y quién tiene permiso de entrar a Gerencia (`RBAC`). |
+| **S05** | **Resources y RBAC** | ⚖️ Dosificador y 🪪 Carnets | Cuánta agua/cafetera puede usar cada taza (`requests/limits`) y quién tiene permiso de entrar a Gerencia (`RBAC`). |
 | **S06** | **Helm Chart** | 🍱 Kit de Franquicia | Plano maestro parametrizado para inaugurar una sucursal completa de KubeCafé en un solo comando. |
 
 ---
@@ -159,7 +159,7 @@ En **KubeCafé** está prohibido dejar tazas sueltas por ahí. Toda bebida se si
 * **🍽️ ¿Por qué una Bandeja (`Pod`) y no la taza sola?**  
   Porque un buen café de especialidad se sirve acompañado de un **🥛 vasito de agua con gas o una galleta (`Contenedor Sidecar`)**. Ambos van sobre la **misma bandeja (`misma IP / localhost`)**, comparten la misma servilleta (`volumen emptyDir`) y se entregan o retiran juntos.
 * **🪵 Las Mesas de Barismo (`Worker Nodes`):**  
-  Son las estaciones físicas donde trabajan los **👨‍🍳 Baristas (`kubelet`)**. Cada mesa tiene un límite de agua (**RAM**) y de molinos (**CPU**).
+  Son las estaciones físicas donde trabajan los **👨‍🍳 Baristas (`kubelet`)**. Cada mesa tiene un límite de agua (**RAM**) y de cafeteras (**CPU**).
 * **🏢 La Oficina de Gerencia (`Control Plane`):**  
   Cuando tú (`kubectl`) pides una bandeja:
   1. Entregas la comanda en la **🛎️ Caja Registradora (`kube-apiserver`)** (en **modo imperativo** dando la orden verbalmente con `k run`, o en **modo declarativo** entregando el formulario oficial impreso con `k apply -f`).
@@ -257,7 +257,7 @@ sequenceDiagram
 
 1. **💥 El Accidente:** Una taza de café se cae al piso (`CrashLoopBackOff` o falla del contenedor).
 2. **🧐 La Detección:** El **Supervisor de Salón (`Controller Manager`)** nota que el menú pide 3 tazas pero solo hay 2 tazas sanas en las mesas.
-3. **📋 La Asignación:** El **Despachador (`kube-scheduler`)** revisa las mesas y asigna la preparación a la mesa que tenga molino y agua disponible.
+3. **📋 La Asignación:** El **Despachador (`kube-scheduler`)** revisa las mesas y asigna la preparación a la mesa que tenga cafetera y agua disponible.
 4. **👨‍🍳 La Ejecución:** El **Barista (`kubelet`)** toma la bolsa de café (`Image`), sirve una nueva taza en una bandeja (`Pod`), y notifica a la caja (`kube-apiserver`).
 5. **🤵 El Cliente:** Nunca se enteró de la caída porque el **Mesero (`Service`)** solo entrega tazas que pasaron la prueba de calidad (`readinessProbe`).
 
@@ -287,7 +287,7 @@ kubectl describe pod <nombre-del-pod>
 </details>
 
 <details>
-<summary><b>🧩 Reto 3: "Acabas de pedir una bandeja gigante que requiere 64 molinos de café (64 CPUs), pero tus mesas solo tienen 4 molinos cada una. ¿Qué pasa con tu pedido?"</b></summary>
+<summary><b>🧩 Reto 3: "Acabas de pedir una bandeja gigante que requiere 64 cafeteras (64 CPUs), pero tus mesas solo tienen 4 cafeteras cada una. ¿Qué pasa con tu pedido?"</b></summary>
 <br>
 
 ✅ **Respuesta:** El Pod se queda en estado **`Pending` (Pendiente)** indefinidamente.  

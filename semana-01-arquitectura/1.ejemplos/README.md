@@ -217,7 +217,7 @@ k delete -f .
 | :--- | :--- | :--- | :--- |
 | [`01-mi-primer-pod.yaml`](./01-mi-primer-pod.yaml) | Pod Básico (1 Contenedor) | 🍽️ Bandeja con 1 ☕ taza de café | Estructura básica mínima de un Pod en Kubernetes. |
 | [`02-pod-multi-contenedor.yaml`](./02-pod-multi-contenedor.yaml) | **Multi-Contenedor (2 Contenedores)** | 🍽️ Bandeja con ☕ taza principal + 🥛 vaso de agua | Patrón *Sidecar* con volumen temporal compartido (`emptyDir`). |
-| [`03-pod-con-recursos-y-env.yaml`](./03-pod-con-recursos-y-env.yaml) | Pod con Variables y Recursos | ⚖️ Medidor de agua/molino y 🧂 azúcar del día | `requests`, `limits` de CPU/RAM y Downward API (`fieldRef`). |
+| [`03-pod-con-recursos-y-env.yaml`](./03-pod-con-recursos-y-env.yaml) | Pod con Variables y Recursos | ⚖️ Medidor de agua/cafetera y 🧂 azúcar del día | `requests`, `limits` de CPU/RAM y Downward API (`fieldRef`). |
 | [`04-pod-con-init-container.yaml`](./04-pod-con-init-container.yaml) | Pod con `initContainers` | 🧼 Calentar y limpiar la máquina antes de servir | Tareas previas bloqueantes antes de iniciar la app principal. |
 | [`05-pod-con-health-checks.yaml`](./05-pod-con-health-checks.yaml) | Pod con Sondas de Salud | 🌡️ Termómetro para saber si el café sigue caliente | `readinessProbe` y `livenessProbe` para auto-recuperación. |
 | [`06-pod-inferencia-ia-ollama.yaml`](./06-pod-inferencia-ia-ollama.yaml) | **🤖 Pod de Inferencia de IA (LLM)** | 🤖 Barista Sommelier con IA Local en la bandeja | Inferencia LLM en CPU con **Ollama**, volumen `emptyDir`, `resources` y `Probes`. |

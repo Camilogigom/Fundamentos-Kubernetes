@@ -15,7 +15,7 @@ Ahora en la **Semana 01** abrimos nuestra cafetería de especialidad (**KubeCaf�
 
 > 💡 **Palabras clave de la cafetería en lenguaje cotidiano:**
 > * **👨‍🍳 Barista:** Es la persona experta que prepara las bebidas de café detrás de la barra y maneja la máquina cafetera (en Kubernetes es el **`kubelet`**).
-> * **🪵 Barismo / Mesa de barismo:** El *barismo* es el oficio de preparar buen café. Una *mesa de barismo* es el mesón o estación de trabajo donde están conectados los molinos (**CPU**) y el agua (**RAM**) para preparar las tazas (representa un **`Worker Node`** o servidor).
+> * **🪵 Barismo / Mesa de barismo:** El *barismo* es el oficio de preparar buen café. Una *mesa de barismo* es el mesón o estación de trabajo donde están conectadas las **cafeteras / máquinas de café** (**CPU**) y el agua (**RAM**) para preparar las tazas (representa un **`Worker Node`** o servidor).
 > * **🧾 Pedido / Orden:** La solicitud escrita donde se detalla exactamente qué recursos o características necesita la aplicación (representa tu archivo manifiesto **`.yaml`**).
 > * **🥛 Sidecar (Acompañante):** Como el vasito de agua que te sirven en la misma bandeja junto al café; es un contenedor auxiliar que acompaña al contenedor principal dentro del mismo **`Pod`**.
 
@@ -23,12 +23,12 @@ Ahora en la **Semana 01** abrimos nuestra cafetería de especialidad (**KubeCaf�
 | :--- | :--- | :--- |
 | **Contenedor** | ☕ **Taza de café servida** | La bebida lista y ejecutándose en memoria/CPU. |
 | **Pod** | 🍽️ **Bandeja de servicio** | Unidad mínima de K8s: lleva la **☕ taza de café principal** + el **🥛 vaso de agua** (*Sidecar*). Nunca se sirven tazas sueltas sin bandeja. |
-| **Worker Node** | 🪵 **Mesa de barismo** | Estación de trabajo física o virtual con agua (**RAM**) y molinos (**CPU**). |
+| **Worker Node** | 🪵 **Mesa de barismo** | Estación de trabajo física o virtual con agua (**RAM**) y cafeteras (**CPU**). |
 | **Kubelet** | 👨‍🍳 **Barista de la mesa** | Agente en cada nodo: recibe órdenes de gerencia y vigila que las tazas no se enfríen. |
 | **Control Plane** | 🏢 **Oficina de Gerencia** | Coordina toda la cafetería sin preparar café directamente. |
 | **kube-apiserver** | 🛎️ **Caja / Mostrador** | Ventanilla única: todos tus comandos (`kubectl`) y reportes entran por aquí. |
 | **etcd** | 📖 **Libro contable** | Base de datos llave-valor inmutable donde se registran todas las órdenes activas y el estado de las mesas. |
-| **kube-scheduler** | 📋 **Despachador de mesas** | Mira qué mesa de barismo tiene molino y agua libre para asignar la bandeja (`Pod`). |
+| **kube-scheduler** | 📋 **Despachador de mesas** | Mira qué mesa de barismo tiene cafetera y agua libre para asignar la bandeja (`Pod`). |
 | **Controller Manager** | 🧐 **Supervisor de salón** | Si una taza se derrama, detecta la falta y ordena preparar otra inmediatamente. |
 
 👉 *¿Quieres ver cómo se conecta KubeCafé hasta la Semana 06 (Services, Ingress, ConfigMaps, Secrets, PV y Helm)? Lee: [**☕ Kubernetes explicado con la Analogía del Café (KubeCafé)**](../recursos/de-un-tinto-a-kubernetes.md).*
@@ -123,7 +123,7 @@ En la carpeta [`2.reto-roto/`](./2.reto-roto) encontrarás **4 incidentes reales
 | :-: | :--- | :--- | :--- |
 | **01** | [`01-pod-con-errores.yaml`](./2.reto-roto/01-pod-con-errores.yaml) | El barista buscó una 📦 **bolsa de café** con etiqueta mal escrita y puerto inválido. | `ImagePullBackOff` / Error de puerto |
 | **02** | [`02-pod-crashloop.yaml`](./2.reto-roto/02-pod-crashloop.yaml) | La ☕ **taza se sirve pero se derrama** al instante porque el comando falla. | `CrashLoopBackOff` |
-| **03** | [`03-pod-pendiente-infinito.yaml`](./2.reto-roto/03-pod-pendiente-infinito.yaml) | La orden del pedido pide **64 molinos de café (CPU)** y ninguna 🪵 mesa tiene capacidad. | `Pending` (`Insufficient cpu`) |
+| **03** | [`03-pod-pendiente-infinito.yaml`](./2.reto-roto/03-pod-pendiente-infinito.yaml) | La orden del pedido pide **64 cafeteras (CPU)** y ninguna 🪵 mesa tiene capacidad. | `Pending` (`Insufficient cpu`) |
 | **04** | [`04-pod-yaml-molesto.yaml`](./2.reto-roto/04-pod-yaml-molesto.yaml) | El archivo de pedido entregado en 🛎️ **Caja (`apiserver`)** tiene errores de escritura y formato YAML. | Error de validación al hacer `apply` |
 
 ### ¿Cómo superarlos y ganar hasta +40 XP?
@@ -142,7 +142,7 @@ Cuando ejecutes `kubectl get pods`, el estado (`STATUS`) te dará la primera pis
 
 | Estado del Pod | En ☕ KubeCafé | ¿Qué significa técnicamente? | Comando para descubrir el culpable |
 | :--- | :--- | :--- | :--- |
-| **`Pending`** | 📋 El **Despachador (`scheduler`)** dejó el pedido en sala de espera porque ninguna mesa tiene tanta agua/molinos libres. | Ningún Worker Node tiene suficiente RAM/CPU libre o hay una restricción (`taint`/`nodeSelector`). | `kubectl describe pod <nombre>` *(Mira la tabla de `Events` al final)*. |
+| **`Pending`** | 📋 El **Despachador (`scheduler`)** dejó el pedido en sala de espera porque ninguna mesa tiene tanta agua o cafeteras libres. | Ningún Worker Node tiene suficiente RAM/CPU libre o hay una restricción (`taint`/`nodeSelector`). | `kubectl describe pod <nombre>` *(Mira la tabla de `Events` al final)*. |
 | **`ImagePullBackOff`** / **`ErrImagePull`** | 👨‍🍳 El **Barista (`kubelet`)** fue a la bodega pero esa 📦 **bolsa de café** no existe o está bajo llave. | La imagen de Docker está mal escrita, el tag no existe o el repositorio es privado. | `kubectl describe pod <nombre>` *(Revisa qué imagen intentó descargar)*. |
 | **`CrashLoopBackOff`** | ☕ La **taza se sirve pero se cae al piso** una y otra vez apenas el barista la suelta. | El contenedor arrancó, pero el proceso principal adentro terminó con error o se apagó. | `kubectl logs <nombre>` *(Lee el error que arrojó la aplicación)*. |
 | **`Error de validación al hacer apply`** | 🛎️ La **Caja Registradora (`apiserver`)** rechazó la orden porque el formulario YAML está mal escrito o mal indentado. | El archivo YAML tiene un error de sintaxis, indentación o un campo mal escrito. | Usa `kubectl explain pod --recursive` o revisa la línea del error en terminal. |
