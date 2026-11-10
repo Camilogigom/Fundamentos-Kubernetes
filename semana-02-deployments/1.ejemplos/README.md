@@ -154,7 +154,7 @@ Respuesta esperada:
 {
   "modelo": "KubeCafe-Barista-AI-v1",
   "pod": "barista-ia-5f8cb47d9f-x9j2",
-  "recomendacion": "Te recomiendo un Espresso doble con granos de origen Huila (tueste medio).",
+  "recomendacion": "Te recomiendo un Expreso doble con granos de origen Huila (tueste medio).",
   "latencia_inferencia_ms": 18.4,
   "timestamp": 1793836800.0
 }

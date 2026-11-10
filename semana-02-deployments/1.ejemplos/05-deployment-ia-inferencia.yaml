@@ -40,9 +40,9 @@ spec:
 
               # Respuestas inteligentes simuladas del Barista IA
               RECOMMENDATIONS = [
-                  "Te recomiendo un Espresso doble con granos de origen Huila (tueste medio).",
+                  "Te recomiendo un Expreso doble con granos de origen Huila (tueste medio).",
                   "Para esta tarde va perfecto un Cold Brew con notas cítricas y panela.",
-                  "Prueba un Cappuccino con leche texturizada a 65°C y café de Jericó.",
+                  "Prueba un Capuchino con leche texturizada a 65 °C y café de Jericó.",
                   "Nuestra recomendación de hoy: Filtrado V60 con café Geisha de Fredonia."
               ]
 

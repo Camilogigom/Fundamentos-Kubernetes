@@ -38,7 +38,7 @@ flowchart LR
 
 | Característica | ⚡ Modo Imperativo / Interactivo | 📜 Modo Declarativo |
 | :--- | :--- | :--- |
-| **En ☕ KubeCafé** | Pides en el mostrador a viva voz: *"¡Sírvanme un espresso rápido!"*. | Entregas una comanda escrita y firmada con la receta exacta que queda archivada. |
+| **En ☕ KubeCafé** | Pides en el mostrador a viva voz: *"¡Sírvanme un expreso rápido!"*. | Entregas una comanda escrita y firmada con la receta exacta que queda archivada. |
 | **¿Qué le dices a K8s?** | **Cómo** hacer algo mediante órdenes directas en la terminal. | **Qué** estado final deseas alcanzar descrito en un archivo `.yaml`. |
 | **Comandos típicos** | `k run`, `k create`, `k expose`, `k scale`, `k edit`, `k delete pod X` | `k apply -f archivo.yaml`, `k diff -f archivo.yaml`, `k delete -f archivo.yaml` |
 | **Trazabilidad / Auditoría** | ❌ Baja (si no guardas el comando, nadie sabe qué cambiaste). | ✅ Alta (el archivo YAML vive en Git con historial de commits y PRs). |
@@ -417,7 +417,7 @@ stern pod-observabilidad-kubecafe
 ```
 Verás fluir líneas como:
 ```json
-{"timestamp":"2026-11-02T14:00:03Z","nivel":"INFO","servicio":"kubecafe","pedido_id":14,"bebida":"espresso","estado":"servido_200_ok"}
+{"timestamp":"2026-11-02T14:00:03Z","nivel":"INFO","servicio":"kubecafe","pedido_id":14,"bebida":"expreso","estado":"servido_200_ok"}
 ```
 
 #### C. Inspeccionar las Métricas en Formato Prometheus (`:9113/metrics`)

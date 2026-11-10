@@ -9,7 +9,7 @@
 </div>
 
 > ☕ **La Estación del Barista Senior en KubeCafé:**  
-> Un barista experto no busca la cuchara ni el termómetro cada vez que entra un pedido: tiene su estación organizada para preparar un espresso perfecto en segundos y sin equivocarse de mesa.  
+> Un barista experto no busca la cuchara ni el termómetro cada vez que entra un pedido: tiene su estación organizada para preparar un café expreso perfecto en segundos y sin equivocarse de mesa.  
 > En ingeniería Cloud Native (y en certificaciones prácticas de la CNCF como **CKA**, **CKAD** y **CKS**), preparar tu terminal reduce errores humanos, evita que apliques cambios en el clúster equivocado y multiplica tu velocidad al diagnosticar los **Retos Rotos** de cada semana.
 
 ---
@@ -171,7 +171,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 kubectl krew install ctx          # Cambia de clúster con menú interactivo
 kubectl krew install ns           # Cambia de namespace con menú interactivo
 kubectl krew install neat         # Limpia metadatos internos al exportar un YAML del clúster
-kubectl krew install stern        #Sigue los logs en vivo de todas las réplicas de un Deployment
+kubectl krew install stern        # Sigue los logs en vivo de todas las réplicas de un Deployment
 kubectl krew install tree         # Muestra la jerarquía Deployment -> ReplicaSet -> Pods como un árbol
 ```
 

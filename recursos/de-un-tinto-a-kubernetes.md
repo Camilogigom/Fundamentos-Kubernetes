@@ -68,7 +68,7 @@ flowchart TD
     end
 
     subgraph Entrada["🚪 Entrada y Salón del KubeCafé (Semana 03)"]
-        Ingress["🚪 Ingress: Anfitriona / Puerta\n(Rutas: /espresso, /postres)"]
+        Ingress["🚪 Ingress: Anfitriona / Puerta\n(Rutas: /expreso, /postres)"]
         Service["🤵 Service: Mesero con Menú Fijo\n(IP y DNS estables)"]
     end
 
@@ -174,7 +174,7 @@ En **KubeCafé** está prohibido dejar tazas sueltas por ahí. Toda bebida se si
 
 Si creas una bandeja suelta (`Pod`) y alguien la tropieza, nadie prepara otra. Por eso en la Semana 02 contratamos al **🧐 Supervisor de Salón (`Controller Manager`)** mediante un **`Deployment`**:
 
-* **📝 `Deployment` y `ReplicaSet`:** Dejas una orden permanente: *"Quiero que SIEMPRE haya 3 bandejas de Espresso listas"*.
+* **📝 `Deployment` y `ReplicaSet`:** Dejas una orden permanente: *"Quiero que SIEMPRE haya 3 bandejas de Expreso listas"*.
 * **⚡ Auto-Curación (*Self-Healing*):** Si una taza se derrama (`CrashLoopBackOff`) o una mesa entera se queda sin luz (`Node NotReady`), el Supervisor cuenta solo 2 bandejas y ordena preparar la 3.ª de inmediato en una mesa sana.
 * **🔄 Cambio de Receta sin Cerrar (*Rolling Update*):** ¿Pasamos de *Café Origen Huila v1* a *Café Origen Antioquia v2*? El Supervisor va reemplazando bandeja por bandeja sin que ningún cliente se quede sin servicio. Y si el café v2 salió amargo, haces **`kubectl rollout undo`** (*Rollback*) y vuelves a la v1 en segundos.
 
@@ -211,7 +211,7 @@ Una cafetería profesional necesita estándares de calidad, control de costos y 
 * **🌡️ Termómetros de Calidad (`Probes`):**
   * **`readinessProbe` (¿Ya está lista la bandeja?):** El mesero (`Service`) **no** se lleva la bandeja a la mesa del cliente hasta que el café haya terminado de filtrarse al 100%.
   * **`livenessProbe` (¿Sigue caliente el café?):** Si el café se enfrió o la máquina se trabó, el barista retira la taza y sirve una fresca automáticamente.
-  * **`startupProbe` (Tiempo de precalentamiento):** Espera con paciencia mientras la máquina de espresso calienta el agua al inicio de la mañana.
+  * **`startupProbe` (Tiempo de precalentamiento):** Espera con paciencia mientras la máquina de expreso calienta el agua al inicio de la mañana.
 * **⚖️ Dosificadores (`requests` y `limits`):** Garantizan que cada bandeja tenga su mínima agua asegurada (`requests`) y que ninguna taza desbordada gaste toda el agua de la mesa (`limits` / `OOMKilled`).
 * **🪪 Carnets de Personal (`RBAC`):** El barista puede ver comandas de su mesa, pero solo el Gerente tiene llave para modificar el Libro Contable o borrar sucursales.
 </details>

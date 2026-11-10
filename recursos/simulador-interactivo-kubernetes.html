@@ -758,7 +758,7 @@
                     </div>
                     <p id="step-cafe-desc" class="text-xs text-amber-100/90 leading-relaxed">
                         Entregas tu orden escrita en la Caja Registradora pidiendo: «Quiero mantener siempre 2 bandejas
-                        de Espresso listas en el salón».
+                        de Expreso listas en el salón».
                     </p>
                 </div>
 
@@ -1117,7 +1117,7 @@
                         cafeDesc: "En la Bandeja, la taza principal sirve el café con las especias del ConfigMap mientras el vaso acompañante (Sidecar) anota la venta en las métricas.",
                         simpleDesc: "El contenedor de tu aplicación recibe la petición en el puerto 8080, usa sus variables de entorno/volúmenes y genera la respuesta JSON mientras el contenedor Sidecar registra el log.",
                         techDesc: "El proceso dentro del Pod 'mi-app-7d9f-x8k2' recibe el paquete en :8080, lee su configuración montada e imprime el log estructurado en stdout, mientras el exporter Sidecar incrementa el contador http_requests_total.",
-                        yamlCode: `# Respuesta generada por el Pod:\n{\n  "menu": "Espresso Cloud Native",\n  "pod": "mi-app-7d9f-x8k2",\n  "ip": "10.244.1.42",\n  "status": "200 OK"\n}`,
+                        yamlCode: `# Respuesta generada por el Pod:\n{\n  "menu": "Expreso Cloud Native",\n  "pod": "mi-app-7d9f-x8k2",\n  "ip": "10.244.1.42",\n  "status": "200 OK"\n}`,
                         logs: [
                             "[pod:mi-app-7d9f-x8k2] GET /api/menu recibido en :8080",
                             "[sidecar-metrics] http_requests_total{status='200'} +1",
@@ -1137,7 +1137,7 @@
                         cafeDesc: "¡El comensal recibe su café recién hecho en su mesa en cuestión de milisegundos y queda feliz!",
                         simpleDesc: "La respuesta viaja de vuelta hacia el usuario con código 'HTTP 200 OK' y el contenido JSON aparece en su pantalla o terminal.",
                         techDesc: "El paquete de respuesta deshace la traducción NAT (conntrack un-DNAT), regresa por el Ingress/LoadBalancer y llega al cliente cerrando el ciclo de red de extremo a extremo.",
-                        yamlCode: `HTTP/2 200 OK\ncontent-type: application/json\nx-served-by: mi-app-7d9f-x8k2\n\n{"menu":"Espresso Cloud Native","status":"200 OK"}`,
+                        yamlCode: `HTTP/2 200 OK\ncontent-type: application/json\nx-served-by: mi-app-7d9f-x8k2\n\n{"menu":"Expreso Cloud Native","status":"200 OK"}`,
                         logs: [
                             "[kernel-net] Conntrack un-DNAT completado hacia Ingress",
                             "[ingress] Enviando respuesta TLS al cliente externo",
