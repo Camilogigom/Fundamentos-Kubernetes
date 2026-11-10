@@ -39,3 +39,4 @@ Cada reto resuelto te otorga **+10 XP** (hasta **+40 XP** en total) para subir d
    - Agrega comentarios `#` explicando cuál era el error y cómo lo solucionaste.
 5. **Envía tu Pull Request:**
    Sigue los pasos del [Manual de la Comunidad](../../aportes-comunidad/README.md). ¡El bot evaluará tus archivos y te sumará tus puntos automáticamente!
+

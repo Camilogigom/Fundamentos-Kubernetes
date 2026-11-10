@@ -28,3 +28,4 @@ containers: # ❌ Error de indentación: 'containers' debe estar dentro de 'temp
     image: nginx:alpine
     ports:
       - containerPort: 80
+

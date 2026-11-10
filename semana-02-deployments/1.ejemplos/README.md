@@ -168,3 +168,4 @@ Cuando termines de practicar, puedes eliminar los deployments creados:
 ```bash
 kubectl delete -f semana-02-deployments/1.ejemplos/
 ```
+

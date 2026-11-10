@@ -194,3 +194,4 @@ En la carpeta [`2.reto-roto/`](./2.reto-roto/) encontrarás 4 manifiestos dañad
 3. **Configura `readinessProbe` con Rolling Updates**: Si no defines un probe de preparación, Kubernetes asume que el Pod está listo en cuanto el contenedor inicia, enviándole tráfico antes de que la aplicación haya calentado.
 4. **No uses la etiqueta `:latest` en producción**: Hace imposible saber qué versión de código corre en cada revisión y dificulta los rollbacks fiables. Usa tags semánticos (ej: `v1.2.3` o hash de commit git).
 5. **Alinea siempre `matchLabels` con `template.metadata.labels`**: La inmutabilidad del selector impedirá que apliques cambios si no coinciden.
+
