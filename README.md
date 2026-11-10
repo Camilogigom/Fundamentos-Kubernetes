@@ -24,6 +24,7 @@
 [⚓ Guía de Harbor](./recursos/guia-harbor-registry.md) •
 [🛡️ Guía de Trivy](./recursos/guia-trivy-seguridad.md) •
 [🤖 Guía de Ollama](./recursos/guia-ollama-ia-local.md) •
+[📂 Explorador Visual](#directorio-visual) •
 [🚀 Empezar Ahora](#paso-0-prepara-tu-laboratorio) •
 [🗺️ Mapa de Ruta](#mapa-de-ruta) •
 [🏆 Rangos y Premios](#-rangos-de-navegación-y-puntaje-gamificación)
@@ -51,6 +52,22 @@
 > [!IMPORTANT]
 > 📢 **¿Hiciste Fork de este repositorio antes?**  
 > El repositorio ha sido actualizado recientemente con los nuevos contenidos de Docker y mejoras en las plantillas. **Por favor sincroniza tu copia** entrando a tu repositorio en GitHub y haciendo clic en el botón **"Sync fork" ➔ "Update branch"** (o en tu terminal con `git pull origin main`).
+
+---
+
+<a id="directorio-visual"></a>
+
+## 📂 Directorio Visual del Repositorio
+*(Navegación rápida por carpetas con logotipos oficiales y acceso directo a cada módulo)*
+
+| Carpeta / Módulo | Tecnología & Estado | Contenido del Directorio |
+| :--- | :---: | :--- |
+| [**`semana-00-fundamentos-docker/`**](./semana-00-fundamentos-docker) | [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](./semana-00-fundamentos-docker)<br>`🟢 DISPONIBLE` | Empaquetado de aplicaciones, imágenes Alpine ligeras, redes bridge y volúmenes persistentes. |
+| [**`semana-01-arquitectura/`**](./semana-01-arquitectura) | [![Kubernetes](https://img.shields.io/badge/K8s_Pods-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](./semana-01-arquitectura)<br>`🟢 DISPONIBLE` | Arquitectura interna (Control Plane vs Workers), creación de Pods y contenedores Sidecar. |
+| [**`semana-02-deployments/`**](./semana-02-deployments) | [![Deployments](https://img.shields.io/badge/Deployments-10B981?style=for-the-badge&logo=kubernetes&logoColor=white)](./semana-02-deployments)<br>`🔥 EN CURSO` | Controladores de réplicas, autorreparación (*self-healing*), rolling updates con cero caídas y rollbacks. |
+| [**`aportes-comunidad/`**](./aportes-comunidad) | [![Comunidad](https://img.shields.io/badge/Comunidad-F59E0B?style=for-the-badge&logo=github&logoColor=white)](./aportes-comunidad)<br>`🏆 RANKING` | Entrega de retos rotos de los asistentes para sumar **XP** y subir de rango en el muro de navegación. |
+| [**`recursos/`**](./recursos) | [![KubeCafé](https://img.shields.io/badge/Recursos-8B5CF6?style=for-the-badge&logo=coffeescript&logoColor=white)](./recursos)<br>`🎮 SIMULADOR` | Simulador interactivo en HTML/JS, diapositivas oficiales en PDF y guías de seguridad (Trivy/Harbor). |
+| [**`scripts/`**](./scripts) | [![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](./scripts)<br>`⚙️ AUTOMATIZACIÓN` | Scripts que leen las entregas, validan los retos y calculan los puntajes automáticamente. |
 
 ---
 
