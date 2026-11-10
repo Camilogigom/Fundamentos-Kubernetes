@@ -378,23 +378,30 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
 <table>
   <tr>
     <td align="center" width="140">
+      <a href="./aportes-comunidad/soluciones-retos/StivenMunera/README.md" title="Stiven Munera (@StivenMunera) — 100 XP">
+        <img src="https://github.com/StivenMunera.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="StivenMunera"/><br/>
+        <sub><b>🥇 Stiven Munera</b></sub>
+      </a><br/>
+      <sub>🧭 Timonel • <b>100 XP</b></sub>
+    </td>
+    <td align="center" width="140">
       <a href="./aportes-comunidad/soluciones-retos/devdavco/README.md" title="David Corrales (@devdavco) — 60 XP">
         <img src="https://github.com/devdavco.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="devdavco"/><br/>
-        <sub><b>🥇 David Corrales</b></sub>
+        <sub><b>🥈 David Corrales</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
       <a href="./aportes-comunidad/soluciones-retos/calichem26/README.md" title="Carlos Andres Montoya Alzate (@calichem26) — 60 XP">
         <img src="https://github.com/calichem26.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="calichem26"/><br/>
-        <sub><b>🥈 Carlos Andres</b></sub>
+        <sub><b>🥉 Carlos Andres</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
       <a href="./aportes-comunidad/soluciones-retos/karolrojas68/README.md" title="Karol Rojas (@karolrojas68) — 60 XP">
         <img src="https://github.com/karolrojas68.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="karolrojas68"/><br/>
-        <sub><b>🥉 Karol Rojas</b></sub>
+        <sub><b>Karol Rojas</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
@@ -402,13 +409,6 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       <a href="./aportes-comunidad/soluciones-retos/jujo23z/README.md" title="Juan Jose Jaramillo (@jujo23z) — 60 XP">
         <img src="https://github.com/jujo23z.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="jujo23z"/><br/>
         <sub><b>Juan Jose</b></sub>
-      </a><br/>
-      <sub>⛵ Marinero • <b>60 XP</b></sub>
-    </td>
-    <td align="center" width="140">
-      <a href="./aportes-comunidad/soluciones-retos/StivenMunera/README.md" title="Stiven Munera (@StivenMunera) — 60 XP">
-        <img src="https://github.com/StivenMunera.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="StivenMunera"/><br/>
-        <sub><b>Stiven Munera</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>

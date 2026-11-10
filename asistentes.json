@@ -45,6 +45,16 @@
     "motivacion": "Apoyar y acompañar a la comunidad Cloud Native Medellín en su travesía por Kubernetes. 🏔️☕"
   },
   {
+    "github": "StivenMunera",
+    "nombre": "Stiven Munera",
+    "rol": "FullStack Developer Jr",
+    "linkedin": "https://www.linkedin.com/in/stiven-munera-quintero-80151721a/",
+    "redes": [],
+    "rango": "🧭 Timonel",
+    "puntos": 100,
+    "motivacion": "Aprender todo estos temas de performance y escalabilidad"
+  },
+  {
     "github": "devdavco",
     "nombre": "David Corrales",
     "rol": "Desarrollador Fullstack Java",
@@ -83,16 +93,6 @@
     "rango": "⛵ Marinero",
     "puntos": 60,
     "motivacion": "Quiero aprender todo lo posible de la comunidad y si es posible aportar."
-  },
-  {
-    "github": "StivenMunera",
-    "nombre": "Stiven Munera",
-    "rol": "FullStack Developer Jr",
-    "linkedin": "https://www.linkedin.com/in/stiven-munera-quintero-80151721a/",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 60,
-    "motivacion": "Aprender todo estos temas de performance y escalabilidad"
   },
   {
     "github": "parte193",
