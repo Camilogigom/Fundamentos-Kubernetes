@@ -1,0 +1,24 @@
+# 🚨 RETO 3 (Nivel Medio): El Pod demasiado exigente 🚨
+# Síntoma: El Pod se crea, pero se queda en estado 'Pending' para siempre y nunca arranca.
+# Pista: El Scheduler está buscando un servidor libre pero ninguno cumple los requisitos.
+#        Ejecuta 'kubectl describe pod reto-03-exigente' y mira por qué el Scheduler lo rechazó.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reto-03-exigente
+  labels:
+    reto: "3"
+spec:
+  containers:
+    - name: app-glotona
+      image: nginx:alpine
+      resources:
+        requests:
+          memory: "128Mi"
+          cpu: "100m"
+
+## Reto 03
+## El Pod permanecia en Pending porque solicitaba 64 CPU y 500Gi de RAM.El comando kubectl describe pod reto-03-exigente mostro
+## FailedScheduling: Insufficient cpu e Insufficient memory. El scheduler no encontro ningun nodo con recursos suficientes.
+## Se redujeron las solicitudes a 100m de CPU y 128Mi de memoria para que el Pod pueda ser asignado y ejecutado en el laboratorio.

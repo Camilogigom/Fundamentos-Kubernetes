@@ -1,0 +1,23 @@
+# 🚨 RETO 2 (Nivel Medio): El Pod que nace y muere sin parar 🚨
+# Síntoma: El estado pasa a 'Error' y luego a 'CrashLoopBackOff' (se reinicia una y otra vez).
+# Pista: Cuando un contenedor arranca pero falla por dentro, 'describe' no basta.
+#        Usa 'kubectl logs reto-02-crash' para ver qué gritó el contenedor antes de morir.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reto-02-crash
+  labels:
+    reto: "2"
+spec:
+  containers:
+    - name: trabajador-confundido
+      image: busybox:latest
+      command: ["sh", "-c", "echo '¡Hola Cloud Native Medellín!' && sleep 3600"]
+
+      ## Reto 02
+## El Pod entraba en CrashLoopBackOff porque el contenedor intentaba ejecutar el comando "echho", que no existe.
+## Al consultar kubectl logs se encontró el error: sh: line 0: echho: not found
+## El contenedor terminaba con Exit Code 127 aplicando el comando kubectl describe pod reto-02-crash y se puede observar
+##que intento 4 reinicios.
+## Se corrigió "echho" por "echo" para imprimir el mensaje '¡Hola Cloud Native Medellín!'.
