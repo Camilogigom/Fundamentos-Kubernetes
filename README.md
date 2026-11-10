@@ -72,49 +72,51 @@
 Así evolucionaremos paso a paso desde el **grano de café crudo** empaquetado con Docker hasta inaugurar una **franquicia automatizada de alta disponibilidad** en Kubernetes *(haz clic en los bloques o en los botones de la tabla para saltar a cada laboratorio)*:
 
 ```mermaid
-flowchart TB
-    subgraph F1["🏭 ETAPA 1: Tostaduría y Empaque (Contenedores)"]
-        S0["🐳 Semana 00 • 🟢 DISPONIBLE\nFundamentos de Docker\n🌱 Grano → 📜 Receta → 📦 Bolsa → ☕ Taza\n🎯 +50 XP (5 Retos)"]
+flowchart LR
+    subgraph F1["01 • CONTENEDORES"]
+        S0["🐳 SEMANA 00 · DISPONIBLE\nFundamentos de Docker\n☕ Grano a Taza · +50 XP"]
     end
 
-    subgraph F2["☕ ETAPA 2: Apertura y Supervisión del Salón (Core K8s)"]
-        S1["🌱 Semana 01 • 🟢 DISPONIBLE\nArquitectura y Pods\n🍽️ Bandeja, 🪵 Mesas y 🏢 Gerencia\n🎯 +40 XP (4 Retos)"]
-        S2["🔄 Semana 02 • 🔥 EN CURSO\nDeployments y Autorreparación\n🧐 Supervisor, Réplicas y Rollbacks\n🎯 +40 XP (4 Retos)"]
+    subgraph F2["02 • NÚCLEO KUBERNETES"]
+        S1["🌱 SEMANA 01 · DISPONIBLE\nArquitectura y Pods\n☕ Mesas y Gerencia · +40 XP"]
+        S2["🔄 SEMANA 02 · EN CURSO\nDeployments y Réplicas\n☕ Supervisor y Rollouts · +40 XP"]
     end
 
-    subgraph F3["🌐 ETAPA 3: Atención al Cliente y Bodega (Red y Datos)"]
-        S3["🌐 Semana 03 • 🔜 PRÓXIMAMENTE\nServices e Ingress\n🤵 Mesero de Barra y 🚪 Anfitriona"]
-        S4["💾 Semana 04 • 🔜 PRÓXIMAMENTE\nConfigMaps, Secrets y PV\n🧂 Especias, 🔐 Caja Fuerte y 🏬 Bodega"]
+    subgraph F3["03 • RED Y PERSISTENCIA"]
+        S3["🌐 SEMANA 03 · PRÓXIMAMENTE\nServices e Ingress\n☕ Mesero y Anfitriona · +40 XP"]
+        S4["💾 SEMANA 04 · PRÓXIMAMENTE\nConfigMaps, Secrets y PV\n☕ Especias y Bodega · +40 XP"]
     end
 
-    subgraph F4["🚀 ETAPA 4: Calidad Industrial y Franquicia (Producción)"]
-        S5["🛡️ Semana 05 • 🔜 PRÓXIMAMENTE\nProbes, Recursos y RBAC\n🌡️ Termómetro, ⚖️ Dosificador y 🪪 Carnets"]
-        S6["🎓 Semana 06 • 🔜 PRÓXIMAMENTE\nHelm y Proyecto Final\n🍱 Kit de Franquicia de 3 Capas"]
+    subgraph F4["04 • PRODUCCIÓN Y ENTREGA"]
+        S5["🛡️ SEMANA 05 · PRÓXIMAMENTE\nProbes, Recursos y RBAC\n☕ Termómetro y Carnets · +40 XP"]
+        S6["🎓 SEMANA 06 · PROYECTO FINAL\nHelm Charts y Arquitectura\n☕ Kit de Franquicia · +50 XP"]
     end
 
     S0 ==> S1
-    S1 ==> S2
-    S2 -.-> S3
-    S3 -.-> S4
-    S4 -.-> S5
-    S5 -.-> S6
+    S0 ==> S2
+    S1 ==> S3
+    S2 ==> S4
+    S3 -.-> S5
+    S4 -.-> S6
 
     click S0 "https://github.com/edwinbermudez91/Fundamentos-Kubernetes/tree/main/semana-00-fundamentos-docker" "Ir a Semana 00: Fundamentos de Docker"
     click S1 "https://github.com/edwinbermudez91/Fundamentos-Kubernetes/tree/main/semana-01-arquitectura" "Ir a Semana 01: Arquitectura y Pods"
     click S2 "https://github.com/edwinbermudez91/Fundamentos-Kubernetes/tree/main/semana-02-deployments" "Ir a Semana 02: Deployments y Réplicas"
 
-    style F1 fill:#f0f9ff,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
-    style F2 fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#064e3b
-    style F3 fill:#fefce8,stroke:#ca8a04,stroke-width:1px,stroke-dasharray: 5 5,color:#713f12
-    style F4 fill:#fdf2f8,stroke:#db2777,stroke-width:1px,stroke-dasharray: 5 5,color:#831843
+    classDef done fill:#064E3B,stroke:#10B981,stroke-width:2px,color:#ECFDF5;
+    classDef active fill:#1E3A8A,stroke:#00F0FF,stroke-width:3px,color:#FFFFFF;
+    classDef next fill:#0F172A,stroke:#475569,stroke-width:1.5px,stroke-dasharray: 4 4,color:#CBD5E1;
+    classDef final fill:#3B0764,stroke:#C084FC,stroke-width:2px,stroke-dasharray: 4 4,color:#F3E8FF;
 
-    style S0 fill:#bae6fd,stroke:#0284c7,stroke-width:2px,color:#000
-    style S1 fill:#a7f3d0,stroke:#059669,stroke-width:2px,color:#000
-    style S2 fill:#6ee7b7,stroke:#047857,stroke-width:3px,color:#000
-    style S3 fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569
-    style S4 fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569
-    style S5 fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569
-    style S6 fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569
+    class S0,S1 done;
+    class S2 active;
+    class S3,S4,S5 next;
+    class S6 final;
+
+    style F1 fill:#0B1120,stroke:#10B981,stroke-width:1.5px,color:#10B981
+    style F2 fill:#0B1120,stroke:#00F0FF,stroke-width:2px,color:#00F0FF
+    style F3 fill:#0B1120,stroke:#475569,stroke-width:1.5px,stroke-dasharray: 5 5,color:#94A3B8
+    style F4 fill:#0B1120,stroke:#A855F7,stroke-width:1.5px,stroke-dasharray: 5 5,color:#C084FC
 ```
 
 ### 🧭 Tablero de Navegación Rápida por Semana
