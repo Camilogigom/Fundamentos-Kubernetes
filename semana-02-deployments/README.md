@@ -21,7 +21,7 @@ Al finalizar esta semana serás capaz de:
 
 ## ☕ La Analogía de KubeCafé: El Supervisor de Turno
 
-En la [Semana 01](../semana-01-pods-contenedores/) aprendiste qué es un **Pod**: es el barista individual preparando tu tinto.
+En la [Semana 01](../semana-01-arquitectura/) aprendiste qué es un **Pod**: es el barista individual preparando tu tinto.
 ¿El problema? Si el barista se resbala o se va a almorzar, **nadie atiende a los clientes**.
 
 ```mermaid
@@ -104,21 +104,21 @@ kubectl get deployments
 kubectl get replicasets
 
 # Ver los 3 Pods gestionados
-kubectl get pods -l app=kubecafe,componente=menu-api -o wide
+kubectl get pods -l app=cafecito -o wide
 ```
 
 ### 3. El Experimento de Autorreparación (Self-Healing)
 Elige uno de los Pods y bórralo manualmente:
 ```bash
 # Guarda el nombre de un pod
-POD_NAME=$(kubectl get pods -l app=kubecafe -o jsonpath='{.items[0].metadata.name}')
+POD_NAME=$(kubectl get pods -l app=cafecito -o jsonpath='{.items[0].metadata.name}')
 echo "Borrando pod: $POD_NAME"
 
 # Elimina el pod
 kubectl delete pod $POD_NAME
 
 # Observa de inmediato: Kubernetes ya creó un reemplazo
-kubectl get pods -l app=kubecafe
+kubectl get pods -l app=cafecito
 ```
 > 💡 **¿Qué sucedió?** El **Controlador de Réplicas (kube-controller-manager)** detectó que `Actual: 2 != Desired: 3` y ordenó de inmediato al `kube-scheduler` y `kubelet` crear un nuevo Pod idéntico.
 
@@ -130,29 +130,29 @@ kubectl apply -f semana-02-deployments/1.ejemplos/02-rolling-update-cero-caidas.
 
 En una terminal abre el monitoreo en vivo:
 ```bash
-kubectl rollout status deployment/kubecafe-catalogo-cero-caidas
+kubectl rollout status deployment/api-pedidos-rolling
 ```
 
-Actualiza la imagen en vivo para ver el relevo de pods:
+Actualiza la versión en vivo para ver el relevo progresivo de pods:
 ```bash
-kubectl set image deployment/kubecafe-catalogo-cero-caidas catalogo=nginx:1.27-alpine
-kubectl rollout status deployment/kubecafe-catalogo-cero-caidas
-kubectl rollout history deployment/kubecafe-catalogo-cero-caidas
+kubectl set env deployment/api-pedidos-rolling VERSION=v2.0
+kubectl rollout status deployment/api-pedidos-rolling
+kubectl rollout history deployment/api-pedidos-rolling
 ```
 
 ### 5. Simular y Resolver un Rollback
 Si una versión falla (por ejemplo una imagen que no existe o un bug crítico):
 ```bash
 # Provocar fallo intencional
-kubectl set image deployment/kubecafe-catalogo-cero-caidas catalogo=nginx:version-no-existe-999
+kubectl set image deployment/api-pedidos-rolling api=python:version-fantasma-999
 
-# Observar cómo el rollout se bloquea pero los pods viejos siguen vivos
-kubectl rollout status deployment/kubecafe-catalogo-cero-caidas --timeout=15s
-kubectl get pods -l app=kubecafe,componente=catalogo
+# Observar cómo el rollout se bloquea pero los pods viejos siguen vivos (cero caídas)
+kubectl rollout status deployment/api-pedidos-rolling --timeout=15s
+kubectl get pods -l app=api-pedidos
 
 # Deshacer al estado anterior de inmediato
-kubectl rollout undo deployment/kubecafe-catalogo-cero-caidas
-kubectl rollout status deployment/kubecafe-catalogo-cero-caidas
+kubectl rollout undo deployment/api-pedidos-rolling
+kubectl rollout status deployment/api-pedidos-rolling
 ```
 
 ---

@@ -273,7 +273,7 @@ const CHALLENGE_VALIDATORS = {
       validate: files =>
         files.some(f => {
           const code = stripComments(f.content);
-          const isReto01 = /kubecafe-pedidos-api/.test(code) || /0?1/.test(f.relPath);
+          const isReto01 = /reto-?01|kubecafe-pedidos-api/.test(code) || /0?1/.test(f.relPath);
           return (
             isReto01 &&
             /kind:\s*Deployment/.test(code) &&
@@ -288,7 +288,7 @@ const CHALLENGE_VALIDATORS = {
       validate: files =>
         files.some(f => {
           const code = stripComments(f.content);
-          const isReto02 = /kubecafe-checkout-v2/.test(code) || /0?2/.test(f.relPath);
+          const isReto02 = /reto-?02|kubecafe-checkout-v2/.test(code) || /0?2/.test(f.relPath);
           return (
             isReto02 &&
             /kind:\s*Deployment/.test(code) &&
@@ -303,7 +303,7 @@ const CHALLENGE_VALIDATORS = {
       validate: files =>
         files.some(f => {
           const code = stripComments(f.content);
-          const isReto03 = /kubecafe-notificaciones/.test(code) || /0?3/.test(f.relPath);
+          const isReto03 = /reto-?03|kubecafe-notificaciones/.test(code) || /0?3/.test(f.relPath);
           return (
             isReto03 &&
             /kind:\s*Deployment/.test(code) &&
@@ -319,7 +319,7 @@ const CHALLENGE_VALIDATORS = {
       validate: files =>
         files.some(f => {
           const code = stripComments(f.content);
-          const isReto04 = /kubecafe-fidelizacion/.test(code) || /0?4/.test(f.relPath);
+          const isReto04 = /reto-?04|kubecafe-fidelizacion/.test(code) || /0?4/.test(f.relPath);
           return (
             isReto04 &&
             /kind:\s*Deployment/.test(code) &&

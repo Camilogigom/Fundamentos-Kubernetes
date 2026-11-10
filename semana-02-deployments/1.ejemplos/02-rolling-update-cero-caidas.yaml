@@ -35,6 +35,9 @@ spec:
       containers:
         - name: api
           image: python:3.12-alpine
+          env:
+            - name: VERSION
+              value: "v1.0"
           command: ["sh", "-c"]
           args:
             - |
@@ -42,10 +45,12 @@ spec:
               import http.server, socketserver, os
               class Handler(http.server.SimpleHTTPRequestHandler):
                   def do_GET(self):
+                      version = os.environ.get("VERSION", "v1.0")
                       self.send_response(200)
                       self.send_header("Content-type", "application/json")
                       self.end_headers()
-                      self.wfile.write(b"{\"mensaje\":\"KubeCafe API v1.0 - Origen Huila\",\"estado\":\"sirviendo\"}\n")
+                      body = f"{{\"mensaje\":\"KubeCafe API {version} - Origen Huila\",\"estado\":\"sirviendo\"}}\n"
+                      self.wfile.write(body.encode("utf-8"))
               with socketserver.TCPServer(("", 8080), Handler) as httpd:
                   httpd.serve_forever()
               '

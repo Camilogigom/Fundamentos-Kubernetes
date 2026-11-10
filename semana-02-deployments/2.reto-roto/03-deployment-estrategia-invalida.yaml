@@ -18,8 +18,8 @@ spec:
   replicas: 2
   strategy:
     type: Rollingupdates # ❌ Error: está mal escrito y en minúsculas
-    maxSurge: 1          # ❌ Error: debe estar anidado dentro de 'rollingUpdate:'
-    maxUnavailable: 0    # ❌ Error: debe estar anidado dentro de 'rollingUpdate:'
+    maxSurge: 1          # ❌ Error: debe estar identado dentro de 'rollingUpdate:'
+    maxUnavailable: 0    # ❌ Error: debe estar identado dentro de 'rollingUpdate:'
   selector:
     matchLabels:
       app: catalogo
