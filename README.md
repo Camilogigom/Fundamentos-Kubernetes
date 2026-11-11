@@ -450,16 +450,16 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
     <td align="center" width="140">
+      <a href="./aportes-comunidad/soluciones-retos/DrSiker/README.md" title="Didier Alexander Rendón Chaverra (@DrSiker) — 60 XP">
+        <img src="https://github.com/DrSiker.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="DrSiker"/><br/>
+        <sub><b>Didier Alexander</b></sub>
+      </a><br/>
+      <sub>⛵ Marinero • <b>60 XP</b></sub>
+    </td>
+    <td align="center" width="140">
       <a href="./aportes-comunidad/soluciones-retos/sanjavier88/README.md" title="Jorge Alberto Monsalve Ruiz (@sanjavier88) — 50 XP">
         <img src="https://github.com/sanjavier88.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="sanjavier88"/><br/>
         <sub><b>Jorge Alberto</b></sub>
-      </a><br/>
-      <sub>⛵ Marinero • <b>50 XP</b></sub>
-    </td>
-    <td align="center" width="140">
-      <a href="./aportes-comunidad/soluciones-retos/DrSiker/README.md" title="Didier Alexander Rendón Chaverra (@DrSiker) — 50 XP">
-        <img src="https://github.com/DrSiker.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="DrSiker"/><br/>
-        <sub><b>Didier Alexander</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>50 XP</b></sub>
     </td>

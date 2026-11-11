@@ -145,6 +145,16 @@
     "motivacion": "Aprovechar al maximo esta oportunidad de aprender"
   },
   {
+    "github": "DrSiker",
+    "nombre": "Didier Alexander Rendón Chaverra",
+    "rol": "DevSecOps/Cloud Engineer",
+    "linkedin": "https://www.linkedin.com/in/didierendon",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 60,
+    "motivacion": "Reforzar mis fundamentos sobre Kubernetes y Docker, y lograr certificarme y lograr la kubestronaut en un futuro"
+  },
+  {
     "github": "sanjavier88",
     "nombre": "Jorge Alberto Monsalve Ruiz",
     "rol": "Estudiante",
@@ -153,16 +163,6 @@
     "rango": "⛵ Marinero",
     "puntos": 50,
     "motivacion": "No tengo conocimiento de la nube, así que con el curso espero poder aprender a utilizarla."
-  },
-  {
-    "github": "DrSiker",
-    "nombre": "Didier Alexander Rendón Chaverra",
-    "rol": "DevSecOps/Cloud Engineer",
-    "linkedin": "https://www.linkedin.com/in/didierendon",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 50,
-    "motivacion": "Reforzar mis fundamentos sobre Kubernetes y Docker, y lograr certificarme y lograr la kubestronaut en un futuro"
   },
   {
     "github": "glgaviria64",
