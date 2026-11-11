@@ -1,0 +1,20 @@
+# 🚨 RETO 4 (Nivel Ninja): El YAML que el API Server ni siquiera deja entrar 🚨
+# Síntoma: Al hacer 'kubectl apply', Kubernetes rechaza el archivo de inmediato.
+# Pista: Hay 3 errores de estructura y nombres de campos en este archivo. Lee el error que te da la terminal.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reto-04-sintaxis
+spec:
+  containers:
+    - name: mi-nginx
+      image: nginx:alpine
+      ports:
+        - containerPort: 80
+
+# Reto 04
+# El archivo original contenía tres errores: 
+# 1. apiVersion estaba configurado como v2 en lugar de v1 -- https://kubernetes.io/es/docs/concepts/workloads/pods/init-containers/
+# 2. El atributo imaeg estaba mal escrito; debe ser image. 
+# 3. Se utilizaba port en lugar de containerPort -- https://kubernetes.io/docs/tutorials/services/connect-applications-service/

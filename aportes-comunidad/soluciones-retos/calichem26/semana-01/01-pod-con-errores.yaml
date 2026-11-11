@@ -1,0 +1,23 @@
+# 🚨 RETO 1 (Nivel Fácil): El Pod que no encuentra su ropa 🚨
+# Síntoma: Al hacer 'kubectl get pods', el estado se queda en ErrImagePull o ImagePullBackOff.
+# Pista: Usa 'kubectl describe pod reto-01-imagen' y lee la sección final llamada "Events".
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reto-01-imagen
+  labels:
+    reto: "1"
+spec:
+  containers:
+    - name: servidor-web
+      image: nginx:alpine    #nginx:version-fantasma-999
+      ports:
+        - containerPort: 80 #80809
+
+
+# Reto 01
+# EL problema es que el puerto 80809 estaba fuera del rango, The Pod "reto-01-imagen" is invalid: spec.containers[0].ports[0].containerPort: Invalid value: 80809: must be between 1 and 65535, inclusive
+# Después de corregirlo, el Pod quedó en ImagePullBackOff porque la imagen nginx:version-fantasma-999 no existe: default        reto-01-imagen                      0/1     ErrImagePull   0          4s
+# El error se identificó utilizando kubectl get pods y kubectl describe pod en los "Events"
+# se aplico la imagen nginx:alpine modificando el yaml y ejecutando el comando kubectl apply -f 01-pod-con-errores.yaml
