@@ -155,6 +155,16 @@
     "motivacion": "No tengo conocimiento de la nube, así que con el curso espero poder aprender a utilizarla."
   },
   {
+    "github": "DrSiker",
+    "nombre": "Didier Alexander Rendón Chaverra",
+    "rol": "DevSecOps/Cloud Engineer",
+    "linkedin": "https://www.linkedin.com/in/didierendon",
+    "redes": [],
+    "rango": "⛵ Marinero",
+    "puntos": 40,
+    "motivacion": "Reforzar mis fundamentos sobre Kubernetes y Docker, y lograr certificarme y lograr la kubestronaut en un futuro"
+  },
+  {
     "github": "glgaviria64",
     "nombre": "Gloria Gaviria",
     "rol": "👩‍💻 Estudiante<br>Desarrolladora Jr",
@@ -163,16 +173,6 @@
     "rango": "⛵ Marinero",
     "puntos": 30,
     "motivacion": "Aprender de la comunidad de Cloud Native Medellín. 🏔️☕"
-  },
-  {
-    "github": "DrSiker",
-    "nombre": "Didier Alexander Rendón Chaverra",
-    "rol": "DevSecOps/Cloud Engineer",
-    "linkedin": "https://www.linkedin.com/in/didierendon",
-    "redes": [],
-    "rango": "⛵ Marinero",
-    "puntos": 20,
-    "motivacion": "Reforzar mis fundamentos sobre Kubernetes y Docker, y lograr certificarme y lograr la kubestronaut en un futuro"
   },
   {
     "github": "ccsanchezb04",

@@ -457,20 +457,20 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       <sub>⛵ Marinero • <b>50 XP</b></sub>
     </td>
     <td align="center" width="140">
+      <a href="./aportes-comunidad/soluciones-retos/DrSiker/README.md" title="Didier Alexander Rendón Chaverra (@DrSiker) — 40 XP">
+        <img src="https://github.com/DrSiker.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="DrSiker"/><br/>
+        <sub><b>Didier Alexander</b></sub>
+      </a><br/>
+      <sub>⛵ Marinero • <b>40 XP</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="140">
       <a href="./aportes-comunidad/soluciones-retos/glgaviria64/README.md" title="Gloria Gaviria (@glgaviria64) — 30 XP">
         <img src="https://github.com/glgaviria64.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="glgaviria64"/><br/>
         <sub><b>Gloria Gaviria</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>30 XP</b></sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="140">
-      <a href="./aportes-comunidad/soluciones-retos/DrSiker/README.md" title="Didier Alexander Rendón Chaverra (@DrSiker) — 20 XP">
-        <img src="https://github.com/DrSiker.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="DrSiker"/><br/>
-        <sub><b>Didier Alexander</b></sub>
-      </a><br/>
-      <sub>⛵ Marinero • <b>20 XP</b></sub>
     </td>
     <td align="center" width="140">
       <a href="https://www.linkedin.com/in/cristian-camilo-sanchez-bermudez" title="Cristian Sanchez (@ccsanchezb04) — 10 XP">
