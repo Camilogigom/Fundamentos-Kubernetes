@@ -385,16 +385,16 @@ Si no puedes instalar Docker Desktop o tu máquina no tiene suficiente memoria R
       <sub>🧭 Timonel • <b>100 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="./aportes-comunidad/soluciones-retos/devdavco/README.md" title="David Corrales (@devdavco) — 60 XP">
-        <img src="https://github.com/devdavco.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="devdavco"/><br/>
-        <sub><b>🥈 David Corrales</b></sub>
+      <a href="./aportes-comunidad/soluciones-retos/calichem26/README.md" title="Carlos Andres Montoya Alzate (@calichem26) — 100 XP">
+        <img src="https://github.com/calichem26.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="calichem26"/><br/>
+        <sub><b>🥈 Carlos Andres</b></sub>
       </a><br/>
-      <sub>⛵ Marinero • <b>60 XP</b></sub>
+      <sub>🧭 Timonel • <b>100 XP</b></sub>
     </td>
     <td align="center" width="140">
-      <a href="./aportes-comunidad/soluciones-retos/calichem26/README.md" title="Carlos Andres Montoya Alzate (@calichem26) — 60 XP">
-        <img src="https://github.com/calichem26.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="calichem26"/><br/>
-        <sub><b>🥉 Carlos Andres</b></sub>
+      <a href="./aportes-comunidad/soluciones-retos/devdavco/README.md" title="David Corrales (@devdavco) — 60 XP">
+        <img src="https://github.com/devdavco.png?size=100" width="64" height="64" style="border-radius: 50%;" alt="devdavco"/><br/>
+        <sub><b>🥉 David Corrales</b></sub>
       </a><br/>
       <sub>⛵ Marinero • <b>60 XP</b></sub>
     </td>
